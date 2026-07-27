@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" markdown="1">
 
 # Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
@@ -6,7 +6,7 @@
 
 Kodlama ajanları · yerel çıkarım · ajan çatıları · vektör veritabanları · RAG · değerlendirme · gözlemlenebilirlik
 
-[English](README.md) · **Türkçe** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [kendi dilini ekle](TRANSLATIONS.md)
+[English](README.md) · **Türkçe** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*kendi dilini ekle*](TRANSLATIONS.md)
 
 </div>
 

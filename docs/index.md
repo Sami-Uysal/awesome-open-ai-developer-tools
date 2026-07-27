@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" markdown="1">
 
 # Awesome Open-Source AI Developer Tools [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
@@ -6,7 +6,7 @@
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [add your language](TRANSLATIONS.md)
+**English** · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*add your language*](TRANSLATIONS.md)
 
 </div>
 

@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" markdown="1">
 
 # Awesome Herramientas de IA de Código Abierto para Desarrolladores [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
@@ -6,7 +6,7 @@
 
 Agentes de código · inferencia local · frameworks de agentes · bases de datos vectoriales · RAG · evaluación · observabilidad
 
-[English](README.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **Español** · [añade tu idioma](TRANSLATIONS.md)
+[English](README.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **Español** · [*añade tu idioma*](TRANSLATIONS.md)
 
 </div>
 
