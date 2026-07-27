@@ -3,8 +3,6 @@ site_description: A curated directory of open-source AI tools, local LLM engines
 site_author: Sami Uysal
 site_url: https://sami-uysal.github.io/awesome-open-ai-developer-tools/
 
-docs_dir: '.'
-
 repo_url: https://github.com/Sami-Uysal/awesome-open-ai-developer-tools
 repo_name: Sami-Uysal/awesome-open-ai-developer-tools
 
@@ -31,15 +29,14 @@ theme:
     - content.code.copy
 
 nav:
-  - Home: README.md
-  - Categories:
-      - "01. AI IDEs & CLI": docs/01-ai-ides-and-cli.md
-      - "02. AI Agents": docs/02-open-source-agents.md
-      - "03. Local LLMs": docs/03-local-llm-engines.md
-      - "04. RAG & Vector DBs": docs/04-rag-and-vector-dbs.md
-      - "05. UI & App Builders": docs/05-ui-and-app-builders.md
+  - Home: index.md
+  - Translations:
+      - "Türkçe": README.tr.md
+      - "Español": README.es.md
+      - "中文": README.zh-CN.md
   - Community:
       - "Contributing": CONTRIBUTING.md
+      - "Translations Info": TRANSLATIONS.md
 
 markdown_extensions:
   - tables
