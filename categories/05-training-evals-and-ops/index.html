@@ -1,0 +1,1287 @@
+<!--
+  ---------------------------------------------------------------
+  docmd : the zero-config documentation engine.
+  @website https://docmd.io
+  [docmd-source] - Please do not remove this header.
+  ---------------------------------------------------------------
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="docmd v0.8.17">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+      var root = "../../";
+      if (root && !root.endsWith('/')) root += '/';
+      if (root === '') root = './';
+      window.DOCMD_ROOT = root;
+
+      window.DOCMD_SITE_ROOT = "/awesome-open-ai-developer-tools/";
+
+      window.DOCMD_APPEARANCE = "system";
+      window.DOCMD_VERSION_ROOT = "/";
+      window.DOCMD_BASE = "/awesome-open-ai-developer-tools/";
+      window.DOCMD_LOCALE = "";
+      window.DOCMD_DEFAULT_LOCALE = "";
+    </script>
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    //
+    // Resolve from three sources, in priority order:
+    //   1. localStorage explicit user choice (light / dark)
+    //   2. window.DOCMD_APPEARANCE  (current canonical name, set by EJS templates)
+    //   3. window.DOCMD_DEFAULT_MODE (legacy alias kept for pre-0.8.7 outputs)
+    //   4. 'light' as the final fallback
+    //
+    // Note: localStorage is only honoured when it holds an explicit
+    // 'light' or 'dark' value. A stored 'system' value (from a prior
+    // session where the user picked "follow system") must NOT win over
+    // a freshly resolved config value — the resolved value will itself
+    // be 'system' in that case and the OS preference check below takes
+    // over, so this is a no-op for the in-session behaviour but keeps
+    // any future storage migration simple.
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_APPEARANCE
+      || window.DOCMD_DEFAULT_MODE
+      || 'light';
+    var theme = (localValue === 'light' || localValue === 'dark')
+      ? localValue
+      : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+    <style>
+      html {
+        visibility: hidden;
+      }
+    </style>
+    <title>
+      Training, Evals, and Ops : Awesome Open AI Developer Tools
+    </title>
+    
+    
+
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.ico?v=ms3ptj3q">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=ms3ptj3q">
+    
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=ms3ptj3q" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=ms3ptj3q" id="hljs-dark" disabled>
+    
+    
+<meta name="description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+<link rel="canonical" href="https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/">
+<meta property="og:title" content="Training, Evals, and Ops - Awesome Open AI Developer Tools">
+<meta property="og:description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+<meta property="og:url" content="https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Training, Evals, and Ops - Awesome Open AI Developer Tools">
+<meta name="twitter:description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+
+
+
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=ms3ptj3q" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=ms3ptj3q" >
+
+    
+    
+  </head>
+  <body
+    class="sidebar-collapsible has-menubar has-menubar-top"
+    data-default-collapsed="false"
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/categories/05-training-evals-and-ops.md">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    
+      
+
+
+
+<div class="docmd-menubar">
+  <div class="menubar-inner">
+    <div class="menubar-left">
+    
+        
+          
+            <a href="../../" class="menubar-brand" >
+              
+                
+<svg class="lucide-icon icon-sparkles menubar-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sparkles"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" />
+</svg>
+
+              
+              
+                <span class="menubar-brand-text">
+                  Awesome Open AI Developer Tools
+                </span>
+              
+            </a>
+            
+        
+          
+                <a href="../../categories/01-ai-ides-and-cli/" class="menubar-link" >
+                  
+                  <span>
+                    Categories
+                  </span>
+                  
+                </a>
+              
+        
+          
+                <a href="../../languages/tr/" class="menubar-link" >
+                  
+                  <span>
+                    Languages
+                  </span>
+                  
+                </a>
+              
+        
+    
+      </div>
+      <div class="menubar-right">
+        
+          
+            
+              <a href="https://github.com/Sami-Uysal/awesome-open-ai-developer-tools" class="menubar-link"  target="_blank" rel="noopener noreferrer">
+                
+                <span>
+                  GitHub
+                </span>
+                
+                  
+<svg class="lucide-icon icon-external-link menubar-ext-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-external-link"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</svg>
+
+                
+              </a>
+            
+          
+        
+        
+          <div class="menubar-options">
+            
+
+
+<div class="docmd-options-menu">
+    
+    <button class="docmd-search-trigger" aria-label="Search">
+        
+<svg class="lucide-icon icon-search " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+
+        <span class="search-label">Search</span>
+        <span class="search-keys"><kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">K</kbd></span>
+    </button>
+    
+
+    
+
+    
+
+    
+    <button class="theme-toggle-button" aria-label="Toggle theme">
+        
+<svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+ 
+<svg class="lucide-icon icon-moon icon-moon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-moon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+
+    </button>
+    
+
+    
+</div>
+
+          </div>
+        
+    </div>
+  </div>
+</div>
+    
+    
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          
+<h1><a href="../../">
+                Awesome Open AI Developer Tools
+              </a></h1>
+          
+          <span class="mobile-view sidebar-menu-button float-right">
+            
+<svg class="lucide-icon icon-menu " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-menu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" />
+</svg>
+
+          </span>
+        </div>
+        <div class="sidebar-top-group">
+          
+          
+          
+          
+        </div>
+        
+
+<nav class="sidebar-nav" aria-label="Main Navigation">
+  <ul>
+    
+      <li class="" >
+      
+        <a href="../../" class=" "
+          >
+           
+<svg class="lucide-icon icon-home " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-house"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Home
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="active-parent collapsible expanded nav-group"  aria-expanded="true" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-folder-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-folder-open"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Categories
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../categories/01-ai-ides-and-cli/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            AI IDEs and CLI
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/02-open-source-agents/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Open-Source Agents
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/03-local-llm-inference/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Local LLM Inference
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/04-rag-and-data/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            RAG and Data
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="active" >
+      
+        <a href="../../categories/05-training-evals-and-ops/" class="active "
+          >
+          
+          <span class="nav-item-title">
+            Training, Evals, and Ops
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/06-multimodal-and-builders/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Multimodal and Builders
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-languages " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-languages"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m5 8 6 6" />
+  <path d="m4 14 6-6 2-3" />
+  <path d="M2 5h12" />
+  <path d="M7 2h1" />
+  <path d="m22 22-5-10-5 10" />
+  <path d="M14 18h6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Languages
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../languages/tr/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Türkçe
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../languages/es/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Español
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../languages/zh/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            中文
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-users " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-users"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Community
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../community/contributing/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Contributing
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../community/translations/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Translations
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+        <div class="sidebar-bottom-group mt-auto">
+          
+          
+          
+          
+        </div>
+      </aside>
+      
+      
+      
+      <div class="main-content-wrapper">
+        
+        
+          <header class="page-header">
+            <div class="header-left">
+              
+                <button id="sidebar-toggle-button" class="sidebar-toggle-button"
+                  aria-label="Toggle Sidebar">
+                  
+<svg class="lucide-icon icon-chevron-left " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 18-6-6 6-6" />
+</svg>
+
+                </button>
+              
+              <div class="header-titles-wrapper">
+                <span class="header-title">
+                  Training, Evals, and Ops
+                </span>
+              </div>
+            </div>
+            <div class="header-right">
+              
+            </div>
+          </header>
+        
+        <div class="content-theme-cover">
+          <main class="content-area" id="main-content">
+            <div class="content-layout">
+              <div class="main-content">
+                <div class="docmd-breadcrumbs-row">
+                  <div id="docmd-raw-markdown" data-content="%23%20Training%2C%20Evals%2C%20and%20Ops%0A%0AFine-tuning%2C%20evaluation%2C%20guardrails%2C%20observability%2C%20and%20LLMOps%20tooling.%0A%0A%23%23%20Fine-Tuning%20%26%20Training%0A%23%23%23%20%5BUnsloth%5D(https%3A%2F%2Fgithub.com%2Funslothai%2Funsloth)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AFine-tune%20LLMs%20roughly%202x%20faster%20with%20far%20less%20VRAM%2C%20without%20accuracy%20loss.%0A%0A-%20**Edge%3A**%20Hand-written%20Triton%20kernels%20and%20a%20manual%20backprop%20engine.%20Makes%20fine-tuning%20a%20mid-size%20model%20on%20a%20single%20free%20Colab%20GPU%20realistic%20instead%20of%20aspirational.%0A%0A%23%23%23%20%5BAxolotl%5D(https%3A%2F%2Fgithub.com%2Faxolotl-ai-cloud%2Faxolotl)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0APost-training%20framework%20configured%20entirely%20through%20YAML%20%E2%80%94%20full%20fine-tune%2C%20LoRA%2C%20QLoRA%2C%20DPO%2C%20ORPO%2C%20and%20more.%0A%0A-%20**Edge%3A**%20One%20config%20file%20describes%20the%20entire%20run%2C%20which%20makes%20experiments%20reproducible%20and%20diffable%20in%20git.%0A%0A%23%23%23%20%5BLLaMA-Factory%5D(https%3A%2F%2Fgithub.com%2Fhiyouga%2FLLaMA-Factory)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AUnified%20fine-tuning%20for%20100%2B%20models%2C%20with%20a%20web%20UI.%0A%0A-%20**Edge%3A**%20Zero-code%20training%20via%20LlamaBoard.%20The%20widest%20model%20coverage%20of%20any%20tuning%20toolkit.%0A%0A%23%23%23%20%5BPEFT%5D(https%3A%2F%2Fgithub.com%2Fhuggingface%2Fpeft)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AHugging%20Face&#039;s%20parameter-efficient%20fine-tuning%20library%20%E2%80%94%20LoRA%2C%20QLoRA%2C%20adapters%2C%20prompt%20tuning.%0A%0A-%20**Edge%3A**%20The%20reference%20implementation%20everything%20else%20builds%20on.%20Integrates%20directly%20with%20Transformers%2C%20Accelerate%2C%20and%20TRL.%0A%0A%23%23%23%20%5BDistilabel%5D(https%3A%2F%2Fgithub.com%2Fargilla-io%2Fdistilabel)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0ASynthetic%20data%20pipelines%20for%20SFT%20and%20preference%20tuning%2C%20from%20the%20Argilla%20team.%0A%0A-%20**Edge%3A**%20treats%20dataset%20generation%20as%20a%20reproducible%20pipeline%20rather%20than%20a%20pile%20of%20one-off%20scripts%2C%20and%20loops%20through%20Argilla%20so%20a%20human%20can%20curate%20what%20the%20model%20generated.%20The%20bottleneck%20in%20fine-tuning%20is%20almost%20always%20data%2C%20not%20compute.%0A%0A%23%23%23%20%5BTRL%5D(https%3A%2F%2Fgithub.com%2Fhuggingface%2Ftrl)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0ATrain%20transformer%20models%20with%20reinforcement%20learning%20%E2%80%94%20SFT%2C%20DPO%2C%20GRPO%2C%20reward%20modeling.%0A%0A-%20**Edge%3A**%20The%20standard%20path%20from%20a%20base%20model%20to%20an%20aligned%2C%20instruction-following%20one.%0A%0A---%0A%0A%23%23%20Evals%2C%20Testing%20%26%20Guardrails%0A%23%23%23%20%5Bpromptfoo%5D(https%3A%2F%2Fgithub.com%2Fpromptfoo%2Fpromptfoo)%0A%60TypeScript%60%20%C2%B7%20%60MIT%60%0A%0ATest%20and%20evaluate%20prompts%2C%20agents%2C%20and%20RAG%20systems%20%E2%80%94%20plus%20LLM%20red%20teaming%20and%20vulnerability%20scanning.%0A%0A-%20**Edge%3A**%20Declarative%20test%20cases%20in%20YAML%20that%20run%20in%20CI.%20Side-by-side%20model%20comparison%20plus%20adversarial%20red-teaming%20in%20one%20tool.%20Local-first%20%E2%80%94%20your%20prompts%20never%20leave%20your%20machine.%0A%0A%23%23%23%20%5BDeepEval%5D(https%3A%2F%2Fgithub.com%2Fconfident-ai%2Fdeepeval)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0A%22Pytest%20for%20LLMs%22%20%E2%80%94%20unit-test%20LLM%20outputs%20with%20research-backed%20metrics.%0A%0A-%20**Edge%3A**%20Feels%20like%20a%20normal%20test%20suite.%20G-Eval%2C%20faithfulness%2C%20answer%20relevancy%2C%20hallucination%2C%20and%20RAG-specific%20metrics%20run%20locally%20on%20the%20model%20of%20your%20choice.%0A%0A%23%23%23%20%5BRagas%5D(https%3A%2F%2Fgithub.com%2Fexplodinggradients%2Fragas)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AEvaluation%20toolkit%20for%20RAG%20pipelines.%0A%0A-%20**Edge%3A**%20Splits%20retrieval%20quality%20from%20generation%20quality%2C%20so%20you%20know%20which%20half%20to%20fix.%20Can%20synthesize%20a%20test%20set%20from%20your%20own%20documents.%0A%0A%23%23%23%20%5BGuardrails%5D(https%3A%2F%2Fgithub.com%2Fguardrails-ai%2Fguardrails)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AAdd%20input%2Foutput%20validators%20to%20LLM%20applications%20%E2%80%94%20structure%2C%20safety%2C%20PII%2C%20and%20custom%20rules.%0A%0A-%20**Edge%3A**%20Validators%20are%20composable%20and%20re-ask%20the%20model%20on%20failure%20rather%20than%20just%20erroring%20out.%0A%0A%23%23%23%20%5BNeMo%20Guardrails%5D(https%3A%2F%2Fgithub.com%2FNVIDIA%2FNeMo-Guardrails)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AProgrammable%20rails%20for%20conversational%20systems%2C%20defined%20in%20the%20Colang%20modeling%20language.%0A%0A-%20**Edge%3A**%20Dialogue-level%20control%20%E2%80%94%20keep%20a%20bot%20on%20topic%2C%20block%20jailbreaks%2C%20enforce%20a%20conversation%20flow.%0A%0A%23%23%23%20%5BGarak%5D(https%3A%2F%2Fgithub.com%2FNVIDIA%2Fgarak)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0ALLM%20vulnerability%20scanner%20%E2%80%94%20probes%20for%20prompt%20injection%2C%20jailbreaks%2C%20data%20leakage%2C%20and%20toxicity.%0A%0A-%20**Edge%3A**%20%60nmap%60%20for%20language%20models.%20Run%20it%20before%20you%20ship%2C%20not%20after%20the%20incident.%0A%0A---%0A%0A%23%23%20Observability%20%26%20LLMOps%0A%23%23%23%20%5BLangfuse%5D(https%3A%2F%2Fgithub.com%2Flangfuse%2Flangfuse)%0A%60TypeScript%60%20%C2%B7%20%60MIT%60%20(core)%0A%0AOpen-source%20LLM%20engineering%20platform%20%E2%80%94%20tracing%2C%20evals%2C%20prompt%20management%2C%20and%20cost%20tracking.%0A%0A-%20**Replaces%3A**%20LangSmith%0A-%20**Edge%3A**%20MIT-licensed%20core%20that%20you%20can%20genuinely%20self-host.%20Framework-agnostic%20via%20OpenTelemetry.%20Nested%20traces%20make%20multi-agent%20debugging%20tractable%2C%20and%20prompt%20versioning%20decouples%20prompt%20changes%20from%20deploys.%0A%0A%23%23%23%20%5BPhoenix%5D(https%3A%2F%2Fgithub.com%2FArize-ai%2Fphoenix)%0A%60Python%20%2B%20TypeScript%60%20%C2%B7%20%60Elastic-2.0%60%0A%0AAI%20observability%20and%20evaluation%2C%20built%20on%20OpenTelemetry%20and%20OpenInference.%0A%0A-%20**Edge%3A**%20Runs%20in%20a%20notebook%20for%20local%20debugging%20or%20as%20a%20server%20for%20production.%20Strong%20embedding-drift%20and%20retrieval-quality%20visualizations.%0A%0A%23%23%23%20%5BOpenLLMetry%5D(https%3A%2F%2Fgithub.com%2Ftraceloop%2Fopenllmetry)%0A%60Python%20%2B%20TypeScript%60%20%C2%B7%20%60Apache-2.0%60%0A%0AOpenTelemetry%20instrumentation%20for%20LLM%20applications.%0A%0A-%20**Edge%3A**%20Standards-based%20%E2%80%94%20ship%20traces%20to%20Datadog%2C%20Honeycomb%2C%20Grafana%2C%20or%20whatever%20you%20already%20run.%20No%20new%20observability%20vendor.%0A%0A%23%23%23%20%5BHelicone%5D(https%3A%2F%2Fgithub.com%2FHelicone%2Fhelicone)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%0A%0AObservability%20platform%20for%20LLM%20apps%20%E2%80%94%20one-line%20proxy%20integration%2C%20caching%2C%20and%20rate%20limiting.%0A%0A-%20**Edge%3A**%20Change%20your%20base%20URL%20and%20you%20have%20logging.%20Lowest-friction%20start%20of%20any%20tool%20in%20this%20section.%0A%0A---%0A" style="display: none;"></div>
+                  
+                    <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
+                      <ol>
+                        
+                        
+                          <li class="breadcrumb-item " >
+                            
+                              <span>Categories</span>
+                            
+                            
+                              <span class="breadcrumb-separator">
+<svg class="lucide-icon icon-chevron-right " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+                            
+                          </li>
+                        
+                          <li class="breadcrumb-item active" aria-current=&quot;page&quot;>
+                            
+                              <span>Training, Evals, and Ops</span>
+                            
+                            
+                          </li>
+                        
+                      </ol>
+                    </nav>
+                  
+
+                  
+                    <div class="docmd-copy-widgets">
+                      
+                        <button class="docmd-copy-btn docmd-copy-raw-btn" data-copied="Copied!" title="Copy Markdown" aria-label="Copy Markdown">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-copy " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-copy"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+</svg>
+</span>
+                        </button>
+                      
+                      
+                        <button class="docmd-copy-btn docmd-copy-context-btn" data-copied="Copied!" title="Copy Context">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-message-square " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-message-square"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+</svg>
+</span>
+                          <span class="docmd-btn-text">Copy Context</span>
+                        </button>
+                      
+                    </div>
+                  
+                </div>
+                
+                <h1 id="training-evals-and-ops" class="docmd-heading"><a href="#training-evals-and-ops" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Training, Evals, and Ops</h1>
+<p>Fine-tuning, evaluation, guardrails, observability, and LLMOps tooling.</p>
+<h2 id="training-evals-and-ops-fine-tuning-training" class="docmd-heading"><a href="#training-evals-and-ops-fine-tuning-training" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Fine-Tuning &amp; Training</h2>
+<h3 id="training-evals-and-ops-fine-tuning-training-unslothhttpsgithubcomunslothaiunsloth" class="docmd-heading"><a href="#training-evals-and-ops-fine-tuning-training-unslothhttpsgithubcomunslothaiunsloth" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/unslothai/unsloth">Unsloth</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Fine-tune LLMs roughly 2x faster with far less VRAM, without accuracy loss.</p>
+<ul>
+<li><strong>Edge:</strong> Hand-written Triton kernels and a manual backprop engine. Makes fine-tuning a mid-size model on a single free Colab GPU realistic instead of aspirational.</li>
+</ul>
+<h3 id="training-evals-and-ops-fine-tuning-training-axolotlhttpsgithubcomaxolotl-ai-cloudaxolotl" class="docmd-heading"><a href="#training-evals-and-ops-fine-tuning-training-axolotlhttpsgithubcomaxolotl-ai-cloudaxolotl" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/axolotl-ai-cloud/axolotl">Axolotl</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Post-training framework configured entirely through YAML — full fine-tune, LoRA, QLoRA, DPO, ORPO, and more.</p>
+<ul>
+<li><strong>Edge:</strong> One config file describes the entire run, which makes experiments reproducible and diffable in git.</li>
+</ul>
+<h3 id="training-evals-and-ops-fine-tuning-training-llama-factoryhttpsgithubcomhiyougallama-factory" class="docmd-heading"><a href="#training-evals-and-ops-fine-tuning-training-llama-factoryhttpsgithubcomhiyougallama-factory" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/hiyouga/LLaMA-Factory">LLaMA-Factory</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Unified fine-tuning for 100+ models, with a web UI.</p>
+<ul>
+<li><strong>Edge:</strong> Zero-code training via LlamaBoard. The widest model coverage of any tuning toolkit.</li>
+</ul>
+<h3 id="training-evals-and-ops-fine-tuning-training-pefthttpsgithubcomhuggingfacepeft" class="docmd-heading"><a href="#training-evals-and-ops-fine-tuning-training-pefthttpsgithubcomhuggingfacepeft" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/huggingface/peft">PEFT</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Hugging Face’s parameter-efficient fine-tuning library — LoRA, QLoRA, adapters, prompt tuning.</p>
+<ul>
+<li><strong>Edge:</strong> The reference implementation everything else builds on. Integrates directly with Transformers, Accelerate, and TRL.</li>
+</ul>
+<h3 id="training-evals-and-ops-fine-tuning-training-distilabelhttpsgithubcomargilla-iodistilabel" class="docmd-heading"><a href="#training-evals-and-ops-fine-tuning-training-distilabelhttpsgithubcomargilla-iodistilabel" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/argilla-io/distilabel">Distilabel</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Synthetic data pipelines for SFT and preference tuning, from the Argilla team.</p>
+<ul>
+<li><strong>Edge:</strong> treats dataset generation as a reproducible pipeline rather than a pile of one-off scripts, and loops through Argilla so a human can curate what the model generated. The bottleneck in fine-tuning is almost always data, not compute.</li>
+</ul>
+<h3 id="training-evals-and-ops-fine-tuning-training-trlhttpsgithubcomhuggingfacetrl" class="docmd-heading"><a href="#training-evals-and-ops-fine-tuning-training-trlhttpsgithubcomhuggingfacetrl" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/huggingface/trl">TRL</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Train transformer models with reinforcement learning — SFT, DPO, GRPO, reward modeling.</p>
+<ul>
+<li><strong>Edge:</strong> The standard path from a base model to an aligned, instruction-following one.</li>
+</ul>
+<hr>
+<h2 id="training-evals-and-ops-evals-testing-guardrails" class="docmd-heading"><a href="#training-evals-and-ops-evals-testing-guardrails" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Evals, Testing &amp; Guardrails</h2>
+<h3 id="training-evals-and-ops-evals-testing-guardrails-promptfoohttpsgithubcompromptfoopromptfoo" class="docmd-heading"><a href="#training-evals-and-ops-evals-testing-guardrails-promptfoohttpsgithubcompromptfoopromptfoo" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/promptfoo/promptfoo">promptfoo</a></h3>
+<p><code>TypeScript</code> · <code>MIT</code></p>
+<p>Test and evaluate prompts, agents, and RAG systems — plus LLM red teaming and vulnerability scanning.</p>
+<ul>
+<li><strong>Edge:</strong> Declarative test cases in YAML that run in CI. Side-by-side model comparison plus adversarial red-teaming in one tool. Local-first — your prompts never leave your machine.</li>
+</ul>
+<h3 id="training-evals-and-ops-evals-testing-guardrails-deepevalhttpsgithubcomconfident-aideepeval" class="docmd-heading"><a href="#training-evals-and-ops-evals-testing-guardrails-deepevalhttpsgithubcomconfident-aideepeval" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/confident-ai/deepeval">DeepEval</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>“Pytest for LLMs” — unit-test LLM outputs with research-backed metrics.</p>
+<ul>
+<li><strong>Edge:</strong> Feels like a normal test suite. G-Eval, faithfulness, answer relevancy, hallucination, and RAG-specific metrics run locally on the model of your choice.</li>
+</ul>
+<h3 id="training-evals-and-ops-evals-testing-guardrails-ragashttpsgithubcomexplodinggradientsragas" class="docmd-heading"><a href="#training-evals-and-ops-evals-testing-guardrails-ragashttpsgithubcomexplodinggradientsragas" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/explodinggradients/ragas">Ragas</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Evaluation toolkit for RAG pipelines.</p>
+<ul>
+<li><strong>Edge:</strong> Splits retrieval quality from generation quality, so you know which half to fix. Can synthesize a test set from your own documents.</li>
+</ul>
+<h3 id="training-evals-and-ops-evals-testing-guardrails-guardrailshttpsgithubcomguardrails-aiguardrails" class="docmd-heading"><a href="#training-evals-and-ops-evals-testing-guardrails-guardrailshttpsgithubcomguardrails-aiguardrails" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/guardrails-ai/guardrails">Guardrails</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Add input/output validators to LLM applications — structure, safety, PII, and custom rules.</p>
+<ul>
+<li><strong>Edge:</strong> Validators are composable and re-ask the model on failure rather than just erroring out.</li>
+</ul>
+<h3 id="training-evals-and-ops-evals-testing-guardrails-nemo-guardrailshttpsgithubcomnvidianemo-guardrails" class="docmd-heading"><a href="#training-evals-and-ops-evals-testing-guardrails-nemo-guardrailshttpsgithubcomnvidianemo-guardrails" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/NVIDIA/NeMo-Guardrails">NeMo Guardrails</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Programmable rails for conversational systems, defined in the Colang modeling language.</p>
+<ul>
+<li><strong>Edge:</strong> Dialogue-level control — keep a bot on topic, block jailbreaks, enforce a conversation flow.</li>
+</ul>
+<h3 id="training-evals-and-ops-evals-testing-guardrails-garakhttpsgithubcomnvidiagarak" class="docmd-heading"><a href="#training-evals-and-ops-evals-testing-guardrails-garakhttpsgithubcomnvidiagarak" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/NVIDIA/garak">Garak</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>LLM vulnerability scanner — probes for prompt injection, jailbreaks, data leakage, and toxicity.</p>
+<ul>
+<li><strong>Edge:</strong> <code>nmap</code> for language models. Run it before you ship, not after the incident.</li>
+</ul>
+<hr>
+<h2 id="training-evals-and-ops-observability-llmops" class="docmd-heading"><a href="#training-evals-and-ops-observability-llmops" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Observability &amp; LLMOps</h2>
+<h3 id="training-evals-and-ops-observability-llmops-langfusehttpsgithubcomlangfuselangfuse" class="docmd-heading"><a href="#training-evals-and-ops-observability-llmops-langfusehttpsgithubcomlangfuselangfuse" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/langfuse/langfuse">Langfuse</a></h3>
+<p><code>TypeScript</code> · <code>MIT</code> (core)</p>
+<p>Open-source LLM engineering platform — tracing, evals, prompt management, and cost tracking.</p>
+<ul>
+<li><strong>Replaces:</strong> LangSmith</li>
+<li><strong>Edge:</strong> MIT-licensed core that you can genuinely self-host. Framework-agnostic via OpenTelemetry. Nested traces make multi-agent debugging tractable, and prompt versioning decouples prompt changes from deploys.</li>
+</ul>
+<h3 id="training-evals-and-ops-observability-llmops-phoenixhttpsgithubcomarize-aiphoenix" class="docmd-heading"><a href="#training-evals-and-ops-observability-llmops-phoenixhttpsgithubcomarize-aiphoenix" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/Arize-ai/phoenix">Phoenix</a></h3>
+<p><code>Python + TypeScript</code> · <code>Elastic-2.0</code></p>
+<p>AI observability and evaluation, built on OpenTelemetry and OpenInference.</p>
+<ul>
+<li><strong>Edge:</strong> Runs in a notebook for local debugging or as a server for production. Strong embedding-drift and retrieval-quality visualizations.</li>
+</ul>
+<h3 id="training-evals-and-ops-observability-llmops-openllmetryhttpsgithubcomtraceloopopenllmetry" class="docmd-heading"><a href="#training-evals-and-ops-observability-llmops-openllmetryhttpsgithubcomtraceloopopenllmetry" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/traceloop/openllmetry">OpenLLMetry</a></h3>
+<p><code>Python + TypeScript</code> · <code>Apache-2.0</code></p>
+<p>OpenTelemetry instrumentation for LLM applications.</p>
+<ul>
+<li><strong>Edge:</strong> Standards-based — ship traces to Datadog, Honeycomb, Grafana, or whatever you already run. No new observability vendor.</li>
+</ul>
+<h3 id="training-evals-and-ops-observability-llmops-heliconehttpsgithubcomheliconehelicone" class="docmd-heading"><a href="#training-evals-and-ops-observability-llmops-heliconehttpsgithubcomheliconehelicone" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/Helicone/helicone">Helicone</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code></p>
+<p>Observability platform for LLM apps — one-line proxy integration, caching, and rate limiting.</p>
+<ul>
+<li><strong>Edge:</strong> Change your base URL and you have logging. Lowest-friction start of any tool in this section.</li>
+</ul>
+<hr>
+
+                
+                  <div class="page-navigation">
+                    
+                      <a href="../../categories/04-rag-and-data/" class="prev-page">
+                        
+<svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" />
+</svg>
+
+                        <span><small>Previous</small><strong>
+                            RAG and Data
+                          </strong></span>
+                      </a>
+                    
+                    
+                      <a href="../../categories/06-multimodal-and-builders/" class="next-page">
+                        <span><small>Next</small>
+                          <strong>
+                            Multimodal and Builders
+                          </strong></span>
+                        
+<svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>
+
+                      </a>
+                    
+                  </div>
+                
+              </div>
+              
+              <div class="toc-sidebar">
+                
+
+
+  <div class="toc-container">
+    <h2 class="toc-title">On This Page<span class="mobile-view toc-menu-button float-right">
+<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 9 6 6 6-6" />
+</svg>
+</span></h2>
+    <ul class="toc-list">
+      
+        <li class="toc-item toc-level-1">
+          <a href="#training-evals-and-ops" class="toc-link">Training, Evals, and Ops</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#training-evals-and-ops-fine-tuning-training" class="toc-link">Fine-Tuning &amp; Training</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-fine-tuning-training-unslothhttpsgithubcomunslothaiunsloth" class="toc-link">Unsloth</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-fine-tuning-training-axolotlhttpsgithubcomaxolotl-ai-cloudaxolotl" class="toc-link">Axolotl</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-fine-tuning-training-llama-factoryhttpsgithubcomhiyougallama-factory" class="toc-link">LLaMA-Factory</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-fine-tuning-training-pefthttpsgithubcomhuggingfacepeft" class="toc-link">PEFT</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-fine-tuning-training-distilabelhttpsgithubcomargilla-iodistilabel" class="toc-link">Distilabel</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-fine-tuning-training-trlhttpsgithubcomhuggingfacetrl" class="toc-link">TRL</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#training-evals-and-ops-evals-testing-guardrails" class="toc-link">Evals, Testing &amp; Guardrails</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-evals-testing-guardrails-promptfoohttpsgithubcompromptfoopromptfoo" class="toc-link">promptfoo</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-evals-testing-guardrails-deepevalhttpsgithubcomconfident-aideepeval" class="toc-link">DeepEval</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-evals-testing-guardrails-ragashttpsgithubcomexplodinggradientsragas" class="toc-link">Ragas</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-evals-testing-guardrails-guardrailshttpsgithubcomguardrails-aiguardrails" class="toc-link">Guardrails</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-evals-testing-guardrails-nemo-guardrailshttpsgithubcomnvidianemo-guardrails" class="toc-link">NeMo Guardrails</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-evals-testing-guardrails-garakhttpsgithubcomnvidiagarak" class="toc-link">Garak</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#training-evals-and-ops-observability-llmops" class="toc-link">Observability &amp; LLMOps</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-observability-llmops-langfusehttpsgithubcomlangfuselangfuse" class="toc-link">Langfuse</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-observability-llmops-phoenixhttpsgithubcomarize-aiphoenix" class="toc-link">Phoenix</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-observability-llmops-openllmetryhttpsgithubcomtraceloopopenllmetry" class="toc-link">OpenLLMetry</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#training-evals-and-ops-observability-llmops-heliconehttpsgithubcomheliconehelicone" class="toc-link">Helicone</a>
+        </li>
+      
+    </ul>
+  </div>
+
+              </div>
+              
+            </div>
+            <div class="page-footer-actions">
+              
+              
+                <span class="git-last-updated" data-timestamp="1785186234000">
+                  <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span class="git-label">Last updated:</span>
+                  <span class="git-time" data-timestamp="1785186234000"></span>
+                  
+                  <div class="git-commit-tooltip" role="tooltip">
+                    <div class="git-tooltip-title">Recent commits</div>
+                    <ul class="git-commit-list">
+                      
+                        <li class="git-commit-item">
+                          <div class="git-commit-avatar" title="Sami Uysal">
+                            
+                              <img src="https://www.gravatar.com/avatar/0ea2606a3559c065e056e441f58180b1?d=mp&amp;s=64" alt="Sami Uysal">
+                            
+                          </div>
+                          <div class="git-commit-details">
+                            <div class="git-commit-message" title="Refactor docmd navigation and routes">Refactor docmd navigation and routes</div>
+                            <div class="git-commit-meta">
+                              <span class="git-commit-author">Sami Uysal</span>
+                              <span class="git-commit-date" data-timestamp="1785186234000"></span>
+                            </div>
+                          </div>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                  
+                </span>
+              
+              <span class="git-spacer"></span>
+              
+            </div>
+          </main>
+          
+
+
+<footer class="page-footer">
+  <div class="footer-content">
+    <div class="user-footer">© 2026</div>
+    
+      <div class="branding-footer">
+        Built with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
+      </div>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+      
+      <script src="../../assets/js/docmd-main.js?v=ms3ptj3q"></script>
+      
+      <script src="../../assets/js/docmd-git.js?v=ms3ptj3q"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/vendor/minisearch.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/docmd-search.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/docmd-git.js?v=ms3ptj3q" type="module"></script>
+
+  <!-- Search Modal (Injected by @docmd/plugin-search) -->
+  <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-show-confidence="false" data-show-filters="true"
+       data-search-placeholder="Search documentation..."
+       data-search-no-results="No results found."
+       data-search-error="Failed to load search index."
+       data-search-offline="Search requires a web server. Open this site via http://localhost instead of file:// to enable search."
+       data-search-offline-build="Search is disabled because these docs were built with the --offline flag. Rebuild the site without the flag to enable search."
+       data-search-initial="Type to start searching..."
+       data-search-navigate="to navigate"
+       data-search-escape="to close">
+      <div class="docmd-search-box">
+          <div class="docmd-search-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input type="text" id="docmd-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+              <button onclick="window.closeDocmdSearch()" class="docmd-search-close" aria-label="Close search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+              </button>
+          </div>
+          <div id="docmd-search-results" class="docmd-search-results"></div>
+          <div class="docmd-search-footer">
+              <span><kbd class="docmd-kbd">↑</kbd> <kbd class="docmd-kbd">↓</kbd> to navigate</span>
+              <span><kbd class="docmd-kbd">ESC</kbd> to close</span>
+          </div>
+      </div>
+  </div>
+
+    <script>
+      (function() {
+        var searchDebounceTimer;
+
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a');
+          if (!link || !window.gtag) return;
+          
+          var url = link.href;
+          var hostname = window.location.hostname;
+          var isExternal = link.hostname && link.hostname !== hostname;
+          var isDownload = link.hasAttribute('download') || url.match(/\.(pdf|zip|tar|gz|exe|pkg)$/i);
+          
+          if (isExternal) {
+            gtag('event', 'click_external', { 'url': url, 'link_text': link.innerText.trim() });
+          } else if (isDownload) {
+            gtag('event', 'download', { 'file_name': url.split('/').pop(), 'url': url });
+          }
+
+          // TOC tracking
+          if (link.classList.contains('toc-link')) {
+            gtag('event', 'toc_click', { 'target_id': link.getAttribute('href'), 'title': link.innerText.trim() });
+          }
+
+          // Permalink tracking
+          if (link.classList.contains('heading-anchor')) {
+            gtag('event', 'permalink_click', { 'url': url });
+          }
+        });
+
+        
+        // Search Keyword Tracking
+        document.addEventListener('input', function(e) {
+          if (e.target.id === 'docmd-search-input' && window.gtag) {
+            var query = e.target.value.trim();
+            if (query.length < 3) return;
+            
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(function() {
+              gtag('event', 'search', { 'search_term': query });
+            }, 1000);
+          }
+        });
+        
+      })();
+    </script>
+
+<script>window.__git_config={"repo":null,"branch":"main","editLink":false,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+      
+      
+      
+  </body>
+</html>

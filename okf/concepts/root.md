@@ -1,24 +1,23 @@
 ---
 type: concept
-title: "Awesome Open-Source AI Developer Tools [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)"
+title: "Awesome Open AI Developer Tools"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/"
 path: /
 updated: 2026-07-27
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-27T20:39:47.561Z"
+  generated_at: "2026-07-27T21:04:43.137Z"
 ---
-<div align="center" markdown="1">
+# Awesome Open AI Developer Tools
 
-# Awesome Open-Source AI Developer Tools [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **A curated guide to the open-source AI stack — every layer, every proprietary tool you can replace.**
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*add your language*](TRANSLATIONS.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+**English** · [Türkçe](/languages/tr) · [简体中文](/languages/zh) · [Español](/languages/es) · [*add your language*](/community/translations) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
-</div>
 
 ---
 
@@ -900,7 +899,7 @@ Three rules that save the most time:
 
 ## Contributing
 
-PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+PRs welcome. See [contributing guide](/community/contributing).
 
 The bar for inclusion:
 
@@ -919,3 +918,4 @@ The bar for inclusion:
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 To the extent possible under law, contributors have waived all copyright and related rights to this work.
+

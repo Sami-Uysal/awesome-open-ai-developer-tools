@@ -1,24 +1,23 @@
 ---
 type: concept
-title: "Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)"
-source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.tr/"
-path: /README.tr/
+title: "Awesome Open AI Developer Tools"
+source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/tr/"
+path: /languages/tr/
 updated: 2026-07-27
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-27T20:39:47.559Z"
+  generated_at: "2026-07-27T21:04:43.145Z"
 ---
-<div align="center" markdown="1">
+# Awesome Open AI Developer Tools
 
-# Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **Açık kaynak yapay zekâ yığınının her katmanı için derlenmiş rehber — ve yerine geçtiği her ücretli ürün.**
 
 Kodlama ajanları · yerel çıkarım · ajan çatıları · vektör veritabanları · RAG · değerlendirme · gözlemlenebilirlik
 
-[English](index.md) · **Türkçe** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*kendi dilini ekle*](TRANSLATIONS.md) · [🌐 Web sitesi](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](/) · **Türkçe** · [简体中文](/languages/zh) · [Español](/languages/es) · [*kendi dilini ekle*](/community/translations) · [🌐 Web sitesi](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
-</div>
 
 ---
 
@@ -900,7 +899,7 @@ En çok zaman kazandıran üç kural:
 
 ## Katkı
 
-PR'lara açığız. [CONTRIBUTING.md](CONTRIBUTING.md) dosyasına bakın.
+PR'lara açığız. [contributing guide](/community/contributing) dosyasına bakın.
 
 Listeye girme çıtası:
 
@@ -909,10 +908,11 @@ Listeye girme çıtası:
 - Bir geliştiricinin gerçekten yaşadığı bir sorunu çözüyor
 - Madde, aracın ne yaptığını değil *neden onu seçeceğini* açıklıyor
 
-> **Not:** İngilizce sürüm kanoniktir. Bu çeviriyle İngilizce metin çelişirse İngilizce geçerlidir. Bkz. [TRANSLATIONS.md](TRANSLATIONS.md).
+> **Not:** İngilizce sürüm kanoniktir. Bu çeviriyle İngilizce metin çelişirse İngilizce geçerlidir. Bkz. [translations guide](/community/translations).
 
 ## Lisans
 
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 Yasaların izin verdiği ölçüde, katkıda bulunanlar bu esere ilişkin tüm telif ve bağlantılı haklarından feragat etmiştir.
+

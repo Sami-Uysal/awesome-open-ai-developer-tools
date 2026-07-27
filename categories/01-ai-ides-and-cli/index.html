@@ -1,0 +1,1283 @@
+<!--
+  ---------------------------------------------------------------
+  docmd : the zero-config documentation engine.
+  @website https://docmd.io
+  [docmd-source] - Please do not remove this header.
+  ---------------------------------------------------------------
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="docmd v0.8.17">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+      var root = "../../";
+      if (root && !root.endsWith('/')) root += '/';
+      if (root === '') root = './';
+      window.DOCMD_ROOT = root;
+
+      window.DOCMD_SITE_ROOT = "/awesome-open-ai-developer-tools/";
+
+      window.DOCMD_APPEARANCE = "system";
+      window.DOCMD_VERSION_ROOT = "/";
+      window.DOCMD_BASE = "/awesome-open-ai-developer-tools/";
+      window.DOCMD_LOCALE = "";
+      window.DOCMD_DEFAULT_LOCALE = "";
+    </script>
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    //
+    // Resolve from three sources, in priority order:
+    //   1. localStorage explicit user choice (light / dark)
+    //   2. window.DOCMD_APPEARANCE  (current canonical name, set by EJS templates)
+    //   3. window.DOCMD_DEFAULT_MODE (legacy alias kept for pre-0.8.7 outputs)
+    //   4. 'light' as the final fallback
+    //
+    // Note: localStorage is only honoured when it holds an explicit
+    // 'light' or 'dark' value. A stored 'system' value (from a prior
+    // session where the user picked "follow system") must NOT win over
+    // a freshly resolved config value — the resolved value will itself
+    // be 'system' in that case and the OS preference check below takes
+    // over, so this is a no-op for the in-session behaviour but keeps
+    // any future storage migration simple.
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_APPEARANCE
+      || window.DOCMD_DEFAULT_MODE
+      || 'light';
+    var theme = (localValue === 'light' || localValue === 'dark')
+      ? localValue
+      : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+    <style>
+      html {
+        visibility: hidden;
+      }
+    </style>
+    <title>
+      AI IDEs and CLI : Awesome Open AI Developer Tools
+    </title>
+    
+    
+
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.ico?v=ms3ptj3q">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=ms3ptj3q">
+    
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=ms3ptj3q" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=ms3ptj3q" id="hljs-dark" disabled>
+    
+    
+<meta name="description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+<link rel="canonical" href="https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/">
+<meta property="og:title" content="AI IDEs and CLI - Awesome Open AI Developer Tools">
+<meta property="og:description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+<meta property="og:url" content="https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI IDEs and CLI - Awesome Open AI Developer Tools">
+<meta name="twitter:description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+
+
+
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=ms3ptj3q" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=ms3ptj3q" >
+
+    
+    
+  </head>
+  <body
+    class="sidebar-collapsible has-menubar has-menubar-top"
+    data-default-collapsed="false"
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/categories/01-ai-ides-and-cli.md">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    
+      
+
+
+
+<div class="docmd-menubar">
+  <div class="menubar-inner">
+    <div class="menubar-left">
+    
+        
+          
+            <a href="../../" class="menubar-brand" >
+              
+                
+<svg class="lucide-icon icon-sparkles menubar-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sparkles"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" />
+</svg>
+
+              
+              
+                <span class="menubar-brand-text">
+                  Awesome Open AI Developer Tools
+                </span>
+              
+            </a>
+            
+        
+          
+                <a href="../../categories/01-ai-ides-and-cli/" class="menubar-link" >
+                  
+                  <span>
+                    Categories
+                  </span>
+                  
+                </a>
+              
+        
+          
+                <a href="../../languages/tr/" class="menubar-link" >
+                  
+                  <span>
+                    Languages
+                  </span>
+                  
+                </a>
+              
+        
+    
+      </div>
+      <div class="menubar-right">
+        
+          
+            
+              <a href="https://github.com/Sami-Uysal/awesome-open-ai-developer-tools" class="menubar-link"  target="_blank" rel="noopener noreferrer">
+                
+                <span>
+                  GitHub
+                </span>
+                
+                  
+<svg class="lucide-icon icon-external-link menubar-ext-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-external-link"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</svg>
+
+                
+              </a>
+            
+          
+        
+        
+          <div class="menubar-options">
+            
+
+
+<div class="docmd-options-menu">
+    
+    <button class="docmd-search-trigger" aria-label="Search">
+        
+<svg class="lucide-icon icon-search " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+
+        <span class="search-label">Search</span>
+        <span class="search-keys"><kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">K</kbd></span>
+    </button>
+    
+
+    
+
+    
+
+    
+    <button class="theme-toggle-button" aria-label="Toggle theme">
+        
+<svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+ 
+<svg class="lucide-icon icon-moon icon-moon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-moon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+
+    </button>
+    
+
+    
+</div>
+
+          </div>
+        
+    </div>
+  </div>
+</div>
+    
+    
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          
+<h1><a href="../../">
+                Awesome Open AI Developer Tools
+              </a></h1>
+          
+          <span class="mobile-view sidebar-menu-button float-right">
+            
+<svg class="lucide-icon icon-menu " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-menu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" />
+</svg>
+
+          </span>
+        </div>
+        <div class="sidebar-top-group">
+          
+          
+          
+          
+        </div>
+        
+
+<nav class="sidebar-nav" aria-label="Main Navigation">
+  <ul>
+    
+      <li class="" >
+      
+        <a href="../../" class=" "
+          >
+           
+<svg class="lucide-icon icon-home " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-house"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Home
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="active-parent collapsible expanded nav-group"  aria-expanded="true" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-folder-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-folder-open"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Categories
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="active" >
+      
+        <a href="../../categories/01-ai-ides-and-cli/" class="active "
+          >
+          
+          <span class="nav-item-title">
+            AI IDEs and CLI
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/02-open-source-agents/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Open-Source Agents
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/03-local-llm-inference/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Local LLM Inference
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/04-rag-and-data/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            RAG and Data
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/05-training-evals-and-ops/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Training, Evals, and Ops
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/06-multimodal-and-builders/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Multimodal and Builders
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-languages " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-languages"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m5 8 6 6" />
+  <path d="m4 14 6-6 2-3" />
+  <path d="M2 5h12" />
+  <path d="M7 2h1" />
+  <path d="m22 22-5-10-5 10" />
+  <path d="M14 18h6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Languages
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../languages/tr/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Türkçe
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../languages/es/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Español
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../languages/zh/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            中文
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-users " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-users"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Community
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../community/contributing/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Contributing
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../community/translations/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Translations
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+        <div class="sidebar-bottom-group mt-auto">
+          
+          
+          
+          
+        </div>
+      </aside>
+      
+      
+      
+      <div class="main-content-wrapper">
+        
+        
+          <header class="page-header">
+            <div class="header-left">
+              
+                <button id="sidebar-toggle-button" class="sidebar-toggle-button"
+                  aria-label="Toggle Sidebar">
+                  
+<svg class="lucide-icon icon-chevron-left " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 18-6-6 6-6" />
+</svg>
+
+                </button>
+              
+              <div class="header-titles-wrapper">
+                <span class="header-title">
+                  AI IDEs and CLI
+                </span>
+              </div>
+            </div>
+            <div class="header-right">
+              
+            </div>
+          </header>
+        
+        <div class="content-theme-cover">
+          <main class="content-area" id="main-content">
+            <div class="content-layout">
+              <div class="main-content">
+                <div class="docmd-breadcrumbs-row">
+                  <div id="docmd-raw-markdown" data-content="%23%20AI%20IDEs%20and%20CLI%0A%0ACoding%20agents%2C%20pair%20programmers%2C%20and%20prompt-to-app%20builders%20for%20developer%20workflows.%0A%0A%23%23%20Coding%20Agents%20%26%20Pair%20Programmers%0AAgents%20that%20read%2C%20write%2C%20and%20refactor%20code%20in%20your%20repo.%0A%0A%23%23%23%20%5Baider%5D(https%3A%2F%2Fgithub.com%2FAider-AI%2Faider)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20CLI%0A%0AAI%20pair%20programming%20in%20your%20terminal.%20Maps%20your%20whole%20repository%2C%20edits%20files%20directly%2C%20and%20writes%20its%20own%20git%20commits.%0A%0A-%20**Replaces%3A**%20GitHub%20Copilot%2C%20Cursor%0A-%20**Backends%3A**%20100%2B%20models%20via%20LiteLLM%20%E2%80%94%20Claude%2C%20GPT%2C%20Gemini%2C%20plus%20local%20models%20through%20Ollama%20or%20any%20OpenAI-compatible%20endpoint%0A-%20**Edge%3A**%20The%20repo%20map%20gives%20it%20whole-codebase%20context%20without%20dumping%20every%20file%20into%20the%20prompt.%20Auto-commits%20mean%20every%20AI%20edit%20is%20a%20revertable%20checkpoint.%20Editor-agnostic%20%E2%80%94%20works%20alongside%20VS%20Code%2C%20Neovim%2C%20Emacs%2C%20or%20nothing%20at%20all.%0A%0A%23%23%23%20%5BOpenCode%5D(https%3A%2F%2Fgithub.com%2Fsst%2Fopencode)%0A%60TypeScript%60%20%C2%B7%20%60MIT%60%20%C2%B7%20TUI%0A%0ATerminal-native%20coding%20agent%20with%20LSP%20integration%20%E2%80%94%20it%20loads%20the%20right%20language%20server%20so%20the%20model%20sees%20real%20type%20information%2C%20not%20guesses.%0A%0A-%20**Replaces%3A**%20Claude%20Code%2C%20Cursor%0A-%20**Backends%3A**%20Anthropic%2C%20OpenAI%2C%20Google%2C%20local%20models%3B%20provider-agnostic%20by%20design%0A-%20**Edge%3A**%20LSP-grounded%20suggestions%20cut%20hallucinated%20APIs.%20Client%2Fserver%20split%20means%20you%20can%20drive%20one%20session%20from%20multiple%20clients.%0A%0A%23%23%23%20%5BCline%5D(https%3A%2F%2Fgithub.com%2Fcline%2Fcline)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20VS%20Code%20extension%0A%0AAutonomous%20coding%20agent%20inside%20VS%20Code.%20Plans%2C%20edits%20files%2C%20runs%20terminal%20commands%2C%20and%20uses%20the%20browser%20%E2%80%94%20asking%20permission%20at%20each%20step.%0A%0A-%20**Replaces%3A**%20Cursor%20Composer%2C%20Devin%0A-%20**Backends%3A**%20Anthropic%2C%20OpenAI%2C%20Google%2C%20AWS%20Bedrock%2C%20Azure%2C%20OpenRouter%2C%20Ollama%2C%20LM%20Studio%0A-%20**Edge%3A**%20Human-in-the-loop%20by%20default%20%E2%80%94%20every%20file%20diff%20and%20shell%20command%20needs%20approval.%20Plan%2FAct%20mode%20separation%20stops%20the%20agent%20from%20bulldozing%20a%20codebase.%0A%0A%23%23%23%20%5BContinue%5D(https%3A%2F%2Fgithub.com%2Fcontinuedev%2Fcontinue)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20VS%20Code%20%2B%20JetBrains%0A%0ABuild%20your%20own%20AI%20code%20assistant%20%E2%80%94%20autocomplete%2C%20chat%2C%20and%20edit%2C%20configured%20with%20your%20own%20models%20and%20context%20providers.%0A%0A-%20**Replaces%3A**%20GitHub%20Copilot%0A-%20**Backends%3A**%20Any%20%E2%80%94%20local%20(Ollama%2C%20llama.cpp)%20or%20hosted%0A-%20**Edge%3A**%20Fully%20configurable%20context%20providers%20(docs%2C%20terminal%2C%20git%20diff%2C%20codebase).%20Tab-autocomplete%20works%20well%20with%20small%20local%20models%2C%20so%20you%20can%20run%20genuinely%20offline.%0A%0A%23%23%23%20%5BOpenHands%5D(https%3A%2F%2Fgithub.com%2FAll-Hands-AI%2FOpenHands)%0A%60Python%60%20%C2%B7%20%60MIT%60%20%C2%B7%20Web%20%2B%20headless%0A%0AAgents%20that%20do%20what%20a%20developer%20does%20%E2%80%94%20modify%20code%2C%20run%20commands%2C%20browse%20the%20web%2C%20call%20APIs%20%E2%80%94%20inside%20a%20sandboxed%20runtime.%0A%0A-%20**Replaces%3A**%20Devin%0A-%20**Backends%3A**%20Anything%20LiteLLM%20supports%0A-%20**Edge%3A**%20Real%20sandboxed%20execution%20(Docker)%20rather%20than%20a%20chat%20that%20pretends%20to%20run%20things.%20Headless%20and%20CLI%20modes%20make%20it%20scriptable%20in%20CI.%0A%0A%23%23%23%20%5BSWE-agent%5D(https%3A%2F%2Fgithub.com%2FSWE-agent%2FSWE-agent)%0A%60Python%60%20%C2%B7%20%60MIT%60%20%C2%B7%20CLI%0A%0AResearch-grade%20agent%20that%20turns%20a%20GitHub%20issue%20into%20a%20pull%20request.%0A%0A-%20**Replaces%3A**%20Devin%2C%20issue-to-PR%20bots%0A-%20**Edge%3A**%20The%20agent-computer%20interface%20(ACI)%20is%20the%20point%20%E2%80%94%20carefully%20designed%20tools%20beat%20a%20bigger%20model.%20If%20you&#039;re%20building%20your%20own%20agent%2C%20read%20this%20codebase%20first.%0A%0A%23%23%23%20%5BGoose%5D(https%3A%2F%2Fgithub.com%2Fblock%2Fgoose)%0A%60Rust%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20CLI%20%2B%20desktop%0A%0AExtensible%20autonomous%20agent%20from%20Block%2C%20now%20governed%20by%20the%20Linux%20Foundation.%20Installs%2C%20executes%2C%20edits%2C%20and%20tests%20%E2%80%94%20not%20just%20suggests.%0A%0A-%20**Replaces%3A**%20Devin%2C%20Cursor%20agent%20mode%0A-%20**Backends%3A**%20Any%20provider%2C%20plus%20first-class%20MCP%20extension%20support%0A-%20**Edge%3A**%20More%20autonomous%20than%20aider%20%E2%80%94%20plans%20and%20iterates%20with%20less%20hand-holding.%20Vendor-neutral%20governance%20under%20the%20Linux%20Foundation%20means%20no%20rug-pull%20risk%2C%20which%20matters%20for%20tooling%20you%20standardize%20a%20team%20on.%0A%0A%23%23%23%20%5BKilo%20Code%5D(https%3A%2F%2Fgithub.com%2FKilo-Org%2Fkilocode)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20VS%20Code%20%2B%20JetBrains%0A%0AOpen-source%20IDE%20agent%20that%20merged%20the%20best%20of%20Roo%20Code%20and%20Cline%20into%20one%20extension.%0A%0A-%20**Replaces%3A**%20Cursor%2C%20Windsurf%0A-%20**Edge%3A**%20Orchestrator%20mode%20splits%20a%20large%20task%20into%20subtasks%20handled%20by%20specialized%20modes.%20Absorbs%20upstream%20features%20from%20both%20parents%2C%20so%20it%20moves%20faster%20than%20either%20did%20alone.%0A%0A%23%23%23%20%5BTabby%5D(https%3A%2F%2Fgithub.com%2FTabbyML%2Ftabby)%0A%60Rust%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20Self-hosted%20server%0A%0ASelf-hosted%20AI%20coding%20assistant%20with%20its%20own%20inference%20server%2C%20no%20external%20API%20calls.%0A%0A-%20**Replaces%3A**%20GitHub%20Copilot%20(enterprise)%0A-%20**Edge%3A**%20Runs%20on%20consumer%20GPUs%2C%20OpenAPI%20interface%2C%20and%20answers%20the%20compliance%20question%20(%22where%20does%20our%20code%20go%3F%22)%20with%20%22nowhere.%22%0A%0A%23%23%23%20%5Bgpt-engineer%5D(https%3A%2F%2Fgithub.com%2Fgpt-engineer-org%2Fgpt-engineer)%0A%60Python%60%20%C2%B7%20%60MIT%60%20%C2%B7%20CLI%0A%0ADescribe%20a%20project%20in%20natural%20language%3B%20it%20writes%20and%20iterates%20on%20the%20whole%20codebase.%0A%0A-%20**Edge%3A**%20Best%20for%20greenfield%20scaffolding%20rather%20than%20surgical%20edits%20on%20an%20existing%20repo.%0A%0A---%0A%0A%23%23%20Prompt-to-App%20Builders%0APrompt%20in%2C%20deployed%20full-stack%20app%20out.%0A%0A%23%23%23%20%5Bbolt.diy%5D(https%3A%2F%2Fgithub.com%2Fstackblitz-labs%2Fbolt.diy)%0A%60TypeScript%60%20%C2%B7%20%60MIT%60%0A%0AOfficial%20open-source%20fork%20of%20Bolt.new.%20Prompt%2C%20run%2C%20edit%2C%20and%20deploy%20full-stack%20web%20apps%20in%20the%20browser%20%E2%80%94%20with%20the%20LLM%20of%20your%20choice.%0A%0A-%20**Replaces%3A**%20Bolt.new%2C%20v0%2C%20Replit%20Agent%0A-%20**Backends%3A**%20OpenAI%2C%20Anthropic%2C%20Google%2C%20Groq%2C%20Mistral%2C%20DeepSeek%2C%20xAI%2C%20Ollama%2C%20LM%20Studio%2C%20OpenRouter%2C%20any%20OpenAI-compatible%20endpoint%0A-%20**Edge%3A**%20Self-hostable%20with%20zero%20telemetry.%20Multi-provider%20switching%20mid-project%20means%20you%20can%20start%20on%20a%20cheap%20model%20and%20escalate%20only%20where%20it%20matters.%0A%0A%23%23%23%20%5BOpen%20Design%5D(https%3A%2F%2Fgithub.com%2Fnexu-io%2Fopen-design)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20Desktop%20%2B%20web%0A%0ATurns%20the%20coding%20agent%20you%20already%20have%20into%20a%20design%20engine%20%E2%80%94%20prototypes%2C%20landing%20pages%2C%20dashboards%2C%20slides%2C%20images%2C%20and%20video%2C%20exported%20as%20HTML%2FPDF%2FPPTX%2FMP4.%0A%0A-%20**Replaces%3A**%20Claude%20Design%2C%20Figma%20Make%0A-%20**Backends%3A**%20BYOK%20through%20whatever%20agent%20is%20on%20your%20PATH%20%E2%80%94%20Claude%20Code%2C%20Codex%2C%20Cursor%2C%20Gemini%2C%20OpenCode%2C%20Qwen%2C%20and%2020%2B%20others%0A-%20**Edge%3A**%20Ships%20with%20a%20large%20library%20of%20brand-grade%20design-system%20packages%2C%20and%20every%20render%20reads%20a%20%60DESIGN.md%60%20brand%20contract%2C%20so%20output%20is%20consistent%20instead%20of%20randomly%20styled.%20Local-first%3A%20your%20brand%20assets%20never%20leave%20the%20machine.%0A%0A%23%23%23%20%5BOpenUI%5D(https%3A%2F%2Fgithub.com%2Fwandb%2Fopenui)%0A%60Python%20%2B%20TypeScript%60%20%C2%B7%20%60Apache-2.0%60%0A%0ADescribe%20a%20UI%2C%20watch%20it%20render%20live%2C%20convert%20it%20to%20React%2FSvelte%2FVue.%0A%0A-%20**Replaces%3A**%20v0.dev%0A-%20**Edge%3A**%20Live%20iteration%20loop%20%E2%80%94%20describe%20the%20change%2C%20see%20it%20immediately.%20Works%20with%20local%20models%20via%20Ollama.%0A%0A%23%23%23%20%5BDyad%5D(https%3A%2F%2Fgithub.com%2Fdyad-sh%2Fdyad)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%20%C2%B7%20Desktop%0A%0ALocal%2C%20open-source%20AI%20app%20builder.%20Runs%20on%20your%20machine%2C%20bring%20your%20own%20API%20keys.%0A%0A-%20**Replaces%3A**%20Lovable%2C%20v0%2C%20Bolt%0A-%20**Edge%3A**%20No%20vendor%20lock-in%20and%20no%20cloud%20round-trip%20for%20your%20source%20code.%0A%0A---%0A" style="display: none;"></div>
+                  
+                    <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
+                      <ol>
+                        
+                        
+                          <li class="breadcrumb-item " >
+                            
+                              <span>Categories</span>
+                            
+                            
+                              <span class="breadcrumb-separator">
+<svg class="lucide-icon icon-chevron-right " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+                            
+                          </li>
+                        
+                          <li class="breadcrumb-item active" aria-current=&quot;page&quot;>
+                            
+                              <span>AI IDEs and CLI</span>
+                            
+                            
+                          </li>
+                        
+                      </ol>
+                    </nav>
+                  
+
+                  
+                    <div class="docmd-copy-widgets">
+                      
+                        <button class="docmd-copy-btn docmd-copy-raw-btn" data-copied="Copied!" title="Copy Markdown" aria-label="Copy Markdown">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-copy " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-copy"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+</svg>
+</span>
+                        </button>
+                      
+                      
+                        <button class="docmd-copy-btn docmd-copy-context-btn" data-copied="Copied!" title="Copy Context">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-message-square " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-message-square"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+</svg>
+</span>
+                          <span class="docmd-btn-text">Copy Context</span>
+                        </button>
+                      
+                    </div>
+                  
+                </div>
+                
+                <h1 id="ai-ides-and-cli" class="docmd-heading"><a href="#ai-ides-and-cli" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>AI IDEs and CLI</h1>
+<p>Coding agents, pair programmers, and prompt-to-app builders for developer workflows.</p>
+<h2 id="ai-ides-and-cli-coding-agents-pair-programmers" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Coding Agents &amp; Pair Programmers</h2>
+<p>Agents that read, write, and refactor code in your repo.</p>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-aiderhttpsgithubcomaider-aiaider" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-aiderhttpsgithubcomaider-aiaider" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/Aider-AI/aider">aider</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code> · CLI</p>
+<p>AI pair programming in your terminal. Maps your whole repository, edits files directly, and writes its own git commits.</p>
+<ul>
+<li><strong>Replaces:</strong> GitHub Copilot, Cursor</li>
+<li><strong>Backends:</strong> 100+ models via LiteLLM — Claude, GPT, Gemini, plus local models through Ollama or any OpenAI-compatible endpoint</li>
+<li><strong>Edge:</strong> The repo map gives it whole-codebase context without dumping every file into the prompt. Auto-commits mean every AI edit is a revertable checkpoint. Editor-agnostic — works alongside VS Code, Neovim, Emacs, or nothing at all.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-opencodehttpsgithubcomsstopencode" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-opencodehttpsgithubcomsstopencode" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/sst/opencode">OpenCode</a></h3>
+<p><code>TypeScript</code> · <code>MIT</code> · TUI</p>
+<p>Terminal-native coding agent with LSP integration — it loads the right language server so the model sees real type information, not guesses.</p>
+<ul>
+<li><strong>Replaces:</strong> Claude Code, Cursor</li>
+<li><strong>Backends:</strong> Anthropic, OpenAI, Google, local models; provider-agnostic by design</li>
+<li><strong>Edge:</strong> LSP-grounded suggestions cut hallucinated APIs. Client/server split means you can drive one session from multiple clients.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-clinehttpsgithubcomclinecline" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-clinehttpsgithubcomclinecline" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/cline/cline">Cline</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code> · VS Code extension</p>
+<p>Autonomous coding agent inside VS Code. Plans, edits files, runs terminal commands, and uses the browser — asking permission at each step.</p>
+<ul>
+<li><strong>Replaces:</strong> Cursor Composer, Devin</li>
+<li><strong>Backends:</strong> Anthropic, OpenAI, Google, AWS Bedrock, Azure, OpenRouter, Ollama, LM Studio</li>
+<li><strong>Edge:</strong> Human-in-the-loop by default — every file diff and shell command needs approval. Plan/Act mode separation stops the agent from bulldozing a codebase.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-continuehttpsgithubcomcontinuedevcontinue" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-continuehttpsgithubcomcontinuedevcontinue" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/continuedev/continue">Continue</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code> · VS Code + JetBrains</p>
+<p>Build your own AI code assistant — autocomplete, chat, and edit, configured with your own models and context providers.</p>
+<ul>
+<li><strong>Replaces:</strong> GitHub Copilot</li>
+<li><strong>Backends:</strong> Any — local (Ollama, llama.cpp) or hosted</li>
+<li><strong>Edge:</strong> Fully configurable context providers (docs, terminal, git diff, codebase). Tab-autocomplete works well with small local models, so you can run genuinely offline.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-openhandshttpsgithubcomall-hands-aiopenhands" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-openhandshttpsgithubcomall-hands-aiopenhands" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/All-Hands-AI/OpenHands">OpenHands</a></h3>
+<p><code>Python</code> · <code>MIT</code> · Web + headless</p>
+<p>Agents that do what a developer does — modify code, run commands, browse the web, call APIs — inside a sandboxed runtime.</p>
+<ul>
+<li><strong>Replaces:</strong> Devin</li>
+<li><strong>Backends:</strong> Anything LiteLLM supports</li>
+<li><strong>Edge:</strong> Real sandboxed execution (Docker) rather than a chat that pretends to run things. Headless and CLI modes make it scriptable in CI.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-swe-agenthttpsgithubcomswe-agentswe-agent" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-swe-agenthttpsgithubcomswe-agentswe-agent" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/SWE-agent/SWE-agent">SWE-agent</a></h3>
+<p><code>Python</code> · <code>MIT</code> · CLI</p>
+<p>Research-grade agent that turns a GitHub issue into a pull request.</p>
+<ul>
+<li><strong>Replaces:</strong> Devin, issue-to-PR bots</li>
+<li><strong>Edge:</strong> The agent-computer interface (ACI) is the point — carefully designed tools beat a bigger model. If you’re building your own agent, read this codebase first.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-goosehttpsgithubcomblockgoose" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-goosehttpsgithubcomblockgoose" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/block/goose">Goose</a></h3>
+<p><code>Rust</code> · <code>Apache-2.0</code> · CLI + desktop</p>
+<p>Extensible autonomous agent from Block, now governed by the Linux Foundation. Installs, executes, edits, and tests — not just suggests.</p>
+<ul>
+<li><strong>Replaces:</strong> Devin, Cursor agent mode</li>
+<li><strong>Backends:</strong> Any provider, plus first-class MCP extension support</li>
+<li><strong>Edge:</strong> More autonomous than aider — plans and iterates with less hand-holding. Vendor-neutral governance under the Linux Foundation means no rug-pull risk, which matters for tooling you standardize a team on.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-kilo-codehttpsgithubcomkilo-orgkilocode" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-kilo-codehttpsgithubcomkilo-orgkilocode" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/Kilo-Org/kilocode">Kilo Code</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code> · VS Code + JetBrains</p>
+<p>Open-source IDE agent that merged the best of Roo Code and Cline into one extension.</p>
+<ul>
+<li><strong>Replaces:</strong> Cursor, Windsurf</li>
+<li><strong>Edge:</strong> Orchestrator mode splits a large task into subtasks handled by specialized modes. Absorbs upstream features from both parents, so it moves faster than either did alone.</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-tabbyhttpsgithubcomtabbymltabby" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-tabbyhttpsgithubcomtabbymltabby" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/TabbyML/tabby">Tabby</a></h3>
+<p><code>Rust</code> · <code>Apache-2.0</code> · Self-hosted server</p>
+<p>Self-hosted AI coding assistant with its own inference server, no external API calls.</p>
+<ul>
+<li><strong>Replaces:</strong> GitHub Copilot (enterprise)</li>
+<li><strong>Edge:</strong> Runs on consumer GPUs, OpenAPI interface, and answers the compliance question (“where does our code go?”) with “nowhere.”</li>
+</ul>
+<h3 id="ai-ides-and-cli-coding-agents-pair-programmers-gpt-engineerhttpsgithubcomgpt-engineer-orggpt-engineer" class="docmd-heading"><a href="#ai-ides-and-cli-coding-agents-pair-programmers-gpt-engineerhttpsgithubcomgpt-engineer-orggpt-engineer" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/gpt-engineer-org/gpt-engineer">gpt-engineer</a></h3>
+<p><code>Python</code> · <code>MIT</code> · CLI</p>
+<p>Describe a project in natural language; it writes and iterates on the whole codebase.</p>
+<ul>
+<li><strong>Edge:</strong> Best for greenfield scaffolding rather than surgical edits on an existing repo.</li>
+</ul>
+<hr>
+<h2 id="ai-ides-and-cli-prompt-to-app-builders" class="docmd-heading"><a href="#ai-ides-and-cli-prompt-to-app-builders" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Prompt-to-App Builders</h2>
+<p>Prompt in, deployed full-stack app out.</p>
+<h3 id="ai-ides-and-cli-prompt-to-app-builders-boltdiyhttpsgithubcomstackblitz-labsboltdiy" class="docmd-heading"><a href="#ai-ides-and-cli-prompt-to-app-builders-boltdiyhttpsgithubcomstackblitz-labsboltdiy" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/stackblitz-labs/bolt.diy">bolt.diy</a></h3>
+<p><code>TypeScript</code> · <code>MIT</code></p>
+<p>Official open-source fork of Bolt.new. Prompt, run, edit, and deploy full-stack web apps in the browser — with the LLM of your choice.</p>
+<ul>
+<li><strong>Replaces:</strong> Bolt.new, v0, Replit Agent</li>
+<li><strong>Backends:</strong> OpenAI, Anthropic, Google, Groq, Mistral, DeepSeek, xAI, Ollama, LM Studio, OpenRouter, any OpenAI-compatible endpoint</li>
+<li><strong>Edge:</strong> Self-hostable with zero telemetry. Multi-provider switching mid-project means you can start on a cheap model and escalate only where it matters.</li>
+</ul>
+<h3 id="ai-ides-and-cli-prompt-to-app-builders-open-designhttpsgithubcomnexu-ioopen-design" class="docmd-heading"><a href="#ai-ides-and-cli-prompt-to-app-builders-open-designhttpsgithubcomnexu-ioopen-design" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/nexu-io/open-design">Open Design</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code> · Desktop + web</p>
+<p>Turns the coding agent you already have into a design engine — prototypes, landing pages, dashboards, slides, images, and video, exported as HTML/PDF/PPTX/MP4.</p>
+<ul>
+<li><strong>Replaces:</strong> Claude Design, Figma Make</li>
+<li><strong>Backends:</strong> BYOK through whatever agent is on your PATH — Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, and 20+ others</li>
+<li><strong>Edge:</strong> Ships with a large library of brand-grade design-system packages, and every render reads a <code>DESIGN.md</code> brand contract, so output is consistent instead of randomly styled. Local-first: your brand assets never leave the machine.</li>
+</ul>
+<h3 id="ai-ides-and-cli-prompt-to-app-builders-openuihttpsgithubcomwandbopenui" class="docmd-heading"><a href="#ai-ides-and-cli-prompt-to-app-builders-openuihttpsgithubcomwandbopenui" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/wandb/openui">OpenUI</a></h3>
+<p><code>Python + TypeScript</code> · <code>Apache-2.0</code></p>
+<p>Describe a UI, watch it render live, convert it to React/Svelte/Vue.</p>
+<ul>
+<li><strong>Replaces:</strong> v0.dev</li>
+<li><strong>Edge:</strong> Live iteration loop — describe the change, see it immediately. Works with local models via Ollama.</li>
+</ul>
+<h3 id="ai-ides-and-cli-prompt-to-app-builders-dyadhttpsgithubcomdyad-shdyad" class="docmd-heading"><a href="#ai-ides-and-cli-prompt-to-app-builders-dyadhttpsgithubcomdyad-shdyad" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/dyad-sh/dyad">Dyad</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code> · Desktop</p>
+<p>Local, open-source AI app builder. Runs on your machine, bring your own API keys.</p>
+<ul>
+<li><strong>Replaces:</strong> Lovable, v0, Bolt</li>
+<li><strong>Edge:</strong> No vendor lock-in and no cloud round-trip for your source code.</li>
+</ul>
+<hr>
+
+                
+                  <div class="page-navigation">
+                    
+                      <a href="../../" class="prev-page">
+                        
+<svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" />
+</svg>
+
+                        <span><small>Previous</small><strong>
+                            Home
+                          </strong></span>
+                      </a>
+                    
+                    
+                      <a href="../../categories/02-open-source-agents/" class="next-page">
+                        <span><small>Next</small>
+                          <strong>
+                            Open-Source Agents
+                          </strong></span>
+                        
+<svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>
+
+                      </a>
+                    
+                  </div>
+                
+              </div>
+              
+              <div class="toc-sidebar">
+                
+
+
+  <div class="toc-container">
+    <h2 class="toc-title">On This Page<span class="mobile-view toc-menu-button float-right">
+<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 9 6 6 6-6" />
+</svg>
+</span></h2>
+    <ul class="toc-list">
+      
+        <li class="toc-item toc-level-1">
+          <a href="#ai-ides-and-cli" class="toc-link">AI IDEs and CLI</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers" class="toc-link">Coding Agents &amp; Pair Programmers</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-aiderhttpsgithubcomaider-aiaider" class="toc-link">aider</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-opencodehttpsgithubcomsstopencode" class="toc-link">OpenCode</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-clinehttpsgithubcomclinecline" class="toc-link">Cline</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-continuehttpsgithubcomcontinuedevcontinue" class="toc-link">Continue</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-openhandshttpsgithubcomall-hands-aiopenhands" class="toc-link">OpenHands</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-swe-agenthttpsgithubcomswe-agentswe-agent" class="toc-link">SWE-agent</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-goosehttpsgithubcomblockgoose" class="toc-link">Goose</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-kilo-codehttpsgithubcomkilo-orgkilocode" class="toc-link">Kilo Code</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-tabbyhttpsgithubcomtabbymltabby" class="toc-link">Tabby</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-coding-agents-pair-programmers-gpt-engineerhttpsgithubcomgpt-engineer-orggpt-engineer" class="toc-link">gpt-engineer</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#ai-ides-and-cli-prompt-to-app-builders" class="toc-link">Prompt-to-App Builders</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-prompt-to-app-builders-boltdiyhttpsgithubcomstackblitz-labsboltdiy" class="toc-link">bolt.diy</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-prompt-to-app-builders-open-designhttpsgithubcomnexu-ioopen-design" class="toc-link">Open Design</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-prompt-to-app-builders-openuihttpsgithubcomwandbopenui" class="toc-link">OpenUI</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#ai-ides-and-cli-prompt-to-app-builders-dyadhttpsgithubcomdyad-shdyad" class="toc-link">Dyad</a>
+        </li>
+      
+    </ul>
+  </div>
+
+              </div>
+              
+            </div>
+            <div class="page-footer-actions">
+              
+              
+                <span class="git-last-updated" data-timestamp="1785186234000">
+                  <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span class="git-label">Last updated:</span>
+                  <span class="git-time" data-timestamp="1785186234000"></span>
+                  
+                  <div class="git-commit-tooltip" role="tooltip">
+                    <div class="git-tooltip-title">Recent commits</div>
+                    <ul class="git-commit-list">
+                      
+                        <li class="git-commit-item">
+                          <div class="git-commit-avatar" title="Sami Uysal">
+                            
+                              <img src="https://www.gravatar.com/avatar/0ea2606a3559c065e056e441f58180b1?d=mp&amp;s=64" alt="Sami Uysal">
+                            
+                          </div>
+                          <div class="git-commit-details">
+                            <div class="git-commit-message" title="Refactor docmd navigation and routes">Refactor docmd navigation and routes</div>
+                            <div class="git-commit-meta">
+                              <span class="git-commit-author">Sami Uysal</span>
+                              <span class="git-commit-date" data-timestamp="1785186234000"></span>
+                            </div>
+                          </div>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                  
+                </span>
+              
+              <span class="git-spacer"></span>
+              
+            </div>
+          </main>
+          
+
+
+<footer class="page-footer">
+  <div class="footer-content">
+    <div class="user-footer">© 2026</div>
+    
+      <div class="branding-footer">
+        Built with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
+      </div>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+      
+      <script src="../../assets/js/docmd-main.js?v=ms3ptj3q"></script>
+      
+      <script src="../../assets/js/docmd-git.js?v=ms3ptj3q"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/vendor/minisearch.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/docmd-search.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/docmd-git.js?v=ms3ptj3q" type="module"></script>
+
+  <!-- Search Modal (Injected by @docmd/plugin-search) -->
+  <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-show-confidence="false" data-show-filters="true"
+       data-search-placeholder="Search documentation..."
+       data-search-no-results="No results found."
+       data-search-error="Failed to load search index."
+       data-search-offline="Search requires a web server. Open this site via http://localhost instead of file:// to enable search."
+       data-search-offline-build="Search is disabled because these docs were built with the --offline flag. Rebuild the site without the flag to enable search."
+       data-search-initial="Type to start searching..."
+       data-search-navigate="to navigate"
+       data-search-escape="to close">
+      <div class="docmd-search-box">
+          <div class="docmd-search-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input type="text" id="docmd-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+              <button onclick="window.closeDocmdSearch()" class="docmd-search-close" aria-label="Close search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+              </button>
+          </div>
+          <div id="docmd-search-results" class="docmd-search-results"></div>
+          <div class="docmd-search-footer">
+              <span><kbd class="docmd-kbd">↑</kbd> <kbd class="docmd-kbd">↓</kbd> to navigate</span>
+              <span><kbd class="docmd-kbd">ESC</kbd> to close</span>
+          </div>
+      </div>
+  </div>
+
+    <script>
+      (function() {
+        var searchDebounceTimer;
+
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a');
+          if (!link || !window.gtag) return;
+          
+          var url = link.href;
+          var hostname = window.location.hostname;
+          var isExternal = link.hostname && link.hostname !== hostname;
+          var isDownload = link.hasAttribute('download') || url.match(/\.(pdf|zip|tar|gz|exe|pkg)$/i);
+          
+          if (isExternal) {
+            gtag('event', 'click_external', { 'url': url, 'link_text': link.innerText.trim() });
+          } else if (isDownload) {
+            gtag('event', 'download', { 'file_name': url.split('/').pop(), 'url': url });
+          }
+
+          // TOC tracking
+          if (link.classList.contains('toc-link')) {
+            gtag('event', 'toc_click', { 'target_id': link.getAttribute('href'), 'title': link.innerText.trim() });
+          }
+
+          // Permalink tracking
+          if (link.classList.contains('heading-anchor')) {
+            gtag('event', 'permalink_click', { 'url': url });
+          }
+        });
+
+        
+        // Search Keyword Tracking
+        document.addEventListener('input', function(e) {
+          if (e.target.id === 'docmd-search-input' && window.gtag) {
+            var query = e.target.value.trim();
+            if (query.length < 3) return;
+            
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(function() {
+              gtag('event', 'search', { 'search_term': query });
+            }, 1000);
+          }
+        });
+        
+      })();
+    </script>
+
+<script>window.__git_config={"repo":null,"branch":"main","editLink":false,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+      
+      
+      
+  </body>
+</html>

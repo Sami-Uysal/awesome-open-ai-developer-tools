@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/CONTRIBUTING/</loc>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.es/</loc>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/02-open-source-agents/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.tr/</loc>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.zh-CN/</loc>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/04-rag-and-data/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/TRANSLATIONS/</loc>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/06-multimodal-and-builders/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/contributing/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/translations/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -29,5 +44,20 @@
     <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/</loc>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/es/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/tr/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/zh/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

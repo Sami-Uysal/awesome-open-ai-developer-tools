@@ -1,0 +1,1285 @@
+<!--
+  ---------------------------------------------------------------
+  docmd : the zero-config documentation engine.
+  @website https://docmd.io
+  [docmd-source] - Please do not remove this header.
+  ---------------------------------------------------------------
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="docmd v0.8.17">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+      var root = "../../";
+      if (root && !root.endsWith('/')) root += '/';
+      if (root === '') root = './';
+      window.DOCMD_ROOT = root;
+
+      window.DOCMD_SITE_ROOT = "/awesome-open-ai-developer-tools/";
+
+      window.DOCMD_APPEARANCE = "system";
+      window.DOCMD_VERSION_ROOT = "/";
+      window.DOCMD_BASE = "/awesome-open-ai-developer-tools/";
+      window.DOCMD_LOCALE = "";
+      window.DOCMD_DEFAULT_LOCALE = "";
+    </script>
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    //
+    // Resolve from three sources, in priority order:
+    //   1. localStorage explicit user choice (light / dark)
+    //   2. window.DOCMD_APPEARANCE  (current canonical name, set by EJS templates)
+    //   3. window.DOCMD_DEFAULT_MODE (legacy alias kept for pre-0.8.7 outputs)
+    //   4. 'light' as the final fallback
+    //
+    // Note: localStorage is only honoured when it holds an explicit
+    // 'light' or 'dark' value. A stored 'system' value (from a prior
+    // session where the user picked "follow system") must NOT win over
+    // a freshly resolved config value — the resolved value will itself
+    // be 'system' in that case and the OS preference check below takes
+    // over, so this is a no-op for the in-session behaviour but keeps
+    // any future storage migration simple.
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_APPEARANCE
+      || window.DOCMD_DEFAULT_MODE
+      || 'light';
+    var theme = (localValue === 'light' || localValue === 'dark')
+      ? localValue
+      : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+    <style>
+      html {
+        visibility: hidden;
+      }
+    </style>
+    <title>
+      Local LLM Inference : Awesome Open AI Developer Tools
+    </title>
+    
+    
+
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.ico?v=ms3ptj3q">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=ms3ptj3q">
+    
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=ms3ptj3q" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=ms3ptj3q" id="hljs-dark" disabled>
+    
+    
+<meta name="description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+<link rel="canonical" href="https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/">
+<meta property="og:title" content="Local LLM Inference - Awesome Open AI Developer Tools">
+<meta property="og:description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+<meta property="og:url" content="https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Local LLM Inference - Awesome Open AI Developer Tools">
+<meta name="twitter:description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
+
+
+
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=ms3ptj3q" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=ms3ptj3q" >
+
+    
+    
+  </head>
+  <body
+    class="sidebar-collapsible has-menubar has-menubar-top"
+    data-default-collapsed="false"
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/categories/03-local-llm-inference.md">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    
+      
+
+
+
+<div class="docmd-menubar">
+  <div class="menubar-inner">
+    <div class="menubar-left">
+    
+        
+          
+            <a href="../../" class="menubar-brand" >
+              
+                
+<svg class="lucide-icon icon-sparkles menubar-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sparkles"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" />
+</svg>
+
+              
+              
+                <span class="menubar-brand-text">
+                  Awesome Open AI Developer Tools
+                </span>
+              
+            </a>
+            
+        
+          
+                <a href="../../categories/01-ai-ides-and-cli/" class="menubar-link" >
+                  
+                  <span>
+                    Categories
+                  </span>
+                  
+                </a>
+              
+        
+          
+                <a href="../../languages/tr/" class="menubar-link" >
+                  
+                  <span>
+                    Languages
+                  </span>
+                  
+                </a>
+              
+        
+    
+      </div>
+      <div class="menubar-right">
+        
+          
+            
+              <a href="https://github.com/Sami-Uysal/awesome-open-ai-developer-tools" class="menubar-link"  target="_blank" rel="noopener noreferrer">
+                
+                <span>
+                  GitHub
+                </span>
+                
+                  
+<svg class="lucide-icon icon-external-link menubar-ext-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-external-link"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</svg>
+
+                
+              </a>
+            
+          
+        
+        
+          <div class="menubar-options">
+            
+
+
+<div class="docmd-options-menu">
+    
+    <button class="docmd-search-trigger" aria-label="Search">
+        
+<svg class="lucide-icon icon-search " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+
+        <span class="search-label">Search</span>
+        <span class="search-keys"><kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">K</kbd></span>
+    </button>
+    
+
+    
+
+    
+
+    
+    <button class="theme-toggle-button" aria-label="Toggle theme">
+        
+<svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+ 
+<svg class="lucide-icon icon-moon icon-moon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-moon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+
+    </button>
+    
+
+    
+</div>
+
+          </div>
+        
+    </div>
+  </div>
+</div>
+    
+    
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          
+<h1><a href="../../">
+                Awesome Open AI Developer Tools
+              </a></h1>
+          
+          <span class="mobile-view sidebar-menu-button float-right">
+            
+<svg class="lucide-icon icon-menu " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-menu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" />
+</svg>
+
+          </span>
+        </div>
+        <div class="sidebar-top-group">
+          
+          
+          
+          
+        </div>
+        
+
+<nav class="sidebar-nav" aria-label="Main Navigation">
+  <ul>
+    
+      <li class="" >
+      
+        <a href="../../" class=" "
+          >
+           
+<svg class="lucide-icon icon-home " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-house"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Home
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="active-parent collapsible expanded nav-group"  aria-expanded="true" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-folder-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-folder-open"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Categories
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../categories/01-ai-ides-and-cli/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            AI IDEs and CLI
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/02-open-source-agents/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Open-Source Agents
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="active" >
+      
+        <a href="../../categories/03-local-llm-inference/" class="active "
+          >
+          
+          <span class="nav-item-title">
+            Local LLM Inference
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/04-rag-and-data/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            RAG and Data
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/05-training-evals-and-ops/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Training, Evals, and Ops
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../categories/06-multimodal-and-builders/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Multimodal and Builders
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-languages " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-languages"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m5 8 6 6" />
+  <path d="m4 14 6-6 2-3" />
+  <path d="M2 5h12" />
+  <path d="M7 2h1" />
+  <path d="m22 22-5-10-5 10" />
+  <path d="M14 18h6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Languages
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../languages/tr/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Türkçe
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../languages/es/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Español
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../languages/zh/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            中文
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <span class="nav-label nav-group">
+           
+<svg class="lucide-icon icon-users " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-users"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Community
+          </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+        </span>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../community/contributing/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Contributing
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../community/translations/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Translations
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+        <div class="sidebar-bottom-group mt-auto">
+          
+          
+          
+          
+        </div>
+      </aside>
+      
+      
+      
+      <div class="main-content-wrapper">
+        
+        
+          <header class="page-header">
+            <div class="header-left">
+              
+                <button id="sidebar-toggle-button" class="sidebar-toggle-button"
+                  aria-label="Toggle Sidebar">
+                  
+<svg class="lucide-icon icon-chevron-left " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 18-6-6 6-6" />
+</svg>
+
+                </button>
+              
+              <div class="header-titles-wrapper">
+                <span class="header-title">
+                  Local LLM Inference
+                </span>
+              </div>
+            </div>
+            <div class="header-right">
+              
+            </div>
+          </header>
+        
+        <div class="content-theme-cover">
+          <main class="content-area" id="main-content">
+            <div class="content-layout">
+              <div class="main-content">
+                <div class="docmd-breadcrumbs-row">
+                  <div id="docmd-raw-markdown" data-content="%23%20Local%20LLM%20Inference%0A%0ALocal%20inference%20engines%2C%20model%20gateways%2C%20and%20open-source%20chat%20frontends.%0A%0A%23%23%20Local%20Inference%20Engines%0ARun%20models%20on%20your%20own%20hardware.%0A%0A%23%23%23%20%5BOllama%5D(https%3A%2F%2Fgithub.com%2Follama%2Follama)%0A%60Go%60%20%C2%B7%20%60MIT%60%0A%0ADownload%20and%20run%20open%20models%20with%20one%20command.%20The%20default%20entry%20point%20to%20local%20LLMs.%0A%0A-%20**Replaces%3A**%20OpenAI%20API%20(for%20local%20workloads)%0A-%20**Edge%3A**%20%60ollama%20run%20%3Cmodel%3E%60%20and%20you&#039;re%20done%20%E2%80%94%20it%20handles%20fetching%2C%20quantization%2C%20GPU%20offload%2C%20and%20serving%20an%20OpenAI-compatible%20API.%20The%20largest%20model%20library%20and%20the%20widest%20tool%20support%20of%20any%20local%20runtime.%0A%0A%23%23%23%20%5Bllama.cpp%5D(https%3A%2F%2Fgithub.com%2Fggml-org%2Fllama.cpp)%0A%60C%2FC%2B%2B%60%20%C2%B7%20%60MIT%60%0A%0AThe%20inference%20engine%20most%20local%20tooling%20is%20built%20on.%20Runs%20LLMs%20on%20CPU%2C%20CUDA%2C%20Metal%2C%20ROCm%2C%20Vulkan%2C%20and%20more.%0A%0A-%20**Edge%3A**%20Extreme%20portability%20%E2%80%94%20a%20laptop%2C%20a%20Raspberry%20Pi%2C%20a%20Mac%20Studio%2C%20a%20server%20farm.%20GGUF%20quantization%20is%20the%20reason%20a%20large%20model%20fits%20on%20consumer%20hardware.%0A%0A%23%23%23%20%5BJan%5D(https%3A%2F%2Fgithub.com%2Fmenloresearch%2Fjan)%0A%60TypeScript%60%20%C2%B7%20%60AGPL-3.0%60%20%C2%B7%20Desktop%0A%0AOffline%20ChatGPT%20alternative%20that%20runs%20entirely%20on%20your%20machine.%0A%0A-%20**Replaces%3A**%20ChatGPT%20desktop%2C%20LM%20Studio%20(which%20is%20only%20partially%20open)%0A-%20**Edge%3A**%20Fully%20open%20desktop%20UX%20with%20local-first%20data%20storage%2C%20plus%20an%20optional%20OpenAI-compatible%20local%20server.%0A%0A%23%23%23%20%5BMLC%20LLM%5D(https%3A%2F%2Fgithub.com%2Fmlc-ai%2Fmlc-llm)%0A%60Python%20%2B%20C%2B%2B%60%20%C2%B7%20%60Apache-2.0%60%0A%0AUniversal%20LLM%20deployment%20engine%20%E2%80%94%20native%20GPU%20acceleration%20on%20iOS%2C%20Android%2C%20desktop%2C%20and%20the%20browser.%0A%0A-%20**Replaces%3A**%20Ollama%20(on%20mobile)%2C%20cloud%20inference%20for%20on-device%20apps%0A-%20**Edge%3A**%20the%20only%20serious%20path%20to%20running%20an%20LLM%20on%20a%20phone&#039;s%20GPU.%20**Known%20weakness%3A**%20model%20support%20is%20limited%20to%20what&#039;s%20been%20compiled%20for%20the%20target%2C%20and%20when%20compilation%20or%20inference%20fails%20the%20errors%20are%20opaque.%0A%0A%23%23%23%20%5BWebLLM%5D(https%3A%2F%2Fgithub.com%2Fmlc-ai%2Fweb-llm)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%0A%0ALLM%20inference%20entirely%20in%20the%20browser%20via%20WebGPU.%0A%0A-%20**Edge%3A**%20no%20server%2C%20no%20API%20key%2C%20no%20data%20leaving%20the%20tab%20%E2%80%94%20which%20makes%20a%20whole%20class%20of%20privacy-sensitive%20apps%20possible.%20**Known%20weakness%3A**%20requires%20WebGPU%2C%20so%20Safari%20and%20Firefox%20support%20is%20the%20limiting%20factor%2C%20and%20out-of-memory%20device-lost%20errors%20are%20common%20on%20modest%20GPUs.%0A%0A%23%23%23%20%5Bllamafile%5D(https%3A%2F%2Fgithub.com%2FMozilla-Ocho%2Fllamafile)%0A%60C%2FC%2B%2B%60%20%C2%B7%20%60Apache-2.0%60%0A%0ADistribute%20an%20entire%20LLM%20as%20one%20executable%20file%20that%20runs%20on%20multiple%20OSes%20without%20installation.%0A%0A-%20**Edge%3A**%20Unbeatable%20for%20shipping%20a%20model%20to%20a%20non-technical%20user.%20One%20file.%20Double-click.%20Done.%0A%0A---%0A%0A%23%23%20Inference%20Servers%20%26%20Gateways%0AServing%20models%20at%20scale.%0A%0A%23%23%23%20%5BvLLM%5D(https%3A%2F%2Fgithub.com%2Fvllm-project%2Fvllm)%0A%60Python%20%2B%20CUDA%60%20%C2%B7%20%60Apache-2.0%60%0A%0AHigh-throughput%2C%20memory-efficient%20inference%20and%20serving%20engine%20%E2%80%94%20the%20de%20facto%20standard%20for%20self-hosted%20production%20LLM%20serving.%0A%0A-%20**Replaces%3A**%20OpenAI%20API%2C%20Together%20AI%0A-%20**Edge%3A**%20PagedAttention%20plus%20continuous%20batching%20gives%20order-of-magnitude%20throughput%20gains%20over%20naive%20serving.%20Tensor%2Fpipeline%20parallelism%20scales%20across%20GPUs%3B%20the%20OpenAI-compatible%20API%20means%20clients%20need%20no%20changes.%0A%0A%23%23%23%20%5BSGLang%5D(https%3A%2F%2Fgithub.com%2Fsgl-project%2Fsglang)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AFast%20serving%20framework%20with%20RadixAttention%20prefix%20caching%20and%20a%20structured%20generation%20language.%0A%0A-%20**Edge%3A**%20Wins%20on%20workloads%20with%20heavy%20shared%20prefixes%20(agents%2C%20few-shot%2C%20multi-turn)%20where%20prefix-cache%20reuse%20dominates.%20Excellent%20constrained-decoding%20support.%0A%0A%23%23%23%20%5BLocalAI%5D(https%3A%2F%2Fgithub.com%2Fmudler%2FLocalAI)%0A%60Go%60%20%C2%B7%20%60MIT%60%0A%0ADrop-in%20replacement%20for%20the%20OpenAI%20API%20that%20runs%20locally%20across%20many%20backends%20and%20modalities%20%E2%80%94%20text%2C%20image%2C%20audio%2C%20embeddings.%0A%0A-%20**Replaces%3A**%20OpenAI%20API%2C%20ElevenLabs%20API%0A-%20**Edge%3A**%20One%20server%2C%20many%20backends%20(llama.cpp%2C%20vLLM%2C%20transformers%2C%20whisper%2C%20diffusers).%20No%20GPU%20required.%20Point%20your%20existing%20OpenAI%20SDK%20at%20it%20and%20change%20nothing%20else.%0A%0A%23%23%23%20%5BText%20Generation%20Inference%5D(https%3A%2F%2Fgithub.com%2Fhuggingface%2Ftext-generation-inference)%0A%60Rust%20%2B%20Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0AHugging%20Face&#039;s%20production%20serving%20stack%20%E2%80%94%20the%20engine%20behind%20their%20inference%20endpoints.%0A%0A-%20**Edge%3A**%20Battle-tested%20Rust%20web%20server%2C%20token%20streaming%2C%20and%20tight%20integration%20with%20the%20HF%20ecosystem.%0A%0A%23%23%23%20%5BRay%5D(https%3A%2F%2Fgithub.com%2Fray-project%2Fray)%0A%60Python%60%20%C2%B7%20%60Apache-2.0%60%0A%0ADistributed%20compute%20framework%20for%20scaling%20AI%20workloads%20%E2%80%94%20training%2C%20tuning%2C%20and%20multi-model%20serving%20via%20Ray%20Serve.%0A%0A-%20**Edge%3A**%20For%20when%20one%20model%20on%20one%20box%20is%20no%20longer%20the%20problem.%20Model%20composition%20and%20autoscaling%20across%20a%20cluster.%0A%0A---%0A%0A%23%23%20Chat%20UIs%20%26%20Frontends%0A%23%23%23%20%5BOpen%20WebUI%5D(https%3A%2F%2Fgithub.com%2Fopen-webui%2Fopen-webui)%0A%60Python%20%2B%20Svelte%60%20%C2%B7%20%60BSD-3-Clause%60%20(with%20branding%20clause)%0A%0AFeature-rich%2C%20self-hosted%20AI%20interface%20%E2%80%94%20the%20default%20UI%20for%20Ollama%20and%20OpenAI-compatible%20backends.%0A%0A-%20**Replaces%3A**%20ChatGPT%20Plus%2C%20Claude%20Pro%0A-%20**Edge%3A**%20Multi-user%20with%20RBAC%2C%20built-in%20RAG%20over%20uploaded%20documents%2C%20web%20search%2C%20image%20generation%2C%20voice%2C%20and%20a%20Python%20function%2Fpipeline%20plugin%20system.%20Runs%20fully%20offline.%0A%0A%23%23%23%20%5BLibreChat%5D(https%3A%2F%2Fgithub.com%2Fdanny-avila%2FLibreChat)%0A%60TypeScript%60%20%C2%B7%20%60MIT%60%0A%0AEvery%20AI%20provider%20in%20one%20polished%20ChatGPT-style%20interface.%0A%0A-%20**Replaces%3A**%20ChatGPT%20Plus%2C%20Poe%0A-%20**Edge%3A**%20Multi-provider%20in%20a%20single%20conversation%2C%20agents%2C%20code%20interpreter%2C%20artifacts%2C%20MCP%20support%2C%20and%20genuinely%20good%20multi-user%20auth.%20MIT%20with%20no%20branding%20restrictions.%0A%0A%23%23%23%20%5BLobe%20Chat%5D(https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-chat)%0A%60TypeScript%60%20%C2%B7%20%60Apache-2.0%60%20(with%20conditions)%0A%0AModern%20chat%20framework%20with%20a%20plugin%20and%20agent-market%20ecosystem.%0A%0A-%20**Edge%3A**%20The%20best-looking%20option%2C%20with%20PWA%20and%20mobile%20support%20plus%20one-click%20Vercel%20deploy.%0A%0A%23%23%23%20%5BAnythingLLM%5D(https%3A%2F%2Fgithub.com%2FMintplex-Labs%2Fanything-llm)%0A%60JavaScript%60%20%C2%B7%20%60MIT%60%0A%0AAll-in-one%20desktop%20and%20Docker%20app%3A%20chat%20with%20your%20documents%2C%20with%20agents%20and%20multi-user%20workspaces%20built%20in.%0A%0A-%20**Edge%3A**%20Batteries-included%20RAG%20%E2%80%94%20embedder%2C%20vector%20DB%2C%20and%20UI%20ship%20together.%20Fastest%20path%20from%20%22I%20have%20PDFs%22%20to%20%22I%20can%20ask%20them%20questions.%22%0A%0A---%0A" style="display: none;"></div>
+                  
+                    <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
+                      <ol>
+                        
+                        
+                          <li class="breadcrumb-item " >
+                            
+                              <span>Categories</span>
+                            
+                            
+                              <span class="breadcrumb-separator">
+<svg class="lucide-icon icon-chevron-right " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+                            
+                          </li>
+                        
+                          <li class="breadcrumb-item active" aria-current=&quot;page&quot;>
+                            
+                              <span>Local LLM Inference</span>
+                            
+                            
+                          </li>
+                        
+                      </ol>
+                    </nav>
+                  
+
+                  
+                    <div class="docmd-copy-widgets">
+                      
+                        <button class="docmd-copy-btn docmd-copy-raw-btn" data-copied="Copied!" title="Copy Markdown" aria-label="Copy Markdown">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-copy " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-copy"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+</svg>
+</span>
+                        </button>
+                      
+                      
+                        <button class="docmd-copy-btn docmd-copy-context-btn" data-copied="Copied!" title="Copy Context">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-message-square " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-message-square"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+</svg>
+</span>
+                          <span class="docmd-btn-text">Copy Context</span>
+                        </button>
+                      
+                    </div>
+                  
+                </div>
+                
+                <h1 id="local-llm-inference" class="docmd-heading"><a href="#local-llm-inference" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Local LLM Inference</h1>
+<p>Local inference engines, model gateways, and open-source chat frontends.</p>
+<h2 id="local-llm-inference-local-inference-engines" class="docmd-heading"><a href="#local-llm-inference-local-inference-engines" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Local Inference Engines</h2>
+<p>Run models on your own hardware.</p>
+<h3 id="local-llm-inference-local-inference-engines-ollamahttpsgithubcomollamaollama" class="docmd-heading"><a href="#local-llm-inference-local-inference-engines-ollamahttpsgithubcomollamaollama" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/ollama/ollama">Ollama</a></h3>
+<p><code>Go</code> · <code>MIT</code></p>
+<p>Download and run open models with one command. The default entry point to local LLMs.</p>
+<ul>
+<li><strong>Replaces:</strong> OpenAI API (for local workloads)</li>
+<li><strong>Edge:</strong> <code>ollama run &lt;model&gt;</code> and you’re done — it handles fetching, quantization, GPU offload, and serving an OpenAI-compatible API. The largest model library and the widest tool support of any local runtime.</li>
+</ul>
+<h3 id="local-llm-inference-local-inference-engines-llamacpphttpsgithubcomggml-orgllamacpp" class="docmd-heading"><a href="#local-llm-inference-local-inference-engines-llamacpphttpsgithubcomggml-orgllamacpp" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a></h3>
+<p><code>C/C++</code> · <code>MIT</code></p>
+<p>The inference engine most local tooling is built on. Runs LLMs on CPU, CUDA, Metal, ROCm, Vulkan, and more.</p>
+<ul>
+<li><strong>Edge:</strong> Extreme portability — a laptop, a Raspberry Pi, a Mac Studio, a server farm. GGUF quantization is the reason a large model fits on consumer hardware.</li>
+</ul>
+<h3 id="local-llm-inference-local-inference-engines-janhttpsgithubcommenloresearchjan" class="docmd-heading"><a href="#local-llm-inference-local-inference-engines-janhttpsgithubcommenloresearchjan" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/menloresearch/jan">Jan</a></h3>
+<p><code>TypeScript</code> · <code>AGPL-3.0</code> · Desktop</p>
+<p>Offline ChatGPT alternative that runs entirely on your machine.</p>
+<ul>
+<li><strong>Replaces:</strong> ChatGPT desktop, LM Studio (which is only partially open)</li>
+<li><strong>Edge:</strong> Fully open desktop UX with local-first data storage, plus an optional OpenAI-compatible local server.</li>
+</ul>
+<h3 id="local-llm-inference-local-inference-engines-mlc-llmhttpsgithubcommlc-aimlc-llm" class="docmd-heading"><a href="#local-llm-inference-local-inference-engines-mlc-llmhttpsgithubcommlc-aimlc-llm" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/mlc-ai/mlc-llm">MLC LLM</a></h3>
+<p><code>Python + C++</code> · <code>Apache-2.0</code></p>
+<p>Universal LLM deployment engine — native GPU acceleration on iOS, Android, desktop, and the browser.</p>
+<ul>
+<li><strong>Replaces:</strong> Ollama (on mobile), cloud inference for on-device apps</li>
+<li><strong>Edge:</strong> the only serious path to running an LLM on a phone’s GPU. <strong>Known weakness:</strong> model support is limited to what’s been compiled for the target, and when compilation or inference fails the errors are opaque.</li>
+</ul>
+<h3 id="local-llm-inference-local-inference-engines-webllmhttpsgithubcommlc-aiweb-llm" class="docmd-heading"><a href="#local-llm-inference-local-inference-engines-webllmhttpsgithubcommlc-aiweb-llm" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/mlc-ai/web-llm">WebLLM</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code></p>
+<p>LLM inference entirely in the browser via WebGPU.</p>
+<ul>
+<li><strong>Edge:</strong> no server, no API key, no data leaving the tab — which makes a whole class of privacy-sensitive apps possible. <strong>Known weakness:</strong> requires WebGPU, so Safari and Firefox support is the limiting factor, and out-of-memory device-lost errors are common on modest GPUs.</li>
+</ul>
+<h3 id="local-llm-inference-local-inference-engines-llamafilehttpsgithubcommozilla-ochollamafile" class="docmd-heading"><a href="#local-llm-inference-local-inference-engines-llamafilehttpsgithubcommozilla-ochollamafile" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/Mozilla-Ocho/llamafile">llamafile</a></h3>
+<p><code>C/C++</code> · <code>Apache-2.0</code></p>
+<p>Distribute an entire LLM as one executable file that runs on multiple OSes without installation.</p>
+<ul>
+<li><strong>Edge:</strong> Unbeatable for shipping a model to a non-technical user. One file. Double-click. Done.</li>
+</ul>
+<hr>
+<h2 id="local-llm-inference-inference-servers-gateways" class="docmd-heading"><a href="#local-llm-inference-inference-servers-gateways" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Inference Servers &amp; Gateways</h2>
+<p>Serving models at scale.</p>
+<h3 id="local-llm-inference-inference-servers-gateways-vllmhttpsgithubcomvllm-projectvllm" class="docmd-heading"><a href="#local-llm-inference-inference-servers-gateways-vllmhttpsgithubcomvllm-projectvllm" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/vllm-project/vllm">vLLM</a></h3>
+<p><code>Python + CUDA</code> · <code>Apache-2.0</code></p>
+<p>High-throughput, memory-efficient inference and serving engine — the de facto standard for self-hosted production LLM serving.</p>
+<ul>
+<li><strong>Replaces:</strong> OpenAI API, Together AI</li>
+<li><strong>Edge:</strong> PagedAttention plus continuous batching gives order-of-magnitude throughput gains over naive serving. Tensor/pipeline parallelism scales across GPUs; the OpenAI-compatible API means clients need no changes.</li>
+</ul>
+<h3 id="local-llm-inference-inference-servers-gateways-sglanghttpsgithubcomsgl-projectsglang" class="docmd-heading"><a href="#local-llm-inference-inference-servers-gateways-sglanghttpsgithubcomsgl-projectsglang" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/sgl-project/sglang">SGLang</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Fast serving framework with RadixAttention prefix caching and a structured generation language.</p>
+<ul>
+<li><strong>Edge:</strong> Wins on workloads with heavy shared prefixes (agents, few-shot, multi-turn) where prefix-cache reuse dominates. Excellent constrained-decoding support.</li>
+</ul>
+<h3 id="local-llm-inference-inference-servers-gateways-localaihttpsgithubcommudlerlocalai" class="docmd-heading"><a href="#local-llm-inference-inference-servers-gateways-localaihttpsgithubcommudlerlocalai" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/mudler/LocalAI">LocalAI</a></h3>
+<p><code>Go</code> · <code>MIT</code></p>
+<p>Drop-in replacement for the OpenAI API that runs locally across many backends and modalities — text, image, audio, embeddings.</p>
+<ul>
+<li><strong>Replaces:</strong> OpenAI API, ElevenLabs API</li>
+<li><strong>Edge:</strong> One server, many backends (llama.cpp, vLLM, transformers, whisper, diffusers). No GPU required. Point your existing OpenAI SDK at it and change nothing else.</li>
+</ul>
+<h3 id="local-llm-inference-inference-servers-gateways-text-generation-inferencehttpsgithubcomhuggingfacetext-generation-inference" class="docmd-heading"><a href="#local-llm-inference-inference-servers-gateways-text-generation-inferencehttpsgithubcomhuggingfacetext-generation-inference" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/huggingface/text-generation-inference">Text Generation Inference</a></h3>
+<p><code>Rust + Python</code> · <code>Apache-2.0</code></p>
+<p>Hugging Face’s production serving stack — the engine behind their inference endpoints.</p>
+<ul>
+<li><strong>Edge:</strong> Battle-tested Rust web server, token streaming, and tight integration with the HF ecosystem.</li>
+</ul>
+<h3 id="local-llm-inference-inference-servers-gateways-rayhttpsgithubcomray-projectray" class="docmd-heading"><a href="#local-llm-inference-inference-servers-gateways-rayhttpsgithubcomray-projectray" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/ray-project/ray">Ray</a></h3>
+<p><code>Python</code> · <code>Apache-2.0</code></p>
+<p>Distributed compute framework for scaling AI workloads — training, tuning, and multi-model serving via Ray Serve.</p>
+<ul>
+<li><strong>Edge:</strong> For when one model on one box is no longer the problem. Model composition and autoscaling across a cluster.</li>
+</ul>
+<hr>
+<h2 id="local-llm-inference-chat-uis-frontends" class="docmd-heading"><a href="#local-llm-inference-chat-uis-frontends" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Chat UIs &amp; Frontends</h2>
+<h3 id="local-llm-inference-chat-uis-frontends-open-webuihttpsgithubcomopen-webuiopen-webui" class="docmd-heading"><a href="#local-llm-inference-chat-uis-frontends-open-webuihttpsgithubcomopen-webuiopen-webui" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/open-webui/open-webui">Open WebUI</a></h3>
+<p><code>Python + Svelte</code> · <code>BSD-3-Clause</code> (with branding clause)</p>
+<p>Feature-rich, self-hosted AI interface — the default UI for Ollama and OpenAI-compatible backends.</p>
+<ul>
+<li><strong>Replaces:</strong> ChatGPT Plus, Claude Pro</li>
+<li><strong>Edge:</strong> Multi-user with RBAC, built-in RAG over uploaded documents, web search, image generation, voice, and a Python function/pipeline plugin system. Runs fully offline.</li>
+</ul>
+<h3 id="local-llm-inference-chat-uis-frontends-librechathttpsgithubcomdanny-avilalibrechat" class="docmd-heading"><a href="#local-llm-inference-chat-uis-frontends-librechathttpsgithubcomdanny-avilalibrechat" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/danny-avila/LibreChat">LibreChat</a></h3>
+<p><code>TypeScript</code> · <code>MIT</code></p>
+<p>Every AI provider in one polished ChatGPT-style interface.</p>
+<ul>
+<li><strong>Replaces:</strong> ChatGPT Plus, Poe</li>
+<li><strong>Edge:</strong> Multi-provider in a single conversation, agents, code interpreter, artifacts, MCP support, and genuinely good multi-user auth. MIT with no branding restrictions.</li>
+</ul>
+<h3 id="local-llm-inference-chat-uis-frontends-lobe-chathttpsgithubcomlobehublobe-chat" class="docmd-heading"><a href="#local-llm-inference-chat-uis-frontends-lobe-chathttpsgithubcomlobehublobe-chat" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/lobehub/lobe-chat">Lobe Chat</a></h3>
+<p><code>TypeScript</code> · <code>Apache-2.0</code> (with conditions)</p>
+<p>Modern chat framework with a plugin and agent-market ecosystem.</p>
+<ul>
+<li><strong>Edge:</strong> The best-looking option, with PWA and mobile support plus one-click Vercel deploy.</li>
+</ul>
+<h3 id="local-llm-inference-chat-uis-frontends-anythingllmhttpsgithubcommintplex-labsanything-llm" class="docmd-heading"><a href="#local-llm-inference-chat-uis-frontends-anythingllmhttpsgithubcommintplex-labsanything-llm" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><a href="https://github.com/Mintplex-Labs/anything-llm">AnythingLLM</a></h3>
+<p><code>JavaScript</code> · <code>MIT</code></p>
+<p>All-in-one desktop and Docker app: chat with your documents, with agents and multi-user workspaces built in.</p>
+<ul>
+<li><strong>Edge:</strong> Batteries-included RAG — embedder, vector DB, and UI ship together. Fastest path from “I have PDFs” to “I can ask them questions.”</li>
+</ul>
+<hr>
+
+                
+                  <div class="page-navigation">
+                    
+                      <a href="../../categories/02-open-source-agents/" class="prev-page">
+                        
+<svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" />
+</svg>
+
+                        <span><small>Previous</small><strong>
+                            Open-Source Agents
+                          </strong></span>
+                      </a>
+                    
+                    
+                      <a href="../../categories/04-rag-and-data/" class="next-page">
+                        <span><small>Next</small>
+                          <strong>
+                            RAG and Data
+                          </strong></span>
+                        
+<svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>
+
+                      </a>
+                    
+                  </div>
+                
+              </div>
+              
+              <div class="toc-sidebar">
+                
+
+
+  <div class="toc-container">
+    <h2 class="toc-title">On This Page<span class="mobile-view toc-menu-button float-right">
+<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 9 6 6 6-6" />
+</svg>
+</span></h2>
+    <ul class="toc-list">
+      
+        <li class="toc-item toc-level-1">
+          <a href="#local-llm-inference" class="toc-link">Local LLM Inference</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#local-llm-inference-local-inference-engines" class="toc-link">Local Inference Engines</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-local-inference-engines-ollamahttpsgithubcomollamaollama" class="toc-link">Ollama</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-local-inference-engines-llamacpphttpsgithubcomggml-orgllamacpp" class="toc-link">llama.cpp</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-local-inference-engines-janhttpsgithubcommenloresearchjan" class="toc-link">Jan</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-local-inference-engines-mlc-llmhttpsgithubcommlc-aimlc-llm" class="toc-link">MLC LLM</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-local-inference-engines-webllmhttpsgithubcommlc-aiweb-llm" class="toc-link">WebLLM</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-local-inference-engines-llamafilehttpsgithubcommozilla-ochollamafile" class="toc-link">llamafile</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#local-llm-inference-inference-servers-gateways" class="toc-link">Inference Servers &amp; Gateways</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-inference-servers-gateways-vllmhttpsgithubcomvllm-projectvllm" class="toc-link">vLLM</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-inference-servers-gateways-sglanghttpsgithubcomsgl-projectsglang" class="toc-link">SGLang</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-inference-servers-gateways-localaihttpsgithubcommudlerlocalai" class="toc-link">LocalAI</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-inference-servers-gateways-text-generation-inferencehttpsgithubcomhuggingfacetext-generation-inference" class="toc-link">Text Generation Inference</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-inference-servers-gateways-rayhttpsgithubcomray-projectray" class="toc-link">Ray</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#local-llm-inference-chat-uis-frontends" class="toc-link">Chat UIs &amp; Frontends</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-chat-uis-frontends-open-webuihttpsgithubcomopen-webuiopen-webui" class="toc-link">Open WebUI</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-chat-uis-frontends-librechathttpsgithubcomdanny-avilalibrechat" class="toc-link">LibreChat</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-chat-uis-frontends-lobe-chathttpsgithubcomlobehublobe-chat" class="toc-link">Lobe Chat</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#local-llm-inference-chat-uis-frontends-anythingllmhttpsgithubcommintplex-labsanything-llm" class="toc-link">AnythingLLM</a>
+        </li>
+      
+    </ul>
+  </div>
+
+              </div>
+              
+            </div>
+            <div class="page-footer-actions">
+              
+              
+                <span class="git-last-updated" data-timestamp="1785186234000">
+                  <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span class="git-label">Last updated:</span>
+                  <span class="git-time" data-timestamp="1785186234000"></span>
+                  
+                  <div class="git-commit-tooltip" role="tooltip">
+                    <div class="git-tooltip-title">Recent commits</div>
+                    <ul class="git-commit-list">
+                      
+                        <li class="git-commit-item">
+                          <div class="git-commit-avatar" title="Sami Uysal">
+                            
+                              <img src="https://www.gravatar.com/avatar/0ea2606a3559c065e056e441f58180b1?d=mp&amp;s=64" alt="Sami Uysal">
+                            
+                          </div>
+                          <div class="git-commit-details">
+                            <div class="git-commit-message" title="Refactor docmd navigation and routes">Refactor docmd navigation and routes</div>
+                            <div class="git-commit-meta">
+                              <span class="git-commit-author">Sami Uysal</span>
+                              <span class="git-commit-date" data-timestamp="1785186234000"></span>
+                            </div>
+                          </div>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                  
+                </span>
+              
+              <span class="git-spacer"></span>
+              
+            </div>
+          </main>
+          
+
+
+<footer class="page-footer">
+  <div class="footer-content">
+    <div class="user-footer">© 2026</div>
+    
+      <div class="branding-footer">
+        Built with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
+      </div>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+      
+      <script src="../../assets/js/docmd-main.js?v=ms3ptj3q"></script>
+      
+      <script src="../../assets/js/docmd-git.js?v=ms3ptj3q"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/vendor/minisearch.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/docmd-search.js?v=ms3ptj3q" ></script>
+<script src="../../assets/js/docmd-git.js?v=ms3ptj3q" type="module"></script>
+
+  <!-- Search Modal (Injected by @docmd/plugin-search) -->
+  <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-show-confidence="false" data-show-filters="true"
+       data-search-placeholder="Search documentation..."
+       data-search-no-results="No results found."
+       data-search-error="Failed to load search index."
+       data-search-offline="Search requires a web server. Open this site via http://localhost instead of file:// to enable search."
+       data-search-offline-build="Search is disabled because these docs were built with the --offline flag. Rebuild the site without the flag to enable search."
+       data-search-initial="Type to start searching..."
+       data-search-navigate="to navigate"
+       data-search-escape="to close">
+      <div class="docmd-search-box">
+          <div class="docmd-search-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input type="text" id="docmd-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+              <button onclick="window.closeDocmdSearch()" class="docmd-search-close" aria-label="Close search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+              </button>
+          </div>
+          <div id="docmd-search-results" class="docmd-search-results"></div>
+          <div class="docmd-search-footer">
+              <span><kbd class="docmd-kbd">↑</kbd> <kbd class="docmd-kbd">↓</kbd> to navigate</span>
+              <span><kbd class="docmd-kbd">ESC</kbd> to close</span>
+          </div>
+      </div>
+  </div>
+
+    <script>
+      (function() {
+        var searchDebounceTimer;
+
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a');
+          if (!link || !window.gtag) return;
+          
+          var url = link.href;
+          var hostname = window.location.hostname;
+          var isExternal = link.hostname && link.hostname !== hostname;
+          var isDownload = link.hasAttribute('download') || url.match(/\.(pdf|zip|tar|gz|exe|pkg)$/i);
+          
+          if (isExternal) {
+            gtag('event', 'click_external', { 'url': url, 'link_text': link.innerText.trim() });
+          } else if (isDownload) {
+            gtag('event', 'download', { 'file_name': url.split('/').pop(), 'url': url });
+          }
+
+          // TOC tracking
+          if (link.classList.contains('toc-link')) {
+            gtag('event', 'toc_click', { 'target_id': link.getAttribute('href'), 'title': link.innerText.trim() });
+          }
+
+          // Permalink tracking
+          if (link.classList.contains('heading-anchor')) {
+            gtag('event', 'permalink_click', { 'url': url });
+          }
+        });
+
+        
+        // Search Keyword Tracking
+        document.addEventListener('input', function(e) {
+          if (e.target.id === 'docmd-search-input' && window.gtag) {
+            var query = e.target.value.trim();
+            if (query.length < 3) return;
+            
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(function() {
+              gtag('event', 'search', { 'search_term': query });
+            }, 1000);
+          }
+        });
+        
+      })();
+    </script>
+
+<script>window.__git_config={"repo":null,"branch":"main","editLink":false,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+      
+      
+      
+  </body>
+</html>

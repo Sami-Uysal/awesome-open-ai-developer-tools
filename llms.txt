@@ -4,9 +4,15 @@
 
 ## Documentation Files
 
-- [Contributing](https://sami-uysal.github.io/awesome-open-ai-developer-tools/CONTRIBUTING/)
-- [Awesome Open-Source AI Developer Tools \[!\[Awesome\](https://awesome.re/badge.svg)\](https://awesome.re)](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
-- [Awesome Herramientas de IA de Código Abierto para Desarrolladores \[!\[Awesome\](https://awesome.re/badge.svg)\](https://awesome.re)](https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.es/)
-- [Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları \[!\[Awesome\](https://awesome.re/badge.svg)\](https://awesome.re)](https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.tr/)
-- [Awesome 开源 AI 开发者工具 \[!\[Awesome\](https://awesome.re/badge.svg)\](https://awesome.re)](https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.zh-CN/)
-- [Translations](https://sami-uysal.github.io/awesome-open-ai-developer-tools/TRANSLATIONS/)
+- [AI IDEs and CLI](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/)
+- [Open-Source Agents](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/02-open-source-agents/)
+- [Local LLM Inference](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/)
+- [RAG and Data](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/04-rag-and-data/)
+- [Training, Evals, and Ops](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/)
+- [Multimodal and Builders](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/06-multimodal-and-builders/)
+- [Contributing](https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/contributing/)
+- [Translations](https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/translations/)
+- [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+- [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/es/)
+- [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/tr/)
+- [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/zh/)

@@ -5,60 +5,108 @@ bundle:
   description: ""
   url: "https://sami-uysal.github.io/awesome-open-ai-developer-tools"
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-27T20:39:47.562Z"
+  generated_at: "2026-07-27T21:04:43.148Z"
   default_type: concept
 stats:
-  concepts: 6
+  concepts: 12
   by_type:
-    concept: 6
+    concept: 12
   locales: 
   versions: 
 concepts:
-  - id: contributing
+  - id: categories-01-ai-ides-and-cli
+    type: concept
+    title: "AI IDEs and CLI"
+    path: /categories/01-ai-ides-and-cli/
+    file: concepts/categories-01-ai-ides-and-cli.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: categories-02-open-source-agents
+    type: concept
+    title: "Open-Source Agents"
+    path: /categories/02-open-source-agents/
+    file: concepts/categories-02-open-source-agents.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: categories-03-local-llm-inference
+    type: concept
+    title: "Local LLM Inference"
+    path: /categories/03-local-llm-inference/
+    file: concepts/categories-03-local-llm-inference.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: categories-04-rag-and-data
+    type: concept
+    title: "RAG and Data"
+    path: /categories/04-rag-and-data/
+    file: concepts/categories-04-rag-and-data.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: categories-05-training-evals-and-ops
+    type: concept
+    title: "Training, Evals, and Ops"
+    path: /categories/05-training-evals-and-ops/
+    file: concepts/categories-05-training-evals-and-ops.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: categories-06-multimodal-and-builders
+    type: concept
+    title: "Multimodal and Builders"
+    path: /categories/06-multimodal-and-builders/
+    file: concepts/categories-06-multimodal-and-builders.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: community-contributing
     type: concept
     title: Contributing
-    path: /CONTRIBUTING/
-    file: concepts/contributing.md
+    path: /community/contributing/
+    file: concepts/community-contributing.md
     locale: ""
     version: ""
     tags: 
-  - id: readme-es
-    type: concept
-    title: "Awesome Herramientas de IA de Código Abierto para Desarrolladores [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)"
-    path: /README.es/
-    file: concepts/readme-es.md
-    locale: ""
-    version: ""
-    tags: 
-  - id: readme-tr
-    type: concept
-    title: "Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)"
-    path: /README.tr/
-    file: concepts/readme-tr.md
-    locale: ""
-    version: ""
-    tags: 
-  - id: readme-zh-cn
-    type: concept
-    title: "Awesome 开源 AI 开发者工具 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)"
-    path: /README.zh-CN/
-    file: concepts/readme-zh-cn.md
-    locale: ""
-    version: ""
-    tags: 
-  - id: translations
+  - id: community-translations
     type: concept
     title: Translations
-    path: /TRANSLATIONS/
-    file: concepts/translations.md
+    path: /community/translations/
+    file: concepts/community-translations.md
     locale: ""
     version: ""
     tags: 
   - id: root
     type: concept
-    title: "Awesome Open-Source AI Developer Tools [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)"
+    title: "Awesome Open AI Developer Tools"
     path: /
     file: concepts/root.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: languages-es
+    type: concept
+    title: "Awesome Open AI Developer Tools"
+    path: /languages/es/
+    file: concepts/languages-es.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: languages-tr
+    type: concept
+    title: "Awesome Open AI Developer Tools"
+    path: /languages/tr/
+    file: concepts/languages-tr.md
+    locale: ""
+    version: ""
+    tags: 
+  - id: languages-zh
+    type: concept
+    title: "Awesome Open AI Developer Tools"
+    path: /languages/zh/
+    file: concepts/languages-zh.md
     locale: ""
     version: ""
     tags: 
