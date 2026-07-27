@@ -1,0 +1,16 @@
+# Internal notes — kept locally, not published
+LAUNCH.md
+
+# Link-checker output
+lychee/
+*.lychee.md
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
