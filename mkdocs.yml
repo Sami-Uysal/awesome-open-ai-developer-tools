@@ -1,0 +1,47 @@
+site_name: Awesome Open AI Developer Tools
+site_description: A curated directory of open-source AI tools, local LLM engines, and agents.
+site_author: Sami Uysal
+site_url: https://sami-uysal.github.io/awesome-open-ai-developer-tools/
+
+repository: https://github.com/Sami-Uysal/awesome-open-ai-developer-tools
+repo_name: Sami-Uysal/awesome-open-ai-developer-tools
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.tabs          
+    - navigation.top           
+    - search.suggest          
+    - search.highlight         
+    - content.code.copy      
+
+nav:
+  - Home: README.md
+  - Categories:
+      - "01. AI IDEs & CLI": docs/01-ai-ides-and-cli.md
+      - "02. AI Agents": docs/02-open-source-agents.md
+      - "03. Local LLMs": docs/03-local-llm-engines.md
+      - "04. RAG & Vector DBs": docs/04-rag-and-vector-dbs.md
+      - "05. UI & App Builders": docs/05-ui-and-app-builders.md
+  - Community:
+      - "Contributing": CONTRIBUTING.md
+
+markdown_extensions:
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight
+  - pymdownx.superfences
