@@ -26,62 +26,26 @@ Affiliate link yok. Sponsorlu sıra yok. Yalnızca OSI onaylı lisanslar — kay
 
 ## İçindekiler
 
-Kategoriye tıkla, bölüme gitsin; araca tıkla, doğrudan açıklamasına gitsin.
-
-**[Kodlama Ajanları ve Eşli Programlama](#kodlama-ajanları-ve-eşli-programlama)**
-[aider](#aider) · [OpenCode](#opencode) · [Cline](#cline) · [Continue](#continue) · [OpenHands](#openhands) · [SWE-agent](#swe-agent) · [Goose](#goose) · [Kilo Code](#kilo-code) · [Tabby](#tabby) · [gpt-engineer](#gpt-engineer)
-
-**[Prompt'tan Uygulamaya Üreticiler](#prompttan-uygulamaya-üreticiler)**
-[bolt.diy](#boltdiy) · [Open Design](#open-design) · [OpenUI](#openui) · [Dyad](#dyad)
-
-**[Otonom ve Kalıcı Ajanlar](#otonom-ve-kalıcı-ajanlar)**
-[OpenClaw](#openclaw) · [Hermes Agent](#hermes-agent) · [DeerFlow](#deerflow) · [Open-Sable](#open-sable) · [AutoGPT](#autogpt) · [Letta](#letta) · [Mem0](#mem0) · [Khoj](#khoj)
-
-**[Ajan Kum Havuzları ve Tarayıcı Kontrolü](#ajan-kum-havuzları-ve-tarayıcı-kontrolü)**
-[E2B](#e2b) · [Daytona](#daytona) · [browser-use](#browser-use) · [Skyvern](#skyvern)
-
-**[Ajan Çatıları ve Orkestrasyon](#ajan-çatıları-ve-orkestrasyon)**
-[LangGraph](#langgraph) · [CrewAI](#crewai) · [AutoGen](#autogen) · [smolagents](#smolagents) · [Google ADK](#google-adk) · [Pydantic AI](#pydantic-ai) · [DSPy](#dspy) · [LiteLLM](#litellm) · [Haystack](#haystack)
-
-**[Model Context Protocol (MCP)](#model-context-protocol-mcp)**
-[MCP Spesifikasyonu](#mcp-spesifikasyonu) · [MCP Sunucuları](#mcp-sunucuları) · [MCP Inspector](#mcp-inspector) · [FastMCP](#fastmcp)
-
-**[Yerel Çıkarım Motorları](#yerel-çıkarım-motorları)**
-[Ollama](#ollama) · [llama.cpp](#llamacpp) · [Jan](#jan) · [MLC LLM](#mlc-llm) · [WebLLM](#webllm) · [llamafile](#llamafile)
-
-**[Çıkarım Sunucuları ve Ağ Geçitleri](#çıkarım-sunucuları-ve-ağ-geçitleri)**
-[vLLM](#vllm) · [SGLang](#sglang) · [LocalAI](#localai) · [Text Generation Inference](#text-generation-inference) · [Ray](#ray)
-
-**[Sohbet Arayüzleri](#sohbet-arayüzleri)**
-[Open WebUI](#open-webui) · [LibreChat](#librechat) · [Lobe Chat](#lobe-chat) · [AnythingLLM](#anythingllm)
-
-**[Vektör Veritabanları](#vektör-veritabanları)**
-[Qdrant](#qdrant) · [Milvus](#milvus) · [Weaviate](#weaviate) · [Chroma](#chroma) · [pgvector](#pgvector)
-
-**[Embedding'ler ve Yeniden Sıralayıcılar](#embeddingler-ve-yeniden-sıralayıcılar)**
-[FlagEmbedding / BGE](#flagembedding--bge) · [Sentence Transformers](#sentence-transformers)
-
-**[RAG Çatıları](#rag-çatıları)**
-[LlamaIndex](#llamaindex) · [RAGFlow](#ragflow) · [Dify](#dify) · [Docling](#docling) · [Unstructured](#unstructured)
-
-**[İnce Ayar ve Eğitim](#ince-ayar-ve-eğitim)**
-[Unsloth](#unsloth) · [Axolotl](#axolotl) · [LLaMA-Factory](#llama-factory) · [PEFT](#peft) · [Distilabel](#distilabel) · [TRL](#trl)
-
-**[Değerlendirme, Test ve Koruma Katmanları](#değerlendirme-test-ve-koruma-katmanları)**
-[promptfoo](#promptfoo) · [DeepEval](#deepeval) · [Ragas](#ragas) · [Guardrails](#guardrails) · [NeMo Guardrails](#nemo-guardrails) · [Garak](#garak)
-
-**[Gözlemlenebilirlik ve LLMOps](#gözlemlenebilirlik-ve-llmops)**
-[Langfuse](#langfuse) · [Phoenix](#phoenix) · [OpenLLMetry](#openllmetry) · [Helicone](#helicone)
-
-**[Ses, Görüntü ve Çok Kipli](#ses-görüntü-ve-çok-kipli)**
-[Whisper ailesi](#whisper--faster-whisper--whispercpp) · [WhisperX](#whisperx) · [Kokoro / Piper](#kokoro--piper) · [Pipecat](#pipecat) · [LiveKit Agents](#livekit-agents) · [ComfyUI](#comfyui) · [Surya](#surya)
-
-**[Az Kodlu / Görsel Üreticiler](#az-kodlu--görsel-üreticiler)**
-[n8n](#n8n) · [Flowise](#flowise) · [Langflow](#langflow)
-
----
-
-**Referans:** [Açık Kaynak Alternatifler Tablosu](#açık-kaynak-alternatifler-tablosu) · [Yığınını Seçmek](#yığınını-seçmek) · [Katkı](#katkı)
+- [Kodlama Ajanları ve Eşli Programlama](#kodlama-ajanları-ve-eşli-programlama)
+- [Prompt'tan Uygulamaya Üreticiler](#prompttan-uygulamaya-üreticiler)
+- [Otonom ve Kalıcı Ajanlar](#otonom-ve-kalıcı-ajanlar)
+- [Ajan Kum Havuzları ve Tarayıcı Kontrolü](#ajan-kum-havuzları-ve-tarayıcı-kontrolü)
+- [Ajan Çatıları ve Orkestrasyon](#ajan-çatıları-ve-orkestrasyon)
+- [Model Context Protocol (MCP)](#model-context-protocol-mcp)
+- [Yerel Çıkarım Motorları](#yerel-çıkarım-motorları)
+- [Çıkarım Sunucuları ve Ağ Geçitleri](#çıkarım-sunucuları-ve-ağ-geçitleri)
+- [Sohbet Arayüzleri](#sohbet-arayüzleri)
+- [Vektör Veritabanları](#vektör-veritabanları)
+- [Embedding'ler ve Yeniden Sıralayıcılar](#embeddingler-ve-yeniden-sıralayıcılar)
+- [RAG Çatıları](#rag-çatıları)
+- [İnce Ayar ve Eğitim](#ince-ayar-ve-eğitim)
+- [Değerlendirme, Test ve Koruma Katmanları](#değerlendirme-test-ve-koruma-katmanları)
+- [Gözlemlenebilirlik ve LLMOps](#gözlemlenebilirlik-ve-llmops)
+- [Ses, Görüntü ve Çok Kipli](#ses-görüntü-ve-çok-kipli)
+- [Az Kodlu / Görsel Üreticiler](#az-kodlu--görsel-üreticiler)
+- [Açık Kaynak Alternatifler Tablosu](#açık-kaynak-alternatifler-tablosu)
+- [Yığınını Seçmek](#yığınını-seçmek)
+- [Katkı](#katkı)
 
 ---
 

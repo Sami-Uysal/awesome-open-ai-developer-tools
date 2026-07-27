@@ -26,62 +26,26 @@ No affiliate links. No sponsored slots. OSI-licensed only — source-available t
 
 ## Contents
 
-Click a category to jump to it; click a tool to jump straight to its write-up.
-
-**[Coding Agents & Pair Programmers](#coding-agents--pair-programmers)**
-[aider](#aider) · [OpenCode](#opencode) · [Cline](#cline) · [Continue](#continue) · [OpenHands](#openhands) · [SWE-agent](#swe-agent) · [Goose](#goose) · [Kilo Code](#kilo-code) · [Tabby](#tabby) · [gpt-engineer](#gpt-engineer)
-
-**[Prompt-to-App Builders](#prompt-to-app-builders)**
-[bolt.diy](#boltdiy) · [Open Design](#open-design) · [OpenUI](#openui) · [Dyad](#dyad)
-
-**[Autonomous & Persistent Agents](#autonomous--persistent-agents)**
-[OpenClaw](#openclaw) · [Hermes Agent](#hermes-agent) · [DeerFlow](#deerflow) · [Open-Sable](#open-sable) · [AutoGPT](#autogpt) · [Letta](#letta-formerly-memgpt) · [Mem0](#mem0) · [Khoj](#khoj)
-
-**[Agent Sandboxes & Browser Control](#agent-sandboxes--browser-control)**
-[E2B](#e2b) · [Daytona](#daytona) · [browser-use](#browser-use) · [Skyvern](#skyvern)
-
-**[Agent Frameworks & Orchestration](#agent-frameworks--orchestration)**
-[LangGraph](#langgraph) · [CrewAI](#crewai) · [AutoGen](#autogen) · [smolagents](#smolagents) · [Google ADK](#google-adk) · [Pydantic AI](#pydantic-ai) · [DSPy](#dspy) · [LiteLLM](#litellm) · [Haystack](#haystack)
-
-**[Model Context Protocol (MCP)](#model-context-protocol-mcp)**
-[MCP Specification](#mcp-specification) · [MCP Servers](#mcp-servers) · [MCP Inspector](#mcp-inspector) · [FastMCP](#fastmcp)
-
-**[Local Inference Engines](#local-inference-engines)**
-[Ollama](#ollama) · [llama.cpp](#llamacpp) · [Jan](#jan) · [MLC LLM](#mlc-llm) · [WebLLM](#webllm) · [llamafile](#llamafile)
-
-**[Inference Servers & Gateways](#inference-servers--gateways)**
-[vLLM](#vllm) · [SGLang](#sglang) · [LocalAI](#localai) · [Text Generation Inference](#text-generation-inference) · [Ray](#ray)
-
-**[Chat UIs & Frontends](#chat-uis--frontends)**
-[Open WebUI](#open-webui) · [LibreChat](#librechat) · [Lobe Chat](#lobe-chat) · [AnythingLLM](#anythingllm)
-
-**[Vector Databases](#vector-databases)**
-[Qdrant](#qdrant) · [Milvus](#milvus) · [Weaviate](#weaviate) · [Chroma](#chroma) · [pgvector](#pgvector)
-
-**[Embeddings & Rerankers](#embeddings--rerankers)**
-[FlagEmbedding / BGE](#flagembedding--bge) · [Sentence Transformers](#sentence-transformers)
-
-**[RAG Frameworks](#rag-frameworks)**
-[LlamaIndex](#llamaindex) · [RAGFlow](#ragflow) · [Dify](#dify) · [Docling](#docling) · [Unstructured](#unstructured)
-
-**[Fine-Tuning & Training](#fine-tuning--training)**
-[Unsloth](#unsloth) · [Axolotl](#axolotl) · [LLaMA-Factory](#llama-factory) · [PEFT](#peft) · [Distilabel](#distilabel) · [TRL](#trl)
-
-**[Evals, Testing & Guardrails](#evals-testing--guardrails)**
-[promptfoo](#promptfoo) · [DeepEval](#deepeval) · [Ragas](#ragas) · [Guardrails](#guardrails) · [NeMo Guardrails](#nemo-guardrails) · [Garak](#garak)
-
-**[Observability & LLMOps](#observability--llmops)**
-[Langfuse](#langfuse) · [Phoenix](#phoenix) · [OpenLLMetry](#openllmetry) · [Helicone](#helicone)
-
-**[Speech, Vision & Multimodal](#speech-vision--multimodal)**
-[Whisper family](#whisper--faster-whisper--whispercpp) · [WhisperX](#whisperx) · [Kokoro / Piper](#kokoro--piper) · [Pipecat](#pipecat) · [LiveKit Agents](#livekit-agents) · [ComfyUI](#comfyui) · [Surya](#surya)
-
-**[Low-Code / Visual Builders](#low-code--visual-builders)**
-[n8n](#n8n) · [Flowise](#flowise) · [Langflow](#langflow)
-
----
-
-**Reference:** [Open-Source Alternatives Cheat Sheet](#open-source-alternatives-cheat-sheet) · [Choosing Your Stack](#choosing-your-stack) · [Contributing](#contributing)
+- [Coding Agents & Pair Programmers](#coding-agents--pair-programmers)
+- [Prompt-to-App Builders](#prompt-to-app-builders)
+- [Autonomous & Persistent Agents](#autonomous--persistent-agents)
+- [Agent Sandboxes & Browser Control](#agent-sandboxes--browser-control)
+- [Agent Frameworks & Orchestration](#agent-frameworks--orchestration)
+- [Model Context Protocol (MCP)](#model-context-protocol-mcp)
+- [Local Inference Engines](#local-inference-engines)
+- [Inference Servers & Gateways](#inference-servers--gateways)
+- [Chat UIs & Frontends](#chat-uis--frontends)
+- [Vector Databases](#vector-databases)
+- [Embeddings & Rerankers](#embeddings--rerankers)
+- [RAG Frameworks](#rag-frameworks)
+- [Fine-Tuning & Training](#fine-tuning--training)
+- [Evals, Testing & Guardrails](#evals-testing--guardrails)
+- [Observability & LLMOps](#observability--llmops)
+- [Speech, Vision & Multimodal](#speech-vision--multimodal)
+- [Low-Code / Visual Builders](#low-code--visual-builders)
+- [Open-Source Alternatives Cheat Sheet](#open-source-alternatives-cheat-sheet)
+- [Choosing Your Stack](#choosing-your-stack)
+- [Contributing](#contributing)
 
 ---
 

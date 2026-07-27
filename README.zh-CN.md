@@ -26,62 +26,26 @@
 
 ## 目录
 
-点击分类跳到该分类，点击工具直接跳到它的说明。
-
-**[编码智能体与结对编程](#编码智能体与结对编程)**
-[aider](#aider) · [OpenCode](#opencode) · [Cline](#cline) · [Continue](#continue) · [OpenHands](#openhands) · [SWE-agent](#swe-agent) · [Goose](#goose) · [Kilo Code](#kilo-code) · [Tabby](#tabby) · [gpt-engineer](#gpt-engineer)
-
-**[Prompt 到应用生成器](#prompt-到应用生成器)**
-[bolt.diy](#boltdiy) · [Open Design](#open-design) · [OpenUI](#openui) · [Dyad](#dyad)
-
-**[自主与持久化智能体](#自主与持久化智能体)**
-[OpenClaw](#openclaw) · [Hermes Agent](#hermes-agent) · [DeerFlow](#deerflow) · [Open-Sable](#open-sable) · [AutoGPT](#autogpt) · [Letta](#letta) · [Mem0](#mem0) · [Khoj](#khoj)
-
-**[智能体沙箱与浏览器控制](#智能体沙箱与浏览器控制)**
-[E2B](#e2b) · [Daytona](#daytona) · [browser-use](#browser-use) · [Skyvern](#skyvern)
-
-**[智能体框架与编排](#智能体框架与编排)**
-[LangGraph](#langgraph) · [CrewAI](#crewai) · [AutoGen](#autogen) · [smolagents](#smolagents) · [Google ADK](#google-adk) · [Pydantic AI](#pydantic-ai) · [DSPy](#dspy) · [LiteLLM](#litellm) · [Haystack](#haystack)
-
-**[Model Context Protocol (MCP)](#model-context-protocol-mcp)**
-[MCP 规范](#mcp-规范) · [MCP Servers](#mcp-servers) · [MCP Inspector](#mcp-inspector) · [FastMCP](#fastmcp)
-
-**[本地推理引擎](#本地推理引擎)**
-[Ollama](#ollama) · [llama.cpp](#llamacpp) · [Jan](#jan) · [MLC LLM](#mlc-llm) · [WebLLM](#webllm) · [llamafile](#llamafile)
-
-**[推理服务与网关](#推理服务与网关)**
-[vLLM](#vllm) · [SGLang](#sglang) · [LocalAI](#localai) · [Text Generation Inference](#text-generation-inference) · [Ray](#ray)
-
-**[聊天前端](#聊天前端)**
-[Open WebUI](#open-webui) · [LibreChat](#librechat) · [Lobe Chat](#lobe-chat) · [AnythingLLM](#anythingllm)
-
-**[向量数据库](#向量数据库)**
-[Qdrant](#qdrant) · [Milvus](#milvus) · [Weaviate](#weaviate) · [Chroma](#chroma) · [pgvector](#pgvector)
-
-**[Embedding 与重排序器](#embedding-与重排序器)**
-[FlagEmbedding / BGE](#flagembedding--bge) · [Sentence Transformers](#sentence-transformers)
-
-**[RAG 框架](#rag-框架)**
-[LlamaIndex](#llamaindex) · [RAGFlow](#ragflow) · [Dify](#dify) · [Docling](#docling) · [Unstructured](#unstructured)
-
-**[微调与训练](#微调与训练)**
-[Unsloth](#unsloth) · [Axolotl](#axolotl) · [LLaMA-Factory](#llama-factory) · [PEFT](#peft) · [Distilabel](#distilabel) · [TRL](#trl)
-
-**[评测、测试与护栏](#评测测试与护栏)**
-[promptfoo](#promptfoo) · [DeepEval](#deepeval) · [Ragas](#ragas) · [Guardrails](#guardrails) · [NeMo Guardrails](#nemo-guardrails) · [Garak](#garak)
-
-**[可观测性与 LLMOps](#可观测性与-llmops)**
-[Langfuse](#langfuse) · [Phoenix](#phoenix) · [OpenLLMetry](#openllmetry) · [Helicone](#helicone)
-
-**[语音、视觉与多模态](#语音视觉与多模态)**
-[Whisper 系列](#whisper--faster-whisper--whispercpp) · [WhisperX](#whisperx) · [Kokoro / Piper](#kokoro--piper) · [Pipecat](#pipecat) · [LiveKit Agents](#livekit-agents) · [ComfyUI](#comfyui) · [Surya](#surya)
-
-**[低代码 / 可视化搭建](#低代码--可视化搭建)**
-[n8n](#n8n) · [Flowise](#flowise) · [Langflow](#langflow)
-
----
-
-**参考：** [开源替代速查表](#开源替代速查表) · [如何选择你的技术栈](#如何选择你的技术栈) · [参与贡献](#参与贡献)
+- [编码智能体与结对编程](#编码智能体与结对编程)
+- [Prompt 到应用生成器](#prompt-到应用生成器)
+- [自主与持久化智能体](#自主与持久化智能体)
+- [智能体沙箱与浏览器控制](#智能体沙箱与浏览器控制)
+- [智能体框架与编排](#智能体框架与编排)
+- [Model Context Protocol (MCP)](#model-context-protocol-mcp)
+- [本地推理引擎](#本地推理引擎)
+- [推理服务与网关](#推理服务与网关)
+- [聊天前端](#聊天前端)
+- [向量数据库](#向量数据库)
+- [Embedding 与重排序器](#embedding-与重排序器)
+- [RAG 框架](#rag-框架)
+- [微调与训练](#微调与训练)
+- [评测、测试与护栏](#评测测试与护栏)
+- [可观测性与 LLMOps](#可观测性与-llmops)
+- [语音、视觉与多模态](#语音视觉与多模态)
+- [低代码 / 可视化搭建](#低代码--可视化搭建)
+- [开源替代速查表](#开源替代速查表)
+- [如何选择你的技术栈](#如何选择你的技术栈)
+- [参与贡献](#参与贡献)
 
 ---
 

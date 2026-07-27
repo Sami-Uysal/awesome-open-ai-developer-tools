@@ -26,62 +26,26 @@ Sin enlaces de afiliado. Sin puestos patrocinados. Solo licencias aprobadas por 
 
 ## Contenido
 
-Haz clic en una categoría para saltar a ella; haz clic en una herramienta para ir directo a su ficha.
-
-**[Agentes de código y programación en pareja](#agentes-de-código-y-programación-en-pareja)**
-[aider](#aider) · [OpenCode](#opencode) · [Cline](#cline) · [Continue](#continue) · [OpenHands](#openhands) · [SWE-agent](#swe-agent) · [Goose](#goose) · [Kilo Code](#kilo-code) · [Tabby](#tabby) · [gpt-engineer](#gpt-engineer)
-
-**[Generadores de prompt a aplicación](#generadores-de-prompt-a-aplicación)**
-[bolt.diy](#boltdiy) · [Open Design](#open-design) · [OpenUI](#openui) · [Dyad](#dyad)
-
-**[Agentes autónomos y persistentes](#agentes-autónomos-y-persistentes)**
-[OpenClaw](#openclaw) · [Hermes Agent](#hermes-agent) · [DeerFlow](#deerflow) · [Open-Sable](#open-sable) · [AutoGPT](#autogpt) · [Letta](#letta) · [Mem0](#mem0) · [Khoj](#khoj)
-
-**[Sandboxes de agentes y control del navegador](#sandboxes-de-agentes-y-control-del-navegador)**
-[E2B](#e2b) · [Daytona](#daytona) · [browser-use](#browser-use) · [Skyvern](#skyvern)
-
-**[Frameworks de agentes y orquestación](#frameworks-de-agentes-y-orquestación)**
-[LangGraph](#langgraph) · [CrewAI](#crewai) · [AutoGen](#autogen) · [smolagents](#smolagents) · [Google ADK](#google-adk) · [Pydantic AI](#pydantic-ai) · [DSPy](#dspy) · [LiteLLM](#litellm) · [Haystack](#haystack)
-
-**[Model Context Protocol (MCP)](#model-context-protocol-mcp)**
-[Especificación MCP](#especificación-mcp) · [Servidores MCP](#servidores-mcp) · [MCP Inspector](#mcp-inspector) · [FastMCP](#fastmcp)
-
-**[Motores de inferencia local](#motores-de-inferencia-local)**
-[Ollama](#ollama) · [llama.cpp](#llamacpp) · [Jan](#jan) · [MLC LLM](#mlc-llm) · [WebLLM](#webllm) · [llamafile](#llamafile)
-
-**[Servidores de inferencia y pasarelas](#servidores-de-inferencia-y-pasarelas)**
-[vLLM](#vllm) · [SGLang](#sglang) · [LocalAI](#localai) · [Text Generation Inference](#text-generation-inference) · [Ray](#ray)
-
-**[Interfaces de chat](#interfaces-de-chat)**
-[Open WebUI](#open-webui) · [LibreChat](#librechat) · [Lobe Chat](#lobe-chat) · [AnythingLLM](#anythingllm)
-
-**[Bases de datos vectoriales](#bases-de-datos-vectoriales)**
-[Qdrant](#qdrant) · [Milvus](#milvus) · [Weaviate](#weaviate) · [Chroma](#chroma) · [pgvector](#pgvector)
-
-**[Embeddings y rerankers](#embeddings-y-rerankers)**
-[FlagEmbedding / BGE](#flagembedding--bge) · [Sentence Transformers](#sentence-transformers)
-
-**[Frameworks de RAG](#frameworks-de-rag)**
-[LlamaIndex](#llamaindex) · [RAGFlow](#ragflow) · [Dify](#dify) · [Docling](#docling) · [Unstructured](#unstructured)
-
-**[Fine-tuning y entrenamiento](#fine-tuning-y-entrenamiento)**
-[Unsloth](#unsloth) · [Axolotl](#axolotl) · [LLaMA-Factory](#llama-factory) · [PEFT](#peft) · [Distilabel](#distilabel) · [TRL](#trl)
-
-**[Evaluación, pruebas y guardarraíles](#evaluación-pruebas-y-guardarraíles)**
-[promptfoo](#promptfoo) · [DeepEval](#deepeval) · [Ragas](#ragas) · [Guardrails](#guardrails) · [NeMo Guardrails](#nemo-guardrails) · [Garak](#garak)
-
-**[Observabilidad y LLMOps](#observabilidad-y-llmops)**
-[Langfuse](#langfuse) · [Phoenix](#phoenix) · [OpenLLMetry](#openllmetry) · [Helicone](#helicone)
-
-**[Voz, visión y multimodal](#voz-visión-y-multimodal)**
-[Familia Whisper](#whisper--faster-whisper--whispercpp) · [WhisperX](#whisperx) · [Kokoro / Piper](#kokoro--piper) · [Pipecat](#pipecat) · [LiveKit Agents](#livekit-agents) · [ComfyUI](#comfyui) · [Surya](#surya)
-
-**[Low-code / constructores visuales](#low-code--constructores-visuales)**
-[n8n](#n8n) · [Flowise](#flowise) · [Langflow](#langflow)
-
----
-
-**Referencia:** [Tabla de alternativas de código abierto](#tabla-de-alternativas-de-código-abierto) · [Cómo elegir tu stack](#cómo-elegir-tu-stack) · [Contribuir](#contribuir)
+- [Agentes de código y programación en pareja](#agentes-de-código-y-programación-en-pareja)
+- [Generadores de prompt a aplicación](#generadores-de-prompt-a-aplicación)
+- [Agentes autónomos y persistentes](#agentes-autónomos-y-persistentes)
+- [Sandboxes de agentes y control del navegador](#sandboxes-de-agentes-y-control-del-navegador)
+- [Frameworks de agentes y orquestación](#frameworks-de-agentes-y-orquestación)
+- [Model Context Protocol (MCP)](#model-context-protocol-mcp)
+- [Motores de inferencia local](#motores-de-inferencia-local)
+- [Servidores de inferencia y pasarelas](#servidores-de-inferencia-y-pasarelas)
+- [Interfaces de chat](#interfaces-de-chat)
+- [Bases de datos vectoriales](#bases-de-datos-vectoriales)
+- [Embeddings y rerankers](#embeddings-y-rerankers)
+- [Frameworks de RAG](#frameworks-de-rag)
+- [Fine-tuning y entrenamiento](#fine-tuning-y-entrenamiento)
+- [Evaluación, pruebas y guardarraíles](#evaluación-pruebas-y-guardarraíles)
+- [Observabilidad y LLMOps](#observabilidad-y-llmops)
+- [Voz, visión y multimodal](#voz-visión-y-multimodal)
+- [Low-code / constructores visuales](#low-code--constructores-visuales)
+- [Tabla de alternativas de código abierto](#tabla-de-alternativas-de-código-abierto)
+- [Cómo elegir tu stack](#cómo-elegir-tu-stack)
+- [Contribuir](#contribuir)
 
 ---
 
