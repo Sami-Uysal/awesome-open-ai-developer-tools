@@ -6,7 +6,7 @@
 
 编码智能体 · 本地推理 · 智能体框架 · 向量数据库 · RAG · 评测 · 可观测性
 
-[English](README.md) · [Türkçe](README.tr.md) · **简体中文** · [Español](README.es.md) · [*添加你的语言*](TRANSLATIONS.md)
+[English](README.md) · [Türkçe](README.tr.md) · **简体中文** · [Español](README.es.md) · [*添加你的语言*](TRANSLATIONS.md) · [🌐 网站](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 </div>
 

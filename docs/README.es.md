@@ -6,7 +6,7 @@
 
 Agentes de código · inferencia local · frameworks de agentes · bases de datos vectoriales · RAG · evaluación · observabilidad
 
-[English](README.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **Español** · [*añade tu idioma*](TRANSLATIONS.md)
+[English](README.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **Español** · [*añade tu idioma*](TRANSLATIONS.md) · [🌐 Sitio web](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 </div>
 

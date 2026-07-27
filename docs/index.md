@@ -6,7 +6,7 @@
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*add your language*](TRANSLATIONS.md)
+**English** · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*add your language*](TRANSLATIONS.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 </div>
 

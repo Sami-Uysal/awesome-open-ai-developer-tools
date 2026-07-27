@@ -6,7 +6,7 @@
 
 Kodlama ajanları · yerel çıkarım · ajan çatıları · vektör veritabanları · RAG · değerlendirme · gözlemlenebilirlik
 
-[English](README.md) · **Türkçe** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*kendi dilini ekle*](TRANSLATIONS.md)
+[English](README.md) · **Türkçe** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [*kendi dilini ekle*](TRANSLATIONS.md) · [🌐 Web sitesi](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 </div>
 
