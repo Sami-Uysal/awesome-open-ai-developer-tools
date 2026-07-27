@@ -6,7 +6,7 @@
 
 Agentes de código · inferencia local · frameworks de agentes · bases de datos vectoriales · RAG · evaluación · observabilidad
 
-[English](/) · [Türkçe](/languages/tr) · [简体中文](/languages/zh) · **Español** · [*añade tu idioma*](/community/translations) · [🌐 Sitio web](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](../index.md) · [Türkçe](./tr.md) · [简体中文](./zh.md) · **Español** · [añade tu idioma](../community/translations.md) · [🌐 Sitio web](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -889,7 +889,7 @@ Las tres reglas que más tiempo ahorran:
 
 ## Contribuir
 
-Los PRs son bienvenidos. Consulta [contributing guide](/community/contributing).
+Los PRs son bienvenidos. Consulta [contributing guide](../community/contributing.md).
 
 El listón para entrar:
 
@@ -898,7 +898,7 @@ El listón para entrar:
 - Resuelve un problema que un desarrollador tiene de verdad
 - La entrada explica *por qué elegirla*, no solo qué hace
 
-> **Nota:** la versión en inglés es la canónica. Si esta traducción contradice al inglés, manda el inglés. Véase [translations guide](/community/translations).
+> **Nota:** la versión en inglés es la canónica. Si esta traducción contradice al inglés, manda el inglés. Véase [translations guide](../community/translations.md).
 
 ## Licencia
 

@@ -6,7 +6,7 @@
 
 编码智能体 · 本地推理 · 智能体框架 · 向量数据库 · RAG · 评测 · 可观测性
 
-[English](/) · [Türkçe](/languages/tr) · **简体中文** · [Español](/languages/es) · [*添加你的语言*](/community/translations) · [🌐 网站](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](../index.md) · [Türkçe](./tr.md) · **简体中文** · [Español](./es.md) · [添加你的语言](../community/translations.md) · [🌐 网站](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -889,7 +889,7 @@ Docling 或 RAGFlow（解析）→ LlamaIndex（检索）→ Qdrant → Ragas（
 
 ## 参与贡献
 
-欢迎提 PR，详见 [contributing guide](/community/contributing)。
+欢迎提 PR，详见 [contributing guide](../community/contributing.md)。
 
 收录门槛：
 
@@ -898,7 +898,7 @@ Docling 或 RAGFlow（解析）→ LlamaIndex（检索）→ Qdrant → Ragas（
 - 解决开发者真实存在的问题
 - 条目要说明*为什么选它*，而不只是它做什么
 
-> **说明：** 英文版为准。本译文若与英文版冲突，以英文版为准。参见 [translations guide](/community/translations)。
+> **说明：** 英文版为准。本译文若与英文版冲突，以英文版为准。参见 [translations guide](../community/translations.md)。
 
 ## 许可证
 

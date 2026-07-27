@@ -6,7 +6,7 @@
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](/languages/tr) · [简体中文](/languages/zh) · [Español](/languages/es) · [*add your language*](/community/translations) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+**English** · [Türkçe](./languages/tr.md) · [简体中文](./languages/zh.md) · [Español](./languages/es.md) · [Add your language](./community/translations.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -889,7 +889,7 @@ Three rules that save the most time:
 
 ## Contributing
 
-PRs welcome. See [contributing guide](/community/contributing).
+PRs welcome. See [contributing guide](./community/contributing.md).
 
 The bar for inclusion:
 

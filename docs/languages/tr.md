@@ -6,7 +6,7 @@
 
 Kodlama ajanları · yerel çıkarım · ajan çatıları · vektör veritabanları · RAG · değerlendirme · gözlemlenebilirlik
 
-[English](/) · **Türkçe** · [简体中文](/languages/zh) · [Español](/languages/es) · [*kendi dilini ekle*](/community/translations) · [🌐 Web sitesi](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](../index.md) · **Türkçe** · [简体中文](./zh.md) · [Español](./es.md) · [kendi dilini ekle](../community/translations.md) · [🌐 Web sitesi](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -889,7 +889,7 @@ En çok zaman kazandıran üç kural:
 
 ## Katkı
 
-PR'lara açığız. [contributing guide](/community/contributing) dosyasına bakın.
+PR'lara açığız. [contributing guide](../community/contributing.md) dosyasına bakın.
 
 Listeye girme çıtası:
 
@@ -898,7 +898,7 @@ Listeye girme çıtası:
 - Bir geliştiricinin gerçekten yaşadığı bir sorunu çözüyor
 - Madde, aracın ne yaptığını değil *neden onu seçeceğini* açıklıyor
 
-> **Not:** İngilizce sürüm kanoniktir. Bu çeviriyle İngilizce metin çelişirse İngilizce geçerlidir. Bkz. [translations guide](/community/translations).
+> **Not:** İngilizce sürüm kanoniktir. Bu çeviriyle İngilizce metin çelişirse İngilizce geçerlidir. Bkz. [translations guide](../community/translations.md).
 
 ## Lisans
 
