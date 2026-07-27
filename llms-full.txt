@@ -958,10 +958,10 @@ The list is maintained in several languages. **English is canonical** — when a
 
 | Language | File | Status |
 |---|---|---|
-| English | [/](/) | Canonical |
-| Türkçe | [/languages/tr](/languages/tr) | Complete |
-| 简体中文 | [/languages/zh](/languages/zh) | Complete |
-| Español | [/languages/es](/languages/es) | Complete |
+| English | [docs/index.md](../index.md) | Canonical |
+| Türkçe | [docs/languages/tr.md](../languages/tr.md) | Complete |
+| 简体中文 | [docs/languages/zh.md](../languages/zh.md) | Complete |
+| Español | [docs/languages/es.md](../languages/es.md) | Complete |
 
 ## Wanted
 
@@ -1018,7 +1018,7 @@ Allowed as a starting point, not as a submission. A native or fluent speaker mus
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](/languages/tr) · [简体中文](/languages/zh) · [Español](/languages/es) · [*add your language*](/community/translations) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+**English** · [Türkçe](./languages/tr.md) · [简体中文](./languages/zh.md) · [Español](./languages/es.md) · [Add your language](./community/translations.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -1901,7 +1901,7 @@ Three rules that save the most time:
 
 ## Contributing
 
-PRs welcome. See [contributing guide](/community/contributing).
+PRs welcome. See [contributing guide](./community/contributing.md).
 
 The bar for inclusion:
 
@@ -1935,7 +1935,7 @@ To the extent possible under law, contributors have waived all copyright and rel
 
 Agentes de código · inferencia local · frameworks de agentes · bases de datos vectoriales · RAG · evaluación · observabilidad
 
-[English](/) · [Türkçe](/languages/tr) · [简体中文](/languages/zh) · **Español** · [*añade tu idioma*](/community/translations) · [🌐 Sitio web](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](../index.md) · [Türkçe](./tr.md) · [简体中文](./zh.md) · **Español** · [añade tu idioma](../community/translations.md) · [🌐 Sitio web](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -2818,7 +2818,7 @@ Las tres reglas que más tiempo ahorran:
 
 ## Contribuir
 
-Los PRs son bienvenidos. Consulta [contributing guide](/community/contributing).
+Los PRs son bienvenidos. Consulta [contributing guide](../community/contributing.md).
 
 El listón para entrar:
 
@@ -2827,7 +2827,7 @@ El listón para entrar:
 - Resuelve un problema que un desarrollador tiene de verdad
 - La entrada explica *por qué elegirla*, no solo qué hace
 
-> **Nota:** la versión en inglés es la canónica. Si esta traducción contradice al inglés, manda el inglés. Véase [translations guide](/community/translations).
+> **Nota:** la versión en inglés es la canónica. Si esta traducción contradice al inglés, manda el inglés. Véase [translations guide](../community/translations.md).
 
 ## Licencia
 
@@ -2849,7 +2849,7 @@ En la medida en que lo permite la ley, quienes contribuyen han renunciado a todo
 
 Kodlama ajanları · yerel çıkarım · ajan çatıları · vektör veritabanları · RAG · değerlendirme · gözlemlenebilirlik
 
-[English](/) · **Türkçe** · [简体中文](/languages/zh) · [Español](/languages/es) · [*kendi dilini ekle*](/community/translations) · [🌐 Web sitesi](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](../index.md) · **Türkçe** · [简体中文](./zh.md) · [Español](./es.md) · [kendi dilini ekle](../community/translations.md) · [🌐 Web sitesi](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -3732,7 +3732,7 @@ En çok zaman kazandıran üç kural:
 
 ## Katkı
 
-PR'lara açığız. [contributing guide](/community/contributing) dosyasına bakın.
+PR'lara açığız. [contributing guide](../community/contributing.md) dosyasına bakın.
 
 Listeye girme çıtası:
 
@@ -3741,7 +3741,7 @@ Listeye girme çıtası:
 - Bir geliştiricinin gerçekten yaşadığı bir sorunu çözüyor
 - Madde, aracın ne yaptığını değil *neden onu seçeceğini* açıklıyor
 
-> **Not:** İngilizce sürüm kanoniktir. Bu çeviriyle İngilizce metin çelişirse İngilizce geçerlidir. Bkz. [translations guide](/community/translations).
+> **Not:** İngilizce sürüm kanoniktir. Bu çeviriyle İngilizce metin çelişirse İngilizce geçerlidir. Bkz. [translations guide](../community/translations.md).
 
 ## Lisans
 
@@ -3763,7 +3763,7 @@ Yasaların izin verdiği ölçüde, katkıda bulunanlar bu esere ilişkin tüm t
 
 编码智能体 · 本地推理 · 智能体框架 · 向量数据库 · RAG · 评测 · 可观测性
 
-[English](/) · [Türkçe](/languages/tr) · **简体中文** · [Español](/languages/es) · [*添加你的语言*](/community/translations) · [🌐 网站](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](../index.md) · [Türkçe](./tr.md) · **简体中文** · [Español](./es.md) · [添加你的语言](../community/translations.md) · [🌐 网站](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -4646,7 +4646,7 @@ Docling 或 RAGFlow（解析）→ LlamaIndex（检索）→ Qdrant → Ragas（
 
 ## 参与贡献
 
-欢迎提 PR，详见 [contributing guide](/community/contributing)。
+欢迎提 PR，详见 [contributing guide](../community/contributing.md)。
 
 收录门槛：
 
@@ -4655,7 +4655,7 @@ Docling 或 RAGFlow（解析）→ LlamaIndex（检索）→ Qdrant → Ragas（
 - 解决开发者真实存在的问题
 - 条目要说明*为什么选它*，而不只是它做什么
 
-> **说明：** 英文版为准。本译文若与英文版冲突，以英文版为准。参见 [translations guide](/community/translations)。
+> **说明：** 英文版为准。本译文若与英文版冲突，以英文版为准。参见 [translations guide](../community/translations.md)。
 
 ## 许可证
 

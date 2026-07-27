@@ -6,7 +6,7 @@ path: /community/translations/
 updated: 2026-07-27
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-27T21:04:43.136Z"
+  generated_at: "2026-07-27T21:16:08.141Z"
 ---
 # Translations
 
@@ -16,10 +16,10 @@ The list is maintained in several languages. **English is canonical** — when a
 
 | Language | File | Status |
 |---|---|---|
-| English | [/](/) | Canonical |
-| Türkçe | [/languages/tr](/languages/tr) | Complete |
-| 简体中文 | [/languages/zh](/languages/zh) | Complete |
-| Español | [/languages/es](/languages/es) | Complete |
+| English | [docs/index.md](../index.md) | Canonical |
+| Türkçe | [docs/languages/tr.md](../languages/tr.md) | Complete |
+| 简体中文 | [docs/languages/zh.md](../languages/zh.md) | Complete |
+| Español | [docs/languages/es.md](../languages/es.md) | Complete |
 
 ## Wanted
 
