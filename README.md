@@ -899,6 +899,11 @@ The bar for inclusion:
 - Solves a problem a developer actually has
 - The entry explains *why you'd choose it*, not just what it does
 
+## Contributors
+<a href="https://github.com/Sami-Uysal/awesome-open-ai-developer-tools/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Sami-Uysal/awesome-open-ai-developer-tools" />
+</a>
+
 ## License
 
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
