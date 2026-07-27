@@ -1,0 +1,82 @@
+{
+  "okf_version": "0.8.17",
+  "bundle": {
+    "name": "awesome-open-ai-developer-tools",
+    "title": "Awesome Open AI Developer Tools",
+    "description": "",
+    "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools",
+    "generated_by": "@docmd/plugin-okf",
+    "generated_at": "2026-07-27T20:39:47.562Z",
+    "default_type": "concept"
+  },
+  "stats": {
+    "concepts": 6,
+    "by_type": {
+      "concept": 6
+    },
+    "locales": [],
+    "versions": []
+  },
+  "concepts": [
+    {
+      "id": "contributing",
+      "type": "concept",
+      "title": "Contributing",
+      "path": "/CONTRIBUTING/",
+      "file": "concepts/contributing.md",
+      "locale": "",
+      "version": "",
+      "tags": []
+    },
+    {
+      "id": "readme-es",
+      "type": "concept",
+      "title": "Awesome Herramientas de IA de Código Abierto para Desarrolladores [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)",
+      "path": "/README.es/",
+      "file": "concepts/readme-es.md",
+      "locale": "",
+      "version": "",
+      "tags": []
+    },
+    {
+      "id": "readme-tr",
+      "type": "concept",
+      "title": "Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)",
+      "path": "/README.tr/",
+      "file": "concepts/readme-tr.md",
+      "locale": "",
+      "version": "",
+      "tags": []
+    },
+    {
+      "id": "readme-zh-cn",
+      "type": "concept",
+      "title": "Awesome 开源 AI 开发者工具 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)",
+      "path": "/README.zh-CN/",
+      "file": "concepts/readme-zh-cn.md",
+      "locale": "",
+      "version": "",
+      "tags": []
+    },
+    {
+      "id": "translations",
+      "type": "concept",
+      "title": "Translations",
+      "path": "/TRANSLATIONS/",
+      "file": "concepts/translations.md",
+      "locale": "",
+      "version": "",
+      "tags": []
+    },
+    {
+      "id": "root",
+      "type": "concept",
+      "title": "Awesome Open-Source AI Developer Tools [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)",
+      "path": "/",
+      "file": "concepts/root.md",
+      "locale": "",
+      "version": "",
+      "tags": []
+    }
+  ]
+}

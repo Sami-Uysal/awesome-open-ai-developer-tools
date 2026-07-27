@@ -1,0 +1,7 @@
+[WARN] missing-type /CONTRIBUTING/  (using fallback 'concept')
+[WARN] missing-type /README.es/  (using fallback 'concept')
+[WARN] missing-type /README.tr/  (using fallback 'concept')
+[WARN] missing-type /README.zh-CN/  (using fallback 'concept')
+[WARN] missing-type /TRANSLATIONS/  (using fallback 'concept')
+[WARN] missing-type /  (using fallback 'concept')
+[WARN] orphan-concept root  (no inbound links)

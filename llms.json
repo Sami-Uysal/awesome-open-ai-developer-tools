@@ -1,0 +1,42 @@
+{
+  "title": "Awesome Open AI Developer Tools",
+  "description": "",
+  "pages": [
+    {
+      "title": "Contributing",
+      "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/CONTRIBUTING/",
+      "description": "",
+      "priority": "medium"
+    },
+    {
+      "title": "Awesome Open-Source AI Developer Tools \\[!\\[Awesome\\](https://awesome.re/badge.svg)\\](https://awesome.re)",
+      "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/",
+      "description": "",
+      "priority": "high"
+    },
+    {
+      "title": "Awesome Herramientas de IA de Código Abierto para Desarrolladores \\[!\\[Awesome\\](https://awesome.re/badge.svg)\\](https://awesome.re)",
+      "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.es/",
+      "description": "",
+      "priority": "medium"
+    },
+    {
+      "title": "Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları \\[!\\[Awesome\\](https://awesome.re/badge.svg)\\](https://awesome.re)",
+      "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.tr/",
+      "description": "",
+      "priority": "medium"
+    },
+    {
+      "title": "Awesome 开源 AI 开发者工具 \\[!\\[Awesome\\](https://awesome.re/badge.svg)\\](https://awesome.re)",
+      "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/README.zh-CN/",
+      "description": "",
+      "priority": "medium"
+    },
+    {
+      "title": "Translations",
+      "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/TRANSLATIONS/",
+      "description": "",
+      "priority": "medium"
+    }
+  ]
+}

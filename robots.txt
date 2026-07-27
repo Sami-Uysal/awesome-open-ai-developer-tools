@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://sami-uysal.github.io/awesome-open-ai-developer-tools/sitemap.xml

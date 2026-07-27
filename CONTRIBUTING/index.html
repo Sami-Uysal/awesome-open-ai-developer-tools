@@ -1,880 +1,480 @@
+<!--
+  ---------------------------------------------------------------
+  docmd : the zero-config documentation engine.
+  @website https://docmd.io
+  [docmd-source] - Please do not remove this header.
+  ---------------------------------------------------------------
+-->
 
-<!doctype html>
-<html lang="en" class="no-js">
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="docmd v0.8.17">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="A curated directory of open-source AI tools, local LLM engines, and agents.">
-      
-      
-        <meta name="author" content="Sami Uysal">
-      
-      
-        <link rel="canonical" href="https://sami-uysal.github.io/awesome-open-ai-developer-tools/CONTRIBUTING/">
-      
-      
-        <link rel="prev" href="../README.zh-CN/">
-      
-      
-        <link rel="next" href="../TRANSLATIONS/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    <script>
+      var root = "../";
+      if (root && !root.endsWith('/')) root += '/';
+      if (root === '') root = './';
+      window.DOCMD_ROOT = root;
+
+      window.DOCMD_SITE_ROOT = "/awesome-open-ai-developer-tools/";
+
+      window.DOCMD_APPEARANCE = "system";
+      window.DOCMD_VERSION_ROOT = "/";
+      window.DOCMD_BASE = "/awesome-open-ai-developer-tools/";
+      window.DOCMD_LOCALE = "";
+      window.DOCMD_DEFAULT_LOCALE = "";
+    </script>
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    //
+    // Resolve from three sources, in priority order:
+    //   1. localStorage explicit user choice (light / dark)
+    //   2. window.DOCMD_APPEARANCE  (current canonical name, set by EJS templates)
+    //   3. window.DOCMD_DEFAULT_MODE (legacy alias kept for pre-0.8.7 outputs)
+    //   4. 'light' as the final fallback
+    //
+    // Note: localStorage is only honoured when it holds an explicit
+    // 'light' or 'dark' value. A stored 'system' value (from a prior
+    // session where the user picked "follow system") must NOT win over
+    // a freshly resolved config value — the resolved value will itself
+    // be 'system' in that case and the OS preference check below takes
+    // over, so this is a no-op for the in-session behaviour but keeps
+    // any future storage migration simple.
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_APPEARANCE
+      || window.DOCMD_DEFAULT_MODE
+      || 'light';
+    var theme = (localValue === 'light' || localValue === 'dark')
+      ? localValue
+      : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+    <style>
+      html {
+        visibility: hidden;
+      }
+    </style>
+    <title>
+      Contributing : Awesome Open AI Developer Tools
+    </title>
     
     
-      
-        <title>Contributing - Awesome Open AI Developer Tools</title>
-      
+
+    <link id="site-favicon" rel="icon" href="../assets/favicon.ico?v=ms3oxh97">
+    <link rel="stylesheet" href="../assets/css/docmd-main.css?v=ms3oxh97">
+    
+    <link rel="stylesheet" href="../assets/css/docmd-highlight-light.css?v=ms3oxh97" id="hljs-light" >
+    <link rel="stylesheet" href="../assets/css/docmd-highlight-dark.css?v=ms3oxh97" id="hljs-dark" disabled>
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
-      
-      
+<meta name="description" content="">
+<link rel="canonical" href="https://sami-uysal.github.io/awesome-open-ai-developer-tools/CONTRIBUTING/">
+<meta property="og:title" content="Contributing - Awesome Open AI Developer Tools">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://sami-uysal.github.io/awesome-open-ai-developer-tools/CONTRIBUTING/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contributing - Awesome Open AI Developer Tools">
+<meta name="twitter:description" content="">
 
 
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
+
+<link rel="stylesheet" href="../assets/css/docmd-git.css?v=ms3oxh97" >
+<link rel="stylesheet" href="../assets/css/docmd-openapi.css?v=ms3oxh97" >
 
     
     
   </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#contributing" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
+  <body
+    class="sidebar-collapsible"
+    data-default-collapsed="false"
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/CONTRIBUTING.md">
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Awesome Open AI Developer Tools" class="md-header__button md-logo" aria-label="Awesome Open AI Developer Tools" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            Awesome Open AI Developer Tools
+    
+    
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          
+<h1><a href="../">
+                Awesome Open AI Developer Tools
+              </a></h1>
+          
+          <span class="mobile-view sidebar-menu-button float-right">
+            
+<svg class="lucide-icon icon-menu " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-menu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" />
+</svg>
+
           </span>
         </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              Contributing
-            
-          </span>
+        <div class="sidebar-top-group">
+          
+          
+          
+          
         </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/Sami-Uysal/awesome-open-ai-developer-tools" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
-    Sami-Uysal/awesome-open-ai-developer-tools
-  </div>
-</a>
-      </div>
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Home
 
-      </a>
-    </li>
-  
-
+<nav class="sidebar-nav" aria-label="Main Navigation">
+  <ul>
+    
+      <li class="" >
       
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../README.tr/" class="md-tabs__link">
+        <a href="" class=" "
+          >
           
-  
-  
-  Translations
-
+          <span class="nav-item-title">
+            Awesome Open-Source AI Developer Tools [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+            </span>
+          
+          
         </a>
+        
+
+        
       </li>
     
-  
-
+      <li class="" >
       
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../README.tr" class=" "
+          >
           
-  
-  
-  Community
-
+          <span class="nav-item-title">
+            Awesome Açık Kaynak Yapay Zekâ Geliştirici Araçları [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+            </span>
+          
+          
         </a>
+        
+
+        
       </li>
     
-  
-
+      <li class="" >
       
-    </ul>
-  </div>
-</nav>
+        <a href="../README.es" class=" "
+          >
           
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
+          <span class="nav-item-title">
+            Awesome Herramientas de IA de Código Abierto para Desarrolladores [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+            </span>
           
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Awesome Open AI Developer Tools" class="md-nav__button md-logo" aria-label="Awesome Open AI Developer Tools" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    Awesome Open AI Developer Tools
-  </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/Sami-Uysal/awesome-open-ai-developer-tools" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
-    Sami-Uysal/awesome-open-ai-developer-tools
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Translations
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+        </a>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Translations
-  
 
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../README.tr/" class="md-nav__link">
         
-  
-  
-  <span class="md-ellipsis">
+      </li>
     
-  
-    Türkçe
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../README.es/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Español
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../README.zh-CN/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    中文
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+      <li class="" >
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
-        
+        <a href="../README.zh-CN" class=" "
+          >
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Community
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Community
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span class="nav-item-title">
+            Awesome 开源 AI 开发者工具 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+            </span>
           
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Contributing
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Contributing
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
+          
+        </a>
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
+        
+      </li>
     
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      <li class="active" >
       
-        <li class="md-nav__item">
-  <a href="#inclusion-criteria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inclusion criteria
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#entry-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Entry format
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Entry format">
-      <ul class="md-nav__list">
+        <a href="../CONTRIBUTING/" class="active "
+          >
+          
+          <span class="nav-item-title">
+            Contributing
+            </span>
+          
+          
+        </a>
         
-          <li class="md-nav__item">
-  <a href="#rules-for-the-edge-line" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rules for the "Edge" line
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#no-star-counts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No star counts
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pr-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PR checklist
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#removing-entries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Removing entries
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reporting-errors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reporting errors
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
 
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TRANSLATIONS/" class="md-nav__link">
         
-  
-  
-  <span class="md-ellipsis">
+      </li>
     
-  
-    Translations Info
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+      <li class="" >
       
-    </li>
-  
+        <a href="../TRANSLATIONS/" class=" "
+          >
+          
+          <span class="nav-item-title">
+            Translations
+            </span>
+          
+          
+        </a>
+        
 
+        
+      </li>
     
   </ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
+        <div class="sidebar-bottom-group mt-auto">
+          
+          
+          
+          
+        </div>
+      </aside>
+      
+      
+      
+      <div class="main-content-wrapper">
+        
+        
+          <header class="page-header">
+            <div class="header-left">
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
+                <button id="sidebar-toggle-button" class="sidebar-toggle-button"
+                  aria-label="Toggle Sidebar">
+                  
+<svg class="lucide-icon icon-chevron-left " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 18-6-6 6-6" />
+</svg>
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#inclusion-criteria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inclusion criteria
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#entry-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Entry format
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Entry format">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rules-for-the-edge-line" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rules for the "Edge" line
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#no-star-counts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No star counts
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pr-checklist" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PR checklist
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#removing-entries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Removing entries
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reporting-errors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reporting errors
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
+                </button>
               
-              <article class="md-content__inner md-typeset">
+              <div class="header-titles-wrapper">
+                <span class="header-title">
+                  Contributing
+                </span>
+              </div>
+            </div>
+            <div class="header-right">
+              
                 
+
+
+<div class="docmd-options-menu">
+    
+    <button class="docmd-search-trigger" aria-label="Search">
+        
+<svg class="lucide-icon icon-search " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+
+        <span class="search-label">Search</span>
+        <span class="search-keys"><kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">K</kbd></span>
+    </button>
+    
+
+    
+
+    
+
+    
+    <button class="theme-toggle-button" aria-label="Toggle theme">
+        
+<svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+ 
+<svg class="lucide-icon icon-moon icon-moon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-moon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+
+    </button>
+    
+
+    
+</div>
+
+              
+            </div>
+          </header>
+        
+        <div class="content-theme-cover">
+          <main class="content-area" id="main-content">
+            <div class="content-layout">
+              <div class="main-content">
+                <div class="docmd-breadcrumbs-row">
+                  <div id="docmd-raw-markdown" data-content="%23%20Contributing%0A%0AThanks%20for%20helping%20keep%20this%20list%20useful.%0A%0A%23%23%20Inclusion%20criteria%0A%0AA%20tool%20gets%20in%20if%20it%20meets%20**all**%20of%20these%3A%0A%0A1.%20**Open%20source.**%20OSI-approved%20license%20preferred.%20Source-available%20or%20fair-code%20tools%20(n8n%2C%20AutoGPT%20platform%2C%20Phoenix)%20may%20be%20included%20but%20**must%20be%20labeled%20as%20such**%20in%20the%20entry.%0A2.%20**Actively%20maintained.**%20Commits%20within%20the%20last%206%20months.%20Archived%20repos%20get%20removed.%0A3.%20**Real%20developer%20utility.**%20It%20solves%20a%20problem%20someone%20actually%20has.%20Demos%2C%20toys%2C%20and%20thin%20wrappers%20around%20one%20API%20call%20do%20not%20qualify.%0A4.%20**Not%20a%20duplicate.**%20If%20three%20tools%20in%20a%20category%20already%20do%20the%20same%20thing%2C%20the%20new%20one%20needs%20a%20clear%20reason%20to%20exist.%0A%0A%23%23%20Entry%20format%0A%0AMatch%20the%20existing%20style%20exactly%3A%0A%0A%60%60%60markdown%0A%23%23%23%20%5BTool%20Name%5D(https%3A%2F%2Fgithub.com%2Fowner%2Frepo)%0A%60Language%60%20%C2%B7%20%60License%60%20%C2%B7%20%60Form%20factor%60%0A%0AOne%20sentence%3A%20what%20it%20does%2C%20in%20plain%20language.%0A%0A-%20**Replaces%3A**%20the%20proprietary%20product(s)%20it%20substitutes%20for%0A-%20**Backends%3A**%20which%20models%2Fproviders%20it%20supports%20(only%20if%20relevant)%0A-%20**Edge%3A**%201%E2%80%933%20sentences%20on%20*why%20you&#039;d%20pick%20this%20over%20the%20alternatives*.%20Be%20specific%20and%20technical.%20No%20marketing%20adjectives.%0A%60%60%60%0A%0A%23%23%23%20Rules%20for%20the%20%22Edge%22%20line%0A%0AThis%20is%20the%20whole%20value%20of%20the%20list.%20Get%20it%20right.%0A%0A-%20Bad%3A%20%22Powerful%2C%20flexible%2C%20and%20easy%20to%20use.%22%0A-%20Good%3A%20%22PagedAttention%20plus%20continuous%20batching%20gives%20order-of-magnitude%20throughput%20gains%20over%20naive%20serving.%22%0A%0ASay%20what%20is%20technically%20true%20and%20load-bearing.%20If%20you%20can&#039;t%20name%20a%20concrete%20reason%20to%20choose%20it%2C%20the%20tool%20probably%20doesn&#039;t%20belong%20here.%0A%0A%23%23%23%20No%20star%20counts%0A%0AStar%20counts%20go%20stale%20within%20weeks%20and%20turn%20every%20PR%20into%20a%20maintenance%20chore.%20Don&#039;t%20add%20them.%0A%0A%23%23%20PR%20checklist%0A%0A-%20%5B%20%5D%20Link%20goes%20to%20the%20canonical%20repo%20(not%20a%20fork%2C%20not%20a%20marketing%20site)%0A-%20%5B%20%5D%20License%20is%20accurate%20%E2%80%94%20check%20the%20%60LICENSE%60%20file%20in%20the%20repo%2C%20not%20the%20README%20claim%0A-%20%5B%20%5D%20Placed%20in%20the%20correct%20category%0A-%20%5B%20%5D%20Entries%20within%20a%20category%20are%20ordered%20roughly%20by%20relevance%0A-%20%5B%20%5D%20%22Edge%22%20line%20is%20specific%20and%20technical%0A-%20%5B%20%5D%20Updated%20the%20cheat%20sheet%20table%20in%20the%20README%20if%20the%20tool%20replaces%20a%20well-known%20paid%20product%0A-%20%5B%20%5D%20One%20tool%20per%20PR%20(makes%20review%20and%20revert%20clean)%0A%0A%23%23%20Removing%20entries%0A%0ARemovals%20are%20as%20welcome%20as%20additions.%20Open%20a%20PR%20if%20a%20project%20is%3A%0A%0A-%20Archived%20or%20unmaintained%20(%3E12%20months%20without%20commits)%0A-%20Relicensed%20away%20from%20open%20source%0A-%20Superseded%20by%20something%20clearly%20better%20in%20the%20same%20category%0A%0ASay%20why%20in%20the%20PR%20description.%0A%0A%23%23%20Reporting%20errors%0A%0AWrong%20license%2C%20dead%20link%2C%20inaccurate%20claim%20%E2%80%94%20open%20an%20issue.%20Corrections%20are%20the%20highest-value%20contribution%20to%20a%20list%20like%20this.%0A" style="display: none;"></div>
+                  
+                    <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
+                      <ol>
+                        
+                        
+                          <li class="breadcrumb-item active" aria-current=&quot;page&quot;>
+                            
+                              <span>Contributing</span>
+                            
+                            
+                          </li>
+                        
+                      </ol>
+                    </nav>
                   
 
-
-  
-  
-
-
-<h1 id="contributing">Contributing</h1>
+                  
+                    <div class="docmd-copy-widgets">
+                      
+                        <button class="docmd-copy-btn docmd-copy-raw-btn" data-copied="Copied!" title="Copy Markdown" aria-label="Copy Markdown">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-copy " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-copy"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+</svg>
+</span>
+                        </button>
+                      
+                      
+                        <button class="docmd-copy-btn docmd-copy-context-btn" data-copied="Copied!" title="Copy Context">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-message-square " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-message-square"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+</svg>
+</span>
+                          <span class="docmd-btn-text">Copy Context</span>
+                        </button>
+                      
+                    </div>
+                  
+                </div>
+                
+                <h1 id="contributing" class="docmd-heading"><a href="#contributing" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Contributing</h1>
 <p>Thanks for helping keep this list useful.</p>
-<h2 id="inclusion-criteria">Inclusion criteria</h2>
+<h2 id="contributing-inclusion-criteria" class="docmd-heading"><a href="#contributing-inclusion-criteria" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Inclusion criteria</h2>
 <p>A tool gets in if it meets <strong>all</strong> of these:</p>
 <ol>
 <li><strong>Open source.</strong> OSI-approved license preferred. Source-available or fair-code tools (n8n, AutoGPT platform, Phoenix) may be included but <strong>must be labeled as such</strong> in the entry.</li>
@@ -882,37 +482,37 @@
 <li><strong>Real developer utility.</strong> It solves a problem someone actually has. Demos, toys, and thin wrappers around one API call do not qualify.</li>
 <li><strong>Not a duplicate.</strong> If three tools in a category already do the same thing, the new one needs a clear reason to exist.</li>
 </ol>
-<h2 id="entry-format">Entry format</h2>
+<h2 id="contributing-entry-format" class="docmd-heading"><a href="#contributing-entry-format" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Entry format</h2>
 <p>Match the existing style exactly:</p>
-<div class="highlight"><pre><span></span><code><span class="gu">### [Tool Name](https://github.com/owner/repo)</span>
-<span class="sb">`Language`</span> · <span class="sb">`License`</span> · <span class="sb">`Form factor`</span>
+<pre class="hljs"><code class="language-markdown"><span class="hljs-comment">### [Tool Name](https://github.com/owner/repo)</span>
+<span class="hljs-string">`Language`</span> · <span class="hljs-string">`License`</span> · <span class="hljs-string">`Form factor`</span>
 
-One sentence: what it does, in plain language.
+One sentence<span class="hljs-punctuation">:</span> what it does, <span class="hljs-keyword">in</span> plain language.
 
-<span class="k">-</span><span class="w"> </span><span class="gs">**Replaces:**</span> the proprietary product(s) it substitutes for
-<span class="k">-</span><span class="w"> </span><span class="gs">**Backends:**</span> which models/providers it supports (only if relevant)
-<span class="k">-</span><span class="w"> </span><span class="gs">**Edge:**</span> 1–3 sentences on <span class="ge">*why you&#39;d pick this over the alternatives*</span>. Be specific and technical. No marketing adjectives.
-</code></pre></div>
-<h3 id="rules-for-the-edge-line">Rules for the "Edge" line</h3>
+<span class="hljs-punctuation">-</span> <span class="hljs-punctuation">**</span>Replaces<span class="hljs-punctuation">:**</span> the proprietary <span class="hljs-title function_">product</span>(s) it substitutes <span class="hljs-keyword">for</span>
+<span class="hljs-punctuation">-</span> <span class="hljs-punctuation">**</span>Backends<span class="hljs-punctuation">:**</span> <span class="hljs-keyword">which</span> models<span class="hljs-punctuation">/</span>providers it <span class="hljs-title function_">supports</span> (only <span class="hljs-keyword">if</span> relevant)
+<span class="hljs-punctuation">-</span> <span class="hljs-punctuation">**</span>Edge<span class="hljs-punctuation">:**</span> <span class="hljs-number">1</span>–<span class="hljs-number">3</span> sentences on <span class="hljs-punctuation">*</span>why you&#039;d pick <span class="hljs-keyword">this</span> over the alternatives<span class="hljs-punctuation">*</span>. Be specific and technical. No marketing adjectives.
+</code></pre>
+<h3 id="contributing-entry-format-rules-for-the-edge-line" class="docmd-heading"><a href="#contributing-entry-format-rules-for-the-edge-line" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Rules for the “Edge” line</h3>
 <p>This is the whole value of the list. Get it right.</p>
 <ul>
-<li>Bad: "Powerful, flexible, and easy to use."</li>
-<li>Good: "PagedAttention plus continuous batching gives order-of-magnitude throughput gains over naive serving."</li>
+<li>Bad: “Powerful, flexible, and easy to use.”</li>
+<li>Good: “PagedAttention plus continuous batching gives order-of-magnitude throughput gains over naive serving.”</li>
 </ul>
-<p>Say what is technically true and load-bearing. If you can't name a concrete reason to choose it, the tool probably doesn't belong here.</p>
-<h3 id="no-star-counts">No star counts</h3>
-<p>Star counts go stale within weeks and turn every PR into a maintenance chore. Don't add them.</p>
-<h2 id="pr-checklist">PR checklist</h2>
-<ul>
-<li>[ ] Link goes to the canonical repo (not a fork, not a marketing site)</li>
-<li>[ ] License is accurate — check the <code>LICENSE</code> file in the repo, not the README claim</li>
-<li>[ ] Placed in the correct category</li>
-<li>[ ] Entries within a category are ordered roughly by relevance</li>
-<li>[ ] "Edge" line is specific and technical</li>
-<li>[ ] Updated the cheat sheet table in the README if the tool replaces a well-known paid product</li>
-<li>[ ] One tool per PR (makes review and revert clean)</li>
+<p>Say what is technically true and load-bearing. If you can’t name a concrete reason to choose it, the tool probably doesn’t belong here.</p>
+<h3 id="contributing-entry-format-no-star-counts" class="docmd-heading"><a href="#contributing-entry-format-no-star-counts" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>No star counts</h3>
+<p>Star counts go stale within weeks and turn every PR into a maintenance chore. Don’t add them.</p>
+<h2 id="contributing-pr-checklist" class="docmd-heading"><a href="#contributing-pr-checklist" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>PR checklist</h2>
+<ul class="contains-task-list">
+<li><input class="task-list-item-checkbox" disabled="" type="checkbox"> Link goes to the canonical repo (not a fork, not a marketing site)</li>
+<li><input class="task-list-item-checkbox" disabled="" type="checkbox"> License is accurate — check the <code>LICENSE</code> file in the repo, not the README claim</li>
+<li><input class="task-list-item-checkbox" disabled="" type="checkbox"> Placed in the correct category</li>
+<li><input class="task-list-item-checkbox" disabled="" type="checkbox"> Entries within a category are ordered roughly by relevance</li>
+<li><input class="task-list-item-checkbox" disabled="" type="checkbox"> “Edge” line is specific and technical</li>
+<li><input class="task-list-item-checkbox" disabled="" type="checkbox"> Updated the cheat sheet table in the README if the tool replaces a well-known paid product</li>
+<li><input class="task-list-item-checkbox" disabled="" type="checkbox"> One tool per PR (makes review and revert clean)</li>
 </ul>
-<h2 id="removing-entries">Removing entries</h2>
+<h2 id="contributing-removing-entries" class="docmd-heading"><a href="#contributing-removing-entries" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Removing entries</h2>
 <p>Removals are as welcome as additions. Open a PR if a project is:</p>
 <ul>
 <li>Archived or unmaintained (&gt;12 months without commits)</li>
@@ -920,68 +520,265 @@ One sentence: what it does, in plain language.
 <li>Superseded by something clearly better in the same category</li>
 </ul>
 <p>Say why in the PR description.</p>
-<h2 id="reporting-errors">Reporting errors</h2>
+<h2 id="contributing-reporting-errors" class="docmd-heading"><a href="#contributing-reporting-errors" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Reporting errors</h2>
 <p>Wrong license, dead link, inaccurate claim — open an issue. Corrections are the highest-value contribution to a list like this.</p>
 
-
-
-
-
-
-
-
-
-
-
-
                 
-              </article>
+                  <div class="page-navigation">
+                    
+                      <a href="../README.zh-CN" class="prev-page">
+                        
+<svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" />
+</svg>
+
+                        <span><small>Previous</small><strong>
+                            Awesome 开源 AI 开发者工具 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+                          </strong></span>
+                      </a>
+                    
+                    
+                      <a href="../TRANSLATIONS/" class="next-page">
+                        <span><small>Next</small>
+                          <strong>
+                            Translations
+                          </strong></span>
+                        
+<svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>
+
+                      </a>
+                    
+                  </div>
+                
+              </div>
+              
+              <div class="toc-sidebar">
+                
+
+
+  <div class="toc-container">
+    <h2 class="toc-title">On This Page<span class="mobile-view toc-menu-button float-right">
+<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 9 6 6 6-6" />
+</svg>
+</span></h2>
+    <ul class="toc-list">
+      
+        <li class="toc-item toc-level-1">
+          <a href="#contributing" class="toc-link">Contributing</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#contributing-inclusion-criteria" class="toc-link">Inclusion criteria</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#contributing-entry-format" class="toc-link">Entry format</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#contributing-entry-format-rules-for-the-edge-line" class="toc-link">Rules for the “Edge” line</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#contributing-entry-format-no-star-counts" class="toc-link">No star counts</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#contributing-pr-checklist" class="toc-link">PR checklist</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#contributing-removing-entries" class="toc-link">Removing entries</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#contributing-reporting-errors" class="toc-link">Reporting errors</a>
+        </li>
+      
+    </ul>
+  </div>
+
+              </div>
+              
             </div>
+            <div class="page-footer-actions">
+              
+              
+                <span class="git-last-updated" data-timestamp="1785184749000">
+                  <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span class="git-label">Last updated:</span>
+                  <span class="git-time" data-timestamp="1785184749000"></span>
+                  
+                  <div class="git-commit-tooltip" role="tooltip">
+                    <div class="git-tooltip-title">Recent commits</div>
+                    <ul class="git-commit-list">
+                      
+                        <li class="git-commit-item">
+                          <div class="git-commit-avatar" title="Sami Uysal">
+                            
+                              <img src="https://www.gravatar.com/avatar/0ea2606a3559c065e056e441f58180b1?d=mp&amp;s=64" alt="Sami Uysal">
+                            
+                          </div>
+                          <div class="git-commit-details">
+                            <div class="git-commit-message" title="Migrate docs site to docmd">Migrate docs site to docmd</div>
+                            <div class="git-commit-meta">
+                              <span class="git-commit-author">Sami Uysal</span>
+                              <span class="git-commit-date" data-timestamp="1785184749000"></span>
+                            </div>
+                          </div>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                  
+                </span>
+              
+              <span class="git-spacer"></span>
+              
+            </div>
+          </main>
           
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
-</button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
-      
-    </div>
+
+
+<footer class="page-footer">
+  <div class="footer-content">
+    <div class="user-footer">© 2026</div>
+    
+      <div class="branding-footer">
+        Built with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
+      </div>
+    
   </div>
 </footer>
+
+        </div>
+      </div>
       
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    
+      <script src="../assets/js/docmd-main.js?v=ms3oxh97"></script>
+      
+      <script src="../assets/js/docmd-git.js?v=ms3oxh97"></script>
+      <script src="../assets/js/docmd-image-lightbox.js?v=ms3oxh97" ></script>
+<script src="../assets/js/vendor/minisearch.js?v=ms3oxh97" ></script>
+<script src="../assets/js/docmd-search.js?v=ms3oxh97" ></script>
+<script src="../assets/js/docmd-git.js?v=ms3oxh97" type="module"></script>
+
+  <!-- Search Modal (Injected by @docmd/plugin-search) -->
+  <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-show-confidence="false" data-show-filters="true"
+       data-search-placeholder="Search documentation..."
+       data-search-no-results="No results found."
+       data-search-error="Failed to load search index."
+       data-search-offline="Search requires a web server. Open this site via http://localhost instead of file:// to enable search."
+       data-search-offline-build="Search is disabled because these docs were built with the --offline flag. Rebuild the site without the flag to enable search."
+       data-search-initial="Type to start searching..."
+       data-search-navigate="to navigate"
+       data-search-escape="to close">
+      <div class="docmd-search-box">
+          <div class="docmd-search-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input type="text" id="docmd-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+              <button onclick="window.closeDocmdSearch()" class="docmd-search-close" aria-label="Close search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+              </button>
+          </div>
+          <div id="docmd-search-results" class="docmd-search-results"></div>
+          <div class="docmd-search-footer">
+              <span><kbd class="docmd-kbd">↑</kbd> <kbd class="docmd-kbd">↓</kbd> to navigate</span>
+              <span><kbd class="docmd-kbd">ESC</kbd> to close</span>
+          </div>
+      </div>
+  </div>
+
+    <script>
+      (function() {
+        var searchDebounceTimer;
+
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a');
+          if (!link || !window.gtag) return;
+          
+          var url = link.href;
+          var hostname = window.location.hostname;
+          var isExternal = link.hostname && link.hostname !== hostname;
+          var isDownload = link.hasAttribute('download') || url.match(/\.(pdf|zip|tar|gz|exe|pkg)$/i);
+          
+          if (isExternal) {
+            gtag('event', 'click_external', { 'url': url, 'link_text': link.innerText.trim() });
+          } else if (isDownload) {
+            gtag('event', 'download', { 'file_name': url.split('/').pop(), 'url': url });
+          }
+
+          // TOC tracking
+          if (link.classList.contains('toc-link')) {
+            gtag('event', 'toc_click', { 'target_id': link.getAttribute('href'), 'title': link.innerText.trim() });
+          }
+
+          // Permalink tracking
+          if (link.classList.contains('heading-anchor')) {
+            gtag('event', 'permalink_click', { 'url': url });
+          }
+        });
+
+        
+        // Search Keyword Tracking
+        document.addEventListener('input', function(e) {
+          if (e.target.id === 'docmd-search-input' && window.gtag) {
+            var query = e.target.value.trim();
+            if (query.length < 3) return;
+            
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(function() {
+              gtag('event', 'search', { 'search_term': query });
+            }, 1000);
+          }
+        });
+        
+      })();
+    </script>
+
+<script>window.__git_config={"repo":null,"branch":"main","editLink":false,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
-    
-    
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-    
   </body>
 </html>
