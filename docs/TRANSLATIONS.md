@@ -6,7 +6,7 @@ The list is maintained in several languages. **English is canonical** — when a
 
 | Language | File | Status |
 |---|---|---|
-| English | [README.md](README.md) | Canonical |
+| English | [index.md](index.md) | Canonical |
 | Türkçe | [README.tr.md](README.tr.md) | Complete |
 | 简体中文 | [README.zh-CN.md](README.zh-CN.md) | Complete |
 | Español | [README.es.md](README.es.md) | Complete |

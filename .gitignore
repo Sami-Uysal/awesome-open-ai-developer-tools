@@ -5,6 +5,9 @@ LAUNCH.md
 lychee/
 *.lychee.md
 
+# docmd build output
+dist/
+
 # Editors
 .vscode/
 .idea/
