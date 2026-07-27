@@ -6,36 +6,36 @@ The list is maintained in several languages. **English is canonical** — when a
 
 | Language | File | Status |
 |---|---|---|
-| English | [index.md](index.md) | Canonical |
-| Türkçe | [README.tr.md](README.tr.md) | Complete |
-| 简体中文 | [README.zh-CN.md](README.zh-CN.md) | Complete |
-| Español | [README.es.md](README.es.md) | Complete |
+| English | [/](/) | Canonical |
+| Türkçe | [/languages/tr](/languages/tr) | Complete |
+| 简体中文 | [/languages/zh](/languages/zh) | Complete |
+| Español | [/languages/es](/languages/es) | Complete |
 
 ## Wanted
 
 Highest-impact languages still missing, roughly by developer population:
 
-- 日本語 (`README.ja.md`)
-- Português — Brasil (`README.pt-BR.md`)
-- Deutsch (`README.de.md`)
-- Русский (`README.ru.md`)
-- Français (`README.fr.md`)
-- हिन्दी (`README.hi.md`)
-- 한국어 (`README.ko.md`)
-- Bahasa Indonesia (`README.id.md`)
+- 日本語 (`docs/languages/ja.md`)
+- Português - Brasil (`docs/languages/pt-BR.md`)
+- Deutsch (`docs/languages/de.md`)
+- Русский (`docs/languages/ru.md`)
+- Français (`docs/languages/fr.md`)
+- हिन्दी (`docs/languages/hi.md`)
+- 한국어 (`docs/languages/ko.md`)
+- Bahasa Indonesia (`docs/languages/id.md`)
 
 Claim one by opening an issue titled `Translation: <language>` so two people don't duplicate the work.
 
 ## How to add a language
 
-1. Copy `README.md` to `README.<code>.md`, using the BCP-47 code (`ja`, `pt-BR`, `zh-CN`).
+1. Copy `docs/index.md` to `docs/languages/<code>.md`, using the BCP-47 code (`ja`, `pt-BR`, `zh`).
 2. Translate the prose. **Do not translate:**
    - Project names (`Ollama`, `LlamaIndex`, `pgvector`)
    - Technical terms with no settled local equivalent (`embedding`, `quantization`, `prompt`, `token`, `RAG`) — use the English term, optionally glossed once on first use
    - Code blocks, licenses, and URLs
 3. Keep the language bar at the top and mark your language as the active one (bold, not a link).
 4. Add a line to the "Available" table above.
-5. Add your language to the language bar in **every** existing `README.*.md`, so the files stay cross-linked.
+5. Add your language to the language bar in `docs/index.md` and every existing file in `docs/languages/`, so the pages stay cross-linked.
 
 ## Structural rule
 
@@ -45,8 +45,8 @@ Every translation carries the **same categories, same entries, in the same order
 
 Translations drift. That's expected and acceptable — a slightly stale translation beats no translation.
 
-- When you change `README.md`, you are **not** required to update every translation. Open an issue tagged `translation-sync` listing what changed, and translators pick it up.
-- To check whether a translation has drifted, compare its `###` entry headings against `README.md` — tool names are identical across languages by design, so diffing those lines shows exactly what's missing.
+- When you change `docs/index.md`, you are **not** required to update every translation. Open an issue tagged `translation-sync` listing what changed, and translators pick it up.
+- To check whether a translation has drifted, compare its `###` entry headings against `docs/index.md` — tool names are identical across languages by design, so diffing those lines shows exactly what's missing.
 - Translations more than 6 months behind get a banner asking for a maintainer. They don't get deleted.
 
 ## Machine translation

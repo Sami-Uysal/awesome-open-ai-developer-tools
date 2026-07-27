@@ -1,14 +1,13 @@
-<div align="center">
+# Awesome Open AI Developer Tools
 
-# Awesome Open-Source AI Developer Tools [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **A curated guide to the open-source AI stack — every layer, every proprietary tool you can replace.**
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](docs/README.tr.md) · [简体中文](docs/README.zh-CN.md) · [Español](docs/README.es.md) · [*add your language*](docs/TRANSLATIONS.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+**English** · [Türkçe](docs/languages/tr.md) · [简体中文](docs/languages/zh.md) · [Español](docs/languages/es.md) · [*add your language*](docs/community/translations.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
-</div>
 
 ---
 
@@ -890,7 +889,7 @@ Three rules that save the most time:
 
 ## Contributing
 
-PRs welcome. See [CONTRIBUTING.md](docs/CONTRIBUTING.md).
+PRs welcome. See [CONTRIBUTING.md](docs/community/contributing.md).
 
 The bar for inclusion:
 
@@ -909,3 +908,5 @@ The bar for inclusion:
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 To the extent possible under law, contributors have waived all copyright and related rights to this work.
+
+

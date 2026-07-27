@@ -1,14 +1,13 @@
-<div align="center" markdown="1">
+# Awesome Open AI Developer Tools
 
-# Awesome 开源 AI 开发者工具 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **开源 AI 技术栈的每一层，以及它们各自能替代的闭源产品。**
 
 编码智能体 · 本地推理 · 智能体框架 · 向量数据库 · RAG · 评测 · 可观测性
 
-[English](index.md) · [Türkçe](README.tr.md) · **简体中文** · [Español](README.es.md) · [*添加你的语言*](TRANSLATIONS.md) · [🌐 网站](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](/) · [Türkçe](/languages/tr) · **简体中文** · [Español](/languages/es) · [*添加你的语言*](/community/translations) · [🌐 网站](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
-</div>
 
 ---
 
@@ -890,7 +889,7 @@ Docling 或 RAGFlow（解析）→ LlamaIndex（检索）→ Qdrant → Ragas（
 
 ## 参与贡献
 
-欢迎提 PR，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+欢迎提 PR，详见 [contributing guide](/community/contributing)。
 
 收录门槛：
 
@@ -899,10 +898,11 @@ Docling 或 RAGFlow（解析）→ LlamaIndex（检索）→ Qdrant → Ragas（
 - 解决开发者真实存在的问题
 - 条目要说明*为什么选它*，而不只是它做什么
 
-> **说明：** 英文版为准。本译文若与英文版冲突，以英文版为准。参见 [TRANSLATIONS.md](TRANSLATIONS.md)。
+> **说明：** 英文版为准。本译文若与英文版冲突，以英文版为准。参见 [translations guide](/community/translations)。
 
 ## 许可证
 
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 在法律允许的范围内，贡献者已放弃对本作品的一切著作权及相关权利。
+

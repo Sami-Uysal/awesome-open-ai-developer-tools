@@ -2,5 +2,118 @@
   "title": "Awesome Open AI Developer Tools",
   "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools",
   "src": "./docs",
-  "out": "./dist"
+  "out": "./dist",
+  "navigation": [
+    {
+      "title": "Home",
+      "path": "/",
+      "icon": "home"
+    },
+    {
+      "title": "Categories",
+      "icon": "folder-open",
+      "children": [
+        {
+          "title": "AI IDEs and CLI",
+          "path": "/categories/01-ai-ides-and-cli"
+        },
+        {
+          "title": "Open-Source Agents",
+          "path": "/categories/02-open-source-agents"
+        },
+        {
+          "title": "Local LLM Inference",
+          "path": "/categories/03-local-llm-inference"
+        },
+        {
+          "title": "RAG and Data",
+          "path": "/categories/04-rag-and-data"
+        },
+        {
+          "title": "Training, Evals, and Ops",
+          "path": "/categories/05-training-evals-and-ops"
+        },
+        {
+          "title": "Multimodal and Builders",
+          "path": "/categories/06-multimodal-and-builders"
+        }
+      ]
+    },
+    {
+      "title": "Languages",
+      "icon": "languages",
+      "children": [
+        {
+          "title": "Türkçe",
+          "path": "/languages/tr"
+        },
+        {
+          "title": "Español",
+          "path": "/languages/es"
+        },
+        {
+          "title": "中文",
+          "path": "/languages/zh"
+        }
+      ]
+    },
+    {
+      "title": "Community",
+      "icon": "users",
+      "children": [
+        {
+          "title": "Contributing",
+          "path": "/community/contributing"
+        },
+        {
+          "title": "Translations",
+          "path": "/community/translations"
+        }
+      ]
+    }
+  ],
+  "layout": {
+    "menubar": {
+      "enabled": true,
+      "position": "top",
+      "left": [
+        {
+          "type": "title",
+          "text": "Awesome Open AI Developer Tools",
+          "url": "/",
+          "icon": "sparkles"
+        },
+        {
+          "text": "Categories",
+          "url": "/categories/01-ai-ides-and-cli"
+        },
+        {
+          "text": "Languages",
+          "url": "/languages/tr"
+        }
+      ],
+      "right": [
+        {
+          "text": "GitHub",
+          "url": "https://github.com/Sami-Uysal/awesome-open-ai-developer-tools",
+          "external": true
+        }
+      ]
+    },
+    "optionsMenu": {
+      "position": "menubar",
+      "components": {
+        "search": true,
+        "themeSwitch": true
+      }
+    }
+  },
+  "plugins": {
+    "search": {},
+    "seo": {
+      "defaultDescription": "A curated directory of open-source AI tools, local LLM engines, and agents."
+    },
+    "sitemap": {},
+    "llms": {}
+  }
 }

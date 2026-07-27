@@ -1,14 +1,13 @@
-<div align="center" markdown="1">
+# Awesome Open AI Developer Tools
 
-# Awesome Herramientas de IA de Código Abierto para Desarrolladores [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 **Guía curada del stack de IA de código abierto — capa por capa, y qué producto de pago reemplaza cada pieza.**
 
 Agentes de código · inferencia local · frameworks de agentes · bases de datos vectoriales · RAG · evaluación · observabilidad
 
-[English](index.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **Español** · [*añade tu idioma*](TRANSLATIONS.md) · [🌐 Sitio web](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+[English](/) · [Türkçe](/languages/tr) · [简体中文](/languages/zh) · **Español** · [*añade tu idioma*](/community/translations) · [🌐 Sitio web](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
-</div>
 
 ---
 
@@ -890,7 +889,7 @@ Las tres reglas que más tiempo ahorran:
 
 ## Contribuir
 
-Los PRs son bienvenidos. Consulta [CONTRIBUTING.md](CONTRIBUTING.md).
+Los PRs son bienvenidos. Consulta [contributing guide](/community/contributing).
 
 El listón para entrar:
 
@@ -899,10 +898,11 @@ El listón para entrar:
 - Resuelve un problema que un desarrollador tiene de verdad
 - La entrada explica *por qué elegirla*, no solo qué hace
 
-> **Nota:** la versión en inglés es la canónica. Si esta traducción contradice al inglés, manda el inglés. Véase [TRANSLATIONS.md](TRANSLATIONS.md).
+> **Nota:** la versión en inglés es la canónica. Si esta traducción contradice al inglés, manda el inglés. Véase [translations guide](/community/translations).
 
 ## Licencia
 
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 En la medida en que lo permite la ley, quienes contribuyen han renunciado a todos los derechos de autor y derechos conexos sobre esta obra.
+
