@@ -1,4 +1,4 @@
-name: Sync docs/index.md from README
+name: Sync docs/ from README
 
 on:
   push:
@@ -17,17 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Sync docs/index.md from README.md
+      - name: Sync docs/index.md and docs/categories/ from README.md
         run: node scripts/sync-docs-index.mjs
 
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/index.md
+          git add docs/index.md docs/categories/
           if git diff --cached --quiet; then
-            echo "docs/index.md already in sync."
+            echo "docs/ already in sync."
           else
-            git commit -m "chore: sync docs/index.md from README.md"
+            git commit -m "chore: sync docs/ from README.md"
             git push
           fi

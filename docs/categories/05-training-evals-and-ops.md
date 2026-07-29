@@ -3,6 +3,7 @@
 Fine-tuning, evaluation, guardrails, observability, and LLMOps tooling.
 
 ## Fine-Tuning & Training
+
 ### [Unsloth](https://github.com/unslothai/unsloth)
 `Python` · `Apache-2.0`
 
@@ -48,6 +49,7 @@ Train transformer models with reinforcement learning — SFT, DPO, GRPO, reward 
 ---
 
 ## Evals, Testing & Guardrails
+
 ### [promptfoo](https://github.com/promptfoo/promptfoo)
 `TypeScript` · `MIT`
 
@@ -93,6 +95,7 @@ LLM vulnerability scanner — probes for prompt injection, jailbreaks, data leak
 ---
 
 ## Observability & LLMOps
+
 ### [Langfuse](https://github.com/langfuse/langfuse)
 `TypeScript` · `MIT` (core)
 

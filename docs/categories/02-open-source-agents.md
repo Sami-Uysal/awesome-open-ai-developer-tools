@@ -3,6 +3,7 @@
 Autonomous agents, browser control, sandboxes, orchestration frameworks, and MCP tooling.
 
 ## Autonomous & Persistent Agents
+
 Long-running agents with memory, goals, and self-direction.
 
 ### [OpenClaw](https://github.com/openclaw/openclaw)
@@ -69,6 +70,7 @@ Self-hosted personal AI that searches your notes, documents, and the web; reacha
 ---
 
 ## Agent Sandboxes & Browser Control
+
 Where agent-generated code actually runs, and how agents touch the web.
 
 ### [E2B](https://github.com/e2b-dev/E2B)
@@ -106,6 +108,7 @@ Browser automation driven by computer vision instead of DOM selectors.
 ---
 
 ## Agent Frameworks & Orchestration
+
 Libraries for building multi-agent and tool-using systems.
 
 ### [LangGraph](https://github.com/langchain-ai/langgraph)
@@ -176,6 +179,7 @@ Production-oriented framework for composable RAG and agent pipelines.
 ---
 
 ## Model Context Protocol (MCP)
+
 The emerging standard for connecting models to tools and data.
 
 ### [MCP Specification](https://github.com/modelcontextprotocol/modelcontextprotocol)
@@ -205,5 +209,14 @@ Official developer tool for testing and debugging MCP servers.
 The ergonomic way to build MCP servers and clients — decorator-based, like FastAPI.
 
 - **Edge:** A working server in ~10 lines. Handles auth, deployment, proxying, and server composition.
+
+### [octocode](https://github.com/Muvon/octocode)
+`Rust` · `Apache-2.0`
+
+Local semantic code index with an MCP server on top — search and navigate a codebase by meaning, not grep.
+
+- **Replaces:** the codebase indexing inside Cursor or Sourcegraph Cody
+- **Backends:** local embeddings via fastembed, or a hosted provider if you'd rather offload it
+- **Edge:** runs entirely locally, and embeddings are your choice. **Known weakness:** first index on a large repo is slow, and semantic search is genuinely bad at structural questions — "find every implementation of this trait" wants a structural index, not embeddings, so you need separate structural tools and have to know which kind of question you're asking before you search. Early-stage; treat it accordingly.
 
 ---

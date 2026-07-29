@@ -3,6 +3,7 @@
 Coding agents, pair programmers, and prompt-to-app builders for developer workflows.
 
 ## Coding Agents & Pair Programmers
+
 Agents that read, write, and refactor code in your repo.
 
 ### [aider](https://github.com/Aider-AI/aider)
@@ -67,6 +68,15 @@ Extensible autonomous agent from Block, now governed by the Linux Foundation. In
 - **Backends:** Any provider, plus first-class MCP extension support
 - **Edge:** More autonomous than aider — plans and iterates with less hand-holding. Vendor-neutral governance under the Linux Foundation means no rug-pull risk, which matters for tooling you standardize a team on.
 
+### [Orkas](https://github.com/Orkas-AI/Orkas)
+`TypeScript` · `MIT` · Desktop
+
+Local-first desktop AI workforce where a Commander plans work and coordinates built-in specialists and external coding agents through one chat.
+
+- **Replaces:** Cursor agent mode, cloud-hosted agent orchestrators
+- **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
+- **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
+
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains
 
@@ -93,6 +103,7 @@ Describe a project in natural language; it writes and iterates on the whole code
 ---
 
 ## Prompt-to-App Builders
+
 Prompt in, deployed full-stack app out.
 
 ### [bolt.diy](https://github.com/stackblitz-labs/bolt.diy)
