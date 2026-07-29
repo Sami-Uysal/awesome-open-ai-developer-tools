@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows:
+      - "Sync docs/index.md from README"
+    types:
+      - completed
 
 permissions:
   contents: write
@@ -11,9 +16,12 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
