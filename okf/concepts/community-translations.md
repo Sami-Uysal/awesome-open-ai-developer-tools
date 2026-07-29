@@ -3,10 +3,10 @@ type: concept
 title: Translations
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/translations/"
 path: /community/translations/
-updated: 2026-07-27
+updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-27T21:16:08.141Z"
+  generated_at: "2026-07-29T02:06:59.693Z"
 ---
 # Translations
 
