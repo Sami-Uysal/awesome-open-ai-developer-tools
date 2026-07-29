@@ -561,7 +561,7 @@ Vector similarity search inside PostgreSQL.
 Columnar database with AI-native retrieval — dense ANN, sparse vectors, full-text, and metadata filters in one transactional engine.
 
 - **Replaces:** Pinecone + a separate operational DB for RAG/agent memory
-- **Edge:** Not a pure vector store: operational rows and embeddings share one MVCC row and six index kinds (HNSW ANN, sparse inverted, FM-index, MinHash LSH, roaring bitmaps, PGM learned ranges) intersect through a shared RowId space. Hybrid search fuses named retrievers with RRF and optional exact-vector rerank, so you can drop the separate vector service for RAG and agent memory without giving up SQL, encryption-at-rest, or credentialed multi-user access. Companion [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) for schema, SQL, and ANN exploration.
+- **Edge:** Not a pure vector store — dense ANN, sparse, and full-text indexes share one transactional row store, so hybrid search with RRF fusion runs without a separate vector service, keeping SQL, encryption-at-rest, and multi-user access. Companion [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) for schema, SQL, and ANN exploration.
 
 ---
 

@@ -555,6 +555,14 @@ Búsqueda por similitud vectorial dentro de PostgreSQL.
 
 - **Ventaja:** ninguna infraestructura nueva. Tus embeddings viven junto a los datos relacionales, con transacciones, joins y copias de seguridad de verdad. Empieza aquí salvo que hayas medido una razón para no hacerlo.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embebida + servidor
+
+Base de datos columnar con recuperación nativa de IA — ANN denso, vectores dispersos, texto completo y filtros de metadatos en un único motor transaccional.
+
+- **Reemplaza:** Pinecone + una base de datos operativa separada para RAG/memoria de agentes
+- **Ventaja:** no es un almacén vectorial puro — los índices de ANN denso, dispersos y de texto completo comparten un único almacén de filas transaccional, así que la búsqueda híbrida con fusión RRF funciona sin un servicio vectorial aparte, conservando SQL, cifrado en reposo y acceso multiusuario. Complementado por [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) para explorar el esquema, SQL y ANN.
+
 ---
 
 ## Embeddings y rerankers
@@ -840,7 +848,7 @@ Framework visual para construir aplicaciones multiagente y de RAG.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (inferencia) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | proxy de [LiteLLM](https://github.com/BerriAI/litellm) |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |

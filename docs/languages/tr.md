@@ -555,6 +555,14 @@ PostgreSQL içinde vektör benzerlik araması.
 
 - **Farkı:** Yeni altyapı yok. Embedding'lerin ilişkisel verinin yanında yaşar; gerçek transaction, join ve yedekleme ile. Aksini ölçmediysen buradan başla.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embedded + sunucu
+
+AI-native retrieval özellikli columnar veritabanı — tek transactional motorda dense ANN, sparse vektörler, tam metin ve metadata filtreleri.
+
+- **Yerine geçtiği:** Pinecone + RAG/ajan belleği için ayrı bir operasyonel veritabanı
+- **Farkı:** Saf bir vektör deposu değil — dense ANN, sparse ve tam metin indeksleri tek transactional satır deposunu paylaşır; bu yüzden RRF fusion'lı hybrid search, ayrı bir vektör servisi olmadan çalışır, SQL, encryption-at-rest ve çok kullanıcılı erişimi korur. Şema, SQL ve ANN keşfi için eşlik eden [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer).
+
 ---
 
 ## Embedding'ler ve Yeniden Sıralayıcılar
@@ -840,7 +848,7 @@ LLM akışları ve ajanlar için sürükle-bırak üretici.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (çıkarım) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) proxy |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |
