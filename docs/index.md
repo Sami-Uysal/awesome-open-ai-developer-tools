@@ -396,6 +396,15 @@ The ergonomic way to build MCP servers and clients — decorator-based, like Fas
 
 - **Edge:** A working server in ~10 lines. Handles auth, deployment, proxying, and server composition.
 
+### [octocode](https://github.com/Muvon/octocode)
+`Rust` · `Apache-2.0`
+
+Local semantic code index with an MCP server on top — search and navigate a codebase by meaning, not grep.
+
+- **Replaces:** the codebase indexing inside Cursor or Sourcegraph Cody
+- **Backends:** local embeddings via fastembed, or a hosted provider if you'd rather offload it
+- **Edge:** runs entirely locally, and embeddings are your choice. **Known weakness:** first index on a large repo is slow, and semantic search is genuinely bad at structural questions — "find every implementation of this trait" wants a structural index, not embeddings, so you need separate structural tools and have to know which kind of question you're asking before you search. Early-stage; treat it accordingly.
+
 ---
 
 ## Local Inference Engines
