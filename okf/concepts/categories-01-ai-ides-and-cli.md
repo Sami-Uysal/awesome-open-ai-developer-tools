@@ -6,7 +6,7 @@ path: /categories/01-ai-ides-and-cli/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T08:39:12.164Z"
+  generated_at: "2026-07-29T11:35:53.462Z"
 ---
 # AI IDEs and CLI
 
@@ -17,7 +17,7 @@ Coding agents, pair programmers, and prompt-to-app builders for developer workfl
 Agents that read, write, and refactor code in your repo.
 
 ### [aider](https://github.com/Aider-AI/aider)
-`Python` · `Apache-2.0` · CLI
+`Python` · `Apache-2.0` · CLI · 🟡 active
 
 AI pair programming in your terminal. Maps your whole repository, edits files directly, and writes its own git commits.
 
@@ -26,7 +26,7 @@ AI pair programming in your terminal. Maps your whole repository, edits files di
 - **Edge:** The repo map gives it whole-codebase context without dumping every file into the prompt. Auto-commits mean every AI edit is a revertable checkpoint. Editor-agnostic — works alongside VS Code, Neovim, Emacs, or nothing at all.
 
 ### [OpenCode](https://github.com/sst/opencode)
-`TypeScript` · `MIT` · TUI
+`TypeScript` · `MIT` · TUI · 🟢 stable
 
 Terminal-native coding agent with LSP integration — it loads the right language server so the model sees real type information, not guesses.
 
@@ -35,7 +35,7 @@ Terminal-native coding agent with LSP integration — it loads the right languag
 - **Edge:** LSP-grounded suggestions cut hallucinated APIs. Client/server split means you can drive one session from multiple clients.
 
 ### [Cline](https://github.com/cline/cline)
-`TypeScript` · `Apache-2.0` · VS Code extension
+`TypeScript` · `Apache-2.0` · VS Code extension · 🟢 stable
 
 Autonomous coding agent inside VS Code. Plans, edits files, runs terminal commands, and uses the browser — asking permission at each step.
 
@@ -44,7 +44,7 @@ Autonomous coding agent inside VS Code. Plans, edits files, runs terminal comman
 - **Edge:** Human-in-the-loop by default — every file diff and shell command needs approval. Plan/Act mode separation stops the agent from bulldozing a codebase.
 
 ### [Continue](https://github.com/continuedev/continue)
-`TypeScript` · `Apache-2.0` · VS Code + JetBrains
+`TypeScript` · `Apache-2.0` · VS Code + JetBrains · 🟢 stable
 
 Build your own AI code assistant — autocomplete, chat, and edit, configured with your own models and context providers.
 
@@ -53,7 +53,7 @@ Build your own AI code assistant — autocomplete, chat, and edit, configured wi
 - **Edge:** Fully configurable context providers (docs, terminal, git diff, codebase). Tab-autocomplete works well with small local models, so you can run genuinely offline.
 
 ### [OpenHands](https://github.com/All-Hands-AI/OpenHands)
-`Python` · `MIT` · Web + headless
+`Python` · `MIT` · Web + headless · 🟢 stable
 
 Agents that do what a developer does — modify code, run commands, browse the web, call APIs — inside a sandboxed runtime.
 
@@ -62,7 +62,7 @@ Agents that do what a developer does — modify code, run commands, browse the w
 - **Edge:** Real sandboxed execution (Docker) rather than a chat that pretends to run things. Headless and CLI modes make it scriptable in CI.
 
 ### [SWE-agent](https://github.com/SWE-agent/SWE-agent)
-`Python` · `MIT` · CLI
+`Python` · `MIT` · CLI · 🟡 active
 
 Research-grade agent that turns a GitHub issue into a pull request.
 
@@ -70,7 +70,7 @@ Research-grade agent that turns a GitHub issue into a pull request.
 - **Edge:** The agent-computer interface (ACI) is the point — carefully designed tools beat a bigger model. If you're building your own agent, read this codebase first.
 
 ### [Goose](https://github.com/block/goose)
-`Rust` · `Apache-2.0` · CLI + desktop
+`Rust` · `Apache-2.0` · CLI + desktop · 🟢 stable
 
 Extensible autonomous agent from Block, now governed by the Linux Foundation. Installs, executes, edits, and tests — not just suggests.
 
@@ -79,7 +79,7 @@ Extensible autonomous agent from Block, now governed by the Linux Foundation. In
 - **Edge:** More autonomous than aider — plans and iterates with less hand-holding. Vendor-neutral governance under the Linux Foundation means no rug-pull risk, which matters for tooling you standardize a team on.
 
 ### [Orkas](https://github.com/Orkas-AI/Orkas)
-`TypeScript` · `MIT` · Desktop
+`TypeScript` · `MIT` · Desktop · 🟡 active
 
 Local-first desktop AI workforce where a Commander plans work and coordinates built-in specialists and external coding agents through one chat.
 
@@ -88,7 +88,7 @@ Local-first desktop AI workforce where a Commander plans work and coordinates bu
 - **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
 
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
-`TypeScript` · `Apache-2.0` · VS Code + JetBrains
+`TypeScript` · `Apache-2.0` · VS Code + JetBrains · 🟢 stable
 
 Open-source IDE agent that merged the best of Roo Code and Cline into one extension.
 
@@ -96,7 +96,7 @@ Open-source IDE agent that merged the best of Roo Code and Cline into one extens
 - **Edge:** Orchestrator mode splits a large task into subtasks handled by specialized modes. Absorbs upstream features from both parents, so it moves faster than either did alone.
 
 ### [Tabby](https://github.com/TabbyML/tabby)
-`Rust` · `Apache-2.0` · Self-hosted server
+`Rust` · `Apache-2.0` · Self-hosted server · 🟢 stable
 
 Self-hosted AI coding assistant with its own inference server, no external API calls.
 
@@ -104,7 +104,7 @@ Self-hosted AI coding assistant with its own inference server, no external API c
 - **Edge:** Runs on consumer GPUs, OpenAPI interface, and answers the compliance question ("where does our code go?") with "nowhere."
 
 ### [gpt-engineer](https://github.com/gpt-engineer-org/gpt-engineer)
-`Python` · `MIT` · CLI
+`Python` · `MIT` · CLI · 🟠 experimental
 
 Describe a project in natural language; it writes and iterates on the whole codebase.
 
@@ -117,7 +117,7 @@ Describe a project in natural language; it writes and iterates on the whole code
 Prompt in, deployed full-stack app out.
 
 ### [bolt.diy](https://github.com/stackblitz-labs/bolt.diy)
-`TypeScript` · `MIT`
+`TypeScript` · `MIT` · 🟢 stable
 
 Official open-source fork of Bolt.new. Prompt, run, edit, and deploy full-stack web apps in the browser — with the LLM of your choice.
 
@@ -126,7 +126,7 @@ Official open-source fork of Bolt.new. Prompt, run, edit, and deploy full-stack 
 - **Edge:** Self-hostable with zero telemetry. Multi-provider switching mid-project means you can start on a cheap model and escalate only where it matters.
 
 ### [Open Design](https://github.com/nexu-io/open-design)
-`TypeScript` · `Apache-2.0` · Desktop + web
+`TypeScript` · `Apache-2.0` · Desktop + web · 🟠 experimental
 
 Turns the coding agent you already have into a design engine — prototypes, landing pages, dashboards, slides, images, and video, exported as HTML/PDF/PPTX/MP4.
 
@@ -135,7 +135,7 @@ Turns the coding agent you already have into a design engine — prototypes, lan
 - **Edge:** Ships with a large library of brand-grade design-system packages, and every render reads a `DESIGN.md` brand contract, so output is consistent instead of randomly styled. Local-first: your brand assets never leave the machine.
 
 ### [OpenUI](https://github.com/wandb/openui)
-`Python + TypeScript` · `Apache-2.0`
+`Python + TypeScript` · `Apache-2.0` · 🟡 active
 
 Describe a UI, watch it render live, convert it to React/Svelte/Vue.
 
@@ -143,7 +143,7 @@ Describe a UI, watch it render live, convert it to React/Svelte/Vue.
 - **Edge:** Live iteration loop — describe the change, see it immediately. Works with local models via Ollama.
 
 ### [Dyad](https://github.com/dyad-sh/dyad)
-`TypeScript` · `Apache-2.0` · Desktop
+`TypeScript` · `Apache-2.0` · Desktop · 🟢 stable
 
 Local, open-source AI app builder. Runs on your machine, bring your own API keys.
 

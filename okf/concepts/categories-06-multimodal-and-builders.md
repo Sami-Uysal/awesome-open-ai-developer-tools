@@ -6,7 +6,7 @@ path: /categories/06-multimodal-and-builders/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T08:39:12.168Z"
+  generated_at: "2026-07-29T11:35:53.465Z"
 ---
 # Multimodal and Builders
 
@@ -15,7 +15,7 @@ Speech, vision, multimodal tools, low-code builders, and stack selection guidanc
 ## Speech, Vision & Multimodal
 
 ### [Whisper](https://github.com/openai/whisper) / [faster-whisper](https://github.com/SYSTRAN/faster-whisper) / [whisper.cpp](https://github.com/ggml-org/whisper.cpp)
-`MIT`
+`MIT` · 🟢 stable
 
 Speech-to-text: the original model, the CTranslate2 port (substantially faster), and the C++ port (runs anywhere).
 
@@ -23,14 +23,14 @@ Speech-to-text: the original model, the CTranslate2 port (substantially faster),
 - **Edge:** State-of-the-art multilingual ASR for free, on your own hardware. `whisper.cpp` runs real-time transcription on a laptop CPU.
 
 ### [WhisperX](https://github.com/m-bain/whisperX)
-`Python` · `BSD-2-Clause`
+`Python` · `BSD-2-Clause` · 🟢 stable
 
 Whisper plus word-level timestamps and speaker diarization.
 
 - **Edge:** If you need to know *who* said *what, when* — subtitles, meeting notes — this is the one.
 
 ### [Kokoro](https://github.com/hexgrad/kokoro) / [Piper](https://github.com/OHF-Voice/piper1-gpl)
-`Apache-2.0` / `GPL-3.0`
+`Apache-2.0` / `GPL-3.0` · 🟢 stable
 
 Text-to-speech. Kokoro is a tiny (~82M parameter) model with quality far above its weight class; Piper is optimized for devices as small as a Raspberry Pi.
 
@@ -38,7 +38,7 @@ Text-to-speech. Kokoro is a tiny (~82M parameter) model with quality far above i
 - **Edge:** Real-time TTS on CPU. Kokoro's small footprint makes it viable to bundle inside an app.
 
 ### [Pipecat](https://github.com/pipecat-ai/pipecat)
-`Python` · Library
+`Python` · Library · 🟢 stable
 
 Framework for real-time voice and multimodal conversational agents.
 
@@ -46,7 +46,7 @@ Framework for real-time voice and multimodal conversational agents.
 - **Edge:** pluggable STT/TTS/LLM stages over WebRTC, plus speech-to-speech model support, so you can assemble a voice agent from open parts instead of renting a platform. **Known weakness:** maintainers' own issue tracker documents pipeline freezes, zombie function-call handlers after timeout, and multi-second latency in production. The linear pipeline model also fits multi-party conversation badly. Expect real engineering effort.
 
 ### [LiveKit Agents](https://github.com/livekit/agents)
-`Python + Node` · `Apache-2.0` · Framework
+`Python + Node` · `Apache-2.0` · Framework · 🟢 stable
 
 Realtime agent framework built on LiveKit's WebRTC infrastructure.
 
@@ -54,7 +54,7 @@ Realtime agent framework built on LiveKit's WebRTC infrastructure.
 - **Edge:** the room/participant model handles multi-party and interruption natively, where a linear pipeline has to fake it. If your voice agent needs more than one human in the call, start here rather than with a pipeline framework.
 
 ### [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
-`Python` · `GPL-3.0`
+`Python` · `GPL-3.0` · 🟢 stable
 
 Node-based interface for diffusion models — image, video, and audio generation pipelines.
 
@@ -62,7 +62,7 @@ Node-based interface for diffusion models — image, video, and audio generation
 - **Edge:** The graph *is* the program — every step is inspectable and reproducible, and workflows are shareable as JSON. Supports essentially every open image/video model within days of release.
 
 ### [Surya](https://github.com/datalab-to/surya)
-`Python` · `GPL-3.0` (commercial exceptions)
+`Python` · `GPL-3.0` (commercial exceptions) · 🟡 active
 
 Document OCR, layout analysis, and reading-order detection in 90+ languages.
 
@@ -73,7 +73,7 @@ Document OCR, layout analysis, and reading-order detection in 90+ languages.
 ## Low-Code / Visual Builders
 
 ### [n8n](https://github.com/n8n-io/n8n)
-`TypeScript` · `Sustainable Use License` (fair-code, source-available)
+`TypeScript` · `Sustainable Use License` (fair-code, source-available) · 🟢 stable
 
 Workflow automation with native AI agent nodes — hundreds of integrations, self-hostable.
 
@@ -81,14 +81,14 @@ Workflow automation with native AI agent nodes — hundreds of integrations, sel
 - **Edge:** Drop to JavaScript in any node when the visual builder runs out. AI agent nodes make it a legitimate agent runtime, not just a trigger-action tool. **Note:** fair-code, not OSI-approved — read the license before commercial use.
 
 ### [Flowise](https://github.com/FlowiseAI/Flowise)
-`TypeScript` · `Apache-2.0` (with conditions)
+`TypeScript` · `Apache-2.0` (with conditions) · 🟢 stable
 
 Drag-and-drop builder for LLM flows and agents.
 
 - **Edge:** Fastest way to prototype a RAG chatbot visually and expose it as an API or embeddable widget.
 
 ### [Langflow](https://github.com/langflow-ai/langflow)
-`Python` · `MIT`
+`Python` · `MIT` · 🟢 stable
 
 Visual framework for building multi-agent and RAG applications.
 

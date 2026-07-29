@@ -6,7 +6,7 @@ path: /categories/03-local-llm-inference/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T08:39:12.166Z"
+  generated_at: "2026-07-29T11:35:53.464Z"
 ---
 # Local LLM Inference
 
@@ -17,7 +17,7 @@ Local inference engines, model gateways, and open-source chat frontends.
 Run models on your own hardware.
 
 ### [Ollama](https://github.com/ollama/ollama)
-`Go` · `MIT`
+`Go` · `MIT` · 🟢 stable
 
 Download and run open models with one command. The default entry point to local LLMs.
 
@@ -25,14 +25,14 @@ Download and run open models with one command. The default entry point to local 
 - **Edge:** `ollama run <model>` and you're done — it handles fetching, quantization, GPU offload, and serving an OpenAI-compatible API. The largest model library and the widest tool support of any local runtime.
 
 ### [llama.cpp](https://github.com/ggml-org/llama.cpp)
-`C/C++` · `MIT`
+`C/C++` · `MIT` · 🟢 stable
 
 The inference engine most local tooling is built on. Runs LLMs on CPU, CUDA, Metal, ROCm, Vulkan, and more.
 
 - **Edge:** Extreme portability — a laptop, a Raspberry Pi, a Mac Studio, a server farm. GGUF quantization is the reason a large model fits on consumer hardware.
 
 ### [Jan](https://github.com/menloresearch/jan)
-`TypeScript` · `AGPL-3.0` · Desktop
+`TypeScript` · `AGPL-3.0` · Desktop · 🟢 stable
 
 Offline ChatGPT alternative that runs entirely on your machine.
 
@@ -40,7 +40,7 @@ Offline ChatGPT alternative that runs entirely on your machine.
 - **Edge:** Fully open desktop UX with local-first data storage, plus an optional OpenAI-compatible local server.
 
 ### [MLC LLM](https://github.com/mlc-ai/mlc-llm)
-`Python + C++` · `Apache-2.0`
+`Python + C++` · `Apache-2.0` · 🟢 stable
 
 Universal LLM deployment engine — native GPU acceleration on iOS, Android, desktop, and the browser.
 
@@ -48,14 +48,14 @@ Universal LLM deployment engine — native GPU acceleration on iOS, Android, des
 - **Edge:** the only serious path to running an LLM on a phone's GPU. **Known weakness:** model support is limited to what's been compiled for the target, and when compilation or inference fails the errors are opaque.
 
 ### [WebLLM](https://github.com/mlc-ai/web-llm)
-`TypeScript` · `Apache-2.0`
+`TypeScript` · `Apache-2.0` · 🟢 stable
 
 LLM inference entirely in the browser via WebGPU.
 
 - **Edge:** no server, no API key, no data leaving the tab — which makes a whole class of privacy-sensitive apps possible. **Known weakness:** requires WebGPU, so Safari and Firefox support is the limiting factor, and out-of-memory device-lost errors are common on modest GPUs.
 
 ### [llamafile](https://github.com/Mozilla-Ocho/llamafile)
-`C/C++` · `Apache-2.0`
+`C/C++` · `Apache-2.0` · 🟢 stable
 
 Distribute an entire LLM as one executable file that runs on multiple OSes without installation.
 
@@ -68,7 +68,7 @@ Distribute an entire LLM as one executable file that runs on multiple OSes witho
 Serving models at scale.
 
 ### [vLLM](https://github.com/vllm-project/vllm)
-`Python + CUDA` · `Apache-2.0`
+`Python + CUDA` · `Apache-2.0` · 🟢 stable
 
 High-throughput, memory-efficient inference and serving engine — the de facto standard for self-hosted production LLM serving.
 
@@ -76,14 +76,14 @@ High-throughput, memory-efficient inference and serving engine — the de facto 
 - **Edge:** PagedAttention plus continuous batching gives order-of-magnitude throughput gains over naive serving. Tensor/pipeline parallelism scales across GPUs; the OpenAI-compatible API means clients need no changes.
 
 ### [SGLang](https://github.com/sgl-project/sglang)
-`Python` · `Apache-2.0`
+`Python` · `Apache-2.0` · 🟢 stable
 
 Fast serving framework with RadixAttention prefix caching and a structured generation language.
 
 - **Edge:** Wins on workloads with heavy shared prefixes (agents, few-shot, multi-turn) where prefix-cache reuse dominates. Excellent constrained-decoding support.
 
 ### [LocalAI](https://github.com/mudler/LocalAI)
-`Go` · `MIT`
+`Go` · `MIT` · 🟢 stable
 
 Drop-in replacement for the OpenAI API that runs locally across many backends and modalities — text, image, audio, embeddings.
 
@@ -91,14 +91,14 @@ Drop-in replacement for the OpenAI API that runs locally across many backends an
 - **Edge:** One server, many backends (llama.cpp, vLLM, transformers, whisper, diffusers). No GPU required. Point your existing OpenAI SDK at it and change nothing else.
 
 ### [Text Generation Inference](https://github.com/huggingface/text-generation-inference)
-`Rust + Python` · `Apache-2.0`
+`Rust + Python` · `Apache-2.0` · 🟢 stable
 
 Hugging Face's production serving stack — the engine behind their inference endpoints.
 
 - **Edge:** Battle-tested Rust web server, token streaming, and tight integration with the HF ecosystem.
 
 ### [Ray](https://github.com/ray-project/ray)
-`Python` · `Apache-2.0`
+`Python` · `Apache-2.0` · 🟢 stable
 
 Distributed compute framework for scaling AI workloads — training, tuning, and multi-model serving via Ray Serve.
 
@@ -109,7 +109,7 @@ Distributed compute framework for scaling AI workloads — training, tuning, and
 ## Chat UIs & Frontends
 
 ### [Open WebUI](https://github.com/open-webui/open-webui)
-`Python + Svelte` · `BSD-3-Clause` (with branding clause)
+`Python + Svelte` · `BSD-3-Clause` (with branding clause) · 🟢 stable
 
 Feature-rich, self-hosted AI interface — the default UI for Ollama and OpenAI-compatible backends.
 
@@ -117,7 +117,7 @@ Feature-rich, self-hosted AI interface — the default UI for Ollama and OpenAI-
 - **Edge:** Multi-user with RBAC, built-in RAG over uploaded documents, web search, image generation, voice, and a Python function/pipeline plugin system. Runs fully offline.
 
 ### [LibreChat](https://github.com/danny-avila/LibreChat)
-`TypeScript` · `MIT`
+`TypeScript` · `MIT` · 🟢 stable
 
 Every AI provider in one polished ChatGPT-style interface.
 
@@ -125,14 +125,14 @@ Every AI provider in one polished ChatGPT-style interface.
 - **Edge:** Multi-provider in a single conversation, agents, code interpreter, artifacts, MCP support, and genuinely good multi-user auth. MIT with no branding restrictions.
 
 ### [Lobe Chat](https://github.com/lobehub/lobe-chat)
-`TypeScript` · `Apache-2.0` (with conditions)
+`TypeScript` · `Apache-2.0` (with conditions) · 🟢 stable
 
 Modern chat framework with a plugin and agent-market ecosystem.
 
 - **Edge:** The best-looking option, with PWA and mobile support plus one-click Vercel deploy.
 
 ### [AnythingLLM](https://github.com/Mintplex-Labs/anything-llm)
-`JavaScript` · `MIT`
+`JavaScript` · `MIT` · 🟢 stable
 
 All-in-one desktop and Docker app: chat with your documents, with agents and multi-user workspaces built in.
 
