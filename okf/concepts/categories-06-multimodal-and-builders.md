@@ -6,13 +6,14 @@ path: /categories/06-multimodal-and-builders/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T08:07:53.180Z"
+  generated_at: "2026-07-29T08:39:12.168Z"
 ---
 # Multimodal and Builders
 
 Speech, vision, multimodal tools, low-code builders, and stack selection guidance.
 
 ## Speech, Vision & Multimodal
+
 ### [Whisper](https://github.com/openai/whisper) / [faster-whisper](https://github.com/SYSTRAN/faster-whisper) / [whisper.cpp](https://github.com/ggml-org/whisper.cpp)
 `MIT`
 
@@ -70,6 +71,7 @@ Document OCR, layout analysis, and reading-order detection in 90+ languages.
 ---
 
 ## Low-Code / Visual Builders
+
 ### [n8n](https://github.com/n8n-io/n8n)
 `TypeScript` · `Sustainable Use License` (fair-code, source-available)
 
@@ -95,6 +97,7 @@ Visual framework for building multi-agent and RAG applications.
 ---
 
 ## Open-Source Alternatives Cheat Sheet
+
 | You're paying for | Use instead |
 |---|---|
 | GitHub Copilot | [Continue](https://github.com/continuedev/continue), [Tabby](https://github.com/TabbyML/tabby), [aider](https://github.com/Aider-AI/aider) |
@@ -106,7 +109,7 @@ Visual framework for building multi-agent and RAG applications.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (inference) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) proxy |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |
@@ -121,6 +124,7 @@ Visual framework for building multi-agent and RAG applications.
 ---
 
 ## Choosing Your Stack
+
 Start small. Every layer below is optional until it isn't.
 
 **Solo developer, local-first, zero API cost**

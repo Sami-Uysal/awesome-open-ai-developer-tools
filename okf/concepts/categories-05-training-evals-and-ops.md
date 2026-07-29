@@ -6,13 +6,14 @@ path: /categories/05-training-evals-and-ops/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T08:07:53.180Z"
+  generated_at: "2026-07-29T08:39:12.167Z"
 ---
 # Training, Evals, and Ops
 
 Fine-tuning, evaluation, guardrails, observability, and LLMOps tooling.
 
 ## Fine-Tuning & Training
+
 ### [Unsloth](https://github.com/unslothai/unsloth)
 `Python` · `Apache-2.0`
 
@@ -58,6 +59,7 @@ Train transformer models with reinforcement learning — SFT, DPO, GRPO, reward 
 ---
 
 ## Evals, Testing & Guardrails
+
 ### [promptfoo](https://github.com/promptfoo/promptfoo)
 `TypeScript` · `MIT`
 
@@ -103,6 +105,7 @@ LLM vulnerability scanner — probes for prompt injection, jailbreaks, data leak
 ---
 
 ## Observability & LLMOps
+
 ### [Langfuse](https://github.com/langfuse/langfuse)
 `TypeScript` · `MIT` (core)
 

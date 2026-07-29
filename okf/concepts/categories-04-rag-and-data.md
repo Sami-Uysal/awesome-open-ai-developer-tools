@@ -6,13 +6,14 @@ path: /categories/04-rag-and-data/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T08:07:53.180Z"
+  generated_at: "2026-07-29T08:39:12.166Z"
 ---
 # RAG and Data
 
 Vector databases, embedding tools, rerankers, and RAG application frameworks.
 
 ## Vector Databases
+
 ### [Qdrant](https://github.com/qdrant/qdrant)
 `Rust` · `Apache-2.0`
 
@@ -49,9 +50,18 @@ Vector similarity search inside PostgreSQL.
 
 - **Edge:** No new infrastructure. Your embeddings live next to your relational data with real transactions, joins, and backups. Start here unless you've measured a reason not to.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embedded + server
+
+Columnar database with AI-native retrieval — dense ANN, sparse vectors, full-text, and metadata filters in one transactional engine.
+
+- **Replaces:** Pinecone + a separate operational DB for RAG/agent memory
+- **Edge:** Not a pure vector store — dense ANN, sparse, and full-text indexes share one transactional row store, so hybrid search with RRF fusion runs without a separate vector service, keeping SQL, encryption-at-rest, and multi-user access. Companion [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) for schema, SQL, and ANN exploration.
+
 ---
 
 ## Embeddings & Rerankers
+
 The retrieval quality layer. Swapping your embedding model usually beats swapping your vector database.
 
 ### [FlagEmbedding / BGE](https://github.com/FlagOpen/FlagEmbedding)
@@ -72,6 +82,7 @@ The library for computing, training, and fine-tuning text embeddings.
 ---
 
 ## RAG Frameworks
+
 ### [LlamaIndex](https://github.com/run-llama/llama_index)
 `Python + TypeScript` · `MIT`
 

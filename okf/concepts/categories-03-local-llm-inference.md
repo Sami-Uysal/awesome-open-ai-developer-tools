@@ -6,13 +6,14 @@ path: /categories/03-local-llm-inference/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T08:07:53.179Z"
+  generated_at: "2026-07-29T08:39:12.166Z"
 ---
 # Local LLM Inference
 
 Local inference engines, model gateways, and open-source chat frontends.
 
 ## Local Inference Engines
+
 Run models on your own hardware.
 
 ### [Ollama](https://github.com/ollama/ollama)
@@ -63,6 +64,7 @@ Distribute an entire LLM as one executable file that runs on multiple OSes witho
 ---
 
 ## Inference Servers & Gateways
+
 Serving models at scale.
 
 ### [vLLM](https://github.com/vllm-project/vllm)
@@ -105,6 +107,7 @@ Distributed compute framework for scaling AI workloads — training, tuning, and
 ---
 
 ## Chat UIs & Frontends
+
 ### [Open WebUI](https://github.com/open-webui/open-webui)
 `Python + Svelte` · `BSD-3-Clause` (with branding clause)
 
