@@ -114,6 +114,15 @@ Extensible autonomous agent from Block, now governed by the Linux Foundation. In
 - **Backends:** Any provider, plus first-class MCP extension support
 - **Edge:** More autonomous than aider — plans and iterates with less hand-holding. Vendor-neutral governance under the Linux Foundation means no rug-pull risk, which matters for tooling you standardize a team on.
 
+### [Orkas](https://github.com/Orkas-AI/Orkas)
+`TypeScript` · `MIT` · Desktop
+
+Local-first desktop AI workforce where a Commander plans work and coordinates built-in specialists and external coding agents through one chat.
+
+- **Replaces:** Cursor agent mode, cloud-hosted agent orchestrators
+- **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
+- **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
+
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains
 
@@ -916,5 +925,4 @@ The bar for inclusion:
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 To the extent possible under law, contributors have waived all copyright and related rights to this work.
-
 
