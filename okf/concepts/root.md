@@ -6,7 +6,7 @@ path: /
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T07:44:48.570Z"
+  generated_at: "2026-07-29T08:07:40.500Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -123,6 +123,15 @@ Extensible autonomous agent from Block, now governed by the Linux Foundation. In
 - **Replaces:** Devin, Cursor agent mode
 - **Backends:** Any provider, plus first-class MCP extension support
 - **Edge:** More autonomous than aider — plans and iterates with less hand-holding. Vendor-neutral governance under the Linux Foundation means no rug-pull risk, which matters for tooling you standardize a team on.
+
+### [Orkas](https://github.com/Orkas-AI/Orkas)
+`TypeScript` · `MIT` · Desktop
+
+Local-first desktop AI workforce where a Commander plans work and coordinates built-in specialists and external coding agents through one chat.
+
+- **Replaces:** Cursor agent mode, cloud-hosted agent orchestrators
+- **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
+- **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
 
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains
@@ -396,6 +405,15 @@ Official developer tool for testing and debugging MCP servers.
 The ergonomic way to build MCP servers and clients — decorator-based, like FastAPI.
 
 - **Edge:** A working server in ~10 lines. Handles auth, deployment, proxying, and server composition.
+
+### [octocode](https://github.com/Muvon/octocode)
+`Rust` · `Apache-2.0`
+
+Local semantic code index with an MCP server on top — search and navigate a codebase by meaning, not grep.
+
+- **Replaces:** the codebase indexing inside Cursor or Sourcegraph Cody
+- **Backends:** local embeddings via fastembed, or a hosted provider if you'd rather offload it
+- **Edge:** runs entirely locally, and embeddings are your choice. **Known weakness:** first index on a large repo is slow, and semantic search is genuinely bad at structural questions — "find every implementation of this trait" wants a structural index, not embeddings, so you need separate structural tools and have to know which kind of question you're asking before you search. Early-stage; treat it accordingly.
 
 ---
 
@@ -926,5 +944,4 @@ The bar for inclusion:
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 To the extent possible under law, contributors have waived all copyright and related rights to this work.
-
 
