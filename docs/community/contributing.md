@@ -11,13 +11,23 @@ A tool gets in if it meets **all** of these:
 3. **Real developer utility.** It solves a problem someone actually has. Demos, toys, and thin wrappers around one API call do not qualify.
 4. **Not a duplicate.** If three tools in a category already do the same thing, the new one needs a clear reason to exist.
 
+## Maturity level
+
+Every entry carries one badge. Pick it yourself when you open the PR — reviewers just sanity-check it against the criteria below. A 30-second look at the repo's releases page, commit history, and README is usually enough.
+
+- 🟢 **stable** — `v1.0.0`+ released **or** a battle-tested industry standard that never bothered bumping to 1.0 (Ollama, vLLM, LlamaIndex, Chroma — years of production use, `v0.x.x` forever). Real doc site with install guides and API reference, CI running tests, usually backed by a company, VC funding, or an established maintainer team. Staying on `0.x` alone isn't disqualifying if everything else says "this is infrastructure people depend on."
+- 🟡 **active** — still on `v0.x.x`, but shipping fast: regular commits, PRs merging, healthy issue traffic. Solid for personal and local use; expect the API to move if you wire it into something you can't easily unwind.
+- 🟠 **experimental** — no release tag (or an `-alpha`/`-beta` one), young repo, low commit count, and/or the maintainer says so directly ("PoC", "WIP", "don't use in production"). Thin docs, no tests, breaking changes are the norm.
+
+Quick decision order: release tag → commit cadence/age → does the README warn you itself.
+
 ## Entry format
 
 Match the existing style exactly:
 
 ```markdown
 ### [Tool Name](https://github.com/owner/repo)
-`Language` · `License` · `Form factor`
+`Language` · `License` · `Form factor` · 🟢 stable / 🟡 active / 🟠 experimental
 
 One sentence: what it does, in plain language.
 
@@ -25,6 +35,8 @@ One sentence: what it does, in plain language.
 - **Backends:** which models/providers it supports (only if relevant)
 - **Edge:** 1–3 sentences on *why you'd pick this over the alternatives*. Be specific and technical. No marketing adjectives.
 ```
+
+The maturity badge (see [Maturity level](#maturity-level)) goes at the end of the language/license/form-factor line.
 
 ### Rules for the "Edge" line
 
@@ -46,6 +58,7 @@ Star counts go stale within weeks and turn every PR into a maintenance chore. Do
 - [ ] Placed in the correct category
 - [ ] Entries within a category are ordered roughly by relevance
 - [ ] "Edge" line is specific and technical
+- [ ] Maturity badge (🟢/🟡/🟠) set and matches the [criteria above](#maturity-level)
 - [ ] Updated the cheat sheet table in the README if the tool replaces a well-known paid product
 - [ ] One tool per PR (makes review and revert clean)
 
