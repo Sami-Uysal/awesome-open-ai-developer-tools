@@ -6,7 +6,7 @@ path: /languages/zh/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T02:06:59.696Z"
+  generated_at: "2026-07-29T02:28:45.710Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -565,6 +565,14 @@ Hugging Face 的生产级服务栈——其推理端点背后的引擎。
 
 - **优势：** 不引入新基础设施。embedding 与关系数据同处一库，拥有真正的事务、join 和备份。除非你已经量化出了不这么做的理由，否则从这里起步。
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · 嵌入式 + 服务器
+
+具备 AI 原生检索能力的列式数据库——在同一个事务引擎中集成 dense ANN、稀疏向量、全文检索与元数据过滤。
+
+- **替代：** Pinecone + RAG/智能体记忆所需的独立操作型数据库
+- **优势：** 不是纯粹的向量存储——dense ANN、稀疏检索与全文索引共享同一个事务型行存储，因此带 RRF 融合的混合检索无需独立向量服务即可运行，同时保留 SQL、静态加密和多用户访问。配套的 [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) 用于 schema、SQL 与 ANN 探索。
+
 ---
 
 ## Embedding 与重排序器
@@ -850,7 +858,7 @@ LLM 漏洞扫描器——探测 prompt 注入、越狱、数据泄露与有害�
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui)、[LibreChat](https://github.com/danny-avila/LibreChat)、[Jan](https://github.com/menloresearch/jan) |
 | OpenAI API（推理） | [vLLM](https://github.com/vllm-project/vllm)、[Ollama](https://github.com/ollama/ollama)、[LocalAI](https://github.com/mudler/LocalAI)、[SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta)、[Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant)、[pgvector](https://github.com/pgvector/pgvector)、[Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant)、[pgvector](https://github.com/pgvector/pgvector)、[Chroma](https://github.com/chroma-core/chroma)、[MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse)、[Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) 代理 |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro)、[Piper](https://github.com/OHF-Voice/piper1-gpl) |

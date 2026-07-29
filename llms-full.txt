@@ -1018,7 +1018,7 @@ Allowed as a starting point, not as a submission. A native or fluent speaker mus
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](./languages/tr.md) · [简体中文](./languages/zh.md) · [Español](./languages/es.md) · [Add your language](./community/translations.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+**English** · [Türkçe](./languages/tr.md) · [简体中文](./languages/zh.md) · [Español](./languages/es.md) · [*add your language*](./community/translations.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -1567,6 +1567,14 @@ Vector similarity search inside PostgreSQL.
 
 - **Edge:** No new infrastructure. Your embeddings live next to your relational data with real transactions, joins, and backups. Start here unless you've measured a reason not to.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embedded + server
+
+Columnar database with AI-native retrieval — dense ANN, sparse vectors, full-text, and metadata filters in one transactional engine.
+
+- **Replaces:** Pinecone + a separate operational DB for RAG/agent memory
+- **Edge:** Not a pure vector store — dense ANN, sparse, and full-text indexes share one transactional row store, so hybrid search with RRF fusion runs without a separate vector service, keeping SQL, encryption-at-rest, and multi-user access. Companion [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) for schema, SQL, and ANN exploration.
+
 ---
 
 ## Embeddings & Rerankers
@@ -1852,7 +1860,7 @@ Visual framework for building multi-agent and RAG applications.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (inference) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) proxy |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |
@@ -1901,7 +1909,7 @@ Three rules that save the most time:
 
 ## Contributing
 
-PRs welcome. See [contributing guide](./community/contributing.md).
+PRs welcome. See [CONTRIBUTING.md](./community/contributing.md).
 
 The bar for inclusion:
 
@@ -1920,6 +1928,7 @@ The bar for inclusion:
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 To the extent possible under law, contributors have waived all copyright and related rights to this work.
+
 
 
 
@@ -2484,6 +2493,14 @@ Búsqueda por similitud vectorial dentro de PostgreSQL.
 
 - **Ventaja:** ninguna infraestructura nueva. Tus embeddings viven junto a los datos relacionales, con transacciones, joins y copias de seguridad de verdad. Empieza aquí salvo que hayas medido una razón para no hacerlo.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embebida + servidor
+
+Base de datos columnar con recuperación nativa de IA — ANN denso, vectores dispersos, texto completo y filtros de metadatos en un único motor transaccional.
+
+- **Reemplaza:** Pinecone + una base de datos operativa separada para RAG/memoria de agentes
+- **Ventaja:** no es un almacén vectorial puro — los índices de ANN denso, dispersos y de texto completo comparten un único almacén de filas transaccional, así que la búsqueda híbrida con fusión RRF funciona sin un servicio vectorial aparte, conservando SQL, cifrado en reposo y acceso multiusuario. Complementado por [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) para explorar el esquema, SQL y ANN.
+
 ---
 
 ## Embeddings y rerankers
@@ -2769,7 +2786,7 @@ Framework visual para construir aplicaciones multiagente y de RAG.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (inferencia) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | proxy de [LiteLLM](https://github.com/BerriAI/litellm) |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |
@@ -3398,6 +3415,14 @@ PostgreSQL içinde vektör benzerlik araması.
 
 - **Farkı:** Yeni altyapı yok. Embedding'lerin ilişkisel verinin yanında yaşar; gerçek transaction, join ve yedekleme ile. Aksini ölçmediysen buradan başla.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embedded + sunucu
+
+AI-native retrieval özellikli columnar veritabanı — tek transactional motorda dense ANN, sparse vektörler, tam metin ve metadata filtreleri.
+
+- **Yerine geçtiği:** Pinecone + RAG/ajan belleği için ayrı bir operasyonel veritabanı
+- **Farkı:** Saf bir vektör deposu değil — dense ANN, sparse ve tam metin indeksleri tek transactional satır deposunu paylaşır; bu yüzden RRF fusion'lı hybrid search, ayrı bir vektör servisi olmadan çalışır, SQL, encryption-at-rest ve çok kullanıcılı erişimi korur. Şema, SQL ve ANN keşfi için eşlik eden [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer).
+
 ---
 
 ## Embedding'ler ve Yeniden Sıralayıcılar
@@ -3683,7 +3708,7 @@ LLM akışları ve ajanlar için sürükle-bırak üretici.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (çıkarım) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) proxy |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |
@@ -4312,6 +4337,14 @@ Hugging Face 的生产级服务栈——其推理端点背后的引擎。
 
 - **优势：** 不引入新基础设施。embedding 与关系数据同处一库，拥有真正的事务、join 和备份。除非你已经量化出了不这么做的理由，否则从这里起步。
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · 嵌入式 + 服务器
+
+具备 AI 原生检索能力的列式数据库——在同一个事务引擎中集成 dense ANN、稀疏向量、全文检索与元数据过滤。
+
+- **替代：** Pinecone + RAG/智能体记忆所需的独立操作型数据库
+- **优势：** 不是纯粹的向量存储——dense ANN、稀疏检索与全文索引共享同一个事务型行存储，因此带 RRF 融合的混合检索无需独立向量服务即可运行，同时保留 SQL、静态加密和多用户访问。配套的 [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) 用于 schema、SQL 与 ANN 探索。
+
 ---
 
 ## Embedding 与重排序器
@@ -4597,7 +4630,7 @@ LLM 漏洞扫描器——探测 prompt 注入、越狱、数据泄露与有害�
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui)、[LibreChat](https://github.com/danny-avila/LibreChat)、[Jan](https://github.com/menloresearch/jan) |
 | OpenAI API（推理） | [vLLM](https://github.com/vllm-project/vllm)、[Ollama](https://github.com/ollama/ollama)、[LocalAI](https://github.com/mudler/LocalAI)、[SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta)、[Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant)、[pgvector](https://github.com/pgvector/pgvector)、[Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant)、[pgvector](https://github.com/pgvector/pgvector)、[Chroma](https://github.com/chroma-core/chroma)、[MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse)、[Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) 代理 |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro)、[Piper](https://github.com/OHF-Voice/piper1-gpl) |

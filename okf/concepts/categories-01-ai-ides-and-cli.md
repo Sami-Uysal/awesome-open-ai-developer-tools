@@ -6,7 +6,7 @@ path: /categories/01-ai-ides-and-cli/
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T02:06:59.689Z"
+  generated_at: "2026-07-29T02:28:45.704Z"
 ---
 # AI IDEs and CLI
 

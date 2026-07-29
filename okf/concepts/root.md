@@ -6,7 +6,7 @@ path: /
 updated: 2026-07-29
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T02:06:59.693Z"
+  generated_at: "2026-07-29T02:28:45.708Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -16,7 +16,7 @@ okf:
 
 Coding agents · local inference · agent frameworks · vector DBs · RAG · evals · observability
 
-**English** · [Türkçe](./languages/tr.md) · [简体中文](./languages/zh.md) · [Español](./languages/es.md) · [Add your language](./community/translations.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
+**English** · [Türkçe](./languages/tr.md) · [简体中文](./languages/zh.md) · [Español](./languages/es.md) · [*add your language*](./community/translations.md) · [🌐 Website](https://sami-uysal.github.io/awesome-open-ai-developer-tools/)
 
 
 ---
@@ -565,6 +565,14 @@ Vector similarity search inside PostgreSQL.
 
 - **Edge:** No new infrastructure. Your embeddings live next to your relational data with real transactions, joins, and backups. Start here unless you've measured a reason not to.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embedded + server
+
+Columnar database with AI-native retrieval — dense ANN, sparse vectors, full-text, and metadata filters in one transactional engine.
+
+- **Replaces:** Pinecone + a separate operational DB for RAG/agent memory
+- **Edge:** Not a pure vector store — dense ANN, sparse, and full-text indexes share one transactional row store, so hybrid search with RRF fusion runs without a separate vector service, keeping SQL, encryption-at-rest, and multi-user access. Companion [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) for schema, SQL, and ANN exploration.
+
 ---
 
 ## Embeddings & Rerankers
@@ -850,7 +858,7 @@ Visual framework for building multi-agent and RAG applications.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (inference) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) proxy |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |
@@ -899,7 +907,7 @@ Three rules that save the most time:
 
 ## Contributing
 
-PRs welcome. See [contributing guide](./community/contributing.md).
+PRs welcome. See [CONTRIBUTING.md](./community/contributing.md).
 
 The bar for inclusion:
 
@@ -918,4 +926,5 @@ The bar for inclusion:
 [![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
 
 To the extent possible under law, contributors have waived all copyright and related rights to this work.
+
 
