@@ -555,6 +555,14 @@ Vector similarity search inside PostgreSQL.
 
 - **Edge:** No new infrastructure. Your embeddings live next to your relational data with real transactions, joins, and backups. Start here unless you've measured a reason not to.
 
+### [MongrelDB](https://github.com/visorcraft/MongrelDB)
+`Rust` · `MIT OR Apache-2.0` · Embedded + server
+
+Columnar database with AI-native retrieval — dense ANN, sparse vectors, full-text, and metadata filters in one transactional engine.
+
+- **Replaces:** Pinecone + a separate operational DB for RAG/agent memory
+- **Edge:** Not a pure vector store: operational rows and embeddings share one MVCC row and six index kinds (HNSW ANN, sparse inverted, FM-index, MinHash LSH, roaring bitmaps, PGM learned ranges) intersect through a shared RowId space. Hybrid search fuses named retrievers with RRF and optional exact-vector rerank, so you can drop the separate vector service for RAG and agent memory without giving up SQL, encryption-at-rest, or credentialed multi-user access. Companion [MongrelDB Viewer](https://github.com/visorcraft/MongrelDB-Viewer) for schema, SQL, and ANN exploration.
+
 ---
 
 ## Embeddings & Rerankers
@@ -840,7 +848,7 @@ Visual framework for building multi-agent and RAG applications.
 | ChatGPT Plus / Claude Pro | [Open WebUI](https://github.com/open-webui/open-webui), [LibreChat](https://github.com/danny-avila/LibreChat), [Jan](https://github.com/menloresearch/jan) |
 | OpenAI API (inference) | [vLLM](https://github.com/vllm-project/vllm), [Ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI), [SGLang](https://github.com/sgl-project/sglang) |
 | OpenAI Assistants API | [Letta](https://github.com/letta-ai/letta), [Dify](https://github.com/langgenius/dify) |
-| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma) |
+| Pinecone | [Qdrant](https://github.com/qdrant/qdrant), [pgvector](https://github.com/pgvector/pgvector), [Chroma](https://github.com/chroma-core/chroma), [MongrelDB](https://github.com/visorcraft/MongrelDB) |
 | LangSmith | [Langfuse](https://github.com/langfuse/langfuse), [Phoenix](https://github.com/Arize-ai/phoenix) |
 | OpenRouter | [LiteLLM](https://github.com/BerriAI/litellm) proxy |
 | ElevenLabs | [Kokoro](https://github.com/hexgrad/kokoro), [Piper](https://github.com/OHF-Voice/piper1-gpl) |
