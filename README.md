@@ -510,6 +510,15 @@ Distributed compute framework for scaling AI workloads — training, tuning, and
 
 - **Edge:** For when one model on one box is no longer the problem. Model composition and autoscaling across a cluster.
 
+### [Unified AI System](https://github.com/happy520ai/unified-ai-system)
+`TypeScript + JavaScript` · `Apache-2.0` · `Self-hosted gateway + CLI` · 🟡 active
+
+Terminal-first AI gateway that puts provider routing, governed agent and knowledge contracts, and an optional operator workbench behind one self-hosted service.
+
+- **Replaces:** ad hoc provider-specific proxy scripts and hosted gateway control planes for local evaluation
+- **Backends:** deterministic local fake provider by default; OpenAI-compatible and NVIDIA endpoints via explicit configuration
+- **Edge:** A fresh clone can prove the complete chat path without credentials, while the CLI refuses to send when a real provider may be active unless the operator supplies `--allow-real-provider` for that command. Public-clone and container smoke checks keep the credential-free path under CI.
+
 ---
 
 ## Chat UIs & Frontends
