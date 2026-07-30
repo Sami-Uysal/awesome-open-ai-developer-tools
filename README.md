@@ -513,11 +513,11 @@ Distributed compute framework for scaling AI workloads — training, tuning, and
 ### [Unified AI System](https://github.com/happy520ai/unified-ai-system)
 `TypeScript + JavaScript` · `Apache-2.0` · `Self-hosted gateway + CLI` · 🟡 active
 
-Terminal-first AI gateway that puts provider routing, governed agent and knowledge contracts, and an optional operator workbench behind one self-hosted service.
+Terminal-first AI gateway that puts provider routing, governed agent and knowledge contracts, an HTTP API, and Codex MCP tools behind one self-hosted service.
 
-- **Replaces:** ad hoc provider-specific proxy scripts and hosted gateway control planes for local evaluation
-- **Backends:** deterministic local fake provider by default; OpenAI-compatible and NVIDIA endpoints via explicit configuration
-- **Edge:** A fresh clone can prove the complete chat path without credentials, while the CLI refuses to send when a real provider may be active unless the operator supplies `--allow-real-provider` for that command. Public-clone and container smoke checks keep the credential-free path under CI.
+- **Replaces:** ad hoc provider-specific proxy scripts when evaluating a local AI gateway control plane
+- **Backends:** deterministic local fake provider by default; configurable adapters for NVIDIA and OpenAI-compatible upstream providers
+- **Edge:** A fresh clone can prove the complete chat and MCP paths without credentials, while the CLI refuses to send when a real provider may be active unless the operator supplies `--allow-real-provider` for that command. Public-clone and container smoke checks keep the credential-free path under CI.
 
 ---
 
