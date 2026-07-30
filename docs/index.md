@@ -204,7 +204,7 @@ Self-hosted personal AI assistant that runs on any OS and reaches you on any pla
 - **Edge:** Gateways into Telegram, Discord, Slack, WhatsApp, Signal, email, and CLI, so the agent reaches you where you already are — and can proactively message *you*. Large skill/plugin ecosystem. **Security note:** it holds credentials for your messaging accounts and runs autonomously; sandbox it and read the permission model before pointing it at anything sensitive.
 
 ### [Hivekeep](https://github.com/MarlBurroW/hivekeep)
-`TypeScript` · `MIT`
+`TypeScript` · `MIT` · 🟡 active
 
 Self-hosted platform to run a *team* of specialized AI agents that collaborate, keep persistent memory, and build their own tools, mini-apps, and plugins.
 
