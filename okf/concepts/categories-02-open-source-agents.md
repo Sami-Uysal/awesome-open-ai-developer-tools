@@ -3,10 +3,10 @@ type: concept
 title: "Open-Source Agents"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/02-open-source-agents/"
 path: /categories/02-open-source-agents/
-updated: 2026-07-29
+updated: 2026-07-30
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T11:35:53.463Z"
+  generated_at: "2026-07-30T09:24:03.399Z"
 ---
 # Open-Source Agents
 
@@ -24,6 +24,15 @@ Self-hosted personal AI assistant that runs on any OS and reaches you on any pla
 - **Replaces:** ChatGPT desktop, Claude Desktop, Microsoft Copilot
 - **Backends:** Any OpenAI-compatible API, Ollama, LocalAI
 - **Edge:** Gateways into Telegram, Discord, Slack, WhatsApp, Signal, email, and CLI, so the agent reaches you where you already are — and can proactively message *you*. Large skill/plugin ecosystem. **Security note:** it holds credentials for your messaging accounts and runs autonomously; sandbox it and read the permission model before pointing it at anything sensitive.
+
+### [Hivekeep](https://github.com/MarlBurroW/hivekeep)
+`TypeScript` · `MIT`
+
+Self-hosted platform to run a *team* of specialized AI agents that collaborate, keep persistent memory, and build their own tools, mini-apps, and plugins.
+
+- **Replaces:** ChatGPT Team, Claude Desktop, hosted agent platforms
+- **Backends:** Any OpenAI-compatible API, Ollama
+- **Edge:** Multiple agents delegate to each other and share memory across months; a built-in web UI plus Telegram, Slack, Discord, and Matrix channels. Ships as a single container (Bun + SQLite), so the whole platform runs on modest hardware.
 
 ### [Hermes Agent](https://github.com/NousResearch/hermes-agent)
 `Python` · `MIT` · 🟡 active

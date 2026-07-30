@@ -3,10 +3,10 @@ type: concept
 title: "AI IDEs and CLI"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/"
 path: /categories/01-ai-ides-and-cli/
-updated: 2026-07-29
+updated: 2026-07-30
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-29T11:35:53.462Z"
+  generated_at: "2026-07-30T09:24:03.398Z"
 ---
 # AI IDEs and CLI
 
