@@ -6,7 +6,7 @@ on:
       - main
   workflow_run:
     workflows:
-      - "Sync docs/index.md from README"
+      - "Sync docs/ from README"
     types:
       - completed
 
