@@ -6,7 +6,7 @@ path: /categories/03-local-llm-inference/
 updated: 2026-07-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-07-31T06:53:04.912Z"
+  generated_at: "2026-07-31T06:57:40.979Z"
 ---
 # Local LLM Inference
 
@@ -103,6 +103,15 @@ Hugging Face's production serving stack — the engine behind their inference en
 Distributed compute framework for scaling AI workloads — training, tuning, and multi-model serving via Ray Serve.
 
 - **Edge:** For when one model on one box is no longer the problem. Model composition and autoscaling across a cluster.
+
+### [Unified AI System](https://github.com/happy520ai/unified-ai-system)
+`TypeScript + JavaScript` · `Apache-2.0` · `Self-hosted gateway + CLI` · 🟡 active
+
+Terminal-first AI gateway that puts provider routing, governed agent and knowledge contracts, an HTTP API, and Codex MCP tools behind one self-hosted service.
+
+- **Replaces:** ad hoc provider-specific proxy scripts when evaluating a local AI gateway control plane
+- **Backends:** deterministic local fake provider by default; configurable adapters for NVIDIA and OpenAI-compatible upstream providers
+- **Edge:** A fresh clone can prove the complete chat and MCP paths without credentials, while the CLI refuses to send when a real provider may be active unless the operator supplies `--allow-real-provider` for that command. Public-clone and container smoke checks keep the credential-free path under CI.
 
 ---
 
