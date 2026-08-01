@@ -57,6 +57,13 @@ Test and evaluate prompts, agents, and RAG systems — plus LLM red teaming and 
 
 - **Edge:** Declarative test cases in YAML that run in CI. Side-by-side model comparison plus adversarial red-teaming in one tool. Local-first — your prompts never leave your machine.
 
+### [ClawBench](https://github.com/reacher-z/ClawBench)
+`Python` · `Apache-2.0` · Docker/browser harness · 🟡 active
+
+Evaluate web agents on 153 everyday tasks across 144 live websites, with the final submission request intercepted to keep runs side-effect-free.
+
+- **Edge:** Captures session replay, screenshots, HTTP traffic, browser actions, and agent messages in one reproducible run, making failures diagnosable beyond a final pass/fail score.
+
 ### [DeepEval](https://github.com/confident-ai/deepeval)
 `Python` · `Apache-2.0` · 🟢 stable
 
