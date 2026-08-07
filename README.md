@@ -124,6 +124,7 @@ Local-first desktop AI workforce where a Commander plans work and coordinates bu
 - **Replaces:** Cursor agent mode, cloud-hosted agent orchestrators
 - **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
 - **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
+- [ordewell](https://github.com/ordewell/ordewell) — Plan-first CLI/TUI orchestrator: one goal in, a read-only planner returns an ordered, editable plan of coding-agent tasks (Claude Code, Codex, OpenCode), each with its own runner/model/mode. Apache-2.0.
 
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains · 🟢 stable
