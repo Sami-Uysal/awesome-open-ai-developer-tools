@@ -137,4 +137,13 @@ All-in-one desktop and Docker app: chat with your documents, with agents and mul
 
 - **Edge:** Batteries-included RAG — embedder, vector DB, and UI ship together. Fastest path from "I have PDFs" to "I can ask them questions."
 
+### [ThoughtDAG](https://github.com/chenxiachan/thoughtdag)
+`TypeScript` · `MIT` · Web · 🟠 experimental
+
+A local-first visual LLM workspace where graph edges define what context the model receives.
+
+- **Replaces:** linear chat interfaces for long-running LLM research
+- **Backends:** Ollama and OpenAI-compatible endpoints
+- **Edge:** Graph edges are execution semantics, not decoration: traversing a node's upstream DAG constructs the message history for the next request, so users can branch, merge, and prune context explicitly.
+
 ---
