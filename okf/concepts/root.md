@@ -6,7 +6,7 @@ path: /
 updated: 2026-08-09
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-09T08:33:16.916Z"
+  generated_at: "2026-08-09T08:33:30.567Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -134,6 +134,15 @@ Local-first desktop AI workforce where a Commander plans work and coordinates bu
 - **Replaces:** Cursor agent mode, cloud-hosted agent orchestrators
 - **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
 - **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
+
+### [ordewell](https://github.com/ordewell/ordewell)
+`Rust` · `Apache-2.0` · CLI / TUI · 🟡 active
+
+Plan-first CLI/TUI orchestrator that converts a single goal into an ordered, editable plan of coding-agent tasks.
+
+- **Replaces:** Manual task decomposition and multi-agent CLI scripting
+- **Backends:** Claude Code, Codex, OpenCode
+- **Edge:** Features a read-only planner that generates explicit step-by-step agent plans before execution, with per-task runner, model, and mode assignment.
 
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains · 🟢 stable
