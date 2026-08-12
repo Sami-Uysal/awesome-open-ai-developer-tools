@@ -571,6 +571,14 @@ A local-first visual LLM workspace where graph edges define what context the mod
 - **Backends:** Ollama and OpenAI-compatible endpoints
 - **Edge:** Graph edges are execution semantics, not decoration: traversing a node's upstream DAG constructs the message history for the next request, so users can branch, merge, and prune context explicitly.
 
+### [Persona](https://github.com/jayamitkatariya/personacli)
+`TypeScript` · `MIT` · 🟢 stable
+
+Local-first workspace combining notes, tasks, and AI chat in your browser on your machine.
+
+- **Replaces:** Notion AI, Obsidian + Copilot plugin
+- **Edge:** Plain markdown files on disk — no accounts, no cloud, no database. The AI reads and edits your actual workspace files. Supports Ollama for fully local inference.
+
 ---
 
 ## Vector Databases
