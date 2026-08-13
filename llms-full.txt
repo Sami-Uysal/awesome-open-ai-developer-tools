@@ -103,6 +103,15 @@ Plan-first CLI/TUI orchestrator that converts a single goal into an ordered, edi
 - **Backends:** Claude Code, Codex, OpenCode
 - **Edge:** Features a read-only planner that generates explicit step-by-step agent plans before execution, with per-task runner, model, and mode assignment.
 
+### [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent)
+`TypeScript` · `MIT` · CLI + TUI · 🟠 experimental
+
+Local-first coding and desktop agent that runs open-weight models on your machine, with no account or API key needed to install and run it.
+
+- **Replaces:** Claude Code, Cursor, GitHub Copilot
+- **Backends:** Bundled `llama.cpp` fork for local quantized models, plus any OpenAI-compatible endpoint, with presets for OpenRouter, LM Studio, and Ollama Cloud
+- **Edge:** Ships its own `llama.cpp` fork and manages the backend process itself, so a quantized local model stays usable across long multi-step runs without a separate server setup. The control loop and all state, including a five-layer memory store, stay on the machine, and 56 built-in tools cover browser, filesystem, git, and vision alongside external MCP servers. The README labels it a developer preview: APIs, commands, and config still move between releases.
+
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains · 🟢 stable
 
@@ -934,7 +943,7 @@ Visual framework for building multi-agent and RAG applications.
 | You're paying for | Use instead |
 |---|---|
 | GitHub Copilot | [Continue](https://github.com/continuedev/continue), [Tabby](https://github.com/TabbyML/tabby), [aider](https://github.com/Aider-AI/aider) |
-| Cursor / Windsurf | [Cline](https://github.com/cline/cline), [OpenCode](https://github.com/sst/opencode), [Continue](https://github.com/continuedev/continue), [BitFun](https://github.com/GCWing/BitFun) |
+| Cursor / Windsurf | [Cline](https://github.com/cline/cline), [OpenCode](https://github.com/sst/opencode), [Continue](https://github.com/continuedev/continue), [BitFun](https://github.com/GCWing/BitFun), [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent) |
 | Devin | [OpenHands](https://github.com/All-Hands-AI/OpenHands), [Goose](https://github.com/block/goose), [SWE-agent](https://github.com/SWE-agent/SWE-agent) |
 | Claude Design / Figma Make | [Open Design](https://github.com/nexu-io/open-design) |
 | ChatGPT desktop / Copilot assistant | [OpenClaw](https://github.com/openclaw/openclaw), [Hermes Agent](https://github.com/NousResearch/hermes-agent) |
@@ -1281,6 +1290,15 @@ Plan-first CLI/TUI orchestrator that converts a single goal into an ordered, edi
 - **Replaces:** Manual task decomposition and multi-agent CLI scripting
 - **Backends:** Claude Code, Codex, OpenCode
 - **Edge:** Features a read-only planner that generates explicit step-by-step agent plans before execution, with per-task runner, model, and mode assignment.
+
+### [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent)
+`TypeScript` · `MIT` · CLI + TUI · 🟠 experimental
+
+Local-first coding and desktop agent that runs open-weight models on your machine, with no account or API key needed to install and run it.
+
+- **Replaces:** Claude Code, Cursor, GitHub Copilot
+- **Backends:** Bundled `llama.cpp` fork for local quantized models, plus any OpenAI-compatible endpoint, with presets for OpenRouter, LM Studio, and Ollama Cloud
+- **Edge:** Ships its own `llama.cpp` fork and manages the backend process itself, so a quantized local model stays usable across long multi-step runs without a separate server setup. The control loop and all state, including a five-layer memory store, stay on the machine, and 56 built-in tools cover browser, filesystem, git, and vision alongside external MCP servers. The README labels it a developer preview: APIs, commands, and config still move between releases.
 
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains · 🟢 stable
@@ -2068,7 +2086,7 @@ Visual framework for building multi-agent and RAG applications.
 | You're paying for | Use instead |
 |---|---|
 | GitHub Copilot | [Continue](https://github.com/continuedev/continue), [Tabby](https://github.com/TabbyML/tabby), [aider](https://github.com/Aider-AI/aider) |
-| Cursor / Windsurf | [Cline](https://github.com/cline/cline), [OpenCode](https://github.com/sst/opencode), [Continue](https://github.com/continuedev/continue), [BitFun](https://github.com/GCWing/BitFun) |
+| Cursor / Windsurf | [Cline](https://github.com/cline/cline), [OpenCode](https://github.com/sst/opencode), [Continue](https://github.com/continuedev/continue), [BitFun](https://github.com/GCWing/BitFun), [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent) |
 | Devin | [OpenHands](https://github.com/All-Hands-AI/OpenHands), [Goose](https://github.com/block/goose), [SWE-agent](https://github.com/SWE-agent/SWE-agent) |
 | Claude Design / Figma Make | [Open Design](https://github.com/nexu-io/open-design) |
 | ChatGPT desktop / Copilot assistant | [OpenClaw](https://github.com/openclaw/openclaw), [Hermes Agent](https://github.com/NousResearch/hermes-agent) |
