@@ -6,7 +6,7 @@ path: /
 updated: 2026-08-13
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-13T10:23:22.123Z"
+  generated_at: "2026-08-13T10:23:30.789Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -580,6 +580,14 @@ A local-first visual LLM workspace where graph edges define what context the mod
 - **Replaces:** linear chat interfaces for long-running LLM research
 - **Backends:** Ollama and OpenAI-compatible endpoints
 - **Edge:** Graph edges are execution semantics, not decoration: traversing a node's upstream DAG constructs the message history for the next request, so users can branch, merge, and prune context explicitly.
+
+### [Persona](https://github.com/jayamitkatariya/personacli)
+`TypeScript` · `MIT` · 🟡 active
+
+Local-first workspace combining notes, tasks, and AI chat in your browser on your machine.
+
+- **Replaces:** Notion AI, Obsidian + Copilot plugin
+- **Edge:** Plain markdown files on disk — no accounts, no cloud, no database. The AI reads and edits your actual workspace files. Supports Ollama for fully local inference.
 
 ---
 
