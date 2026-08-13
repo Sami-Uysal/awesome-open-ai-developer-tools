@@ -95,6 +95,15 @@ Plan-first CLI/TUI orchestrator that converts a single goal into an ordered, edi
 - **Backends:** Claude Code, Codex, OpenCode
 - **Edge:** Features a read-only planner that generates explicit step-by-step agent plans before execution, with per-task runner, model, and mode assignment.
 
+### [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent)
+`TypeScript` · `MIT` · CLI + TUI · 🟠 experimental
+
+Local-first coding and desktop agent that runs open-weight models on your machine, with no account or API key needed to install and run it.
+
+- **Replaces:** Claude Code, Cursor, GitHub Copilot
+- **Backends:** Bundled `llama.cpp` fork for local quantized models, plus any OpenAI-compatible endpoint, with presets for OpenRouter, LM Studio, and Ollama Cloud
+- **Edge:** Ships its own `llama.cpp` fork and manages the backend process itself, so a quantized local model stays usable across long multi-step runs without a separate server setup. The control loop and all state, including a five-layer memory store, stay on the machine, and 56 built-in tools cover browser, filesystem, git, and vision alongside external MCP servers. The README labels it a developer preview: APIs, commands, and config still move between releases.
+
 ### [Kilo Code](https://github.com/Kilo-Org/kilocode)
 `TypeScript` · `Apache-2.0` · VS Code + JetBrains · 🟢 stable
 
