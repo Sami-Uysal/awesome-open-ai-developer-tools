@@ -572,7 +572,7 @@ A local-first visual LLM workspace where graph edges define what context the mod
 - **Edge:** Graph edges are execution semantics, not decoration: traversing a node's upstream DAG constructs the message history for the next request, so users can branch, merge, and prune context explicitly.
 
 ### [Persona](https://github.com/jayamitkatariya/personacli)
-`TypeScript` · `MIT` · 🟢 stable
+`TypeScript` · `MIT` · 🟡 active
 
 Local-first workspace combining notes, tasks, and AI chat in your browser on your machine.
 
