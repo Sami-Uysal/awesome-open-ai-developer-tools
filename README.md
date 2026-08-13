@@ -320,6 +320,15 @@ Browser automation driven by computer vision instead of DOM selectors.
 - **Replaces:** Stagehand, brittle Playwright scraping suites
 - **Edge:** because it navigates visually, a site redesign doesn't break your selectors — the usual reason scraping pipelines rot. **Check the license:** AGPL-3.0, and the anti-bot pieces are held back for the paid cloud. That combination rules it out for some commercial use.
 
+### [Open Interpreter](https://github.com/openinterpreter/openinterpreter)
+`Python` · `MIT` · CLI + Desktop · 🟢 stable
+
+Lets Language Models run code locally on your computer to edit videos, analyze data, and control browsers.
+
+- **Replaces:** OpenAI Code Interpreter (Advanced Data Analysis)
+- **Backends:** Local models (Ollama, LM Studio) or hosted APIs (OpenAI, Anthropic)
+- **Edge:** Runs directly in your local terminal environment with full access to system utilities, internet, and python packages without cloud execution limits.
+
 ---
 
 ## Agent Frameworks & Orchestration
@@ -947,52 +956,3 @@ Visual framework for building multi-agent and RAG applications.
 Start small. Every layer below is optional until it isn't.
 
 **Solo developer, local-first, zero API cost**
-```
-Ollama → Continue (editor) + aider (terminal) → Open WebUI (chat)
-```
-
-**Small team shipping an AI product**
-```
-LiteLLM proxy → LangGraph or CrewAI → pgvector → Langfuse → promptfoo in CI
-```
-
-**Enterprise, self-hosted, compliance-bound**
-```
-vLLM (own GPUs) → LiteLLM (keys/budgets) → Qdrant → Dify or LangGraph
-  → Langfuse (tracing) → Garak + NeMo Guardrails (safety)
-```
-
-**Document-heavy RAG**
-```
-Docling or RAGFlow (parsing) → LlamaIndex (retrieval) → Qdrant → Ragas (eval)
-```
-
-Three rules that save the most time:
-
-1. **Put a gateway in front of your models from day one.** LiteLLM costs an afternoon and buys you provider switching, budgets, and fallbacks forever.
-2. **Use Postgres + pgvector until you have measured a reason not to.** Most "we need a vector database" problems are actually retrieval-quality problems.
-3. **Add tracing before you add features.** Debugging an untraced multi-agent system is guesswork.
-
----
-
-## Contributing
-
-PRs welcome. See [CONTRIBUTING.md](docs/community/contributing.md).
-
-The bar for inclusion:
-
-- OSI-approved license (source-available tools are allowed but must be labeled)
-- Meaningfully maintained — commits within the last 6 months
-- Solves a problem a developer actually has
-- The entry explains *why you'd choose it*, not just what it does
-
-## Contributors
-<a href="https://github.com/Sami-Uysal/awesome-open-ai-developer-tools/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Sami-Uysal/awesome-open-ai-developer-tools" />
-</a>
-
-## License
-
-[![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](LICENSE)
-
-To the extent possible under law, contributors have waived all copyright and related rights to this work.
