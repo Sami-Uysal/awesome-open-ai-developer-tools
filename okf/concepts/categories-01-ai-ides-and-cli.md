@@ -6,7 +6,7 @@ path: /categories/01-ai-ides-and-cli/
 updated: 2026-08-13
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-13T10:23:30.782Z"
+  generated_at: "2026-08-13T10:24:44.918Z"
 ---
 # AI IDEs and CLI
 
@@ -77,6 +77,15 @@ Extensible autonomous agent from Block, now governed by the Linux Foundation. In
 - **Replaces:** Devin, Cursor agent mode
 - **Backends:** Any provider, plus first-class MCP extension support
 - **Edge:** More autonomous than aider — plans and iterates with less hand-holding. Vendor-neutral governance under the Linux Foundation means no rug-pull risk, which matters for tooling you standardize a team on.
+
+### [BitFun](https://github.com/GCWing/BitFun)
+`Rust + TypeScript` · `MIT` · Desktop + CLI · 🟡 active
+
+Cross-platform coding and desktop agent that plans, edits, tests, and commits inside real Git repositories.
+
+- **Replaces:** Cursor, Claude Desktop
+- **Backends:** User-configured model providers; model-agnostic by design
+- **Edge:** A Rust runtime binds each conversation to task-specific Mini Apps while retaining filesystem, terminal, Git, browser, desktop, and remote-workspace execution. A self-hostable zero-knowledge relay supports cross-device session control without routing workspace data through a vendor cloud.
 
 ### [Orkas](https://github.com/Orkas-AI/Orkas)
 `TypeScript` · `MIT` · Desktop · 🟡 active
