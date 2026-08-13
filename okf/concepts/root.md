@@ -6,7 +6,7 @@ path: /
 updated: 2026-08-13
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-13T22:07:16.944Z"
+  generated_at: "2026-08-13T22:07:28.191Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -329,6 +329,15 @@ Browser automation driven by computer vision instead of DOM selectors.
 
 - **Replaces:** Stagehand, brittle Playwright scraping suites
 - **Edge:** because it navigates visually, a site redesign doesn't break your selectors — the usual reason scraping pipelines rot. **Check the license:** AGPL-3.0, and the anti-bot pieces are held back for the paid cloud. That combination rules it out for some commercial use.
+
+### [Open Interpreter](https://github.com/openinterpreter/openinterpreter)
+`Python` · `MIT` · CLI + Desktop · 🟢 stable
+
+Lets Language Models run code locally on your computer to edit videos, analyze data, and control browsers.
+
+- **Replaces:** OpenAI Code Interpreter (Advanced Data Analysis)
+- **Backends:** Local models (Ollama, LM Studio) or hosted APIs (OpenAI, Anthropic)
+- **Edge:** Runs directly in your local terminal environment with full access to system utilities, internet, and python packages without cloud execution limits.
 
 ---
 
