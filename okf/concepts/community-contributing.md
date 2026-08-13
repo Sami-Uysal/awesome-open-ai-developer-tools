@@ -3,10 +3,10 @@ type: concept
 title: Contributing
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/contributing/"
 path: /community/contributing/
-updated: 2026-08-09
+updated: 2026-08-13
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-09T08:35:03.033Z"
+  generated_at: "2026-08-13T10:23:22.122Z"
 ---
 # Contributing
 
