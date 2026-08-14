@@ -847,6 +847,13 @@ Observability platform for LLM apps — one-line proxy integration, caching, and
 
 - **Edge:** Change your base URL and you have logging. Lowest-friction start of any tool in this section.
 
+### [Mydentify AI Model Cost Calculator](https://github.com/mitdralla/mydentify-ai-model-cost-calculator)
+`JavaScript` · `MIT` · Browser app · 🟠 experimental
+
+Dependency-free browser calculator for estimating AI model API costs from request volume, input and output tokens, cached input, and fixed per-request charges.
+
+- **Edge:** Runs locally without API keys, accounts, cookies, analytics, or server-side processing. The tested formula separates cached from uncached input and keeps provider-specific pricing assumptions visible so estimates can be reviewed before a real bill is incurred.
+
 ---
 
 ## Speech, Vision & Multimodal
