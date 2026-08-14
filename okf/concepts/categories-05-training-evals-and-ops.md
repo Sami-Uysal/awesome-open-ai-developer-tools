@@ -3,10 +3,10 @@ type: concept
 title: "Training, Evals, and Ops"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/"
 path: /categories/05-training-evals-and-ops/
-updated: 2026-08-13
+updated: 2026-08-14
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-13T22:10:25.731Z"
+  generated_at: "2026-08-14T11:25:05.923Z"
 ---
 # Training, Evals, and Ops
 
@@ -141,5 +141,12 @@ OpenTelemetry instrumentation for LLM applications.
 Observability platform for LLM apps — one-line proxy integration, caching, and rate limiting.
 
 - **Edge:** Change your base URL and you have logging. Lowest-friction start of any tool in this section.
+
+### [Mydentify AI Model Cost Calculator](https://github.com/mitdralla/mydentify-ai-model-cost-calculator)
+`JavaScript` · `MIT` · Browser app · 🟠 experimental
+
+Dependency-free browser calculator for estimating AI model API costs from request volume, input and output tokens, cached input, and fixed per-request charges.
+
+- **Edge:** Runs locally without API keys, accounts, cookies, analytics, or server-side processing. The tested formula separates cached from uncached input and keeps provider-specific pricing assumptions visible so estimates can be reviewed before a real bill is incurred.
 
 ---
