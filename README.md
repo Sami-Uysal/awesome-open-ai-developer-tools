@@ -446,7 +446,7 @@ The ergonomic way to build MCP servers and clients — decorator-based, like Fas
 ### [SandBase CLI](https://github.com/sandbaseai/cli)
 `TypeScript` · `Apache-2.0` · CLI + MCP bridge · 🟡 active
 
-Connects 17+ coding-agent clients to a hosted catalog of 2,000+ tools and 200+ AI models through MCP.
+Connects 17+ coding-agent clients to a hosted catalog of 2,000+ AI models and APIs through MCP.
 
 - **Replaces:** per-provider API wrappers and repeated MCP configuration across agent clients
 - **Backends:** SandBase's hosted API catalog, including web search, social data, scraping, multimodal generation, and model APIs
