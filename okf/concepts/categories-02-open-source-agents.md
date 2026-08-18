@@ -6,7 +6,7 @@ path: /categories/02-open-source-agents/
 updated: 2026-08-18
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-18T08:20:22.725Z"
+  generated_at: "2026-08-18T08:20:33.675Z"
 ---
 # Open-Source Agents
 
@@ -223,6 +223,13 @@ The protocol itself — open standard for exposing tools, resources, and prompts
 Reference implementations — filesystem, git, fetch, memory, and dozens of community servers.
 
 - **Edge:** The fastest way to learn the protocol is to read a 200-line server that already works.
+
+### [Mac Developer Bridge](https://github.com/alexanderradahl/mac-developer-bridge)
+`JavaScript` · `MIT` · macOS / MCP · 🟠 experimental
+
+Local MCP bridge that lets an existing ChatGPT conversation operate the Mac where the developer is already working: shell, unrestricted files, real PTY sessions, background jobs, and read-only Codex history.
+
+- **Edge:** ChatGPT stays the reasoning layer and the bridge makes no model calls. Unlike a narrow filesystem or shell MCP, it is deliberately built for developer-machine parity and real interactive terminals. **Security tradeoff:** it is intentionally not sandboxed and runs with the macOS user's effective permissions, so it is only appropriate when that level of machine access is explicitly wanted.
 
 ### [MCP Inspector](https://github.com/modelcontextprotocol/inspector)
 `TypeScript` · `MIT` · 🟡 active
