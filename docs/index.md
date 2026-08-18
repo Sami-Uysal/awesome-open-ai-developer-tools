@@ -779,6 +779,14 @@ Test and evaluate prompts, agents, and RAG systems — plus LLM red teaming and 
 
 - **Edge:** Declarative test cases in YAML that run in CI. Side-by-side model comparison plus adversarial red-teaming in one tool. Local-first — your prompts never leave your machine.
 
+### [agent-qa](https://github.com/vostride/agent-qa)
+`TypeScript` · `FSL-1.1-ALv2` (fair-code; converts to `Apache-2.0`) · CLI, dashboard, MCP · 🟠 experimental
+
+The self-improving QA agent for software teams, with natural-language web and mobile tests that adapt when user interfaces change.
+
+- **Backends:** OpenAI- and Anthropic-compatible endpoints, Gemini, and local models
+- **Edge:** Stores product, suite, test, and healed-step observations as versioned execution memory, then reuses that context on later runs. Ships a dashboard, CLI, MCP server, and three agent skills in one repository.
+
 ### [ClawBench](https://github.com/reacher-z/ClawBench)
 `Python` · `Apache-2.0` · Docker/browser harness · 🟡 active
 
