@@ -511,7 +511,7 @@ Distribute an entire LLM as one executable file that runs on multiple OSes witho
 - **Edge:** Unbeatable for shipping a model to a non-technical user. One file. Double-click. Done.
 
 ### [Rapid-MLX](https://github.com/raullenchai/Rapid-MLX)
-`Python` · `Apache-2.0` · 🟢 stable
+`Python` · `Apache-2.0` · 🟡 active
 
 OpenAI-compatible inference server built specifically for Apple Silicon, on Apple's MLX framework.
 
