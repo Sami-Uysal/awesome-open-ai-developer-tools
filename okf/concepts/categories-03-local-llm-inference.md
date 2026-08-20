@@ -3,10 +3,10 @@ type: concept
 title: "Local LLM Inference"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/"
 path: /categories/03-local-llm-inference/
-updated: 2026-08-18
+updated: 2026-08-20
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-18T08:24:20.097Z"
+  generated_at: "2026-08-20T14:29:39.095Z"
 ---
 # Local LLM Inference
 
@@ -60,6 +60,14 @@ LLM inference entirely in the browser via WebGPU.
 Distribute an entire LLM as one executable file that runs on multiple OSes without installation.
 
 - **Edge:** Unbeatable for shipping a model to a non-technical user. One file. Double-click. Done.
+
+### [Rapid-MLX](https://github.com/raullenchai/Rapid-MLX)
+`Python` · `Apache-2.0` · 🟡 active
+
+OpenAI-compatible inference server built specifically for Apple Silicon, on Apple's MLX framework.
+
+- **Replaces:** Ollama / LM Studio (on a Mac)
+- **Edge:** MLX-native quantization tuned for the unified-memory envelope, with grammar-constrained tool calling, reasoning separation, and vision — verified end-to-end against Claude Code, Cursor, Aider and Codex. `brew install rapid-mlx`, then `rapid-mlx serve <model>`.
 
 ---
 

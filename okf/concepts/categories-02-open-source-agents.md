@@ -3,10 +3,10 @@ type: concept
 title: "Open-Source Agents"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/02-open-source-agents/"
 path: /categories/02-open-source-agents/
-updated: 2026-08-18
+updated: 2026-08-20
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-18T08:24:20.097Z"
+  generated_at: "2026-08-20T14:29:39.094Z"
 ---
 # Open-Source Agents
 

@@ -1,12 +1,12 @@
 {
-  "okf_version": "0.9.2",
+  "okf_version": "0.9.3",
   "bundle": {
     "name": "awesome-open-ai-developer-tools",
     "title": "Awesome Open AI Developer Tools",
     "description": "",
     "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools",
     "generated_by": "@docmd/plugin-okf",
-    "generated_at": "2026-08-18T08:24:20.102Z",
+    "generated_at": "2026-08-20T14:29:39.101Z",
     "default_type": "concept"
   },
   "stats": {
