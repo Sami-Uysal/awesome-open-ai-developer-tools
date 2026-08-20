@@ -51,6 +51,14 @@ Distribute an entire LLM as one executable file that runs on multiple OSes witho
 
 - **Edge:** Unbeatable for shipping a model to a non-technical user. One file. Double-click. Done.
 
+### [Rapid-MLX](https://github.com/raullenchai/Rapid-MLX)
+`Python` · `Apache-2.0` · 🟡 active
+
+OpenAI-compatible inference server built specifically for Apple Silicon, on Apple's MLX framework.
+
+- **Replaces:** Ollama / LM Studio (on a Mac)
+- **Edge:** MLX-native quantization tuned for the unified-memory envelope, with grammar-constrained tool calling, reasoning separation, and vision — verified end-to-end against Claude Code, Cursor, Aider and Codex. `brew install rapid-mlx`, then `rapid-mlx serve <model>`.
+
 ---
 
 ## Inference Servers & Gateways
