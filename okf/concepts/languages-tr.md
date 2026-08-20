@@ -6,7 +6,7 @@ path: /languages/tr/
 updated: 2026-08-20
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-20T14:29:39.099Z"
+  generated_at: "2026-08-20T14:29:47.415Z"
 ---
 # Awesome Open AI Developer Tools
 
