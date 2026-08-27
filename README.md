@@ -450,6 +450,15 @@ The ergonomic way to build MCP servers and clients — decorator-based, like Fas
 
 - **Edge:** A working server in ~10 lines. Handles auth, deployment, proxying, and server composition.
 
+### [SandBase CLI](https://github.com/sandbaseai/cli)
+`TypeScript` · `Apache-2.0` · CLI + local MCP server · 🟡 active
+
+Connects 25 AI clients to 2,000+ AI models and API tools through a local MCP bridge.
+
+- **Replaces:** per-provider API wrappers and repeated MCP configuration across agent clients
+- **Backends:** SandBase's hosted catalog for model inference, media generation, embeddings, web search, scraping, and social data
+- **Edge:** `connect` detects clients and applies their native configuration with atomic writes, backups, post-write verification, and exact rollback. Six MCP tools cover schema discovery, execution, async polling, recent-run costs, and account balance without injecting thousands of schemas into every agent context.
+
 ### [octocode](https://github.com/Muvon/octocode)
 `Rust` · `Apache-2.0` · 🟠 experimental
 
