@@ -32,6 +32,7 @@ No affiliate links. No sponsored slots. OSI-licensed only — source-available t
 - [Autonomous & Persistent Agents](#autonomous--persistent-agents)
 - [Agent Sandboxes & Browser Control](#agent-sandboxes--browser-control)
 - [Agent Frameworks & Orchestration](#agent-frameworks--orchestration)
+- [Agent Skills & Package Management](#agent-skills--package-management)
 - [Model Context Protocol (MCP)](#model-context-protocol-mcp)
 - [Local Inference Engines](#local-inference-engines)
 - [Inference Servers & Gateways](#inference-servers--gateways)
@@ -408,6 +409,19 @@ One OpenAI-compatible interface for 100+ LLM providers, plus a proxy with keys, 
 Production-oriented framework for composable RAG and agent pipelines.
 
 - **Edge:** Explicit, inspectable pipeline graphs. Strong retriever/ranker ecosystem — favored when search quality is the hard part.
+
+---
+
+## Agent Skills & Package Management
+
+Tools for publishing, versioning, discovering, and installing reusable instructions and configuration across AI coding assistants.
+
+### [AIPM](https://github.com/abhisri2090/aipm)
+`TypeScript` · `Apache-2.0` · CLI + registry · 🟡 active
+
+Package manager and public registry for reusable AI skills, prompts, rules, MCP setup, and tool files.
+
+- **Edge:** One versioned package can target Codex, Claude Code, and Cursor through adapters, while the lockfile records exact installed versions for repeatable team setup.
 
 ---
 
