@@ -570,6 +570,15 @@ Terminal-first AI gateway that puts provider routing, governed agent and knowled
 - **Backends:** deterministic local fake provider by default; configurable adapters for NVIDIA and OpenAI-compatible upstream providers
 - **Edge:** A fresh clone can prove the complete chat and MCP paths without credentials, while the CLI refuses to send when a real provider may be active unless the operator supplies `--allow-real-provider` for that command. Public-clone and container smoke checks keep the credential-free path under CI.
 
+### [SandBase CLI](https://github.com/sandbaseai/cli)
+`TypeScript` · `Apache-2.0` · `CLI + MCP bridge` · 🟡 active
+
+Agent-first CLI and local MCP bridge for routing requests across 2,000+ AI models and APIs.
+
+- **Replaces:** provider-specific CLI setup and per-client MCP configuration when comparing model backends
+- **Backends:** SandBase's authenticated model and API catalog, exposed through a local MCP transport
+- **Edge:** One managed bridge can configure and health-check 25 supported AI clients, while six MCP tools provide discovery, execution, and account-aware setup from the terminal.
+
 ---
 
 ## Chat UIs & Frontends
