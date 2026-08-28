@@ -450,6 +450,13 @@ The ergonomic way to build MCP servers and clients — decorator-based, like Fas
 
 - **Edge:** A working server in ~10 lines. Handles auth, deployment, proxying, and server composition.
 
+### [SandBase CLI](https://github.com/sandbaseai/cli)
+`TypeScript` · `Apache-2.0` · CLI + MCP · 🟠 experimental
+
+Open-source CLI and MCP bridge that exposes an OpenAI-compatible interface to 2,000+ AI models, with support for 25+ AI clients.
+
+- **Edge:** One provider-neutral endpoint and MCP configuration can be reused across supported clients instead of maintaining separate provider adapters. Usage is metered, with a free plan available.
+
 ### [octocode](https://github.com/Muvon/octocode)
 `Rust` · `Apache-2.0` · 🟠 experimental
 
