@@ -68,6 +68,15 @@ AI pair programming in your terminal. Maps your whole repository, edits files di
 
 Terminal-native coding agent with LSP integration — it loads the right language server so the model sees real type information, not guesses.
 
+### [SandBase CLI](https://github.com/sandbaseai/cli)
+`TypeScript` · `Apache-2.0` · CLI / local MCP bridge · 🟡 active
+
+Connects MCP-compatible coding clients to a catalog of 2,000+ AI models and APIs through one local command.
+
+- **Replaces:** Per-provider CLI and MCP configuration when switching model or API vendors
+- **Backends:** 2,000+ models and APIs exposed through SandBase
+- **Edge:** The local bridge detects and configures 25 supported clients, while `catalog --json` provides a read-only compatibility check before OAuth or configuration changes. Release archives include published SHA-256 checksums for reproducible installs.
+
 - **Replaces:** Claude Code, Cursor
 - **Backends:** Anthropic, OpenAI, Google, local models; provider-agnostic by design
 - **Edge:** LSP-grounded suggestions cut hallucinated APIs. Client/server split means you can drive one session from multiple clients.
