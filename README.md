@@ -518,6 +518,14 @@ OpenAI-compatible inference server built specifically for Apple Silicon, on Appl
 - **Replaces:** Ollama / LM Studio (on a Mac)
 - **Edge:** MLX-native quantization tuned for the unified-memory envelope, with grammar-constrained tool calling, reasoning separation, and vision — verified end-to-end against Claude Code, Cursor, Aider and Codex. `brew install rapid-mlx`, then `rapid-mlx serve <model>`.
 
+### [qwen3.8-27b-in-c](https://github.com/shyringo/qwen3.8-27b-in-c)
+`C` · `Apache-2.0` · CPU · 🟡 active
+
+Native inference engine built specifically to run Qwen3.8-27B on one laptop CPU.
+
+- **Replaces:** cloud inference for Qwen3.8-27B on memory-constrained laptops
+- **Edge:** A tested 8 GB RAM path, measured generation up to 2.52 token/s on a 32 GB x86 laptop, and a resident OpenAI-compatible API with parallel function calls. One launcher builds the engine, selects and downloads a pinned GGUF, and starts a conversation; no GPU, Python service, or external inference runtime.
+
 ---
 
 ## Inference Servers & Gateways
