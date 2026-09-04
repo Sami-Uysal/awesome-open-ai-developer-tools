@@ -338,6 +338,15 @@ Lets Language Models run code locally on your computer to edit videos, analyze d
 - **Backends:** Local models (Ollama, LM Studio) or hosted APIs (OpenAI, Anthropic)
 - **Edge:** Runs directly in your local terminal environment with full access to system utilities, internet, and python packages without cloud execution limits.
 
+### [Superagent](https://github.com/pungme/superagent-desktop)
+`TypeScript + Swift` · `MIT` · Desktop app · 🟡 active
+
+macOS desktop app that gives Claude Code and Codex a real browser to drive, an iOS Simulator to install and screenshot apps in, and a phone companion app for remote monitoring.
+
+- **Replaces:** cloud sandbox services for agents that specifically need a real, controllable macOS browser/iOS Simulator rather than a headless container
+- **Backends:** Claude Code, Codex
+- **Edge:** unlike headless sandboxes, the browser and Simulator are visible and drivable on the user's own Mac, so the agent can screenshot real rendered UI and iOS app behavior instead of a DOM approximation.
+
 ---
 
 ## Agent Frameworks & Orchestration
