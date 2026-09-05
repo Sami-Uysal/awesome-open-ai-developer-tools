@@ -175,6 +175,15 @@ Describe a project in natural language; it writes and iterates on the whole code
 
 - **Edge:** Best for greenfield scaffolding rather than surgical edits on an existing repo.
 
+### [YYLO](https://github.com/yylo-dev/yylo)
+`Python + TypeScript` · `MIT` · CLI · 🟡 active
+
+Command-line orchestrator for coding agents, repeatable workflows, and receipt-backed repository changes.
+
+- **Replaces:** Manual multi-agent workflow scripting, cloud-hosted agent orchestration
+- **Backends:** Drives Pi and Codex subagents through per-subagent aliases
+- **Edge:** `task start` freezes the protected target SHA and creates a dedicated branch/worktree per task; a merge queue then owns risk-based review — low risk merges with no semantic reviewer, high risk gets two sequential reviewers on one frozen candidate. Runs emit declared receipt hashes and terminal manifests, so repository changes stay auditable after the fact.
+
 ---
 
 ## Prompt-to-App Builders
