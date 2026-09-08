@@ -604,6 +604,14 @@ All-in-one desktop and Docker app: chat with your documents, with agents and mul
 
 - **Edge:** Batteries-included RAG — embedder, vector DB, and UI ship together. Fastest path from "I have PDFs" to "I can ask them questions."
 
+### [Artifact Relay](https://github.com/eloktev/artifact-relay)
+`Python + HTML` · `MIT` · `Server + Hermes plugin` · 🟢 stable
+
+Self-hosted delivery surface for publishing long Markdown and standalone HTML results from AI agents to private, mobile-friendly pages.
+
+- **Replaces:** private pastebins and chat-bound artifact viewers
+- **Edge:** Publisher and viewer credentials are separate trust boundaries. Markdown is sanitized, standalone HTML runs in a sandboxed iframe, and optional share links can be scoped and revoked without exposing the publishing credential.
+
 ### [ThoughtDAG](https://github.com/chenxiachan/thoughtdag)
 `TypeScript` · `MIT` · Web · 🟠 experimental
 
