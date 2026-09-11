@@ -6,7 +6,7 @@ path: /
 updated: 2026-09-11
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-09-11T17:58:13.496Z"
+  generated_at: "2026-09-11T17:58:22.724Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -292,6 +292,13 @@ Stateful agents with real long-term memory — the agent manages its own context
 Memory layer you drop into any agent — extracts, stores, and retrieves facts about users across sessions.
 
 - **Edge:** Framework-agnostic. Hybrid vector + graph store beats naively stuffing the chat log into a vector DB.
+
+### [Mnemoverse](https://github.com/mnemoverse/mcp-memory-server)
+`TypeScript + Python` · `MIT` (client) · 🟢 stable
+
+Hosted memory reached over MCP: one key gives Claude Code, Cursor, VS Code and ChatGPT the same store, so what an agent learns in one is there in the next.
+
+- **Edge:** Recall ranking moves with outcomes, not similarity alone. A memory that helped is promoted, one that misled is demoted, so ranking is a function of consequences.
 
 ### [Khoj](https://github.com/khoj-ai/khoj)
 `Python` · `AGPL-3.0` · 🟢 stable
