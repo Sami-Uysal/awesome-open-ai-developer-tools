@@ -289,6 +289,12 @@ Memory layer you drop into any agent — extracts, stores, and retrieves facts a
 Local-first shared decision memory for engineering teams using Claude Code. An append-only log of architectural decisions and the alternatives that were rejected, projected into a knowledge graph the agent queries before it makes a change.
 
 - **Edge:** The log is append-only and decisions are superseded, never edited or deleted, so a rejected approach stays in history with the reason it died. Teams sync the store over an S3 bucket they own, with no central server and no daemon. Capture rules live in a committed, per-repo config you approve before it runs.
+### [Mnemoverse](https://github.com/mnemoverse/mcp-memory-server)
+`TypeScript + Python` · `MIT` (client) · 🟢 stable
+
+Hosted memory reached over MCP: one key gives Claude Code, Cursor, VS Code and ChatGPT the same store, so what an agent learns in one is there in the next.
+
+- **Edge:** Recall ranking moves with outcomes, not similarity alone. A memory that helped is promoted, one that misled is demoted, so ranking is a function of consequences.
 
 ### [Khoj](https://github.com/khoj-ai/khoj)
 `Python` · `AGPL-3.0` · 🟢 stable
