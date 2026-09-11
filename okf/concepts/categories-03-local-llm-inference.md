@@ -6,7 +6,7 @@ path: /categories/03-local-llm-inference/
 updated: 2026-09-11
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-09-11T18:09:57.129Z"
+  generated_at: "2026-09-11T18:10:08.143Z"
 ---
 # Local LLM Inference
 
@@ -120,6 +120,14 @@ Terminal-first AI gateway that puts provider routing, governed agent and knowled
 - **Replaces:** ad hoc provider-specific proxy scripts when evaluating a local AI gateway control plane
 - **Backends:** deterministic local fake provider by default; configurable adapters for NVIDIA and OpenAI-compatible upstream providers
 - **Edge:** A fresh clone can prove the complete chat and MCP paths without credentials, while the CLI refuses to send when a real provider may be active unless the operator supplies `--allow-real-provider` for that command. Public-clone and container smoke checks keep the credential-free path under CI.
+
+### [Bifrost](https://github.com/maximhq/bifrost)
+`Go` · `Apache-2.0` · `Self-hosted gateway` · 🟢 stable
+
+OpenAI-compatible AI gateway for routing requests across multiple model providers with failover, guardrails, usage controls, observability, and MCP support.
+
+- **Replaces:** provider-specific AI API integrations and proxy scripts
+- **Edge:** Go-native gateway with one OpenAI-compatible endpoint, automatic failover and load balancing, plus governance and telemetry controls for production traffic.
 
 ---
 
