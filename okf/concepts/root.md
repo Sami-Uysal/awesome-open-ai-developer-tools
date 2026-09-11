@@ -6,7 +6,7 @@ path: /
 updated: 2026-09-11
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-09-11T17:58:22.724Z"
+  generated_at: "2026-09-11T18:04:23.992Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -293,6 +293,12 @@ Memory layer you drop into any agent — extracts, stores, and retrieves facts a
 
 - **Edge:** Framework-agnostic. Hybrid vector + graph store beats naively stuffing the chat log into a vector DB.
 
+### [kgai](https://github.com/kgaidev/kgai)
+`Go` · `MIT` · Claude Code plugin + CLI · 🟡 active
+
+Local-first shared decision memory for engineering teams using Claude Code. An append-only log of architectural decisions and the alternatives that were rejected, projected into a knowledge graph the agent queries before it makes a change.
+
+- **Edge:** The log is append-only and decisions are superseded, never edited or deleted, so a rejected approach stays in history with the reason it died. Teams sync the store over an S3 bucket they own, with no central server and no daemon. Capture rules live in a committed, per-repo config you approve before it runs.
 ### [Mnemoverse](https://github.com/mnemoverse/mcp-memory-server)
 `TypeScript + Python` · `MIT` (client) · 🟢 stable
 
