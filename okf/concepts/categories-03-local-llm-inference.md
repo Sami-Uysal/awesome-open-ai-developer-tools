@@ -6,7 +6,7 @@ path: /categories/03-local-llm-inference/
 updated: 2026-09-11
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-09-11T18:04:23.988Z"
+  generated_at: "2026-09-11T18:04:30.757Z"
 ---
 # Local LLM Inference
 
