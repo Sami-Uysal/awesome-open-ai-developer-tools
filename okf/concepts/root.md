@@ -6,7 +6,7 @@ path: /
 updated: 2026-09-11
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-09-11T18:06:47.269Z"
+  generated_at: "2026-09-11T18:07:01.094Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -894,6 +894,13 @@ AI observability and evaluation, built on OpenTelemetry and OpenInference.
 OpenTelemetry instrumentation for LLM applications.
 
 - **Edge:** Standards-based — ship traces to Datadog, Honeycomb, Grafana, or whatever you already run. No new observability vendor.
+
+### [agent-watch](https://github.com/soul-sol/agent-watch)
+`POSIX shell` · `MIT` · CLI · 🟠 experimental
+
+Monitors background Claude Code and Codex jobs as RUNNING, DONE, FAILED, or STALL from process, exit-code, and log-tail signals.
+
+- **Edge:** Separates transport failures from credential failures before workers start by probing without credentials in the child process, then runs the optional auth probe only after reachability succeeds.
 
 ### [Helicone](https://github.com/Helicone/helicone)
 `TypeScript` · `Apache-2.0` · 🟢 stable
