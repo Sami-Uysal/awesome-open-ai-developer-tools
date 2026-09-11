@@ -39,7 +39,7 @@ var DocmdAIAssistant = (() => {
     DocmdAIAssistantUI: () => DocmdAIAssistantUI
   });
 
-  // ../../../node_modules/.pnpm/docmd-assistant@0.1.14/node_modules/docmd-assistant/dist/index.js
+  // ../../../node_modules/.pnpm/docmd-assistant@0.1.17/node_modules/docmd-assistant/dist/index.js
   function parseAssistantOutput(raw, knownToolNames) {
     if (!raw || typeof raw !== "string") {
       return { cleanText: "", extractedToolCalls: [] };
@@ -66,34 +66,48 @@ var DocmdAIAssistant = (() => {
     text = text.replace(/\]<\][a-zA-Z0-9_\-]+\[>\[/gi, "");
     text = text.replace(/<\/?(?:[a-zA-Z0-9_\-]+:)?(?:think|thought|reasoning|reflection|plan)\b[^>]*>/gi, "");
     const toolTagRegex = /<(?:[a-zA-Z0-9_\-]+:)?(tool_call|function_call|tool|action|request|invoke)\b([^>]*)>([\s\S]*?)<\/(?:[a-zA-Z0-9_\-]+:)?\1>/gi;
-    text = text.replace(toolTagRegex, (_match, _tag, attrs, body) => {
+    text = text.replace(toolTagRegex, (match, tag, attrs, body) => {
       const nameMatch = attrs.match(/name=["']([^"']+)["']/i);
       if (nameMatch) {
         const toolName = nameMatch[1].trim();
+        if (!knownToolNames || knownToolNames.length === 0 || knownToolNames.includes(toolName)) {
+          let args = {};
+          try {
+            args = JSON.parse(body.trim());
+          } catch {
+            args = { query: body.trim() };
+          }
+          extractedToolCalls.push({ name: toolName, args });
+          return "";
+        }
+        return match;
+      }
+      const initialCount = extractedToolCalls.length;
+      tryParseToolJson(body, extractedToolCalls, knownToolNames);
+      if (extractedToolCalls.length > initialCount) {
+        return "";
+      }
+      if (tag.toLowerCase() === "tool_call" || tag.toLowerCase() === "function_call") {
+        return "";
+      }
+      return match;
+    });
+    const inlineFunctionTagRegex = /<function\s*=\s*["']?([a-zA-Z0-9_\-]+)["']?>([\s\S]*?)<\/function>/gi;
+    text = text.replace(inlineFunctionTagRegex, (match, toolName, body) => {
+      const cleanName = toolName.trim();
+      if (!knownToolNames || knownToolNames.length === 0 || knownToolNames.includes(cleanName)) {
         let args = {};
         try {
           args = JSON.parse(body.trim());
         } catch {
           args = { query: body.trim() };
         }
-        extractedToolCalls.push({ name: toolName, args });
-      } else {
-        tryParseToolJson(body, extractedToolCalls);
+        extractedToolCalls.push({ name: cleanName, args });
+        return "";
       }
-      return "";
+      return match;
     });
-    const inlineFunctionTagRegex = /<function\s*=\s*["']?([a-zA-Z0-9_\-]+)["']?>([\s\S]*?)<\/function>/gi;
-    text = text.replace(inlineFunctionTagRegex, (_match, toolName, body) => {
-      let args = {};
-      try {
-        args = JSON.parse(body.trim());
-      } catch {
-        args = { query: body.trim() };
-      }
-      extractedToolCalls.push({ name: toolName.trim(), args });
-      return "";
-    });
-    const mdToolRegex = /```(?:tool_call|function_call|tool|action|json:tool|json)?\s*\n([\s\S]*?)```/gi;
+    const mdToolRegex = /```(?:tool_call|function_call|action|json:tool|json)?\s*\n([\s\S]*?)```/gi;
     text = text.replace(mdToolRegex, (_match, body) => {
       const initialCount = extractedToolCalls.length;
       tryParseToolJson(body, extractedToolCalls, knownToolNames);
@@ -102,16 +116,20 @@ var DocmdAIAssistant = (() => {
       }
       return _match;
     });
-    const bracketToolRegex = /\[?(?:TOOL[_\s]?CALL|FUNCTION[_\s]?CALL|TOOL|CALL|ACTION):\s*([a-zA-Z0-9_\-]+)\s*(?:\(([\s\S]*?)\)|(\{[\s\S]*?\})|([\s\S]*?))\]?/gi;
-    text = text.replace(bracketToolRegex, (_match, toolName, parenArgs, braceArgs, plainArgs) => {
-      const rawArgs = parenArgs !== void 0 ? parenArgs : braceArgs || plainArgs || "";
-      const args = parseFunctionalArgs(rawArgs);
-      extractedToolCalls.push({ name: toolName.trim(), args });
-      return "";
+    const bracketToolRegex = /\[(?:TOOL[_\s]?CALL|FUNCTION[_\s]?CALL|TOOL|CALL|ACTION):\s*([a-zA-Z0-9_\-]+)\s*(?:\(([\s\S]*?)\)|(\{[\s\S]*?\})|([\s\S]*?))\]/gi;
+    text = text.replace(bracketToolRegex, (match, toolName, parenArgs, braceArgs, plainArgs) => {
+      const cleanName = toolName.trim();
+      if (!knownToolNames || knownToolNames.length === 0 || knownToolNames.includes(cleanName)) {
+        const rawArgs = parenArgs !== void 0 ? parenArgs : braceArgs || plainArgs || "";
+        const args = parseFunctionalArgs(rawArgs);
+        extractedToolCalls.push({ name: cleanName, args });
+        return "";
+      }
+      return match;
     });
     if (knownToolNames && knownToolNames.length > 0) {
       for (const toolName of knownToolNames) {
-        const funcRegex = new RegExp(`(?:call:)?\\b${toolName}\\s*\\(([\\s\\S]*?)\\)`, "g");
+        const funcRegex = new RegExp(`(?:call:|invoke:)?\\b${toolName}\\s*\\(([\\s\\S]*?)\\)`, "g");
         text = text.replace(funcRegex, (_match, innerArgs) => {
           let args = {};
           const trimmed = innerArgs.trim();
@@ -130,7 +148,7 @@ var DocmdAIAssistant = (() => {
       }
     }
     text = extractAndStripJsonObjects(text, extractedToolCalls, knownToolNames);
-    text = text.replace(/<\/?(?:[a-zA-Z0-9_\-]+:)?(?:tool_call|function_call|tool|action|request|invoke)\b[^>]*>/gi, "");
+    text = text.replace(/<\/?(?:[a-zA-Z0-9_\-]+:)?(?:tool_call|function_call|invoke)\b[^>]*>/gi, "");
     text = text.replace(/```(\w+)(?:[ \t]+|\r?\n)?([\s\S]*?)```/g, (_match, lang, code) => {
       const trimmedCode = code.replace(/^\s*\n?/, "");
       return "```" + lang + "\n" + trimmedCode + "```";
@@ -230,22 +248,6 @@ var DocmdAIAssistant = (() => {
     if (parsed.function && typeof parsed.function === "object") {
       return processParsedToolObject(parsed.function, targetArray, knownToolNames);
     }
-    const name = parsed.name || parsed.tool || parsed.action || parsed.function_name;
-    let args = parsed.parameters || parsed.arguments || parsed.args || parsed.input || parsed.action_input;
-    if (name && typeof name === "string") {
-      const toolName = name.trim();
-      if (typeof args === "string") {
-        try {
-          args = JSON.parse(args);
-        } catch {
-          args = { query: args };
-        }
-      } else if (!args || typeof args !== "object") {
-        args = {};
-      }
-      targetArray.push({ name: toolName, args });
-      return true;
-    }
     if (knownToolNames && knownToolNames.length > 0) {
       for (const toolName of knownToolNames) {
         if (parsed[toolName] !== void 0) {
@@ -262,6 +264,26 @@ var DocmdAIAssistant = (() => {
           targetArray.push({ name: toolName, args: toolArgs });
           return true;
         }
+      }
+    }
+    const rawName = parsed.name || parsed.tool || parsed.action || parsed.function_name;
+    if (rawName && typeof rawName === "string") {
+      const toolName = rawName.trim();
+      const isKnown = knownToolNames && knownToolNames.length > 0 ? knownToolNames.includes(toolName) : false;
+      const hasExplicitToolSignature = parsed.type === "function" || parsed.function_name !== void 0 || parsed.tool !== void 0 || parsed.action_input !== void 0 || parsed.name !== void 0 && (parsed.arguments !== void 0 || parsed.parameters !== void 0 || parsed.input !== void 0);
+      if (isKnown || !knownToolNames && hasExplicitToolSignature) {
+        let args = parsed.parameters || parsed.arguments || parsed.args || parsed.input || parsed.action_input;
+        if (typeof args === "string") {
+          try {
+            args = JSON.parse(args);
+          } catch {
+            args = { query: args };
+          }
+        } else if (!args || typeof args !== "object") {
+          args = {};
+        }
+        targetArray.push({ name: toolName, args });
+        return true;
       }
     }
     return false;
@@ -320,11 +342,11 @@ var DocmdAIAssistant = (() => {
     }
     return results;
   }
-  var ENGINE_VERSION = typeof process !== "undefined" && "0.1.14" ? "0.1.14" : "0.1.14";
+  var ENGINE_VERSION = typeof process !== "undefined" && "0.1.17" ? "0.1.17" : "0.1.17";
   var DEFAULT_SYSTEM_PROMPT = `You are docmd assistant \u2014 a professional, precise, and concise technical AI assistant for this documentation site.
 
 CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
-1. IDENTITY: Your name is "docmd assistant". You are an expert AI guide specifically for this documentation site.
+1. IDENTITY: Your name is "docmd assistant". You are an expert AI documentation guide dedicated to assisting visitors with this site. If asked who or what you are, identify yourself as docmd assistant serving this documentation.
 2. STRICT SCOPE & BOUNDARIES: Answer strictly about the software, APIs, tools, installation, configuration, and topics documented on this site. Politely decline off-topic queries.
 3. STRICT FACTUALITY & ZERO FABRICATION:
    - Ground all answers, configuration snippets, and code examples STRICTLY in facts, keys, properties, and evidence explicitly retrieved from documentation search results or site tools.
@@ -332,21 +354,18 @@ CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
    - If documentation results do not evidence a specific setting, state what is verified and do not invent hypothetical JSON shapes.
 4. PROFESSIONAL & CONCISE: Provide direct, succinct, and professional answers. Do NOT use excessive emojis. Avoid conversational filler or boilerplate apologies. Get straight to the point.
 5. AUTONOMOUS & PROACTIVE TOOL EXECUTION:
-   - Always use your tools proactively. Directly execute the appropriate tool (\`search_documentation\` or \`get_site_structure\`) to retrieve accurate facts before answering.
+   - Always use your tools proactively. Directly execute the appropriate tool (\`search_documentation\`, \`get_site_structure\`, or \`read_documentation_page\`) to retrieve accurate facts before answering.
    - Use \`get_site_structure\` to inspect site topology, available documentation branches, and navigation trees.
-   - Use \`search_documentation\` to search release notes, API guides, configuration options, and concepts across all projects.
+   - Use \`search_documentation\` to search release notes, guides, configuration options, and concepts across all projects.
+   - Use \`read_documentation_page\` when you need full section context or deep code examples.
 6. SEARCH STRATEGY \u2014 THIS IS CRITICAL:
-   - The search index is KEYWORD-BASED ONLY. It matches individual keywords against page titles and content.
-   - ALWAYS search with a SINGLE keyword per search call. Never pass full sentences or multi-word phrases.
-   - To answer a question, identify 2-3 important keywords and call search_documentation SEPARATELY for each one.
-   - Example: For "how to deploy a docmd site locally", make separate calls: search("deploy"), search("local"), search("install").
-   - Example: For "what changed in the latest release", call: search("release"), search("changelog").
-   - Analyze the combined search results from all calls, then synthesize your answer.
-7. VERSION & RELEASE NOTES INTELLIGENCE:
-   - Patch releases and changelog updates are documented in the release notes.
-   - When asked what the latest release or version is, search with query: "release" or "changelog".
-8. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced documentation pages.
-9. CONCISE & CLEAN OUTPUT: Keep your response clean, structured, and concise (under 1500 tokens). Use valid Markdown formatting without raw unescaped HTML or script tags.`;
+   - The search index matches keywords against page titles, headers, and content.
+   - Use concise, targeted search keywords.
+   - Example: For "how to install or deploy locally", make targeted calls: search("install"), search("deploy").
+   - Example: For "what changed in a specific release", search the version or release keyword: search("release notes").
+   - Analyze search results carefully, then synthesize your answer.
+7. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced documentation pages.
+8. CONCISE & CLEAN OUTPUT: Keep your response clean, structured, and concise. Use valid Markdown formatting without raw unescaped HTML or script tags.`;
   function truncateContextCleanly(text, maxLen = 15e3) {
     if (!text || text.length <= maxLen) return text;
     let sliced = text.slice(0, maxLen);
@@ -379,8 +398,29 @@ CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
         icon: "folder-tree"
       };
     }
+    if (toolName === "read_documentation_page") {
+      const path = args?.path || args?.url || "";
+      return {
+        text: path ? `Reading documentation: ${path}...` : "Reading documentation...",
+        icon: "book-open"
+      };
+    }
+    if (toolName === "navigate_to_page") {
+      const path = args?.path || "";
+      return {
+        text: path ? `Navigating to ${path}...` : "Navigating to page...",
+        icon: "navigation"
+      };
+    }
+    if (toolName === "copy_code_snippet") {
+      return {
+        text: "Copying code snippet...",
+        icon: "copy"
+      };
+    }
+    const readable = toolName.replace(/^([a-z])/, (m) => m.toUpperCase()).replace(/_/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2");
     return {
-      text: `Running ${toolName}...`,
+      text: `${readable}...`,
       icon: "cog"
     };
   }
@@ -391,9 +431,11 @@ CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
     systemPrompt;
     listeners = /* @__PURE__ */ new Map();
     isExecuting = false;
+    contextWindow;
     constructor(options = {}) {
       this.options = { ...options };
       this.systemPrompt = options.systemPrompt || DEFAULT_SYSTEM_PROMPT;
+      this.contextWindow = options.contextWindow && options.contextWindow >= 1e3 ? options.contextWindow : 2e5;
       if (options.history) {
         this.history = [...options.history];
       }
@@ -587,23 +629,29 @@ ${additionalPrompt}`;
         const toolCallsToExecute = [];
         if (res.message?.toolCalls && res.message.toolCalls.length > 0) {
           for (const tc of res.message.toolCalls) {
-            toolCallsToExecute.push({
-              id: tc.id || `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-              name: tc.name,
-              args: tc.input || {}
-            });
+            if (this.tools.has(tc.name)) {
+              toolCallsToExecute.push({
+                id: tc.id || `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+                name: tc.name,
+                args: tc.input || {}
+              });
+            }
           }
         } else if (parsed.extractedToolCalls.length > 0) {
           for (const tc of parsed.extractedToolCalls) {
-            toolCallsToExecute.push({
-              id: `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-              name: tc.name,
-              args: tc.args || {}
-            });
+            if (this.tools.has(tc.name)) {
+              toolCallsToExecute.push({
+                id: `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+                name: tc.name,
+                args: tc.args || {}
+              });
+            }
           }
         }
-        if (toolCallsToExecute.length === 0) {
+        if (parsed.cleanText || rawContent) {
           finalReplyText = parsed.cleanText || rawContent;
+        }
+        if (toolCallsToExecute.length === 0) {
           break;
         }
         conversationMessages.push({
@@ -694,23 +742,29 @@ ${additionalPrompt}`;
         const toolCallsToExecute = [];
         if (res.message?.toolCalls && res.message.toolCalls.length > 0) {
           for (const tc of res.message.toolCalls) {
-            toolCallsToExecute.push({
-              id: tc.id || `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-              name: tc.name,
-              args: tc.input || {}
-            });
+            if (this.tools.has(tc.name)) {
+              toolCallsToExecute.push({
+                id: tc.id || `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+                name: tc.name,
+                args: tc.input || {}
+              });
+            }
           }
         } else if (parsed.extractedToolCalls.length > 0) {
           for (const tc of parsed.extractedToolCalls) {
-            toolCallsToExecute.push({
-              id: `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-              name: tc.name,
-              args: tc.args || {}
-            });
+            if (this.tools.has(tc.name)) {
+              toolCallsToExecute.push({
+                id: `call_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+                name: tc.name,
+                args: tc.args || {}
+              });
+            }
           }
         }
-        if (toolCallsToExecute.length === 0) {
+        if (parsed.cleanText || streamBuffer) {
           finalAccumulatedText = parsed.cleanText || streamBuffer;
+        }
+        if (toolCallsToExecute.length === 0) {
           callbacks.onChunk?.(finalAccumulatedText);
           this.emit("chunk", finalAccumulatedText);
           break;
@@ -774,7 +828,8 @@ ${additionalPrompt}`;
         description: t.description,
         parameters: t.parameters || t.schema
       }));
-      const originalUserQuery = this.history[this.history.length - 1]?.content || "";
+      const rawUserContent = this.history[this.history.length - 1]?.content || "";
+      const originalUserQuery = rawUserContent.replace(/\n\n\[Documentation Search Context[\s\S]*$/i, "").trim();
       let currentHistory = this.history.slice(0, -1).map((m) => ({
         sender: m.sender || m.role,
         text: m.content
@@ -800,17 +855,32 @@ ${additionalPrompt}`;
           reasoning: reasoningVal,
           tools: allowTools && registeredTools.length > 0 ? registeredTools : void 0
         };
+        if (turnCount > 1) {
+          payload.isToolFollowUp = true;
+        }
         if (opts.provider) payload.provider = opts.provider;
         if (opts.model) payload.model = opts.model;
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Docmd-Plugin": `docmd-assistant/${ENGINE_VERSION}`,
-            ...opts.headers || {}
-          },
-          body: JSON.stringify(payload)
-        });
+        let res;
+        try {
+          res = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Docmd-Plugin": `docmd-assistant/${ENGINE_VERSION}`,
+              ...opts.headers || {}
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (fetchErr) {
+          const msg = String(fetchErr?.message || fetchErr || "");
+          if (fetchErr?.name === "AbortError") {
+            throw new Error("Request was aborted or cancelled.");
+          }
+          if (msg.toLowerCase().includes("load failed") || msg.toLowerCase().includes("failed to fetch")) {
+            throw new Error("Network connection to AI relay failed. Please verify your connection or try again.");
+          }
+          throw fetchErr;
+        }
         const data = await res.json();
         if (data.unconfigured) {
           return {
@@ -831,23 +901,29 @@ ${additionalPrompt}`;
           for (const tc of data.tool_calls) {
             const toolName = tc.name || tc.function?.name;
             const toolArgs = typeof tc.arguments === "string" ? JSON.parse(tc.arguments) : tc.arguments || tc.args || {};
-            toolCallsToExecute.push({
-              id: tc.id || `call_${Date.now()}`,
-              name: toolName,
-              args: toolArgs
-            });
+            if (toolName && this.tools.has(toolName)) {
+              toolCallsToExecute.push({
+                id: tc.id || `call_${Date.now()}`,
+                name: toolName,
+                args: toolArgs
+              });
+            }
           }
         } else if (parsed.extractedToolCalls.length > 0) {
           for (const tc of parsed.extractedToolCalls) {
-            toolCallsToExecute.push({
-              id: `call_${Date.now()}`,
-              name: tc.name,
-              args: tc.args || {}
-            });
+            if (tc.name && this.tools.has(tc.name)) {
+              toolCallsToExecute.push({
+                id: `call_${Date.now()}`,
+                name: tc.name,
+                args: tc.args || {}
+              });
+            }
           }
         }
+        if (parsed.cleanText || rawReply) {
+          finalReply = parsed.cleanText || rawReply;
+        }
         if (toolCallsToExecute.length === 0) {
-          finalReply = parsed.cleanText || rawReply || "No response returned.";
           break;
         }
         if (currentHistory.length === 0 || currentHistory[currentHistory.length - 1]?.text !== originalUserQuery) {
@@ -873,8 +949,8 @@ ${resultStr}`);
             text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
           });
         }
-        const contextStr = truncateContextCleanly(toolSummaries.join("\n\n"), 15e3);
-        userMessage = `User Question: "${originalUserQuery}"
+        const contextStr = truncateContextCleanly(toolSummaries.join("\n\n"), this.contextWindow);
+        userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
 ${contextStr}
@@ -904,7 +980,8 @@ Based strictly on the documentation search results above, answer the user's ques
         description: t.description,
         parameters: t.parameters || t.schema
       }));
-      const originalUserQuery = this.history[this.history.length - 1]?.content || "";
+      const rawUserContent = this.history[this.history.length - 1]?.content || "";
+      const originalUserQuery = rawUserContent.replace(/\n\n\[Documentation Search Context[\s\S]*$/i, "").trim();
       let currentHistory = this.history.slice(0, -1).map((m) => ({
         sender: m.sender || m.role,
         text: m.content
@@ -931,18 +1008,33 @@ Based strictly on the documentation search results above, answer the user's ques
           tools: allowTools && registeredTools.length > 0 ? registeredTools : void 0,
           stream: true
         };
+        if (turnCount > 1) {
+          payload.isToolFollowUp = true;
+        }
         if (opts.provider) payload.provider = opts.provider;
         if (opts.model) payload.model = opts.model;
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "text/event-stream, application/json",
-            "X-Docmd-Plugin": `docmd-assistant/${ENGINE_VERSION}`,
-            ...opts.headers || {}
-          },
-          body: JSON.stringify(payload)
-        });
+        let res;
+        try {
+          res = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "text/event-stream, application/json",
+              "X-Docmd-Plugin": `docmd-assistant/${ENGINE_VERSION}`,
+              ...opts.headers || {}
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (fetchErr) {
+          const msg = String(fetchErr?.message || fetchErr || "");
+          if (fetchErr?.name === "AbortError") {
+            throw new Error("Request was aborted or cancelled.");
+          }
+          if (msg.toLowerCase().includes("load failed") || msg.toLowerCase().includes("failed to fetch")) {
+            throw new Error("Network connection to AI relay failed. Please verify your connection or try again.");
+          }
+          throw fetchErr;
+        }
         const contentType = res.headers.get("content-type") || "";
         const isEventStream = contentType.toLowerCase().includes("text/event-stream");
         if (!isEventStream || !res.body) {
@@ -1019,8 +1111,8 @@ ${resultStr}`);
               text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
             });
           }
-          const contextStr2 = truncateContextCleanly(toolSummaries2.join("\n\n"), 15e3);
-          userMessage = `User Question: "${originalUserQuery}"
+          const contextStr2 = truncateContextCleanly(toolSummaries2.join("\n\n"), this.contextWindow);
+          userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
 ${contextStr2}
@@ -1094,23 +1186,31 @@ Based strictly on the documentation search results above, answer the user's ques
         const toolCallsToExecute = [];
         if (sseToolCalls.length > 0) {
           for (const tc of sseToolCalls) {
-            toolCallsToExecute.push({
-              id: tc.id || `call_${Date.now()}`,
-              name: tc.name || tc.function?.name,
-              args: typeof tc.arguments === "string" ? JSON.parse(tc.arguments) : tc.arguments || tc.args || {}
-            });
+            const toolName = tc.name || tc.function?.name;
+            const toolArgs = typeof tc.arguments === "string" ? JSON.parse(tc.arguments) : tc.arguments || tc.args || {};
+            if (toolName && this.tools.has(toolName)) {
+              toolCallsToExecute.push({
+                id: tc.id || `call_${Date.now()}`,
+                name: toolName,
+                args: toolArgs
+              });
+            }
           }
         } else if (parsed.extractedToolCalls.length > 0) {
           for (const tc of parsed.extractedToolCalls) {
-            toolCallsToExecute.push({
-              id: `call_${Date.now()}`,
-              name: tc.name,
-              args: tc.args || {}
-            });
+            if (tc.name && this.tools.has(tc.name)) {
+              toolCallsToExecute.push({
+                id: `call_${Date.now()}`,
+                name: tc.name,
+                args: tc.args || {}
+              });
+            }
           }
         }
+        if (parsed.cleanText || streamReplyText) {
+          finalReply = parsed.cleanText || streamReplyText;
+        }
         if (toolCallsToExecute.length === 0) {
-          finalReply = parsed.cleanText || streamReplyText || "No response returned.";
           if (allowTools) {
             callbacks.onChunk?.(finalReply);
             this.emit("chunk", finalReply);
@@ -1145,8 +1245,8 @@ ${resultStr}`);
             text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
           });
         }
-        const contextStr = truncateContextCleanly(toolSummaries.join("\n\n"), 15e3);
-        userMessage = `User Question: "${originalUserQuery}"
+        const contextStr = truncateContextCleanly(toolSummaries.join("\n\n"), this.contextWindow);
+        userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
 ${contextStr}
@@ -1343,14 +1443,215 @@ Based strictly on the documentation search results above, answer the user's ques
       }
     }
   };
+  function extractStructuredContent(mainContent) {
+    const clone = mainContent.cloneNode(true);
+    const removeSelectors = 'script, style, noscript, nav, aside, footer, header, svg, .sidebar, .toc, .docmd-ai-drawer, .docmd-ai-bar, [aria-hidden="true"]';
+    clone.querySelectorAll(removeSelectors).forEach((el) => el.remove());
+    clone.querySelectorAll("pre").forEach((pre) => {
+      const code = pre.querySelector("code");
+      const lang = code?.className?.match(/language-([a-z0-9_-]+)/i)?.[1] || "";
+      const codeText = (code || pre).textContent || "";
+      const marker = document.createElement("div");
+      marker.textContent = `
+
+\`\`\`${lang}
+${codeText.trim()}
+\`\`\`
+
+`;
+      pre.replaceWith(marker);
+    });
+    for (let lvl = 1; lvl <= 6; lvl++) {
+      const hashes = "#".repeat(lvl);
+      clone.querySelectorAll(`h${lvl}`).forEach((h) => {
+        const t = (h.textContent || "").trim();
+        if (t) {
+          const div = document.createElement("div");
+          div.textContent = `
+
+${hashes} ${t}
+
+`;
+          h.replaceWith(div);
+        }
+      });
+    }
+    clone.querySelectorAll("li").forEach((li) => {
+      const t = (li.textContent || "").trim();
+      if (t) {
+        const div = document.createElement("div");
+        div.textContent = `
+- ${t}`;
+        li.replaceWith(div);
+      }
+    });
+    clone.querySelectorAll("p").forEach((p) => {
+      const t = (p.textContent || "").trim();
+      if (t) {
+        const div = document.createElement("div");
+        div.textContent = `
+
+${t}
+
+`;
+        p.replaceWith(div);
+      }
+    });
+    const raw = clone.textContent || "";
+    return raw.replace(/\n{3,}/g, "\n\n").trim();
+  }
+  function createStandardTools(customSearch, customReader) {
+    return [
+      {
+        name: "search_documentation",
+        description: "Search documentation content for answers to specific user questions. Optionally filter by version or project.",
+        parameters: {
+          type: "object",
+          properties: {
+            query: { type: "string", description: "The search query string" },
+            version: { type: "string", description: 'Optional documentation version filter (e.g. "0.9.0", "0.8.0", "latest")' },
+            project: { type: "string", description: 'Optional workspace project name or prefix filter (e.g. "/", "assistant", "search")' }
+          },
+          required: ["query"]
+        },
+        execute: async (rawArgs) => {
+          const query = typeof rawArgs === "string" ? rawArgs : rawArgs?.query || rawArgs?.q || rawArgs?.search_query || rawArgs?.text || rawArgs?.input || "";
+          const project = typeof rawArgs === "object" ? rawArgs?.project || rawArgs?.projectFilter : void 0;
+          const version = typeof rawArgs === "object" ? rawArgs?.version || rawArgs?.versionFilter : void 0;
+          if (customSearch) {
+            try {
+              return await customSearch(query, project, version);
+            } catch (err) {
+              console.warn("[docmd-assistant] Custom search failed:", err);
+            }
+          }
+          if (typeof document !== "undefined") {
+            const results = [];
+            const headings = Array.from(document.querySelectorAll("h1, h2, h3, h4, section"));
+            const cleanQuery = (query || "").toLowerCase().trim();
+            if (!cleanQuery) return [];
+            for (const el of headings) {
+              const text = (el.textContent || "").trim();
+              if (text.toLowerCase().includes(cleanQuery)) {
+                const parent = el.closest("section, article") || el.parentElement;
+                const snippet = parent ? parent.textContent?.slice(0, 200) || text : text;
+                results.push({
+                  title: text,
+                  path: window.location.pathname + (el.id ? `#${el.id}` : ""),
+                  snippet
+                });
+              }
+            }
+            return results.slice(0, 5);
+          }
+          return [];
+        }
+      },
+      {
+        name: "navigate_to_page",
+        description: "Navigate user browser to a specific URL or section anchor on the documentation site.",
+        parameters: {
+          type: "object",
+          properties: {
+            path: { type: "string", description: "Relative path or anchor hash (e.g. /docs/setup#install)" }
+          },
+          required: ["path"]
+        },
+        execute: async ({ path }) => {
+          if (typeof window !== "undefined" && path) {
+            if (path.startsWith("#")) {
+              const target = document.querySelector(path);
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth" });
+                return { success: true, navigatedTo: path };
+              }
+            }
+            window.location.href = path;
+            return { success: true, navigatedTo: path };
+          }
+          return { success: false, reason: "Window object unavailable" };
+        }
+      },
+      {
+        name: "copy_code_snippet",
+        description: "Copy a code snippet directly to the user clipboard.",
+        parameters: {
+          type: "object",
+          properties: {
+            code: { type: "string", description: "The exact code snippet to copy" }
+          },
+          required: ["code"]
+        },
+        execute: async ({ code }) => {
+          if (typeof navigator !== "undefined" && navigator.clipboard) {
+            await navigator.clipboard.writeText(code);
+            return { success: true, copiedLength: code.length };
+          }
+          return { success: false, reason: "Clipboard API unavailable" };
+        }
+      },
+      {
+        name: "read_documentation_page",
+        description: "Fetch and read the full content of a specific documentation page or section path.",
+        parameters: {
+          type: "object",
+          properties: {
+            path: { type: "string", description: "The page path to fetch and read (e.g. /quickstart or /docs/setup)" }
+          },
+          required: ["path"]
+        },
+        execute: async ({ path: pagePath }) => {
+          if (customReader) {
+            try {
+              const res = await customReader(pagePath);
+              if (typeof res === "string") {
+                return { path: pagePath, content: res };
+              }
+              return { path: pagePath, title: res.title, content: res.content || "" };
+            } catch (err) {
+              console.warn("[docmd-assistant] Custom reader failed:", err);
+            }
+          }
+          if (typeof window === "undefined") {
+            return { error: "Window context unavailable" };
+          }
+          try {
+            const targetUrl = pagePath.startsWith("http") ? pagePath : window.location.origin + (pagePath.startsWith("/") ? pagePath : "/" + pagePath);
+            const res = await fetch(targetUrl);
+            if (res.ok) {
+              const html = await res.text();
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const mainContent = doc.querySelector('main, article, [role="main"], body');
+              const text = mainContent ? extractStructuredContent(mainContent) : "";
+              return {
+                path: pagePath,
+                content: text ? text.length > 8e3 ? text.slice(0, 8e3) + "\n...[content capped for token economy]" : text : "Page content could not be extracted."
+              };
+            }
+          } catch (err) {
+            console.warn("[docmd-assistant] Failed to fetch page content:", err);
+          }
+          return { error: `Could not load page content for ${pagePath}` };
+        }
+      }
+    ];
+  }
 
   // src/client/index.ts
   var DocmdAIAssistantUI = class {
     constructor() {
+      this.engine = null;
       this.container = null;
       this.isDrawerOpened = false;
       this.isPending = false;
-      const cfg = window.__docmd_ai_config || window.__DOCMD_AI_CONFIG__ || {};
+      this.projectId = "";
+      this.isUnconfigured = false;
+      const rawCfg = window.__docmd_ai_config || window.__DOCMD_AI_CONFIG__;
+      if (!rawCfg || rawCfg.enabled === false || rawCfg.assistant === false || rawCfg.chat === false) {
+        return;
+      }
+      const cfg = rawCfg;
       this.projectId = cfg.projectId || cfg.siteId || cfg.cloud?.projectId || cfg.cloud?.siteId || "default";
       this.isUnconfigured = (!cfg.projectId || cfg.projectId === "default") && !cfg.apiKey && !cfg.baseURL;
       const initialSystemPrompt = this.buildSystemPrompt();
@@ -1360,23 +1661,55 @@ Based strictly on the documentation search results above, answer the user's ques
         provider: cfg.provider,
         model: cfg.model,
         systemPrompt: initialSystemPrompt,
-        reasoning: cfg.reasoning ?? false
+        reasoning: cfg.reasoning ?? false,
+        contextWindow: cfg.contextWindow
       });
       const isSemanticUsable = cfg.searchCapabilities?.semantic === true;
+      const standardTools = createStandardTools(
+        async (query) => {
+          return await this.searchAllWorkspaceIndexes(query);
+        }
+      );
+      for (const tool of standardTools) {
+        this.engine.registerTool(tool);
+      }
       this.engine.registerTool({
         name: "get_site_structure",
         description: "Get the complete documentation site structure, including available versions (current and historical), supported languages/locales, workspace projects, search capabilities, and page navigation hierarchy with titles and URLs.",
+        parameters: {
+          type: "object",
+          properties: {}
+        },
         execute: async () => {
           return this.getSiteStructure();
         }
       });
       this.engine.registerTool({
         name: "search_documentation",
-        description: `Search documentation pages across all projects in this workspace using full-text keyword matching ${isSemanticUsable ? "and semantic vector search" : "(keyword search active; semantic search disabled)"}. Always supply concise, targeted search terms for highest accuracy.`,
+        description: `Search documentation pages across all projects in this workspace using full-text keyword matching ${isSemanticUsable ? "and semantic vector search" : "(keyword search active; semantic search disabled)"}. Always supply concise, targeted search terms for highest accuracy. You can optionally filter by version (e.g. "0.9.0", "0.8.0", "latest") or workspace project (e.g. "/", "assistant", "search").`,
+        parameters: {
+          type: "object",
+          properties: {
+            query: {
+              type: "string",
+              description: 'Targeted search query keywords or phrases (e.g. "installation", "quickstart", "api reference", "release notes", "configuration").'
+            },
+            version: {
+              type: "string",
+              description: 'Optional documentation version filter (e.g. "0.9.0", "0.8.0", "latest", "09", "08") to search exclusively in that version branch.'
+            },
+            project: {
+              type: "string",
+              description: 'Optional workspace project name or prefix filter (e.g. "/", "assistant", "search") to search within a specific project.'
+            }
+          },
+          required: ["query"]
+        },
         execute: async (rawArgs) => {
           const query = typeof rawArgs === "string" ? rawArgs : rawArgs?.query || rawArgs?.q || rawArgs?.search_query || rawArgs?.text || rawArgs?.input || "";
-          const project = typeof rawArgs === "object" ? rawArgs?.project : void 0;
-          return await this.searchAllWorkspaceIndexes(query, project);
+          const project = typeof rawArgs === "object" ? rawArgs?.project || rawArgs?.projectFilter : void 0;
+          const version = typeof rawArgs === "object" ? rawArgs?.version || rawArgs?.versionFilter : void 0;
+          return await this.searchAllWorkspaceIndexes(query, project, version);
         }
       });
       if (typeof document !== "undefined") {
@@ -1413,7 +1746,9 @@ Based strictly on the documentation search results above, answer the user's ques
     }
     mount() {
       if (document.getElementById("docmd-ai-plugin-root")) return;
-      const cfg = window.__docmd_ai_config || {};
+      const rawCfg = window.__docmd_ai_config || window.__DOCMD_AI_CONFIG__;
+      if (!rawCfg || rawCfg.enabled === false || rawCfg.assistant === false || rawCfg.chat === false) return;
+      const cfg = rawCfg;
       const i18n = window.__DOCMD_AI_I18N__ || {};
       const pos = cfg.position || "bottom-center";
       const placeholder = cfg.placeholder || i18n["ai.inputPlaceholder"] || "Ask AI Assistant...";
@@ -1524,6 +1859,27 @@ Based strictly on the documentation search results above, answer the user's ques
       const msgsContainer = document.getElementById("docmd-ai-messages");
       msgsContainer?.addEventListener("click", (e) => {
         const target = e.target;
+        const copyBtn = target.closest(".docmd-ai-code-copy-btn");
+        if (copyBtn) {
+          const wrap = copyBtn.closest(".docmd-ai-code-wrap");
+          const codeEl = wrap?.querySelector("code");
+          if (codeEl) {
+            const textToCopy = codeEl.textContent || "";
+            const copySvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>`;
+            const checkSvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              copyBtn.classList.add("copied");
+              copyBtn.innerHTML = `${checkSvg}<span>Copied</span>`;
+              setTimeout(() => {
+                copyBtn.classList.remove("copied");
+                copyBtn.innerHTML = `${copySvg}<span>Copy</span>`;
+              }, 2e3);
+            }).catch((err) => {
+              console.error("[docmd-ai] Failed to copy code snippet:", err);
+            });
+          }
+          return;
+        }
         if (target && target.classList.contains("docmd-ai-pill-btn")) {
           if (this.isPending) return;
           const prompt = target.getAttribute("data-prompt");
@@ -1566,6 +1922,9 @@ Based strictly on the documentation search results above, answer the user's ques
       const drawer = document.getElementById("docmd-ai-drawer");
       barWrap?.classList.add("hidden");
       drawer?.classList.add("open");
+      if (typeof document !== "undefined" && document.body.classList.contains("tc-panel-open")) {
+        document.body.classList.remove("tc-panel-open");
+      }
     }
     closeDrawer() {
       this.isDrawerOpened = false;
@@ -1670,19 +2029,37 @@ CRITICAL SCOPE & NAVIGATION RULES:
 1. SCOPE PRIORITIZATION: Prioritize answers using content from the Current Active Project ("${currentProjectName}")${hasVersions && activeVersion ? `, active version branch (${activeVersion.label})` : ""}${hasLocales && activeLocale ? `, and active language (${activeLocale.label})` : ""}.
 2. STRICT ACTIVE / LATEST VERSION ONLY: ONLY cite, explain, recommend, and link to pages from the active version (${activeVersion?.label || defaultVer?.label}) or latest branch (${defaultVer?.label}). Never suggest, cite, or list deprecated historical versions unless the user explicitly asks for an older version.
 3. AUTONOMOUS & PROACTIVE TOOL EXECUTION:
-   - Always use your tools proactively. NEVER ask the user "Would you like me to search?" or "Should I check?". Directly invoke \`search_documentation\` or \`get_site_structure\` to retrieve facts before answering.
-   - For any question about version numbers, latest releases, recent updates, or changelogs, you MUST search the release notes with \`search_documentation\` (query: "release notes" or specific version like "0.9.1") to find the newest release note before giving the final answer. Never state that a release does not exist without searching.
-4. ACCURATE HYPERLINKS: ALWAYS ground page hyperlinks strictly in real search results or valid project URLs (${siteBaseUrl}). Never invent or hallucinate invalid subpaths.`;
-      const defaultBasePrompt = `You are docmd assistant \u2014 a professional, precise, and concise technical AI assistant for this documentation site.
+   - Always use your tools proactively. NEVER ask the user "Would you like me to search?" or "Should I check?". Directly invoke \`search_documentation\`, \`get_site_structure\`, or \`read_documentation_page\` to retrieve facts before answering.
+   - For questions about releases, versions, updates, or changelogs, search with \`search_documentation\` to retrieve the relevant release notes.
+4. ACCURATE HYPERLINKS: ALWAYS ground page hyperlinks strictly in real search results or valid project URLs (${siteBaseUrl}). Never invent or hallucinate invalid subpaths.
+5. TOKEN EFFICIENCY & TARGETED RETRIEVAL:
+   - Do not read entire documentation sets or fetch excessive pages unless necessary.
+   - Use \`search_documentation\` first to identify the exact single page or section needed.
+   - Only call \`read_documentation_page\` on that specific page when required to fetch precise code snippets or steps.
+   - Keep answers clean, structured, and focused directly on what the user asked.
+6. STRICT FACTUALITY (ZERO FABRICATION):
+   - Ground all answers, configuration snippets, code examples, and commands strictly in verified facts retrieved from this documentation site.
+   - NEVER guess or fabricate non-existent keys, options, or parameters. If the documentation does not evidence a setting, state clearly what is verified and do not invent hypothetical configs.
+7. VERSION FILTERING:
+   - The \`search_documentation\` tool supports an optional \`version\` parameter. When the user asks about a specific version (e.g. v0.8.0), specify \`version\` to filter results strictly to that version branch.`;
+      const defaultBasePrompt = `You are docmd assistant, the AI documentation guide for "${siteTitle}" \u2014 a professional, precise, and concise technical assistant.
 
 CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
-1. IDENTITY: Your name is "docmd assistant". You are an expert AI guide specifically for this documentation site. Never identify yourself simply as "docmd" or "I am docmd".
-2. STRICT SCOPE & BOUNDARIES: Answer ONLY questions related to the software, APIs, tools, installation, configuration, and documentation provided on this site. Politely decline off-topic queries.
+1. IDENTITY: Your name is "docmd assistant". You are an expert AI documentation assistant dedicated to "${siteTitle}". If asked who you are, state that you are docmd assistant, serving the documentation for "${siteTitle}".
+2. STRICT SCOPE & BOUNDARIES: Answer ONLY questions related to the software, tools, APIs, guides, and documentation provided on this site. Politely decline off-topic queries.
 3. PROFESSIONAL & CONCISE: Provide direct, succinct, and professional answers. Do NOT use excessive emojis (keep emojis to a minimum or none). Avoid conversational fluff, boilerplate apologies, or asking for permission. Get straight to the answer.
-4. TOOL SELECTION & EXECUTION:
-   - Use \`get_site_structure\` whenever you need extended structural inspection of available documentation versions, supported locales, or navigation trees.
-   - Use \`search_documentation\` to search documentation content for specific technical terms, API parameters, error messages, or release notes. Keyword search is always active; pass clean, focused search terms (e.g. "0.9.1 release notes" or "cards container") for highest accuracy.
-5. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced pages.`;
+4. TARGETED RETRIEVAL & MINIMAL TOKEN USAGE:
+   - Only retrieve what is strictly necessary. Never attempt to read the entire documentation or fetch excessive pages.
+   - Use \`search_documentation\` first with targeted keywords to locate the exact page.
+   - Only invoke \`read_documentation_page\` when you need specific code blocks or configuration details from that single page.
+5. TOOL SELECTION & EXECUTION:
+   - Use \`get_site_structure\` whenever you need structural inspection of available documentation versions, supported locales, or navigation trees.
+   - Use \`search_documentation\` to search documentation content for specific technical terms, API parameters, error messages, or release notes. Keyword search is always active; pass clean, focused search terms for highest accuracy.
+   - Use \`read_documentation_page\` when you need full section context or deep code examples.
+6. CLEAN WRITING & LIST FORMATTING:
+   - Write cleanly and directly without artificial gaps, repeated quotes, or messy text breaks.
+   - For lists, use standard numbered lists (1., 2., 3.) or bullet points (-). Do not leave blank lines between list items unless separating distinct multi-paragraph steps.
+7. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced pages.`;
       const basePrompt = cfg.systemPrompt || defaultBasePrompt;
       return `${basePrompt}
 
@@ -1702,7 +2079,7 @@ ${workspaceContext}`;
         navigation: cfg.navigation || []
       };
     }
-    async searchAllWorkspaceIndexes(rawQuery, projectFilter) {
+    async searchAllWorkspaceIndexes(rawQuery, projectFilter, versionFilter) {
       const hits = [];
       const query = typeof rawQuery === "string" ? rawQuery : rawQuery?.query || rawQuery?.q || rawQuery?.search_query || rawQuery?.text || rawQuery?.input || "";
       const cleanQuery = (query || "").trim();
@@ -1726,6 +2103,30 @@ ${workspaceContext}`;
       const allVerList = Array.isArray(versionsObj.all) ? versionsObj.all : [];
       const currentVerId = String(versionsObj.current || "");
       const currentVerDir = versionsObj.current ? allVerList.find((v) => v.id === versionsObj.current)?.dir || `v${versionsObj.current}` : "";
+      let explicitVersionId = null;
+      let explicitVersionDir = null;
+      let explicitVersionLabel = null;
+      if (versionFilter) {
+        const vClean = String(versionFilter).toLowerCase().trim().replace(/^v/, "");
+        if (vClean === "latest" || vClean === "current" || vClean === currentVerId.replace(/^v/, "")) {
+          explicitVersionId = currentVerId;
+          explicitVersionDir = currentVerDir;
+        } else {
+          const found = allVerList.find((v) => {
+            const vid = String(v.id || "").toLowerCase().replace(/^v/, "");
+            const vdir = String(v.dir || "").toLowerCase().replace(/^v/, "");
+            const vlbl = String(v.label || "").toLowerCase().replace(/^v/, "");
+            return vid === vClean || vdir === vClean || vlbl === vClean || vlbl.startsWith(vClean);
+          });
+          if (found) {
+            explicitVersionId = String(found.id);
+            explicitVersionDir = String(found.dir || `v${found.id}`);
+            explicitVersionLabel = String(found.label || found.id);
+          } else {
+            explicitVersionId = vClean;
+          }
+        }
+      }
       const olderVerTokens = [];
       for (const v of allVerList) {
         if (String(v.id) !== currentVerId) {
@@ -1737,7 +2138,7 @@ ${workspaceContext}`;
           }
         }
       }
-      const isExplicitOlderVerRequest = olderVerTokens.some((tok) => cleanQueryLower.includes(tok));
+      const isExplicitOlderVerRequest = explicitVersionId ? explicitVersionId !== currentVerId : olderVerTokens.some((tok) => cleanQueryLower.includes(tok));
       const i18nObj = cfg.i18n || {};
       const allLocales = Array.isArray(i18nObj.locales) ? i18nObj.locales : [];
       let activeLocaleId = i18nObj.default || "en";
@@ -1748,9 +2149,22 @@ ${workspaceContext}`;
       }
       const nonActiveLocaleIds = allLocales.filter((l) => l.id !== activeLocaleId).map((l) => l.id.toLowerCase());
       const isExplicitLocaleRequest = nonActiveLocaleIds.some((locId) => cleanQueryLower.includes(locId));
-      const isPathExcluded = (rawId) => {
+      const isPathExcluded = (rawId, itemVersion) => {
         const norm = String(rawId || "").replace(/^\//, "").toLowerCase();
-        if (!isExplicitOlderVerRequest) {
+        const itemVerLower = String(itemVersion || "").toLowerCase().replace(/^v/, "");
+        if (explicitVersionId) {
+          if (explicitVersionId === currentVerId) {
+            for (const tok of olderVerTokens) {
+              if (norm === tok || norm.startsWith(`${tok}/`) || norm.includes(`/${tok}/`)) return true;
+            }
+          } else {
+            const tokens = [explicitVersionId.toLowerCase(), `v${explicitVersionId.toLowerCase()}`];
+            if (explicitVersionDir) tokens.push(explicitVersionDir.toLowerCase());
+            if (explicitVersionLabel) tokens.push(explicitVersionLabel.toLowerCase().replace(/^v/, ""));
+            const matchesExplicit = tokens.some((tok) => norm === tok || norm.startsWith(`${tok}/`) || norm.includes(`/${tok}/`) || itemVerLower === tok);
+            if (!matchesExplicit) return true;
+          }
+        } else if (!isExplicitOlderVerRequest) {
           for (const tok of olderVerTokens) {
             if (norm === tok || norm.startsWith(`${tok}/`) || norm.includes(`/${tok}/`)) {
               return true;
@@ -1766,38 +2180,109 @@ ${workspaceContext}`;
         }
         return false;
       };
-      const queryTokens = cleanQueryLower.replace(/[\-_.]/g, " ").split(/\s+/).filter((t) => t.length > 0);
-      const versionMatches = cleanQuery.match(/\d+[\.\-_]\d+[\.\-_]\d+/g);
+      const STOP_WORDS = /* @__PURE__ */ new Set([
+        "a",
+        "an",
+        "and",
+        "are",
+        "as",
+        "at",
+        "be",
+        "by",
+        "for",
+        "from",
+        "has",
+        "he",
+        "in",
+        "is",
+        "it",
+        "its",
+        "of",
+        "on",
+        "that",
+        "the",
+        "to",
+        "was",
+        "were",
+        "will",
+        "with",
+        "what",
+        "why",
+        "how",
+        "can",
+        "you",
+        "me",
+        "i",
+        "do",
+        "does",
+        "did",
+        "than"
+      ]);
+      const rawTokens = cleanQueryLower.replace(/[\-_.]/g, " ").split(/\s+/).filter((t) => t.length > 0);
+      const queryTokens = rawTokens.filter((t) => !STOP_WORDS.has(t));
+      const versionMatches = cleanQuery.match(/\d+[\.\-_]\d+([\.\-_]\d+)?/g);
       try {
         if (window.docmdSearch && typeof window.docmdSearch.search === "function") {
-          const localHits = await window.docmdSearch.search(query);
+          const searchOpts = {};
+          if (explicitVersionId) {
+            searchOpts.version = explicitVersionId;
+          }
+          let localHits = await window.docmdSearch.search(query, searchOpts);
+          const isComparisonQuery = /\b(better|advantages?|versus|vs|compare|comparison)\b/i.test(cleanQueryLower);
+          if (isComparisonQuery && !cleanQueryLower.includes("comparison")) {
+            try {
+              const compHits = await window.docmdSearch.search("comparison", searchOpts);
+              if (Array.isArray(compHits)) {
+                if (!Array.isArray(localHits)) localHits = [];
+                for (const ch of compHits) {
+                  if (!localHits.some((lh) => lh.id === ch.id)) {
+                    localHits.unshift({ ...ch, score: 999 });
+                  }
+                }
+              }
+            } catch {
+            }
+          }
           if (Array.isArray(localHits)) {
-            const filteredAndScored = localHits.filter((item) => !isPathExcluded(item.id || item.url || "")).map((item) => {
+            const pageMap = /* @__PURE__ */ new Map();
+            const filtered = localHits.filter((item) => !isPathExcluded(item.id || item.url || "", item.version));
+            for (const item of filtered) {
               const rawId = String(item.id || item.url || "");
               const cleanId = rawId.startsWith("/") ? rawId.slice(1) : rawId;
+              const baseId = cleanId.split("#")[0];
+              const isHeading = cleanId.includes("#");
               const titleLower = String(item.title || cleanId).toLowerCase();
               const textLower = String(item.text || item.snippet || "").toLowerCase();
               const idLower = cleanId.toLowerCase();
               let score = typeof item.score === "number" ? item.score : 1;
-              for (const tok of queryTokens) {
-                if (titleLower.includes(tok)) score += 15;
-                if (idLower.includes(tok)) score += 10;
+              for (const tok of queryTokens.length > 0 ? queryTokens : rawTokens) {
+                if (titleLower.includes(tok)) score += 25;
+                if (idLower.includes(tok)) score += 15;
                 if (textLower.includes(tok)) score += 2;
               }
               if (versionMatches) {
                 for (const vm of versionMatches) {
                   const normV = vm.replace(/[\-_]/g, ".");
                   const dashV = vm.replace(/[\.]/g, "-");
-                  if (titleLower.includes(normV) || titleLower.includes(dashV) || idLower.includes(dashV) || idLower.includes(normV)) {
-                    score += 60;
+                  if (idLower.includes(`/${dashV}/`) || idLower.endsWith(`/${dashV}`) || idLower.includes(`-${dashV}-`)) {
+                    score += 600;
+                  } else if (titleLower.includes(`v${normV}`) || titleLower.includes(`v${dashV}`) || titleLower.includes(` ${normV} `) || titleLower.includes(` ${normV}-`)) {
+                    score += 500;
+                  } else if (titleLower.includes(normV) || idLower.includes(dashV)) {
+                    score += 150;
                   }
                 }
               }
-              return { item, score, cleanId };
-            }).sort((a, b) => b.score - a.score);
-            for (const entry of filteredAndScored) {
-              const { item, cleanId } = entry;
+              if (isHeading) score -= 10;
               const fullUrl = cleanId.startsWith("http") ? cleanId : new URL(cleanId, siteBaseUrl).href;
+              const existing = pageMap.get(baseId);
+              if (!existing || existing.score < score) {
+                pageMap.set(baseId, { item, score, cleanId, fullUrl });
+              }
+            }
+            const rankedEntries = Array.from(pageMap.values()).sort((a, b) => b.score - a.score);
+            for (const entry of rankedEntries) {
+              const { item, cleanId, fullUrl } = entry;
               if (!hits.some((existing) => existing.url === fullUrl)) {
                 hits.push({
                   project: "Current Project",
@@ -1818,7 +2303,7 @@ ${workspaceContext}`;
           if (projectFilter && p.prefix !== projectFilter && p.name !== projectFilter) continue;
           try {
             const pPrefix = p.prefix || "/";
-            const pBaseUrl = new URL(pPrefix.replace(/^\//, ""), siteBaseUrl).href;
+            const pBaseUrl = new URL(pPrefix.replace(/^\//, ""), siteBaseUrl).href.replace(/\/?$/, "/");
             const searchIndexPath = `${pBaseUrl}_docmd-search/search-index.json`;
             const res = await fetch(searchIndexPath);
             if (res.ok) {
@@ -1826,36 +2311,48 @@ ${workspaceContext}`;
               const docs = indexData.storedFields ? Object.values(indexData.storedFields) : Array.isArray(indexData) ? indexData : [];
               const filteredDocs = docs.filter((doc) => {
                 const rawId = String(doc.id || doc.url || "");
-                return !isPathExcluded(rawId);
+                return !isPathExcluded(rawId, doc.version);
               });
-              const scored = filteredDocs.map((doc) => {
+              const pageMap = /* @__PURE__ */ new Map();
+              for (const doc of filteredDocs) {
                 const titleStr = String(doc.title || doc.id || "").toLowerCase();
                 const textStr = String(doc.text || "").toLowerCase();
                 const rawId = String(doc.id || "");
+                const cleanId = rawId.startsWith("/") ? rawId.slice(1) : rawId;
+                const baseId = cleanId.split("#")[0];
+                const isHeading = cleanId.includes("#");
                 let score = 0;
-                for (const term of queryTokens) {
-                  if (titleStr.includes(term)) score += 15;
-                  if (rawId.toLowerCase().includes(term)) score += 10;
+                for (const term of queryTokens.length > 0 ? queryTokens : rawTokens) {
+                  if (titleStr.includes(term)) score += 25;
+                  if (rawId.toLowerCase().includes(term)) score += 15;
                   if (textStr.includes(term)) score += 2;
                 }
                 if (versionMatches) {
                   for (const vm of versionMatches) {
                     const normV = vm.replace(/[\-_]/g, ".");
                     const dashV = vm.replace(/[\.]/g, "-");
-                    if (titleStr.includes(normV) || titleStr.includes(dashV) || rawId.toLowerCase().includes(dashV)) {
-                      score += 60;
+                    if (rawId.toLowerCase().includes(`/${dashV}/`) || rawId.toLowerCase().endsWith(`/${dashV}`)) {
+                      score += 600;
+                    } else if (titleStr.includes(`v${normV}`) || titleStr.includes(`v${dashV}`)) {
+                      score += 500;
+                    } else if (titleStr.includes(normV) || rawId.toLowerCase().includes(dashV)) {
+                      score += 150;
                     }
                   }
                 }
                 if (currentVerDir && rawId.includes(`/${currentVerDir}/`)) score += 10;
                 if (activeLocaleId && rawId.includes(`/${activeLocaleId}/`)) score += 5;
-                return { doc, score };
-              }).filter((h) => h.score > 0).sort((a, b) => b.score - a.score);
-              for (const hit of scored.slice(0, 3)) {
-                const doc = hit.doc;
-                const rawId = doc.id || "";
-                const cleanId = rawId.startsWith("/") ? rawId.slice(1) : rawId;
+                if (isHeading) score -= 10;
                 const fullUrl = rawId.startsWith("http") ? rawId : new URL(cleanId, pBaseUrl).href;
+                const existing = pageMap.get(baseId);
+                if (!existing || existing.score < score) {
+                  pageMap.set(baseId, { doc, score, fullUrl });
+                }
+              }
+              const scored = Array.from(pageMap.values()).filter((h) => h.score > 0).sort((a, b) => b.score - a.score);
+              for (const hit of scored.slice(0, 3)) {
+                const { doc, fullUrl } = hit;
+                const rawId = doc.id || "";
                 if (!hits.some((existing) => existing.url === fullUrl)) {
                   hits.push({
                     project: p.name || p.prefix,
@@ -1934,6 +2431,12 @@ ${formattedHits}`;
           return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`;
         case "folder-tree":
           return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>`;
+        case "book-open":
+          return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`;
+        case "navigation":
+          return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>`;
+        case "copy":
+          return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>`;
         case "cog":
           return `<svg class="docmd-ai-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`;
         case "brain":
@@ -1969,13 +2472,66 @@ ${formattedHits}`;
           res = await this.engine.sendMessageStream(queryWithContext, {
             onStatus: (status) => {
               if (statusWrap && status) {
+                const statusObj = typeof status === "string" ? { text: status } : { ...status };
+                let statusText = statusObj.text || "Thinking...";
+                let statusIcon = statusObj.icon;
+                if (/^Running\s+([a-z0-9_]+)\.\.\./i.test(statusText)) {
+                  const tool = statusText.match(/^Running\s+([a-z0-9_]+)\.\.\./i)?.[1] || "";
+                  if (tool === "read_documentation_page") {
+                    statusText = "Reading documentation...";
+                    statusIcon = statusIcon || "book-open";
+                  } else if (tool === "search_documentation") {
+                    statusText = "Searching documentation...";
+                    statusIcon = statusIcon || "search";
+                  } else if (tool === "navigate_to_page") {
+                    statusText = "Navigating to page...";
+                    statusIcon = statusIcon || "navigation";
+                  } else if (tool === "get_site_structure") {
+                    statusText = "Inspecting site navigation & structure...";
+                    statusIcon = statusIcon || "folder-tree";
+                  } else if (tool === "copy_code_snippet") {
+                    statusText = "Copying code snippet...";
+                    statusIcon = statusIcon || "copy";
+                  } else {
+                    const readable = tool.replace(/^([a-z])/, (m) => m.toUpperCase()).replace(/_/g, " ");
+                    statusText = `${readable}...`;
+                  }
+                } else if (/^[a-z]+(_[a-z0-9]+)+$/.test(statusText)) {
+                  if (statusText === "read_documentation_page") {
+                    statusText = "Reading documentation...";
+                    statusIcon = statusIcon || "book-open";
+                  } else if (statusText === "search_documentation") {
+                    statusText = "Searching documentation...";
+                    statusIcon = statusIcon || "search";
+                  } else if (statusText === "navigate_to_page") {
+                    statusText = "Navigating to page...";
+                    statusIcon = statusIcon || "navigation";
+                  } else if (statusText === "get_site_structure") {
+                    statusText = "Inspecting site navigation & structure...";
+                    statusIcon = statusIcon || "folder-tree";
+                  } else if (statusText === "copy_code_snippet") {
+                    statusText = "Copying code snippet...";
+                    statusIcon = statusIcon || "copy";
+                  } else {
+                    const readable = statusText.replace(/^([a-z])/, (m) => m.toUpperCase()).replace(/_/g, " ");
+                    statusText = `${readable}...`;
+                  }
+                }
                 statusWrap.style.display = "inline-flex";
-                statusWrap.innerHTML = `${this.getStatusSvgIcon(status.icon)} <span>${this.escapeHtml(status.text || "Thinking...")}</span>`;
+                statusWrap.innerHTML = `${this.getStatusSvgIcon(statusIcon)} <span>${this.escapeHtml(statusText)}</span>`;
                 if (msgs) msgs.scrollTop = msgs.scrollHeight;
               }
             },
-            onChunk: (delta) => {
-              accumulatedText = delta;
+            onChunk: (chunk) => {
+              if (chunk) {
+                if (!accumulatedText) {
+                  accumulatedText = chunk;
+                } else if (chunk.startsWith(accumulatedText)) {
+                  accumulatedText = chunk;
+                } else {
+                  accumulatedText += chunk;
+                }
+              }
               if (statusWrap) {
                 statusWrap.style.display = "none";
               }
@@ -2047,7 +2603,6 @@ ${formattedHits}`;
       if (!raw) return "";
       let cleaned = raw.replace(/<(?:[a-zA-Z0-9_\-]+:)?(think|thought|reasoning|reflection|plan)\b[^>]*>[\s\S]*?<\/(?:[a-zA-Z0-9_\-]+:)?\1>/gi, "").replace(/```(?:thought|thinking|reasoning|reflection)\s*\n[\s\S]*?```/gi, "").replace(/\[(?:thought|thinking|reasoning):\s*[\s\S]*?\]/gi, "").replace(/\]<\][a-zA-Z0-9_\-]+\[>\[[\s\S]*?(?:<\/(?:request|tool_call|action)>|\]<\][a-zA-Z0-9_\-]+\[>\[|$)/gi, "").replace(/\]<\][a-zA-Z0-9_\-]+\[>\[/gi, "").replace(/<\/?(?:[a-zA-Z0-9_\-]+:)?(?:think|thought|reasoning|reflection|plan)\b[^>]*>/gi, "").replace(/<(?:[a-zA-Z0-9_\-]+:)?(tool_call|function_call|tool|action|request)\b[^>]*>[\s\S]*?<\/(?:[a-zA-Z0-9_\-]+:)?\1>/gi, "").replace(/```(?:tool_call|function_call|tool|action|json:tool)\s*\n[\s\S]*?```/gi, "").replace(/\{\s*"(?:name|tool|action|function)"\s*:\s*"[^"]+"\s*,\s*"(?:parameters|arguments|args|input)"\s*:\s*\{[\s\S]*?\}\s*\}/g, "").replace(/<\/?(?:[a-zA-Z0-9_\-]+:)?(?:tool_call|function_call|tool|action|request)\b[^>]*>/gi, "").trim();
       if (!cleaned) cleaned = raw;
-      let text = this.escapeHtml(cleaned);
       const cfg = window.__docmd_ai_config || {};
       const getSiteBaseUrl = () => {
         const cfg2 = window.__docmd_ai_config || {};
@@ -2080,35 +2635,82 @@ ${formattedHits}`;
         }
       };
       const codeBlocks = [];
-      text = text.replace(/```(\w+)?[ \t]*\r?\n([\s\S]*?)```/g, (_match, lang, code) => {
-        const languageStr = lang ? `<div class="docmd-ai-code-header"><span class="docmd-ai-code-lang">${lang.toLowerCase()}</span></div>` : "";
+      const copySvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>`;
+      const renderCodeBlock = (lang, code) => {
+        const cleanLang = (lang || "").trim().toLowerCase();
+        const langSpan = cleanLang ? `<span class="docmd-ai-code-lang">${cleanLang}</span>` : `<span class="docmd-ai-code-lang">code</span>`;
+        const copyBtn = `<button class="docmd-ai-code-copy-btn" type="button" title="Copy code" aria-label="Copy code">${copySvg}<span>Copy</span></button>`;
+        const headerStr = `<div class="docmd-ai-code-header">${langSpan}${copyBtn}</div>`;
+        const escapedCode = code.trim().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        return `<div class="docmd-ai-code-wrap">${headerStr}<pre><code>${escapedCode}</code></pre></div>`;
+      };
+      cleaned = cleaned.replace(/(?:^|\n)([ \t]*)(`{4,}|~{4,})([ \t]*\S*.*)\r?\n([\s\S]*?)\r?\n\1\2[ \t]*(?=\r?\n|$)/g, (_match, _indent, _fence, lang, code) => {
         const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
-        codeBlocks.push(`<div class="docmd-ai-code-wrap">${languageStr}<pre><code>${code.trim()}</code></pre></div>`);
+        codeBlocks.push(renderCodeBlock(lang.trim(), code));
+        return `
+${placeholder}
+`;
+      });
+      cleaned = cleaned.replace(/(?:^|\n)([ \t]*)(`{3}|~{3})([ \t]*\S*.*)\r?\n([\s\S]*?)\r?\n\1\2[ \t]*(?=\r?\n|$)/g, (_match, _indent, _fence, lang, code) => {
+        const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
+        codeBlocks.push(renderCodeBlock(lang.trim(), code));
+        return `
+${placeholder}
+`;
+      });
+      cleaned = cleaned.replace(/(`{3,})(\w+)?[ \t]*\r?\n([\s\S]*?)\1/g, (_match, _fence, lang, code) => {
+        const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
+        codeBlocks.push(renderCodeBlock(lang || "", code));
         return placeholder;
       });
-      text = text.replace(/```(\w+)([ \t]+[^\n][\s\S]*?)```/g, (_match, lang, code) => {
-        const languageStr = `<div class="docmd-ai-code-header"><span class="docmd-ai-code-lang">${lang.toLowerCase()}</span></div>`;
+      cleaned = cleaned.replace(/(`{3,})(\w+)([ \t]+[^\n][\s\S]*?)\1/g, (_match, _fence, lang, code) => {
         const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
-        codeBlocks.push(`<div class="docmd-ai-code-wrap">${languageStr}<pre><code>${code.trim()}</code></pre></div>`);
+        codeBlocks.push(renderCodeBlock(lang || "", code));
         return placeholder;
       });
-      text = text.replace(/```\r?\n?([\s\S]*?)```/g, (_match, code) => {
-        const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
-        codeBlocks.push(`<div class="docmd-ai-code-wrap"><pre><code>${code.trim()}</code></pre></div>`);
-        return placeholder;
-      });
+      let text = this.escapeHtml(cleaned);
       text = text.replace(/^#### (.*$)/gim, "<h5>$1</h5>");
       text = text.replace(/^### (.*$)/gim, "<h4>$1</h4>");
       text = text.replace(/^## (.*$)/gim, "<h3>$1</h3>");
       text = text.replace(/^# (.*$)/gim, "<h3>$1</h3>");
-      text = text.replace(/(?:^\s*[-*]\s+.*(?:\r?\n|$))+/gm, (match) => {
-        const items = match.trim().split("\n").map((line) => `<li>${line.replace(/^\s*[-*]\s+/, "")}</li>`).join("");
-        return `<ul>${items}</ul>`;
-      });
-      text = text.replace(/(?:^\s*\d+\.\s+.*(?:\r?\n|$))+/gm, (match) => {
-        const items = match.trim().split("\n").map((line) => `<li>${line.replace(/^\s*\d+\.\s+/, "")}</li>`).join("");
-        return `<ol>${items}</ol>`;
-      });
+      const parseListItems = (rawListText, isOrdered) => {
+        const lines = rawListText.split(/\r?\n/);
+        const items = [];
+        let currentItemText = "";
+        const itemRegex = isOrdered ? /^\s*(\d+)[\.\)]\s+(.*)$/ : /^\s*[-*+]\s+(.*)$/;
+        for (const line of lines) {
+          const mainMatch = line.match(itemRegex);
+          if (mainMatch) {
+            if (currentItemText) {
+              items.push(`<li>${currentItemText.trim()}</li>`);
+            }
+            currentItemText = isOrdered ? mainMatch[2] : mainMatch[1];
+          } else if (line.trim().length === 0) {
+            continue;
+          } else if (currentItemText) {
+            const subBullet = line.match(/^\s+[-*+]\s+(.*)$/);
+            if (subBullet) {
+              currentItemText += `<br/><span class="docmd-ai-sub-item">\u2022 ${subBullet[1].trim()}</span>`;
+            } else {
+              currentItemText += " " + line.trim();
+            }
+          }
+        }
+        if (currentItemText) {
+          items.push(`<li>${currentItemText.trim()}</li>`);
+        }
+        if (items.length === 0) return rawListText;
+        const tag = isOrdered ? "ol" : "ul";
+        return `
+
+<${tag}>${items.join("")}</${tag}>
+
+`;
+      };
+      const orderedListRegex = /(?:^[ \t]*\d+[\.\)][ \t]+.*(?:\r?\n|$))(?:[ \t]*(?:\r?\n)|[ \t]+\S.*(?:\r?\n|$)|^[ \t]*\d+[\.\)][ \t]+.*(?:\r?\n|$))*/gm;
+      text = text.replace(orderedListRegex, (match) => parseListItems(match, true));
+      const unorderedListRegex = /(?:^[ \t]*[-*+][ \t]+.*(?:\r?\n|$))(?:[ \t]*(?:\r?\n)|[ \t]+\S.*(?:\r?\n|$)|^[ \t]*[-*+][ \t]+.*(?:\r?\n|$))*/gm;
+      text = text.replace(unorderedListRegex, (match) => parseListItems(match, false));
       text = text.replace(/(?:^\s*&gt;\s+.*(?:\r?\n|$))+/gm, (match) => {
         const content = match.replace(/^\s*&gt;\s+/gm, "").trim();
         return `<blockquote>${content}</blockquote>`;

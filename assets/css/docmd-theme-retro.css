@@ -1,5 +1,5 @@
 /*!
- * docmd (v0.9.3)
+ * docmd (v0.9.5)
  * Copyright (c) 2025-present docmd.io
  * License: MIT
  */
