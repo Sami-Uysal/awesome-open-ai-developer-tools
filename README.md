@@ -178,6 +178,7 @@ Describe a project in natural language; it writes and iterates on the whole code
 
 ---
 
+- [Ivy Tendril](https://github.com/Ivy-Interactive/Ivy-Tendril): Open-source agentic software factory with an amazing UI that handles parallel Git worktrees for you, complete with programmatic verifications and fast review loops
 ## Prompt-to-App Builders
 
 Prompt in, deployed full-stack app out.
