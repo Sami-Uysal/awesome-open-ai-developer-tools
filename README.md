@@ -144,6 +144,15 @@ Plan-first CLI/TUI orchestrator that converts a single goal into an ordered, edi
 - **Backends:** Claude Code, Codex, OpenCode
 - **Edge:** Features a read-only planner that generates explicit step-by-step agent plans before execution, with per-task runner, model, and mode assignment.
 
+### [LoopTroop](https://github.com/looptroop-ai/LoopTroop)
+`TypeScript` · `MIT` · Local GUI + CLI · 🟡 active
+
+Local orchestrator that turns complex coding tickets into verified pull requests using multi-model planning councils and isolated git worktrees.
+
+- **Replaces:** Devin, Cursor agent mode, cloud-hosted agent orchestrators
+- **Backends:** Anthropic, OpenAI, Google Gemini, DeepSeek, OpenRouter, and local models via OpenCode
+- **Edge:** LoopTroop runs an LLM council where distinct models draft and vote on task plans before implementation starts. Each task executes inside an isolated git worktree with bounded Ralph-style retry loops, so failed runs roll back without touching the primary checkout. Human approval gates hold execution before irreversible terminal commands or branch updates proceed.
+
 ### [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent)
 `TypeScript` · `MIT` · CLI + TUI · 🟠 experimental
 
@@ -1020,7 +1029,7 @@ Visual framework for building multi-agent and RAG applications.
 |---|---|
 | GitHub Copilot | [Continue](https://github.com/continuedev/continue), [Tabby](https://github.com/TabbyML/tabby), [aider](https://github.com/Aider-AI/aider) |
 | Cursor / Windsurf | [Cline](https://github.com/cline/cline), [OpenCode](https://github.com/sst/opencode), [Continue](https://github.com/continuedev/continue), [BitFun](https://github.com/GCWing/BitFun), [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent) |
-| Devin | [OpenHands](https://github.com/All-Hands-AI/OpenHands), [Goose](https://github.com/block/goose), [SWE-agent](https://github.com/SWE-agent/SWE-agent) |
+| Devin | [OpenHands](https://github.com/All-Hands-AI/OpenHands), [Goose](https://github.com/block/goose), [SWE-agent](https://github.com/SWE-agent/SWE-agent), [LoopTroop](https://github.com/looptroop-ai/LoopTroop) |
 | Claude Design / Figma Make | [Open Design](https://github.com/nexu-io/open-design) |
 | ChatGPT desktop / Copilot assistant | [OpenClaw](https://github.com/openclaw/openclaw), [Hermes Agent](https://github.com/NousResearch/hermes-agent) |
 | Bolt.new / v0 / Lovable | [bolt.diy](https://github.com/stackblitz-labs/bolt.diy), [OpenUI](https://github.com/wandb/openui), [Dyad](https://github.com/dyad-sh/dyad) |
