@@ -133,7 +133,7 @@ Local-first desktop AI workforce where a Commander plans work and coordinates bu
 
 - **Replaces:** Cursor agent mode, cloud-hosted agent orchestrators
 - **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
-- **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
+- **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, OpenClaw, and Hermes as local subprocesses alongside built-in agents.
 
 ### [ordewell](https://github.com/ordewell/ordewell)
 `Rust` · `Apache-2.0` · CLI / TUI · 🟡 active
