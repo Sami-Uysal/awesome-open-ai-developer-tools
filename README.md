@@ -495,6 +495,16 @@ Local semantic code index with an MCP server on top — search and navigate a co
 - **Backends:** local embeddings via fastembed, or a hosted provider if you'd rather offload it
 - **Edge:** runs entirely locally, and embeddings are your choice. **Known weakness:** first index on a large repo is slow, and semantic search is genuinely bad at structural questions — "find every implementation of this trait" wants a structural index, not embeddings, so you need separate structural tools and have to know which kind of question you're asking before you search. Early-stage; treat it accordingly.
 
+
+### [ContextStream](https://github.com/contextstream/mcp-server)
+`Rust` · `MIT` · MCP · 🟡 active
+
+Shared project context and semantic code search over MCP for AI coding agents.
+
+- **Replaces:** single-editor indexes and lost per-session context
+- **Backends:** local OSS server (`@contextstream/mcp-server`) or hosted remote MCP (`https://mcp.contextstream.io/mcp`)
+- **Edge:** shared project context across MCP clients not locked to one editor
+
 ---
 
 ## Local Inference Engines
