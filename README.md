@@ -135,6 +135,15 @@ Local-first desktop AI workforce where a Commander plans work and coordinates bu
 - **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
 - **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, and Cline as local subprocesses alongside built-in agents.
 
+### [MulmoTerminal](https://github.com/receptron/mulmoterminal)
+`TypeScript` · `MIT` · Browser / CLI · 🟢 active
+
+Browser grid of live Claude Code and Codex sessions, one real PTY per cell, started with a single `npx` command. Each cell is colour-coded working / needs-you / done, so a session blocked on a permission prompt is distinguishable from one still thinking without opening it.
+
+- **Replaces:** tmux panes plus a notifier script, hand-rolled session dashboards
+- **Backends:** the `claude` and `codex` CLIs you already installed and pay for; Grok and Antigravity also supported
+- **Edge:** session state comes from the agent CLI's own hooks (`PreToolUse` / `Stop` / `Notification`), not from parsing scrollback, so "working" and "waiting on you" are different states rather than both being "output stopped". tmux backs the sessions, so they survive a server restart or a reboot; each cell can hold its own git worktree with commit, push and PR from the grid.
+
 ### [ordewell](https://github.com/ordewell/ordewell)
 `Rust` · `Apache-2.0` · CLI / TUI · 🟡 active
 
