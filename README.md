@@ -554,6 +554,14 @@ OpenAI-compatible inference server built specifically for Apple Silicon, on Appl
 - **Replaces:** Ollama / LM Studio (on a Mac)
 - **Edge:** MLX-native quantization tuned for the unified-memory envelope, with grammar-constrained tool calling, reasoning separation, and vision — verified end-to-end against Claude Code, Cursor, Aider and Codex. `brew install rapid-mlx`, then `rapid-mlx serve <model>`.
 
+### [jevos](https://github.com/feder-cr/jev)
+`Python` · `MIT` · Self-hosted server · 🟠 experimental
+
+CPU-only yes/no decision model server — send text plus a yes/no question over HTTP and get back P(yes) from a single forward pass, no text generation.
+
+- **Replaces:** Jev (TypeSafe AI's hosted decision API), for yes/no routing, triage, and policy-check use cases
+- **Edge:** A 1B model (MiniCPM5) trimmed to 17 layers with a single-logit output head, quantized to GGUF q4_k_m (619 MB) and served through llama.cpp on CPU only — 54ms for a short request, 220ms for a long one on a 16-thread laptop CPU, no GPU involved. Ships a Jev-compatible `/v1/systemone` HTTP API. **Known weakness:** less accurate than the hosted Jev on held-out policy questions in the authors' own benchmark (0.815 vs 0.927), so it trades some accuracy for zero-cost, fully offline self-hosting.
+
 ---
 
 ## Inference Servers & Gateways
