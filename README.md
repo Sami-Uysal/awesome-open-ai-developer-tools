@@ -203,15 +203,6 @@ Describe a project in natural language; it writes and iterates on the whole code
 
 - **Edge:** Best for greenfield scaffolding rather than surgical edits on an existing repo.
 
-### [Orbi](https://github.com/orbi-build/orbi)
-`Python` · `AGPL-3.0` · Self-hosted runner + GitHub · 🟢 stable
-
-Works from GitHub issues: label one `ai-ready` and it implements the change in an isolated worktree, opens a PR, and a separate review session checks the diff against the issue's acceptance criteria before anything merges.
-
-- **Replaces:** Devin, GitHub Copilot coding agent
-- **Backends:** Any OpenAI-compatible model, or a Codex subscription
-- **Edge:** Review is a gate, not a suggestion: only the exact head the reviewer approved is merged, and Orbi then cuts the tagged release. Ops tickets (deploys, investigations) post their real commands and output on the issue.
-
 ### [Ivy Tendril](https://github.com/Ivy-Interactive/Ivy-Tendril)
 `TypeScript` · `MIT` · Desktop + Web · 🟡 active
 
@@ -770,6 +761,16 @@ Local-first workspace combining notes, tasks, and AI chat in your browser on you
 - **Replaces:** Notion AI, Obsidian + Copilot plugin
 - **Edge:** Plain markdown files on disk — no accounts, no cloud, no database. The AI reads and edits your actual workspace files. Supports Ollama for fully local inference.
 
+### [Aleph](https://github.com/josuecuguy1307/Aleph)
+`TypeScript` · `Apache-2.0` · `macOS / Apple silicon desktop` · 🟡 active
+
+An AI workspace for bringing model providers, tools, and files together across focused workspaces and reusable agents.
+
+- **Replaces:** ChatGPT Desktop or Claude Desktop for users who want to configure their own agents, tools, and workflows.
+- **Backends:** User-configured model API providers and installed, authenticated CLI providers such as Claude Code and Codex; availability depends on setup.
+- **Edge:** The Workshop lets users compose agents, equip them with tools, and arrange reusable workflows visually, making the harness inspectable and changeable.
+
+
 ---
 
 ## Vector Databases
@@ -935,15 +936,6 @@ Train transformer models with reinforcement learning — SFT, DPO, GRPO, reward 
 Test and evaluate prompts, agents, and RAG systems — plus LLM red teaming and vulnerability scanning.
 
 - **Edge:** Declarative test cases in YAML that run in CI. Side-by-side model comparison plus adversarial red-teaming in one tool. Local-first — your prompts never leave your machine.
-
-### [Cage](https://github.com/vitalik1921/cage)
-`TypeScript` · `MIT` · CLI + agent hooks · 🟡 active
-
-Deterministic contract harness that links Markdown specs to TypeScript implementations, invariant-linked tests, and review freshness.
-
-- **Replaces:** Manual spec-to-code and test-traceability checklists
-- **Backends:** Claude Code, Codex
-- **Edge:** Parses `*.cage.mdx` specs into TypeScript contract checks, tracks `@invariant`/`@covers` links, and fingerprints spec, code, test, and import material to detect stale reviews. It does not run tests or prove semantic correctness.
 
 ### [agent-qa](https://github.com/vostride/agent-qa)
 `TypeScript` · `FSL-1.1-ALv2` (fair-code; converts to `Apache-2.0`) · CLI, dashboard, MCP · 🟠 experimental
