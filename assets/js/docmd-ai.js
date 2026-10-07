@@ -39,7 +39,7 @@ var DocmdAIAssistant = (() => {
     DocmdAIAssistantUI: () => DocmdAIAssistantUI
   });
 
-  // ../../../node_modules/.pnpm/docmd-assistant@0.1.17/node_modules/docmd-assistant/dist/index.js
+  // ../../../node_modules/.pnpm/docmd-assistant@0.1.18/node_modules/docmd-assistant/dist/index.js
   function parseAssistantOutput(raw, knownToolNames) {
     if (!raw || typeof raw !== "string") {
       return { cleanText: "", extractedToolCalls: [] };
@@ -149,9 +149,9 @@ var DocmdAIAssistant = (() => {
     }
     text = extractAndStripJsonObjects(text, extractedToolCalls, knownToolNames);
     text = text.replace(/<\/?(?:[a-zA-Z0-9_\-]+:)?(?:tool_call|function_call|invoke)\b[^>]*>/gi, "");
-    text = text.replace(/```(\w+)(?:[ \t]+|\r?\n)?([\s\S]*?)```/g, (_match, lang, code) => {
+    text = text.replace(/(`{3,}|~{3,})(\w+)(?:[ \t]+|\r?\n)?([\s\S]*?)\1/g, (_match, fence, lang, code) => {
       const trimmedCode = code.replace(/^\s*\n?/, "");
-      return "```" + lang + "\n" + trimmedCode + "```";
+      return fence + lang + "\n" + trimmedCode + fence;
     });
     let cleanText = text.trim();
     const thinking = thinkingParts.length > 0 ? thinkingParts.join("\n\n") : void 0;
@@ -342,21 +342,23 @@ var DocmdAIAssistant = (() => {
     }
     return results;
   }
-  var ENGINE_VERSION = typeof process !== "undefined" && "0.1.17" ? "0.1.17" : "0.1.17";
+  var ENGINE_VERSION = typeof process !== "undefined" && "0.1.18" ? "0.1.18" : "0.1.17";
   var DEFAULT_SYSTEM_PROMPT = `You are docmd assistant \u2014 a professional, precise, and concise technical AI assistant for this documentation site.
 
 CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
 1. IDENTITY: Your name is "docmd assistant". You are an expert AI documentation guide dedicated to assisting visitors with this site. If asked who or what you are, identify yourself as docmd assistant serving this documentation.
 2. STRICT SCOPE & BOUNDARIES: Answer strictly about the software, APIs, tools, installation, configuration, and topics documented on this site. Politely decline off-topic queries.
-3. STRICT FACTUALITY & ZERO FABRICATION:
+3. STRICT FACTUALITY & ARCHITECTURAL SYNTHESIS:
    - Ground all answers, configuration snippets, and code examples STRICTLY in facts, keys, properties, and evidence explicitly retrieved from documentation search results or site tools.
    - NEVER invent, guess, or fabricate non-existent configurations, non-existent API parameters, or unverified settings.
-   - If documentation results do not evidence a specific setting, state what is verified and do not invent hypothetical JSON shapes.
+   - When a user asks about a capability or concept that is not directly available as a single dedicated setting (e.g. pinning an item, custom database auth, etc.), explicitly explain that no dedicated setting exists for that exact query, synthesize the closest supported mechanism or architectural approach (such as explicit navigation configuration via navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to the relevant documentation pages.
+   - Never return an empty response, silence, or thought-only output. Always provide an informative, grounded answer to the user.
 4. PROFESSIONAL & CONCISE: Provide direct, succinct, and professional answers. Do NOT use excessive emojis. Avoid conversational filler or boilerplate apologies. Get straight to the point.
 5. AUTONOMOUS & PROACTIVE TOOL EXECUTION:
    - Always use your tools proactively. Directly execute the appropriate tool (\`search_documentation\`, \`get_site_structure\`, or \`read_documentation_page\`) to retrieve accurate facts before answering.
    - Use \`get_site_structure\` to inspect site topology, available documentation branches, and navigation trees.
    - Use \`search_documentation\` to search release notes, guides, configuration options, and concepts across all projects.
+   - If initial search results are inconclusive or return no direct matches, use \`get_site_structure\` or an alternate search before concluding.
    - Use \`read_documentation_page\` when you need full section context or deep code examples.
 6. SEARCH STRATEGY \u2014 THIS IS CRITICAL:
    - The search index matches keywords against page titles, headers, and content.
@@ -365,7 +367,8 @@ CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
    - Example: For "what changed in a specific release", search the version or release keyword: search("release notes").
    - Analyze search results carefully, then synthesize your answer.
 7. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced documentation pages.
-8. CONCISE & CLEAN OUTPUT: Keep your response clean, structured, and concise. Use valid Markdown formatting without raw unescaped HTML or script tags.`;
+8. FOUR-BACKTICK CODE FENCES: When providing code blocks, configuration files, or Markdown examples, enclose them in four-backtick fences (\`\`\`\`lang ... \`\`\`\`) rather than three, to prevent fence collision and retain nested code blocks when rendered inside Markdown containers. If the snippet itself contains four backticks, use five backticks.
+9. CONCISE & CLEAN OUTPUT: Keep your response clean, structured, and concise. Use valid Markdown formatting without raw unescaped HTML or script tags.`;
   function truncateContextCleanly(text, maxLen = 15e3) {
     if (!text || text.length <= maxLen) return text;
     let sliced = text.slice(0, maxLen);
@@ -378,9 +381,9 @@ CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
         sliced = sliced.slice(0, lastNL);
       }
     }
-    const codeFenceCount = (sliced.match(/```/g) || []).length;
+    const codeFenceCount = (sliced.match(/(?:`{3,}|~{3,})/g) || []).length;
     if (codeFenceCount % 2 !== 0) {
-      sliced += "\n```";
+      sliced += "\n````";
     }
     return sliced + "\n...[context truncated]";
   }
@@ -725,22 +728,33 @@ ${additionalPrompt}`;
           content: msg.content
         });
       }
-      const maxTurns = 5;
+      const maxTurns = 6;
       let turnCount = 0;
       let finalAccumulatedText = "";
       while (turnCount < maxTurns) {
         turnCount++;
         let streamBuffer = "";
+        let turnDeltaCount = 0;
+        const allowToolsThisTurn = turnCount < maxTurns;
+        const toolsToPass = allowToolsThisTurn && toolsDef.length > 0 ? toolsDef : void 0;
         const res = await adapter.converseStream(
           conversationMessages,
-          toolsDef.length > 0 ? toolsDef : void 0,
+          toolsToPass,
           (delta) => {
             streamBuffer += delta;
+            const isFirst = turnDeltaCount === 0;
+            turnDeltaCount++;
+            callbacks.onChunk?.(delta, {
+              replace: isFirst && turnCount > 1,
+              turn: turnCount,
+              isFinal: false
+            });
+            this.emit("chunk", delta);
           }
         );
         const parsed = parseAssistantOutput(streamBuffer, this.getTools().map((t) => t.name));
         const toolCallsToExecute = [];
-        if (res.message?.toolCalls && res.message.toolCalls.length > 0) {
+        if (allowToolsThisTurn && res.message?.toolCalls && res.message.toolCalls.length > 0) {
           for (const tc of res.message.toolCalls) {
             if (this.tools.has(tc.name)) {
               toolCallsToExecute.push({
@@ -750,7 +764,7 @@ ${additionalPrompt}`;
               });
             }
           }
-        } else if (parsed.extractedToolCalls.length > 0) {
+        } else if (allowToolsThisTurn && parsed.extractedToolCalls.length > 0) {
           for (const tc of parsed.extractedToolCalls) {
             if (this.tools.has(tc.name)) {
               toolCallsToExecute.push({
@@ -765,7 +779,11 @@ ${additionalPrompt}`;
           finalAccumulatedText = parsed.cleanText || streamBuffer;
         }
         if (toolCallsToExecute.length === 0) {
-          callbacks.onChunk?.(finalAccumulatedText);
+          callbacks.onChunk?.(finalAccumulatedText, {
+            replace: true,
+            turn: turnCount,
+            isFinal: true
+          });
           this.emit("chunk", finalAccumulatedText);
           break;
         }
@@ -842,6 +860,8 @@ ${additionalPrompt}`;
       const maxTurns = 5;
       let turnCount = 0;
       let finalReply = "";
+      const accumulatedToolSummaries = [];
+      let lastParsed = null;
       while (turnCount < maxTurns) {
         turnCount++;
         const payload = {
@@ -896,6 +916,7 @@ ${additionalPrompt}`;
         }
         const rawReply = data.text || data.reply || data.response || data.message || "";
         const parsed = parseAssistantOutput(rawReply, registeredTools.map((t) => t.name));
+        lastParsed = parsed;
         const toolCallsToExecute = [];
         if (data.tool_calls && Array.isArray(data.tool_calls) && data.tool_calls.length > 0) {
           for (const tc of data.tool_calls) {
@@ -932,13 +953,12 @@ ${additionalPrompt}`;
             text: originalUserQuery
           });
         }
-        const toolSummaries = [];
         for (const tc of toolCallsToExecute) {
           this.emit("tool_call", { name: tc.name, args: tc.args, callId: tc.id });
           const result = await this.executeTool(tc.name, tc.args);
           this.emit("tool_result", { name: tc.name, args: tc.args, result, callId: tc.id });
           const resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
-          toolSummaries.push(`[Search Result for ${tc.name}]:
+          accumulatedToolSummaries.push(`[Search Result for ${tc.name}]:
 ${resultStr}`);
           currentHistory.push({
             sender: "assistant",
@@ -949,14 +969,23 @@ ${resultStr}`);
             text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
           });
         }
-        const contextStr = truncateContextCleanly(toolSummaries.join("\n\n"), this.contextWindow);
+        const contextStr = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
         userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
 ${contextStr}
 
-Based strictly on the documentation search results above, answer the user's question directly with concise explanations, exact commands, and clickable Markdown links. Do not repeat introductory greetings.`;
-        allowTools = false;
+Based on the retrieved documentation context above and your knowledge of docmd architecture, answer the user's question directly with concise explanations, exact commands, and clickable Markdown links. If the documentation does not have an explicit, dedicated configuration option or feature matching the user's exact query, clearly state this, synthesize the closest supported mechanism or architectural pattern (such as explicit navigation configuration in navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to the relevant documentation pages. Never return an empty response. Do not repeat introductory greetings.`;
+        if (turnCount >= 2) {
+          allowTools = false;
+        }
+      }
+      if (!finalReply || !finalReply.trim()) {
+        if (lastParsed?.thinking && lastParsed.thinking.trim().length > 20) {
+          finalReply = lastParsed.thinking.trim();
+        } else {
+          finalReply = `No documentation page in the retrieved search results explicitly covers a dedicated setting for "${originalUserQuery}". You can configure or customize this behavior via site navigation structure or [Project Structure](https://docs.docmd.io/getting-started/project-structure/).`;
+        }
       }
       const assistantMsg = {
         role: "assistant",
@@ -991,11 +1020,14 @@ Based strictly on the documentation search results above, answer the user's ques
       }
       let userMessage = originalUserQuery;
       let allowTools = true;
-      const maxTurns = 5;
+      const maxTurns = 6;
       let turnCount = 0;
       let finalReply = "";
+      const accumulatedToolSummaries = [];
+      let lastParsed = null;
       while (turnCount < maxTurns) {
         turnCount++;
+        let turnDeltaCount = 0;
         const payload = {
           projectId: opts.projectId,
           siteId: opts.projectId,
@@ -1059,6 +1091,7 @@ Based strictly on the documentation search results above, answer the user's ques
           }
           const rawReply = data.text || data.reply || data.response || data.message || "";
           const parsed2 = parseAssistantOutput(rawReply, registeredTools.map((t) => t.name));
+          lastParsed = parsed2;
           const toolCallsToExecute2 = [];
           if (data.tool_calls && Array.isArray(data.tool_calls) && data.tool_calls.length > 0) {
             for (const tc of data.tool_calls) {
@@ -1079,7 +1112,7 @@ Based strictly on the documentation search results above, answer the user's ques
           }
           if (toolCallsToExecute2.length === 0) {
             finalReply = parsed2.cleanText || rawReply || "No response returned.";
-            callbacks.onChunk?.(finalReply);
+            callbacks.onChunk?.(finalReply, { replace: turnCount > 1, turn: turnCount, isFinal: true });
             this.emit("chunk", finalReply);
             break;
           }
@@ -1089,7 +1122,6 @@ Based strictly on the documentation search results above, answer the user's ques
               text: originalUserQuery
             });
           }
-          const toolSummaries2 = [];
           for (const tc of toolCallsToExecute2) {
             const statusInfo = getToolStatusInfo(tc.name, tc.args);
             callbacks.onStatus?.(statusInfo);
@@ -1100,7 +1132,7 @@ Based strictly on the documentation search results above, answer the user's ques
             callbacks.onToolResult?.({ name: tc.name, args: tc.args, result, callId: tc.id });
             this.emit("tool_result", { name: tc.name, args: tc.args, result, callId: tc.id });
             const resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
-            toolSummaries2.push(`[Search Result for ${tc.name}]:
+            accumulatedToolSummaries.push(`[Search Result for ${tc.name}]:
 ${resultStr}`);
             currentHistory.push({
               sender: "assistant",
@@ -1111,14 +1143,16 @@ ${resultStr}`);
               text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
             });
           }
-          const contextStr2 = truncateContextCleanly(toolSummaries2.join("\n\n"), this.contextWindow);
+          const contextStr2 = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
           userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
 ${contextStr2}
 
-Based strictly on the documentation search results above, answer the user's question directly with concise explanations, exact commands, and clickable Markdown links. Do not repeat introductory greetings.`;
-          allowTools = false;
+Based on the retrieved documentation context above and your knowledge of docmd architecture, answer the user's question directly with concise explanations, exact commands, and clickable Markdown links. If the documentation does not have an explicit, dedicated configuration option or feature matching the user's exact query, clearly state this, synthesize the closest supported mechanism or architectural pattern (such as explicit navigation configuration in navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to the relevant documentation pages. Never return an empty response. Do not repeat introductory greetings.${turnCount >= maxTurns - 1 ? "\n\nYou must now synthesize your complete, final response based on all information retrieved. Do not call any further tools." : ""}`;
+          if (turnCount >= maxTurns - 1) {
+            allowTools = false;
+          }
           continue;
         }
         const reader = res.body.getReader();
@@ -1149,24 +1183,34 @@ Based strictly on the documentation search results above, answer the user's ques
                 }
                 if (dataObj.delta) {
                   streamReplyText += dataObj.delta;
-                  if (!allowTools) {
-                    callbacks.onChunk?.(dataObj.delta);
-                    this.emit("chunk", dataObj.delta);
-                  }
+                  const isFirst = turnDeltaCount === 0;
+                  turnDeltaCount++;
+                  callbacks.onChunk?.(dataObj.delta, {
+                    replace: isFirst && turnCount > 1,
+                    turn: turnCount,
+                    isFinal: false
+                  });
+                  this.emit("chunk", dataObj.delta);
                 }
                 if (dataObj.text) {
                   streamReplyText = dataObj.text;
-                  if (!allowTools) {
-                    callbacks.onChunk?.(dataObj.text);
-                    this.emit("chunk", dataObj.text);
-                  }
+                  callbacks.onChunk?.(dataObj.text, {
+                    replace: true,
+                    turn: turnCount,
+                    isFinal: false
+                  });
+                  this.emit("chunk", dataObj.text);
                 }
               } catch {
                 streamReplyText += dataStr;
-                if (!allowTools) {
-                  callbacks.onChunk?.(dataStr);
-                  this.emit("chunk", dataStr);
-                }
+                const isFirst = turnDeltaCount === 0;
+                turnDeltaCount++;
+                callbacks.onChunk?.(dataStr, {
+                  replace: isFirst && turnCount > 1,
+                  turn: turnCount,
+                  isFinal: false
+                });
+                this.emit("chunk", dataStr);
               }
             }
           }
@@ -1183,6 +1227,7 @@ Based strictly on the documentation search results above, answer the user's ques
           }
         }
         const parsed = parseAssistantOutput(streamReplyText, registeredTools.map((t) => t.name));
+        lastParsed = parsed;
         const toolCallsToExecute = [];
         if (sseToolCalls.length > 0) {
           for (const tc of sseToolCalls) {
@@ -1211,10 +1256,12 @@ Based strictly on the documentation search results above, answer the user's ques
           finalReply = parsed.cleanText || streamReplyText;
         }
         if (toolCallsToExecute.length === 0) {
-          if (allowTools) {
-            callbacks.onChunk?.(finalReply);
-            this.emit("chunk", finalReply);
-          }
+          callbacks.onChunk?.(finalReply, {
+            replace: true,
+            turn: turnCount,
+            isFinal: true
+          });
+          this.emit("chunk", finalReply);
           break;
         }
         if (currentHistory.length === 0 || currentHistory[currentHistory.length - 1]?.text !== originalUserQuery) {
@@ -1223,7 +1270,6 @@ Based strictly on the documentation search results above, answer the user's ques
             text: originalUserQuery
           });
         }
-        const toolSummaries = [];
         for (const tc of toolCallsToExecute) {
           const statusInfo = getToolStatusInfo(tc.name, tc.args);
           callbacks.onStatus?.(statusInfo);
@@ -1234,7 +1280,7 @@ Based strictly on the documentation search results above, answer the user's ques
           callbacks.onToolResult?.({ name: tc.name, args: tc.args, result, callId: tc.id });
           this.emit("tool_result", { name: tc.name, args: tc.args, result, callId: tc.id });
           const resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
-          toolSummaries.push(`[Search Result for ${tc.name}]:
+          accumulatedToolSummaries.push(`[Search Result for ${tc.name}]:
 ${resultStr}`);
           currentHistory.push({
             sender: "assistant",
@@ -1245,15 +1291,28 @@ ${resultStr}`);
             text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
           });
         }
-        const contextStr = truncateContextCleanly(toolSummaries.join("\n\n"), this.contextWindow);
+        const contextStr = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
         userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
 ${contextStr}
 
-Based strictly on the documentation search results above, answer the user's question directly with concise explanations, exact commands, and clickable Markdown links. Do not repeat introductory greetings.`;
-        allowTools = false;
+Based on the retrieved documentation context above and your knowledge of docmd architecture, answer the user's question directly with concise explanations, exact commands, and clickable Markdown links. If the documentation does not have an explicit, dedicated configuration option or feature matching the user's exact query, clearly state this, synthesize the closest supported mechanism or architectural pattern (such as explicit navigation configuration in navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to the relevant documentation pages. Never return an empty response. Do not repeat introductory greetings.${turnCount >= maxTurns - 1 ? "\n\nYou must now synthesize your complete, final response based on all information retrieved. Do not call any further tools." : ""}`;
+        if (turnCount >= maxTurns - 1) {
+          allowTools = false;
+        }
         continue;
+      }
+      if (!finalReply || !finalReply.trim()) {
+        if (lastParsed?.thinking && lastParsed.thinking.trim().length > 20) {
+          finalReply = lastParsed.thinking.trim();
+        } else if (accumulatedToolSummaries.length > 0) {
+          finalReply = `Based on the search results in the documentation, no dedicated setting explicitly matches "${originalUserQuery}". You can configure structure and navigation through [Project Structure](https://docs.docmd.io/getting-started/project-structure/) or your site configuration.`;
+        } else {
+          finalReply = `No documentation page in the retrieved search results explicitly covers a dedicated setting for "${originalUserQuery}". You can configure or customize this behavior via site navigation structure or [Project Structure](https://docs.docmd.io/getting-started/project-structure/).`;
+        }
+        callbacks.onChunk?.(finalReply, { replace: true, turn: turnCount, isFinal: true });
+        this.emit("chunk", finalReply);
       }
       const assistantMsg = {
         role: "assistant",
@@ -1880,6 +1939,45 @@ ${t}
           }
           return;
         }
+        const msgCopyBtn = target.closest(".copy-msg-btn");
+        if (msgCopyBtn) {
+          const bubble = msgCopyBtn.closest(".docmd-ai-chat-bubble");
+          const contentEl = bubble?.querySelector(".docmd-ai-content") || bubble;
+          const textToCopy = contentEl ? (contentEl.textContent || "").trim() : "";
+          if (textToCopy) {
+            const checkSvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+            const copySvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>`;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              msgCopyBtn.classList.add("copied");
+              msgCopyBtn.innerHTML = `${checkSvg} <span>Copied</span>`;
+              setTimeout(() => {
+                msgCopyBtn.classList.remove("copied");
+                msgCopyBtn.innerHTML = `${copySvg} <span>Copy</span>`;
+              }, 2e3);
+            }).catch((err) => {
+              console.error("[docmd-ai] Failed to copy message:", err);
+            });
+          }
+          return;
+        }
+        const retryBtn = target.closest(".retry-msg-btn");
+        if (retryBtn) {
+          if (this.isPending) return;
+          const prompt = retryBtn.getAttribute("data-prompt");
+          if (prompt) {
+            this.submitQuery(prompt);
+          }
+          return;
+        }
+        const editPromptBtn = target.closest(".edit-prompt-btn");
+        if (editPromptBtn) {
+          const prompt = editPromptBtn.getAttribute("data-prompt");
+          if (prompt && drawerInput) {
+            drawerInput.value = prompt;
+            drawerInput.focus();
+          }
+          return;
+        }
         if (target && target.classList.contains("docmd-ai-pill-btn")) {
           if (this.isPending) return;
           const prompt = target.getAttribute("data-prompt");
@@ -2037,9 +2135,11 @@ CRITICAL SCOPE & NAVIGATION RULES:
    - Use \`search_documentation\` first to identify the exact single page or section needed.
    - Only call \`read_documentation_page\` on that specific page when required to fetch precise code snippets or steps.
    - Keep answers clean, structured, and focused directly on what the user asked.
-6. STRICT FACTUALITY (ZERO FABRICATION):
+6. STRICT FACTUALITY & ARCHITECTURAL SYNTHESIS:
    - Ground all answers, configuration snippets, code examples, and commands strictly in verified facts retrieved from this documentation site.
-   - NEVER guess or fabricate non-existent keys, options, or parameters. If the documentation does not evidence a setting, state clearly what is verified and do not invent hypothetical configs.
+   - NEVER guess or fabricate non-existent keys, options, or parameters.
+   - When a user asks about a capability or concept that does not have a single dedicated configuration option (e.g. pinning an item, database authentication, etc.), explicitly explain that no dedicated setting exists for that exact query, explain the closest supported architectural mechanism or pattern (such as explicit navigation configuration via navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to the relevant documentation pages.
+   - Never return an empty response or silence. Always provide an informative, grounded answer to the user.
 7. VERSION FILTERING:
    - The \`search_documentation\` tool supports an optional \`version\` parameter. When the user asks about a specific version (e.g. v0.8.0), specify \`version\` to filter results strictly to that version branch.`;
       const defaultBasePrompt = `You are docmd assistant, the AI documentation guide for "${siteTitle}" \u2014 a professional, precise, and concise technical assistant.
@@ -2048,18 +2148,23 @@ CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
 1. IDENTITY: Your name is "docmd assistant". You are an expert AI documentation assistant dedicated to "${siteTitle}". If asked who you are, state that you are docmd assistant, serving the documentation for "${siteTitle}".
 2. STRICT SCOPE & BOUNDARIES: Answer ONLY questions related to the software, tools, APIs, guides, and documentation provided on this site. Politely decline off-topic queries.
 3. PROFESSIONAL & CONCISE: Provide direct, succinct, and professional answers. Do NOT use excessive emojis (keep emojis to a minimum or none). Avoid conversational fluff, boilerplate apologies, or asking for permission. Get straight to the answer.
-4. TARGETED RETRIEVAL & MINIMAL TOKEN USAGE:
+4. STRICT FACTUALITY & ARCHITECTURAL SYNTHESIS:
+   - Ground all answers, configuration snippets, code examples, and commands strictly in verified facts retrieved from this documentation site.
+   - NEVER guess or fabricate non-existent keys, options, or parameters.
+   - If the documentation does not have an explicit dedicated setting matching the exact query, clearly state this, synthesize the closest supported mechanism or architectural pattern (such as explicit navigation in navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to relevant pages.
+   - Never return an empty response or silence. Always provide an informative, grounded answer.
+5. TARGETED RETRIEVAL & MINIMAL TOKEN USAGE:
    - Only retrieve what is strictly necessary. Never attempt to read the entire documentation or fetch excessive pages.
    - Use \`search_documentation\` first with targeted keywords to locate the exact page.
    - Only invoke \`read_documentation_page\` when you need specific code blocks or configuration details from that single page.
-5. TOOL SELECTION & EXECUTION:
+6. TOOL SELECTION & EXECUTION:
    - Use \`get_site_structure\` whenever you need structural inspection of available documentation versions, supported locales, or navigation trees.
    - Use \`search_documentation\` to search documentation content for specific technical terms, API parameters, error messages, or release notes. Keyword search is always active; pass clean, focused search terms for highest accuracy.
    - Use \`read_documentation_page\` when you need full section context or deep code examples.
-6. CLEAN WRITING & LIST FORMATTING:
+7. CLEAN WRITING & LIST FORMATTING:
    - Write cleanly and directly without artificial gaps, repeated quotes, or messy text breaks.
    - For lists, use standard numbered lists (1., 2., 3.) or bullet points (-). Do not leave blank lines between list items unless separating distinct multi-paragraph steps.
-7. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced pages.`;
+8. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced pages.`;
       const basePrompt = cfg.systemPrompt || defaultBasePrompt;
       return `${basePrompt}
 
@@ -2522,9 +2627,11 @@ ${formattedHits}`;
                 if (msgs) msgs.scrollTop = msgs.scrollHeight;
               }
             },
-            onChunk: (chunk) => {
+            onChunk: (chunk, meta) => {
               if (chunk) {
-                if (!accumulatedText) {
+                if (meta?.replace) {
+                  accumulatedText = chunk;
+                } else if (!accumulatedText) {
                   accumulatedText = chunk;
                 } else if (chunk.startsWith(accumulatedText)) {
                   accumulatedText = chunk;
@@ -2550,7 +2657,26 @@ ${formattedHits}`;
         if (statusWrap) {
           statusWrap.style.display = "none";
         }
-        contentDiv.innerHTML = this.formatMarkdown(res.message || accumulatedText || "No response generated.");
+        const fallbackMsg = text ? `No documentation page in the retrieved results explicitly covers a dedicated setting for "${text}". You can explore the site navigation or search for related topics.` : "No response generated.";
+        const finalMsg = res?.message || accumulatedText || fallbackMsg;
+        contentDiv.innerHTML = this.formatMarkdown(finalMsg);
+        const cfg = window.__docmd_ai_config || {};
+        if (cfg.messageActions) {
+          const actionsDiv = document.createElement("div");
+          actionsDiv.className = "docmd-ai-bubble-actions";
+          actionsDiv.innerHTML = `
+          <button class="docmd-ai-msg-action-btn copy-msg-btn" title="Copy response">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+            <span>Copy</span>
+          </button>
+          <button class="docmd-ai-msg-action-btn retry-msg-btn" title="Retry prompt" data-prompt="${this.escapeHtml(text)}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            <span>Retry</span>
+          </button>
+        `;
+          bubble.appendChild(actionsDiv);
+        }
+        if (msgs) msgs.scrollTop = msgs.scrollHeight;
       } catch (err) {
         const errMsg = err?.message || String(err || "");
         const isAuthOrConfigError = errMsg.includes("Domain Not Authorized") || errMsg.includes("Origin is not authorized") || errMsg.includes("403") || errMsg.includes("401") || err?.unconfigured;
@@ -2589,7 +2715,15 @@ ${formattedHits}`;
       const msgs = document.getElementById("docmd-ai-messages");
       const div = document.createElement("div");
       div.className = `docmd-ai-chat-bubble ${sender}`;
-      div.innerHTML = sender === "assistant" ? this.formatMarkdown(text) : this.escapeHtml(text);
+      if (sender === "user") {
+        const cfg = window.__docmd_ai_config || {};
+        const editBtnHtml = cfg.messageActions ? `<button class="edit-prompt-btn" title="Edit and re-run prompt" data-prompt="${this.escapeHtml(text)}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>` : "";
+        div.innerHTML = `<span class="docmd-ai-user-text">${this.escapeHtml(text)}</span>${editBtnHtml}`;
+      } else {
+        div.innerHTML = this.formatMarkdown(text);
+      }
       if (msgs) {
         msgs.appendChild(div);
         msgs.scrollTop = msgs.scrollHeight;

@@ -1,11 +1,11 @@
-okf_version: 0.9.5
+okf_version: 0.9.7
 bundle:
   name: awesome-open-ai-developer-tools
   title: "Awesome Open AI Developer Tools"
   description: ""
   url: "https://sami-uysal.github.io/awesome-open-ai-developer-tools"
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-09-11T18:40:17.527Z"
+  generated_at: "2026-10-07T11:18:52.433Z"
   default_type: concept
 stats:
   concepts: 12
@@ -17,6 +17,7 @@ concepts:
   - id: categories-01-ai-ides-and-cli
     type: concept
     title: "AI IDEs and CLI"
+    description: ""
     path: /categories/01-ai-ides-and-cli/
     file: concepts/categories-01-ai-ides-and-cli.md
     locale: ""
@@ -25,6 +26,7 @@ concepts:
   - id: categories-02-open-source-agents
     type: concept
     title: "Open-Source Agents"
+    description: ""
     path: /categories/02-open-source-agents/
     file: concepts/categories-02-open-source-agents.md
     locale: ""
@@ -33,6 +35,7 @@ concepts:
   - id: categories-03-local-llm-inference
     type: concept
     title: "Local LLM Inference"
+    description: ""
     path: /categories/03-local-llm-inference/
     file: concepts/categories-03-local-llm-inference.md
     locale: ""
@@ -41,6 +44,7 @@ concepts:
   - id: categories-04-rag-and-data
     type: concept
     title: "RAG and Data"
+    description: ""
     path: /categories/04-rag-and-data/
     file: concepts/categories-04-rag-and-data.md
     locale: ""
@@ -49,6 +53,7 @@ concepts:
   - id: categories-05-training-evals-and-ops
     type: concept
     title: "Training, Evals, and Ops"
+    description: ""
     path: /categories/05-training-evals-and-ops/
     file: concepts/categories-05-training-evals-and-ops.md
     locale: ""
@@ -57,6 +62,7 @@ concepts:
   - id: categories-06-multimodal-and-builders
     type: concept
     title: "Multimodal and Builders"
+    description: ""
     path: /categories/06-multimodal-and-builders/
     file: concepts/categories-06-multimodal-and-builders.md
     locale: ""
@@ -65,6 +71,7 @@ concepts:
   - id: community-contributing
     type: concept
     title: Contributing
+    description: ""
     path: /community/contributing/
     file: concepts/community-contributing.md
     locale: ""
@@ -73,6 +80,7 @@ concepts:
   - id: community-translations
     type: concept
     title: Translations
+    description: ""
     path: /community/translations/
     file: concepts/community-translations.md
     locale: ""
@@ -81,6 +89,7 @@ concepts:
   - id: root
     type: concept
     title: "Awesome Open AI Developer Tools"
+    description: ""
     path: /
     file: concepts/root.md
     locale: ""
@@ -89,6 +98,7 @@ concepts:
   - id: languages-es
     type: concept
     title: "Awesome Open AI Developer Tools"
+    description: ""
     path: /languages/es/
     file: concepts/languages-es.md
     locale: ""
@@ -97,6 +107,7 @@ concepts:
   - id: languages-tr
     type: concept
     title: "Awesome Open AI Developer Tools"
+    description: ""
     path: /languages/tr/
     file: concepts/languages-tr.md
     locale: ""
@@ -105,6 +116,7 @@ concepts:
   - id: languages-zh
     type: concept
     title: "Awesome Open AI Developer Tools"
+    description: ""
     path: /languages/zh/
     file: concepts/languages-zh.md
     locale: ""
