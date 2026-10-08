@@ -425,6 +425,14 @@ Connects an LLM to a real browser so it can navigate, fill forms, and extract da
 - **Replaces:** Stagehand, MultiOn
 - **Edge:** the most widely used open browser agent, with multi-tab handling and vision fallback when the DOM isn't enough. **Known weakness:** non-deterministic — the same goal takes different paths on different runs, which makes failures hard to reproduce, and vision calls on complex pages get expensive. Budget for retries and cap your spend.
 
+### [Jet Browser](https://github.com/masakaai/jet-browser)
+`JavaScript + Rust` · `Apache-2.0` · Self-hosted runtime · 🟡 active
+
+Gives repository-aware coding agents one isolated WPE WebKit session for deterministic browser verification.
+
+- **Replaces:** Browserbase when the requirement is a self-hosted, single-session verification runtime rather than a managed browser service.
+- **Edge:** uses WPE WebKit instead of Chromium/CDP and keeps one ordered JSONL command loop alive across native pointer and keyboard input, DOM checks, and PNG capture. The standalone smoke flow can run against an offline fixture with container networking disabled, and the repository publishes its benchmark method, raw samples, and limitations.
+
 ### [Skyvern](https://github.com/Skyvern-AI/skyvern)
 `Python` · `AGPL-3.0` · Library + server · 🟢 stable
 
@@ -1184,7 +1192,7 @@ Visual framework for building multi-agent and RAG applications.
 | Zapier / Make | [n8n](https://github.com/n8n-io/n8n) |
 | Vapi / Retell | [LiveKit Agents](https://github.com/livekit/agents), [Pipecat](https://github.com/pipecat-ai/pipecat) |
 | Cohere Embed / Rerank | [FlagEmbedding / BGE](https://github.com/FlagOpen/FlagEmbedding) |
-| Browserbase / Stagehand | [browser-use](https://github.com/browser-use/browser-use), [Skyvern](https://github.com/Skyvern-AI/skyvern) |
+| Browserbase / Stagehand | [browser-use](https://github.com/browser-use/browser-use), [Jet Browser](https://github.com/masakaai/jet-browser), [Skyvern](https://github.com/Skyvern-AI/skyvern) |
 | OpenAI GPTs platform | [Dify](https://github.com/langgenius/dify), [Flowise](https://github.com/FlowiseAI/Flowise) |
 
 ---
