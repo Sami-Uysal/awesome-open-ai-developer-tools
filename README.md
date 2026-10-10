@@ -230,6 +230,15 @@ Command-line orchestrator for coding agents, repeatable workflows, and receipt-b
 - **Backends:** Drives Pi and Codex subagents through per-subagent aliases
 - **Edge:** `task start` freezes the protected target SHA and creates a dedicated branch/worktree per task; a merge queue then owns risk-based review — low risk merges with no semantic reviewer,
 
+### [CodeOtter](https://github.com/dharmeshgurnani/CodeOtter)
+`JavaScript + TypeScript` · `AGPL-3.0` · Self-hosted server + CLI · 🟡 active
+
+Self-hosted AI pull request reviewer for GitHub, Forgejo and Gitea that scores each PR, enforces merge gates as status checks and posts committable inline fixes.
+
+- **Replaces:** CodeRabbit, GitHub Copilot code review
+- **Backends:** Local GGUF models via a managed llama.cpp runtime, Anthropic, OpenAI, OpenRouter, MiniMax
+- **Edge:** Scores and pass/fail gates can come from a separate typed-answer model rather than parsed prose, so merge gates don't depend on LLM formatting. Runs fully offline, reads the repo's `AGENTS.md`/`CLAUDE.md`, and works with self-hosted Forgejo and Gitea, not only GitHub.
+
 ---
 ## Prompt-to-App Builders
 
@@ -1186,6 +1195,7 @@ Visual framework for building multi-agent and RAG applications.
 | GitHub Copilot | [Continue](https://github.com/continuedev/continue), [Tabby](https://github.com/TabbyML/tabby), [aider](https://github.com/Aider-AI/aider) |
 | Cursor / Windsurf | [Cline](https://github.com/cline/cline), [OpenCode](https://github.com/sst/opencode), [Continue](https://github.com/continuedev/continue), [BitFun](https://github.com/GCWing/BitFun), [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent) |
 | Devin | [OpenHands](https://github.com/All-Hands-AI/OpenHands), [Goose](https://github.com/block/goose), [SWE-agent](https://github.com/SWE-agent/SWE-agent), [LoopTroop](https://github.com/looptroop-ai/LoopTroop), [5dive](https://github.com/5dive-ai/5dive) |
+| CodeRabbit / Copilot code review | [CodeOtter](https://github.com/dharmeshgurnani/CodeOtter) |
 | Claude Design / Figma Make | [Open Design](https://github.com/nexu-io/open-design) |
 | ChatGPT desktop / Copilot assistant | [OpenClaw](https://github.com/openclaw/openclaw), [Hermes Agent](https://github.com/NousResearch/hermes-agent) |
 | Bolt.new / v0 / Lovable | [bolt.diy](https://github.com/stackblitz-labs/bolt.diy), [OpenUI](https://github.com/wandb/openui), [Dyad](https://github.com/dyad-sh/dyad) |
