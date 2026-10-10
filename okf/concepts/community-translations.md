@@ -6,7 +6,7 @@ path: /community/translations/
 updated: 2026-10-10
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-10-10T19:34:27.362Z"
+  generated_at: "2026-10-10T19:34:54.307Z"
 ---
 # Translations
 
