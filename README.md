@@ -1022,6 +1022,15 @@ LLM vulnerability scanner — probes for prompt injection, jailbreaks, data leak
 
 - **Edge:** `nmap` for language models. Run it before you ship, not after the incident.
 
+### [YYLO Benchmark](https://github.com/yylo-dev/yylo-benchmark)
+`TypeScript` · `MIT` · CLI · 🟡 active
+
+Thin trusted-host experiment runner for historical Ledger tasks, supplied coding prompts, and workflows — compare models, harnesses and configurations, then evaluate retained outputs with different checks or judges later.
+
+- **Replaces:** Ad-hoc multi-model coding-agent experiment scripts
+- **Backends:** Runs selected coding-agent harnesses locally; tests require no paid provider calls
+- **Edge:** Reviewed cases fan out to independent attempts whose retained outputs are re-evaluated later with new checks or judges — comparison rows stay separate from judge opinions, and the runner never chooses a winner.
+
 ---
 
 ## Observability & LLMOps
