@@ -124,7 +124,7 @@ Coding agent that won't say done on a false claim — verification on disk, rece
 
 - **Replaces:** Cursor agent mode, Claude Code for teams that need a done-bar outside the model
 - **Backends:** OpenAI-compatible endpoints (Ollama, vLLM, etc.) or Anthropic
-- **Edge:** Acceptance lives in `.molt/done.yml` against real files; accepts and refusals both write hash-chained receipts (`molt verify`). Install via `npm i -g @solvyx/molt` / `npx @solvyx/molt`.
+- **Edge:** Acceptance lives in `.molt/done.yml` against real files; accepts and refusals both write hash-chained receipts (`molt verify`). Install from the [GitHub releases](https://github.com/solvyxtech/molt/releases/latest) or build from source.
 
 ### [BitFun](https://github.com/GCWing/BitFun)
 `Rust + TypeScript` · `MIT` · Desktop + CLI · 🟡 active
