@@ -3,10 +3,10 @@ type: concept
 title: "Awesome Open AI Developer Tools"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/es/"
 path: /languages/es/
-updated: 2026-10-07
+updated: 2026-10-10
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-10-07T20:05:48.044Z"
+  generated_at: "2026-10-10T19:34:27.363Z"
 ---
 # Awesome Open AI Developer Tools
 
