@@ -552,6 +552,14 @@ Package manager and public registry for reusable AI skills, prompts, rules, MCP 
 
 - **Edge:** One versioned package can target Codex, Claude Code, and Cursor through adapters, while the lockfile records exact installed versions for repeatable team setup.
 
+### [drevon](https://github.com/csakash/drevon)
+`TypeScript` · `MIT` · CLI · 🟡 active
+
+`npx drevon init` turns any directory into an AI workspace with one shared config, persistent cross-session memory, prompts and skills.
+
+- **Backends:** Claude Code, Codex, Copilot, Cursor, Windsurf, Cline, Aider and Continue
+- **Edge:** One shared config plus persistent cross-session memory, prompts and skills serve all of these assistants from a single directory, instead of maintaining each tool's setup separately.
+
 ---
 
 ## Model Context Protocol (MCP)
