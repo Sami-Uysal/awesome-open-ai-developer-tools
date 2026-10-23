@@ -4,7 +4,7 @@
 
 ---
 
-## [AI IDEs and CLI](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/)
+## [AI IDEs and CLI](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/) (Categories)
 
 # AI IDEs and CLI
 
@@ -180,7 +180,7 @@ Local, open-source AI app builder. Runs on your machine, bring your own API keys
 
 ---
 
-## [Open-Source Agents](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/02-open-source-agents/)
+## [Open-Source Agents](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/02-open-source-agents/) (Categories)
 
 # Open-Source Agents
 
@@ -455,7 +455,7 @@ Local semantic code index with an MCP server on top — search and navigate a co
 
 ---
 
-## [Local LLM Inference](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/)
+## [Local LLM Inference](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/) (Categories)
 
 # Local LLM Inference
 
@@ -634,7 +634,7 @@ Local-first workspace combining notes, tasks, and AI chat in your browser on you
 
 ---
 
-## [RAG and Data](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/04-rag-and-data/)
+## [RAG and Data](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/04-rag-and-data/) (Categories)
 
 # RAG and Data
 
@@ -752,7 +752,7 @@ Preprocessing library for ingesting unstructured documents into ML pipelines.
 
 ---
 
-## [Training, Evals, and Ops](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/)
+## [Training, Evals, and Ops](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/) (Categories)
 
 # Training, Evals, and Ops
 
@@ -915,7 +915,7 @@ Dependency-free browser calculator for estimating AI model API costs from reques
 
 ---
 
-## [Multimodal and Builders](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/06-multimodal-and-builders/)
+## [Multimodal and Builders](https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/06-multimodal-and-builders/) (Categories)
 
 # Multimodal and Builders
 
@@ -1068,7 +1068,7 @@ Three rules that save the most time:
 
 ---
 
-## [Contributing](https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/contributing/)
+## [Contributing](https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/contributing/) (Community)
 
 # Contributing
 
@@ -1151,7 +1151,7 @@ Wrong license, dead link, inaccurate claim — open an issue. Corrections are th
 
 ---
 
-## [Translations](https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/translations/)
+## [Translations](https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/translations/) (Community)
 
 # Translations
 
@@ -2300,7 +2300,7 @@ To the extent possible under law, contributors have waived all copyright and rel
 
 ---
 
-## [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/es/)
+## [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/es/) (Languages)
 
 # Awesome Open AI Developer Tools
 
@@ -3224,7 +3224,7 @@ En la medida en que lo permite la ley, quienes contribuyen han renunciado a todo
 
 ---
 
-## [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/tr/)
+## [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/tr/) (Languages)
 
 # Awesome Open AI Developer Tools
 
@@ -4148,7 +4148,7 @@ Yasaların izin verdiği ölçüde, katkıda bulunanlar bu esere ilişkin tüm t
 
 ---
 
-## [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/zh/)
+## [Awesome Open AI Developer Tools](https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/zh/) (Languages)
 
 # Awesome Open AI Developer Tools
 

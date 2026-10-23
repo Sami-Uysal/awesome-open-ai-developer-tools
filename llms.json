@@ -6,72 +6,84 @@
       "title": "AI IDEs and CLI",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/01-ai-ides-and-cli/",
       "description": "",
+      "section": "Categories",
       "priority": "medium"
     },
     {
       "title": "Open-Source Agents",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/02-open-source-agents/",
       "description": "",
+      "section": "Categories",
       "priority": "medium"
     },
     {
       "title": "Local LLM Inference",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/",
       "description": "",
+      "section": "Categories",
       "priority": "medium"
     },
     {
       "title": "RAG and Data",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/04-rag-and-data/",
       "description": "",
+      "section": "Categories",
       "priority": "medium"
     },
     {
       "title": "Training, Evals, and Ops",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/",
       "description": "",
+      "section": "Categories",
       "priority": "medium"
     },
     {
       "title": "Multimodal and Builders",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/06-multimodal-and-builders/",
       "description": "",
+      "section": "Categories",
       "priority": "medium"
     },
     {
       "title": "Contributing",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/contributing/",
       "description": "",
+      "section": "Community",
       "priority": "medium"
     },
     {
       "title": "Translations",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/community/translations/",
       "description": "",
+      "section": "Community",
       "priority": "medium"
     },
     {
       "title": "Awesome Open AI Developer Tools",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/",
       "description": "",
+      "section": null,
       "priority": "high"
     },
     {
       "title": "Awesome Open AI Developer Tools",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/es/",
       "description": "",
+      "section": "Languages",
       "priority": "medium"
     },
     {
       "title": "Awesome Open AI Developer Tools",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/tr/",
       "description": "",
+      "section": "Languages",
       "priority": "medium"
     },
     {
       "title": "Awesome Open AI Developer Tools",
       "url": "https://sami-uysal.github.io/awesome-open-ai-developer-tools/languages/zh/",
       "description": "",
+      "section": "Languages",
       "priority": "medium"
     }
   ]
