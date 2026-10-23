@@ -6,7 +6,7 @@ path: /categories/04-rag-and-data/
 updated: 2026-10-23
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-10-23T15:13:36.514Z"
+  generated_at: "2026-10-23T15:21:57.769Z"
 ---
 # RAG and Data
 
