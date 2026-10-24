@@ -257,6 +257,16 @@ Claude Code plugin that runs GitHub Issues as the work pipeline: each issue move
 - **Backends:** Claude Code (Anthropic)
 - **Edge:** The chat acts as a manager that dispatches worker subagents for code and tests plus a verifier that reviews both without seeing how they were made. Hooks block a code commit until the full test suite has passed on exactly what is being committed, and finished work waits uncommitted for the human to try it.
 
+### [Sqwakie](https://github.com/alexcarney460-hue/walkie)
+`TypeScript` · `FSL-1.1-ALv2` (source-available, not OSI; converts to `Apache-2.0`) · Background daemon + CLI + MCP + web dashboard · 🟠 experimental
+
+Puts a small team's people and their Claude Code and Codex agents on one team: agents message and ask each other peer to peer, and one dashboard shows what every agent across everyone's machines is doing.
+
+- **Replaces:** Relaying questions between teammates' agents through Slack, email or copy-paste
+- **Backends:** Claude Code, Codex
+- **Edge:** Agents call `post`, `get`, `reply`, `subscribe` and `ask` from the CLI or as MCP tools, so one agent's question reaches a teammate's agent directly. Daemons connect peer to peer (QUIC with NAT hole-punching, built on iroh) and replicate a signed, append-only team log; when there is no direct path, a relay forwards encrypted traffic it can't read. Project kanban cards can be started, reviewed and finished by agents.
+
+
 ---
 ## Prompt-to-App Builders
 
