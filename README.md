@@ -273,11 +273,7 @@ Open-source agentic workspace on the VS Code core that puts agent chats, code, G
 
 - **Replaces:** Cursor
 - **Backends:** Claude Code and Codex agent CLIs over the Agent Client Protocol (ACP), plus local models through Ollama and tools through MCP
-- **Edge:** Agent edits land as hunk-level diffs you keep or revert, with Git 
-
-
-
-
+- **Edge:** Agent edits land as hunk-level diffs you keep or revert, with Git checkpoints and worktrees so parallel agents don't collide. Because it runs on the real VS Code core, existing extensions, themes, keybindings and debuggers keep working.
 
 
 ---
