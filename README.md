@@ -266,6 +266,15 @@ Puts a small team's people and their Claude Code and Codex agents on one team: a
 - **Backends:** Claude Code, Codex
 - **Edge:** Agents call `post`, `get`, `reply`, `subscribe` and `ask` from the CLI or as MCP tools, so one agent's question reaches a teammate's agent directly. Daemons connect peer to peer (QUIC with NAT hole-punching, built on iroh) and replicate a signed, append-only team log; when there is no direct path, a relay forwards encrypted traffic it can't read. Project kanban cards can be started, reviewed and finished by agents.
 
+### [Volt](https://github.com/LeulAria/volt)
+`TypeScript` · `MIT` · Desktop IDE (VS Code core) · 🟠 experimental
+
+Open-source agentic workspace on the VS Code core that puts agent chats, code, Git, a browser and a terminal in one window.
+
+- **Replaces:** Cursor
+- **Backends:** Claude Code and Codex agent CLIs over the Agent Client Protocol (ACP), plus local models through Ollama and tools through MCP
+- **Edge:** Agent edits land as hunk-level diffs you keep or revert, with Git checkpoints and worktrees so parallel agents don't collide. Because it runs on the real VS Code core, existing extensions, themes, keybindings and debuggers keep working.
+
 
 ---
 ## Prompt-to-App Builders
