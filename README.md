@@ -1229,6 +1229,14 @@ Text-to-speech. Kokoro is a tiny (~82M parameter) model with quality far above i
 - **Replaces:** ElevenLabs
 - **Edge:** Real-time TTS on CPU. Kokoro's small footprint makes it viable to bundle inside an app.
 
+### [SuperClonica](https://huggingface.co/Superclonica/superclonica)
+`Python` · `Apache-2.0` · Engine + CLI · 🟢 stable
+
+Offline engine for the open-weight Supertonic 3 text-to-speech model: 31 languages, ONNX Runtime on CPU or CUDA, one small JSON file per voice, with free voice files and an optional hosted API.
+
+- **Replaces:** ElevenLabs and cloud TTS for long-form narration
+- **Edge:** `pip install superclonica-cpu`, then voice whole chapters offline on an ordinary CPU; a voice trained from a 5 to 10 second recording is a single file that runs anywhere. **Known weakness:** no Chinese yet, no zero-shot cloning at generation time (a voice is trained once first), and the source ships in the PyPI package rather than in a public Git repository.
+
 ### [Pipecat](https://github.com/pipecat-ai/pipecat)
 `Python` · Library · 🟢 stable
 
