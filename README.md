@@ -267,6 +267,15 @@ Puts a small team's people and their Claude Code and Codex agents on one team: a
 - **Edge:** Agents call `post`, `get`, `reply`, `subscribe` and `ask` from the CLI or as MCP tools, so one agent's question reaches a teammate's agent directly. Daemons connect peer to peer (QUIC with NAT hole-punching, built on iroh) and replicate a signed, append-only team log; when there is no direct path, a relay forwards encrypted traffic it can't read. Project kanban cards can be started, reviewed and finished by agents.
 
 
+### [Sno Station](https://github.com/sno-ai/sno-station)
+`TypeScript` · `Apache-2.0` · CLI + skills added to the agents you already run (no daemon) · 🟡 active
+
+Turns Codex, Claude Code, Cursor, Hermes Agent and OpenClaw into one squad on your own computer: they share one memory, hand work to each other, and review each other's work when you ask.
+
+- **Replaces:** Pasting context between two agent sessions when one hits its usage limit; asking an agent to review its own work
+- **Backends:** Codex, Claude Code, Cursor, Hermes Agent, OpenClaw
+- **Edge:** When one agent hits a rate limit mid-task, another agent picks the task up from the same memory, so nothing is pasted. A review request always goes to a different agent than the author, so the reviewer has no habit of agreeing with it. A nightly pass consolidates memory across all sessions and proposes edits to the agents' own skills, which you approve or reject in the morning.
+
 ---
 ## Prompt-to-App Builders
 
