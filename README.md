@@ -421,6 +421,14 @@ Open-source desktop AI agent for business automation — lead generation, knowle
 - **Replaces:** Cloud-hosted business automation and lead-generation agents
 - **Edge:** Local-first: SQLite + sqlite-vec storage, permission-gated tools, skills/plugins/MCP servers. Cron scheduling, subagents, Puppeteer browser automation for lead-gen/outreach loops.
 
+### [kwant](https://github.com/alexsergivan/kwant)
+`Rust` · `AGPL-3.0` · Self-hosted binary, Mac app · 🟡 active
+
+Self-hosted team of AI bots in one binary that share chats, hand work to each other with an @mention, and run routines on a schedule.
+
+- **Replaces:** Hosted personal agent apps, ChatGPT Team, Claude Desktop
+- **Backends:** Claude, Codex and Grok CLI logins; Anthropic, OpenAI and xAI keys; any OpenAI- or Anthropic-compatible server, including local models
+- **Edge:** Spaces keep separate bots, accounts, routines and approval rules for work and home, and when one account runs out of usage the turn moves to the next one. Risky steps such as `git push` or network calls show an approval card with the exact command. One Rust binary with SQLite and the web app embedded, no telemetry.
 
 ---
 
