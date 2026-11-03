@@ -3,10 +3,10 @@ type: concept
 title: "RAG and Data"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/04-rag-and-data/"
 path: /categories/04-rag-and-data/
-updated: 2026-10-27
+updated: 2026-11-03
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-10-27T16:00:25.471Z"
+  generated_at: "2026-11-03T13:20:33.051Z"
 ---
 # RAG and Data
 
