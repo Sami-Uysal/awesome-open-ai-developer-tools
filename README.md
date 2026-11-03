@@ -1166,6 +1166,15 @@ Thin trusted-host experiment runner for historical Ledger tasks, supplied coding
 - **Backends:** Runs selected coding-agent harnesses locally; tests require no paid provider calls
 - **Edge:** Reviewed cases fan out to independent attempts whose retained outputs are re-evaluated later with new checks or judges — comparison rows stay separate from judge opinions, and the runner never chooses a winner.
 
+### [Ponder](https://github.com/Quinnod345/ponder)
+`JavaScript` · `MIT` · CLI + Agent skill · 🟡 active
+
+Zero-dependency cognitive verification CLI and agent skill that enforces an 8-stage deliberation protocol and a mathematical convergence gate before an AI agent finishes a review or code change.
+
+- **Replaces:** Ad-hoc single-pass LLM self-review prompts and manual review checklists
+- **Backends:** Claude Code, Cursor, Codex, OpenClaw, and any terminal-capable coding agent
+- **Edge:** Tracks explicit work units, predictions, adversarial lens evaluations (`skeptic`, `builder`, `dreamer`, `empath`), and per-pass deltas in `.ponder/sessions/`, requiring 100% unit coverage and bounded novelty and churn before `ponder verify` exits 0. It verifies coverage and convergence of the agent's deliberation state rather than executing application test suites.
+
 ---
 
 ## Observability & LLMOps
