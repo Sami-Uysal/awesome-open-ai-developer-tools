@@ -1279,6 +1279,16 @@ Node-based interface for diffusion models — image, video, and audio generation
 - **Replaces:** Midjourney, DALL·E
 - **Edge:** The graph *is* the program — every step is inspectable and reproducible, and workflows are shareable as JSON. Supports essentially every open image/video model within days of release.
 
+### [Breatic](https://github.com/orime-org/breatic)
+`TypeScript` · `Elastic-2.0` (source-available, not OSI) · Web application / internal deployment · 🟡 active
+
+Collaborative creation workspace with shared documents, AI media canvases, and project-aware agent proposals reviewed by people.
+
+- **Replaces:** Separate brief documents and media-reference boards within a creative project; no full proprietary-suite replacement is claimed.
+- **Backends:** Configured AI model providers; Cloudflare R2 storage is required by the documented setup.
+- **Edge:** Document and canvas Spaces share project context, with Yjs/Hocuspocus collaborative state and explicit review before agent-proposed document changes are applied. This is an application implementation to inspect and deploy internally, not a model, coding agent, or promise to solve every concurrent-edit edge case.
+
+
 ### [Surya](https://github.com/datalab-to/surya)
 `Python` · `GPL-3.0` (commercial exceptions) · 🟡 active
 
