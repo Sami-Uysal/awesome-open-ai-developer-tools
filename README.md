@@ -653,6 +653,14 @@ Reference implementations — filesystem, git, fetch, memory, and dozens of comm
 
 - **Edge:** The fastest way to learn the protocol is to read a 200-line server that already works.
 
+### [Kilobat CLI](https://github.com/seifip/kilobat-cli)
+`Swift` · `GPL-3.0-only` · macOS CLI / TUI / MCP · 🟠 experimental
+
+Network diagnostics and per-app traffic monitoring for a Mac, with JSON output and a local stdio MCP server for coding agents.
+
+- **Edge:** `kilobat why <host> --json` separates network, proxy, DNS, IP and server checks before an agent starts changing application code. The same native executable serves MCP tools with `kilobat mcp`, without a separate Node or Python server.
+- **Known limits:** macOS 14+ only; Homebrew builds from source and requires Xcode 16+. Wi-Fi names need the companion's Location permission, and traffic history needs recorded data. Network blocking requires the separately proprietary desktop app; diagnostics contact the targets being checked.
+
 ### [Mac Developer Bridge](https://github.com/alexanderradahl/mac-developer-bridge)
 `JavaScript` · `MIT` · macOS / MCP · 🟠 experimental
 
