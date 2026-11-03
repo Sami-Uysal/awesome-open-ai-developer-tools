@@ -285,6 +285,15 @@ Turns Codex, Claude Code, Cursor, Hermes Agent and OpenClaw into one squad on yo
 - **Backends:** Codex, Claude Code, Cursor, Hermes Agent, OpenClaw
 - **Edge:** When one agent hits a rate limit mid-task, another agent picks the task up from the same memory, so nothing is pasted. A review request always goes to a different agent than the author, so the reviewer has no habit of agreeing with it. A nightly pass consolidates memory across all sessions and proposes edits to the agents' own skills, which you approve or reject in the morning.
 
+### [DevIntern](https://github.com/getdevintern/devintern)
+`TypeScript` · `FSL-1.1-ALv2 (source-available)` · CLI daemon (self-hosted worker) · 🟢 stable
+
+One self-hosted worker that routes tracker tickets across many repositories and turns them into pull requests with the coding agent you already have.
+
+- **Replaces:** Devin, GitHub Copilot coding agent, Factory
+- **Backends:** Claude Code, Codex, Cursor, OpenCode
+- **Edge:** Routing rules in one `workspace.toml` send Jira, Linear or GitHub Issues tickets to the right repo, each run in a disposable git worktree. An optional auto-review step has the agent critique and fix its own diff before the PR opens. The same daemon runs cron-scheduled prompts and Sentry-to-PR fixes, and turns review comments, failing CI and merge conflicts into follow-up commits without force-pushing.
+
 ---
 ## Prompt-to-App Builders
 
