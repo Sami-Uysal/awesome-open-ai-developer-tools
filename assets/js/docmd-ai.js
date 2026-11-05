@@ -39,7 +39,7 @@ var DocmdAIAssistant = (() => {
     DocmdAIAssistantUI: () => DocmdAIAssistantUI
   });
 
-  // ../../../node_modules/.pnpm/docmd-assistant@0.1.18/node_modules/docmd-assistant/dist/index.js
+  // ../../../node_modules/.pnpm/docmd-assistant@0.1.21/node_modules/docmd-assistant/dist/index.js
   function parseAssistantOutput(raw, knownToolNames) {
     if (!raw || typeof raw !== "string") {
       return { cleanText: "", extractedToolCalls: [] };
@@ -342,7 +342,7 @@ var DocmdAIAssistant = (() => {
     }
     return results;
   }
-  var ENGINE_VERSION = typeof process !== "undefined" && "0.1.18" ? "0.1.18" : "0.1.17";
+  var ENGINE_VERSION = typeof process !== "undefined" && "0.1.21" ? "0.1.21" : "0.1.20";
   var DEFAULT_SYSTEM_PROMPT = `You are docmd assistant \u2014 a professional, precise, and concise technical AI assistant for this documentation site.
 
 CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
@@ -486,6 +486,12 @@ ${additionalPrompt}`;
       }
       return this;
     }
+    getOptions() {
+      return { ...this.options };
+    }
+    isFetchExternalUrlsEnabled() {
+      return this.options.fetchExternalUrls === true;
+    }
     // --- State & History Surface ---
     getHistory() {
       return [...this.history];
@@ -540,8 +546,9 @@ ${additionalPrompt}`;
         throw new Error("Assistant is currently processing a response. Please wait for the current query to complete.");
       }
       this.isExecuting = true;
+      let userMsg = null;
       try {
-        const userMsg = {
+        userMsg = {
           role: "user",
           content,
           sender: "user",
@@ -555,6 +562,12 @@ ${additionalPrompt}`;
           return await this.runAiplugLoop(opts);
         }
         return await this.runRelayLoop(endpoint || "https://api.docmd.io/v1/ai/chat", opts);
+      } catch (err) {
+        if (userMsg && this.history.length > 0 && this.history[this.history.length - 1]?.content === userMsg.content) {
+          this.history.pop();
+        }
+        this.emit("error", err);
+        throw err;
       } finally {
         this.isExecuting = false;
       }
@@ -565,8 +578,9 @@ ${additionalPrompt}`;
         throw new Error("Assistant is currently processing a response. Please wait for the current query to complete.");
       }
       this.isExecuting = true;
+      let userMsg = null;
       try {
-        const userMsg = {
+        userMsg = {
           role: "user",
           content,
           sender: "user",
@@ -587,6 +601,9 @@ ${additionalPrompt}`;
         callbacks.onFinish?.(response);
         return response;
       } catch (err) {
+        if (userMsg && this.history.length > 0 && this.history[this.history.length - 1]?.content === userMsg.content) {
+          this.history.pop();
+        }
         callbacks.onError?.(err);
         this.emit("error", err);
         throw err;
@@ -848,12 +865,20 @@ ${additionalPrompt}`;
       }));
       const rawUserContent = this.history[this.history.length - 1]?.content || "";
       const originalUserQuery = rawUserContent.replace(/\n\n\[Documentation Search Context[\s\S]*$/i, "").trim();
-      let currentHistory = this.history.slice(0, -1).map((m) => ({
+      let currentHistory = this.history.slice(0, -1);
+      if (typeof opts.compactHistory === "function") {
+        try {
+          currentHistory = opts.compactHistory(currentHistory);
+        } catch (compactErr) {
+          console.warn("[docmd-assistant] compactHistory hook failed:", compactErr);
+        }
+      }
+      let mappedHistory = currentHistory.map((m) => ({
         sender: m.sender || m.role,
         text: m.content
       }));
-      if (currentHistory.length > 12) {
-        currentHistory = currentHistory.slice(-12);
+      if (mappedHistory.length > 12) {
+        mappedHistory = mappedHistory.slice(-12);
       }
       let userMessage = originalUserQuery;
       let allowTools = true;
@@ -870,7 +895,7 @@ ${additionalPrompt}`;
           message: userMessage,
           pageUrl: typeof location !== "undefined" ? location.href : void 0,
           pageTitle: typeof document !== "undefined" ? document.title : void 0,
-          history: currentHistory,
+          history: mappedHistory,
           systemPrompt: this.systemPrompt,
           reasoning: reasoningVal,
           tools: allowTools && registeredTools.length > 0 ? registeredTools : void 0
@@ -880,6 +905,13 @@ ${additionalPrompt}`;
         }
         if (opts.provider) payload.provider = opts.provider;
         if (opts.model) payload.model = opts.model;
+        if (typeof opts.onPayload === "function") {
+          try {
+            const mod = opts.onPayload(payload);
+            if (mod && typeof mod === "object") Object.assign(payload, mod);
+          } catch {
+          }
+        }
         let res;
         try {
           res = await fetch(endpoint, {
@@ -914,6 +946,9 @@ ${additionalPrompt}`;
         if (!res.ok || data.error) {
           throw new Error(data.error || `Relay error (${res.status})`);
         }
+        if (data.projectSettings?.fetchExternalUrls !== void 0) {
+          this.options.fetchExternalUrls = !!data.projectSettings.fetchExternalUrls;
+        }
         const rawReply = data.text || data.reply || data.response || data.message || "";
         const parsed = parseAssistantOutput(rawReply, registeredTools.map((t) => t.name));
         lastParsed = parsed;
@@ -947,8 +982,8 @@ ${additionalPrompt}`;
         if (toolCallsToExecute.length === 0) {
           break;
         }
-        if (currentHistory.length === 0 || currentHistory[currentHistory.length - 1]?.text !== originalUserQuery) {
-          currentHistory.push({
+        if (mappedHistory.length === 0 || mappedHistory[mappedHistory.length - 1]?.text !== originalUserQuery) {
+          mappedHistory.push({
             sender: "user",
             text: originalUserQuery
           });
@@ -957,19 +992,46 @@ ${additionalPrompt}`;
           this.emit("tool_call", { name: tc.name, args: tc.args, callId: tc.id });
           const result = await this.executeTool(tc.name, tc.args);
           this.emit("tool_result", { name: tc.name, args: tc.args, result, callId: tc.id });
-          const resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+          let resultStr;
+          if (typeof opts.formatToolResult === "function") {
+            try {
+              const formatted = opts.formatToolResult(tc.name, tc.args, result);
+              resultStr = typeof formatted === "string" ? formatted : JSON.stringify(formatted, null, 2);
+            } catch {
+              resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+            }
+          } else {
+            resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+          }
           accumulatedToolSummaries.push(`[Search Result for ${tc.name}]:
 ${resultStr}`);
           currentHistory.push({
+            role: "assistant",
+            sender: "assistant",
+            content: `[Tool Call: ${tc.name}(${JSON.stringify(tc.args)})]`
+          });
+          mappedHistory.push({
             sender: "assistant",
             text: `[Tool Call: ${tc.name}(${JSON.stringify(tc.args)})]`
           });
           currentHistory.push({
+            role: "user",
+            sender: "user",
+            content: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
+          });
+          mappedHistory.push({
             sender: "user",
             text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
           });
         }
-        const contextStr = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
+        let contextStr = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
+        if (typeof opts.transformContext === "function") {
+          try {
+            contextStr = await opts.transformContext(contextStr, { turn: turnCount, query: originalUserQuery, toolCalls: toolCallsToExecute });
+          } catch (txErr) {
+            console.warn("[docmd-assistant] transformContext hook failed:", txErr);
+          }
+        }
         userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
@@ -1011,12 +1073,20 @@ Based on the retrieved documentation context above and your knowledge of docmd a
       }));
       const rawUserContent = this.history[this.history.length - 1]?.content || "";
       const originalUserQuery = rawUserContent.replace(/\n\n\[Documentation Search Context[\s\S]*$/i, "").trim();
-      let currentHistory = this.history.slice(0, -1).map((m) => ({
+      let currentHistory = this.history.slice(0, -1);
+      if (typeof opts.compactHistory === "function") {
+        try {
+          currentHistory = opts.compactHistory(currentHistory);
+        } catch (compactErr) {
+          console.warn("[docmd-assistant] compactHistory hook failed:", compactErr);
+        }
+      }
+      let mappedHistory = currentHistory.map((m) => ({
         sender: m.sender || m.role,
         text: m.content
       }));
-      if (currentHistory.length > 12) {
-        currentHistory = currentHistory.slice(-12);
+      if (mappedHistory.length > 12) {
+        mappedHistory = mappedHistory.slice(-12);
       }
       let userMessage = originalUserQuery;
       let allowTools = true;
@@ -1034,7 +1104,7 @@ Based on the retrieved documentation context above and your knowledge of docmd a
           message: userMessage,
           pageUrl: typeof location !== "undefined" ? location.href : void 0,
           pageTitle: typeof document !== "undefined" ? document.title : void 0,
-          history: currentHistory,
+          history: mappedHistory,
           systemPrompt: this.systemPrompt,
           reasoning: reasoningVal,
           tools: allowTools && registeredTools.length > 0 ? registeredTools : void 0,
@@ -1045,6 +1115,13 @@ Based on the retrieved documentation context above and your knowledge of docmd a
         }
         if (opts.provider) payload.provider = opts.provider;
         if (opts.model) payload.model = opts.model;
+        if (typeof opts.onPayload === "function") {
+          try {
+            const mod = opts.onPayload(payload);
+            if (mod && typeof mod === "object") Object.assign(payload, mod);
+          } catch {
+          }
+        }
         let res;
         try {
           res = await fetch(endpoint, {
@@ -1089,6 +1166,9 @@ Based on the retrieved documentation context above and your knowledge of docmd a
           if (!res.ok || data.error) {
             throw new Error(data.error || `Relay error (${res.status})`);
           }
+          if (data.projectSettings?.fetchExternalUrls !== void 0) {
+            this.options.fetchExternalUrls = !!data.projectSettings.fetchExternalUrls;
+          }
           const rawReply = data.text || data.reply || data.response || data.message || "";
           const parsed2 = parseAssistantOutput(rawReply, registeredTools.map((t) => t.name));
           lastParsed = parsed2;
@@ -1116,8 +1196,8 @@ Based on the retrieved documentation context above and your knowledge of docmd a
             this.emit("chunk", finalReply);
             break;
           }
-          if (currentHistory.length === 0 || currentHistory[currentHistory.length - 1]?.text !== originalUserQuery) {
-            currentHistory.push({
+          if (mappedHistory.length === 0 || mappedHistory[mappedHistory.length - 1]?.text !== originalUserQuery) {
+            mappedHistory.push({
               sender: "user",
               text: originalUserQuery
             });
@@ -1131,19 +1211,46 @@ Based on the retrieved documentation context above and your knowledge of docmd a
             const result = await this.executeTool(tc.name, tc.args);
             callbacks.onToolResult?.({ name: tc.name, args: tc.args, result, callId: tc.id });
             this.emit("tool_result", { name: tc.name, args: tc.args, result, callId: tc.id });
-            const resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+            let resultStr;
+            if (typeof opts.formatToolResult === "function") {
+              try {
+                const formatted = opts.formatToolResult(tc.name, tc.args, result);
+                resultStr = typeof formatted === "string" ? formatted : JSON.stringify(formatted, null, 2);
+              } catch {
+                resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+              }
+            } else {
+              resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+            }
             accumulatedToolSummaries.push(`[Search Result for ${tc.name}]:
 ${resultStr}`);
             currentHistory.push({
+              role: "assistant",
+              sender: "assistant",
+              content: `[Tool Call: ${tc.name}(${JSON.stringify(tc.args)})]`
+            });
+            mappedHistory.push({
               sender: "assistant",
               text: `[Tool Call: ${tc.name}(${JSON.stringify(tc.args)})]`
             });
             currentHistory.push({
+              role: "user",
+              sender: "user",
+              content: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
+            });
+            mappedHistory.push({
               sender: "user",
               text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
             });
           }
-          const contextStr2 = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
+          let contextStr2 = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
+          if (typeof opts.transformContext === "function") {
+            try {
+              contextStr2 = await opts.transformContext(contextStr2, { turn: turnCount, query: originalUserQuery, toolCalls: toolCallsToExecute2 });
+            } catch (txErr) {
+              console.warn("[docmd-assistant] transformContext hook failed:", txErr);
+            }
+          }
           userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
@@ -1264,8 +1371,8 @@ Based on the retrieved documentation context above and your knowledge of docmd a
           this.emit("chunk", finalReply);
           break;
         }
-        if (currentHistory.length === 0 || currentHistory[currentHistory.length - 1]?.text !== originalUserQuery) {
-          currentHistory.push({
+        if (mappedHistory.length === 0 || mappedHistory[mappedHistory.length - 1]?.text !== originalUserQuery) {
+          mappedHistory.push({
             sender: "user",
             text: originalUserQuery
           });
@@ -1279,19 +1386,46 @@ Based on the retrieved documentation context above and your knowledge of docmd a
           const result = await this.executeTool(tc.name, tc.args);
           callbacks.onToolResult?.({ name: tc.name, args: tc.args, result, callId: tc.id });
           this.emit("tool_result", { name: tc.name, args: tc.args, result, callId: tc.id });
-          const resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+          let resultStr;
+          if (typeof opts.formatToolResult === "function") {
+            try {
+              const formatted = opts.formatToolResult(tc.name, tc.args, result);
+              resultStr = typeof formatted === "string" ? formatted : JSON.stringify(formatted, null, 2);
+            } catch {
+              resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+            }
+          } else {
+            resultStr = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+          }
           accumulatedToolSummaries.push(`[Search Result for ${tc.name}]:
 ${resultStr}`);
           currentHistory.push({
+            role: "assistant",
+            sender: "assistant",
+            content: `[Tool Call: ${tc.name}(${JSON.stringify(tc.args)})]`
+          });
+          mappedHistory.push({
             sender: "assistant",
             text: `[Tool Call: ${tc.name}(${JSON.stringify(tc.args)})]`
           });
           currentHistory.push({
+            role: "user",
+            sender: "user",
+            content: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
+          });
+          mappedHistory.push({
             sender: "user",
             text: `[Tool Result for ${tc.name}]: ${resultStr.length > 2e3 ? resultStr.slice(0, 2e3) + "..." : resultStr}`
           });
         }
-        const contextStr = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
+        let contextStr = truncateContextCleanly(accumulatedToolSummaries.join("\n\n"), this.contextWindow);
+        if (typeof opts.transformContext === "function") {
+          try {
+            contextStr = await opts.transformContext(contextStr, { turn: turnCount, query: originalUserQuery, toolCalls: toolCallsToExecute });
+          } catch (txErr) {
+            console.warn("[docmd-assistant] transformContext hook failed:", txErr);
+          }
+        }
         userMessage = `User Question: ${originalUserQuery}
 
 Retrieved Documentation Context:
@@ -1651,11 +1785,11 @@ ${t}
       },
       {
         name: "read_documentation_page",
-        description: "Fetch and read the full content of a specific documentation page or section path.",
+        description: "Fetch and read the full content of a specific documentation page, section path, or external URL (when external URL fetching is enabled).",
         parameters: {
           type: "object",
           properties: {
-            path: { type: "string", description: "The page path to fetch and read (e.g. /quickstart or /docs/setup)" }
+            path: { type: "string", description: "The page path or external HTTP/HTTPS URL to fetch and read (e.g. /quickstart, /docs/setup, or https://...)" }
           },
           required: ["path"]
         },
@@ -1706,6 +1840,8 @@ ${t}
       this.isPending = false;
       this.projectId = "";
       this.isUnconfigured = false;
+      this.fetchExternalUrls = false;
+      this.endpoint = "";
       const rawCfg = window.__docmd_ai_config || window.__DOCMD_AI_CONFIG__;
       if (!rawCfg || rawCfg.enabled === false || rawCfg.assistant === false || rawCfg.chat === false) {
         return;
@@ -1713,20 +1849,190 @@ ${t}
       const cfg = rawCfg;
       this.projectId = cfg.projectId || cfg.siteId || cfg.cloud?.projectId || cfg.cloud?.siteId || "default";
       this.isUnconfigured = (!cfg.projectId || cfg.projectId === "default") && !cfg.apiKey && !cfg.baseURL;
+      this.fetchExternalUrls = cfg.fetchExternalUrls === true;
+      this.endpoint = cfg.endpoint || (this.projectId ? "https://api.docmd.io/v1/ai/chat" : "");
       const initialSystemPrompt = this.buildSystemPrompt();
       this.engine = new DocmdAssistantEngine({
         projectId: this.projectId,
-        endpoint: cfg.endpoint || (this.projectId ? "https://api.docmd.io/v1/ai/chat" : void 0),
+        endpoint: this.endpoint || void 0,
+        fetchExternalUrls: this.fetchExternalUrls,
         provider: cfg.provider,
         model: cfg.model,
         systemPrompt: initialSystemPrompt,
         reasoning: cfg.reasoning ?? false,
-        contextWindow: cfg.contextWindow
+        contextWindow: cfg.contextWindow,
+        formatToolResult: (toolName, _args, result) => {
+          if (toolName === "get_site_structure" && result && typeof result === "object") {
+            const navSummary = Array.isArray(result.navigation) ? result.navigation.slice(0, 40).map((n) => `- [${n.title || "Page"}](${n.path || "/"})`).join("\n") : "";
+            return {
+              siteTitle: result.siteTitle,
+              siteBaseUrl: result.siteBaseUrl,
+              versions: result.versions,
+              locales: result.locales,
+              workspaceProjects: result.workspaceProjects,
+              navigationSummary: navSummary
+            };
+          }
+          if (toolName === "read_documentation_page" && typeof result === "object" && result?.content) {
+            const content = String(result.content);
+            if (content.length > 12e3) {
+              return {
+                path: result.path,
+                title: result.title,
+                content: content.slice(0, 1e4) + "\n...[content condensed for optimal context delivery]"
+              };
+            }
+          }
+          return result;
+        },
+        compactHistory: (history) => {
+          const compacted = history.map((m) => {
+            if (typeof m.content === "string" && m.content.includes("[Tool Result for")) {
+              return {
+                ...m,
+                content: m.content.length > 400 ? m.content.slice(0, 400) + "...[prior tool result summary]" : m.content
+              };
+            }
+            return m;
+          });
+          if (compacted.length > 6) {
+            const recent = compacted.slice(-3);
+            const older = compacted.slice(0, -3);
+            const summaries = [];
+            for (const msg of older) {
+              const sender = msg.sender || msg.role || "user";
+              const text = (msg.content || msg.text || "").replace(/\s+/g, " ").trim();
+              if (text.startsWith("[Tool Call") || text.startsWith("[Tool Result")) continue;
+              if (sender === "user") {
+                summaries.push(`User asked: "${text.slice(0, 100)}"`);
+              } else if (sender === "assistant") {
+                summaries.push(`Assistant covered: "${text.slice(0, 120)}"`);
+              }
+            }
+            if (summaries.length > 0) {
+              const summaryMessage = {
+                sender: "user",
+                role: "user",
+                content: `[Previous conversation recap: ${summaries.join("; ")}]`
+              };
+              return [summaryMessage, ...recent];
+            }
+          }
+          return compacted;
+        },
+        transformContext: (context) => {
+          if (context.length > 38e3) {
+            return context.slice(0, 38e3) + "\n...[Context boundary preserved]";
+          }
+          return context;
+        }
       });
       const isSemanticUsable = cfg.searchCapabilities?.semantic === true;
       const standardTools = createStandardTools(
         async (query) => {
           return await this.searchAllWorkspaceIndexes(query);
+        },
+        async (pagePath) => {
+          try {
+            let targetUrl = pagePath;
+            const isHttp = /^https?:\/\//i.test(pagePath);
+            if (isHttp) {
+              if (!this.fetchExternalUrls) {
+                return {
+                  title: pagePath,
+                  content: `External URL data fetching is disabled for this documentation site. To enable reading external URLs, set "fetchExternalUrls: true" in docmd.config.json or enable it in the docmd Cloud portal project settings.`
+                };
+              }
+              try {
+                const directRes = await fetch(targetUrl);
+                if (directRes.ok) {
+                  const html2 = await directRes.text();
+                  if (typeof DOMParser !== "undefined") {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html2, "text/html");
+                    const mainContent = doc.querySelector('main, article, [role="main"], body');
+                    const title = doc.querySelector("h1, title")?.textContent?.trim() || pagePath;
+                    const text = mainContent ? (mainContent.textContent || "").replace(/\s+/g, " ").trim() : "";
+                    return {
+                      title,
+                      content: text.slice(0, 12e3) || `Document loaded from "${pagePath}", but contained no readable text.`
+                    };
+                  }
+                  return { title: pagePath, content: html2.slice(0, 1e4) };
+                }
+              } catch {
+              }
+              if (this.endpoint || this.projectId) {
+                try {
+                  let relayFetchUrl = "https://api.docmd.io/v1/ai/fetch";
+                  if (this.endpoint) {
+                    relayFetchUrl = this.endpoint.replace(/\/chat\/?$/, "/fetch");
+                  }
+                  const proxyRes = await fetch(relayFetchUrl, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "X-Docmd-Plugin": "docmd/plugins/ai"
+                    },
+                    body: JSON.stringify({
+                      url: pagePath,
+                      projectId: this.projectId
+                    })
+                  });
+                  const proxyData = await proxyRes.json();
+                  if (proxyRes.ok && proxyData.ok) {
+                    return {
+                      title: proxyData.title || pagePath,
+                      content: proxyData.content || ""
+                    };
+                  } else if (proxyData.error) {
+                    return {
+                      title: pagePath,
+                      content: `Error fetching "${pagePath}": ${proxyData.error}`
+                    };
+                  }
+                } catch (proxyErr) {
+                  return {
+                    title: pagePath,
+                    content: `Error: Unable to fetch external URL "${pagePath}": ${proxyErr?.message || proxyErr}`
+                  };
+                }
+              }
+              return {
+                title: pagePath,
+                content: `Error: Unable to fetch external URL "${pagePath}". Direct browser request was restricted by CORS and no relay proxy is available.`
+              };
+            }
+            targetUrl = pagePath.startsWith("/") ? typeof location !== "undefined" ? new URL(pagePath, location.origin).href : pagePath : typeof location !== "undefined" ? new URL(pagePath, location.href).href : pagePath;
+            const res = await fetch(targetUrl);
+            if (!res.ok) {
+              return {
+                title: pagePath,
+                content: `Error: Document not found or inaccessible at "${pagePath}" (HTTP ${res.status}). The page does not exist.`
+              };
+            }
+            const html = await res.text();
+            if (typeof DOMParser !== "undefined") {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const mainContent = doc.querySelector('main, article, [role="main"], body');
+              const title = doc.querySelector("h1, title")?.textContent?.trim() || pagePath;
+              const text = mainContent ? (mainContent.textContent || "").replace(/\s+/g, " ").trim() : "";
+              return {
+                title,
+                content: text.slice(0, 1e4) || `Document loaded from "${pagePath}", but contained no readable text.`
+              };
+            }
+            return {
+              title: pagePath,
+              content: html.slice(0, 8e3)
+            };
+          } catch (err) {
+            return {
+              title: pagePath,
+              content: `Error: Failed to load page "${pagePath}": ${err?.message || err}`
+            };
+          }
         }
       );
       for (const tool of standardTools) {
@@ -2126,45 +2432,44 @@ ${projectsList}`;
 CRITICAL SCOPE & NAVIGATION RULES:
 1. SCOPE PRIORITIZATION: Prioritize answers using content from the Current Active Project ("${currentProjectName}")${hasVersions && activeVersion ? `, active version branch (${activeVersion.label})` : ""}${hasLocales && activeLocale ? `, and active language (${activeLocale.label})` : ""}.
 2. STRICT ACTIVE / LATEST VERSION ONLY: ONLY cite, explain, recommend, and link to pages from the active version (${activeVersion?.label || defaultVer?.label}) or latest branch (${defaultVer?.label}). Never suggest, cite, or list deprecated historical versions unless the user explicitly asks for an older version.
-3. AUTONOMOUS & PROACTIVE TOOL EXECUTION:
-   - Always use your tools proactively. NEVER ask the user "Would you like me to search?" or "Should I check?". Directly invoke \`search_documentation\`, \`get_site_structure\`, or \`read_documentation_page\` to retrieve facts before answering.
-   - For questions about releases, versions, updates, or changelogs, search with \`search_documentation\` to retrieve the relevant release notes.
+3. DETERMINISTIC TWO-STEP RETRIEVAL PIPELINE:
+   - Always prioritize verified documentation over superficial guessing. Follow this deterministic 2-step pipeline:
+     1. STEP 1 (Targeted Search): Emit exactly ONE targeted \`search_documentation\` call with clean, focused keywords. Do NOT emit multiple synonymous searches in parallel.
+     2. STEP 2 (Single Best Doc Read): Immediately invoke \`read_documentation_page\` on the single best-matching search result (the top hit).
+     3. STEP 3 (Immediate Grounded Synthesis): Synthesize and stream the answer immediately from that verified document. Provide direct explanations, concrete code examples/commands, and clickable Markdown links.
+     4. STEP 4 (Targeted Fallback): ONLY if the top document clearly does not answer the user's specific query (or returned { exists: false }), inspect the second search hit. Never read 3+ pages at once.
 4. ACCURATE HYPERLINKS: ALWAYS ground page hyperlinks strictly in real search results or valid project URLs (${siteBaseUrl}). Never invent or hallucinate invalid subpaths.
-5. TOKEN EFFICIENCY & TARGETED RETRIEVAL:
-   - Do not read entire documentation sets or fetch excessive pages unless necessary.
-   - Use \`search_documentation\` first to identify the exact single page or section needed.
-   - Only call \`read_documentation_page\` on that specific page when required to fetch precise code snippets or steps.
-   - Keep answers clean, structured, and focused directly on what the user asked.
+5. FAST & CONCISE SYNTHESIS:
+   - Provide pinpointed, direct responses with concrete examples instead of generic walls of text.
+   - Lead directly with the answer and code snippets, avoiding conversational filler or boilerplate apologies.
 6. STRICT FACTUALITY & ARCHITECTURAL SYNTHESIS:
    - Ground all answers, configuration snippets, code examples, and commands strictly in verified facts retrieved from this documentation site.
    - NEVER guess or fabricate non-existent keys, options, or parameters.
-   - When a user asks about a capability or concept that does not have a single dedicated configuration option (e.g. pinning an item, database authentication, etc.), explicitly explain that no dedicated setting exists for that exact query, explain the closest supported architectural mechanism or pattern (such as explicit navigation configuration via navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to the relevant documentation pages.
+   - When a user asks about a capability or concept that does not have a single dedicated configuration option, explicitly explain that no dedicated setting exists, describe the closest supported architectural mechanism or pattern (such as explicit navigation configuration via navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to relevant pages.
    - Never return an empty response or silence. Always provide an informative, grounded answer to the user.
 7. VERSION FILTERING:
-   - The \`search_documentation\` tool supports an optional \`version\` parameter. When the user asks about a specific version (e.g. v0.8.0), specify \`version\` to filter results strictly to that version branch.`;
+   - The \`search_documentation\` tool supports an optional \`version\` parameter. When the user asks about a specific version (e.g. v0.8.0), specify \`version\` to filter results strictly to that version branch.
+8. EXTERNAL URL DATA FETCHING:
+   - When external URL data fetching is enabled (or the user asks to inspect a specific remote link, specification, or HTTP/HTTPS documentation URL), use \`read_documentation_page\` with the full URL. If external fetching is disabled, politely inform the user that external URL data fetching is turned off in settings.`;
       const defaultBasePrompt = `You are docmd assistant, the AI documentation guide for "${siteTitle}" \u2014 a professional, precise, and concise technical assistant.
 
 CRITICAL CONSTRAINTS & BEHAVIORAL RULES:
 1. IDENTITY: Your name is "docmd assistant". You are an expert AI documentation assistant dedicated to "${siteTitle}". If asked who you are, state that you are docmd assistant, serving the documentation for "${siteTitle}".
 2. STRICT SCOPE & BOUNDARIES: Answer ONLY questions related to the software, tools, APIs, guides, and documentation provided on this site. Politely decline off-topic queries.
 3. PROFESSIONAL & CONCISE: Provide direct, succinct, and professional answers. Do NOT use excessive emojis (keep emojis to a minimum or none). Avoid conversational fluff, boilerplate apologies, or asking for permission. Get straight to the answer.
-4. STRICT FACTUALITY & ARCHITECTURAL SYNTHESIS:
+4. DETERMINISTIC RETRIEVAL & SYNTHESIS:
+   - Step 1: Use \`search_documentation\` with targeted keywords (1 call).
+   - Step 2: Use \`read_documentation_page\` on the single best matching page.
+   - Step 3: Deliver a verified, pinpointed answer immediately with concrete code examples.
+   - If the first page is not relevant or returned an error, check the second result before concluding.
+5. STRICT FACTUALITY:
    - Ground all answers, configuration snippets, code examples, and commands strictly in verified facts retrieved from this documentation site.
    - NEVER guess or fabricate non-existent keys, options, or parameters.
-   - If the documentation does not have an explicit dedicated setting matching the exact query, clearly state this, synthesize the closest supported mechanism or architectural pattern (such as explicit navigation in navigation.json or docmd.config.json, frontmatter, or project settings), and guide the user to relevant pages.
-   - Never return an empty response or silence. Always provide an informative, grounded answer.
-5. TARGETED RETRIEVAL & MINIMAL TOKEN USAGE:
-   - Only retrieve what is strictly necessary. Never attempt to read the entire documentation or fetch excessive pages.
-   - Use \`search_documentation\` first with targeted keywords to locate the exact page.
-   - Only invoke \`read_documentation_page\` when you need specific code blocks or configuration details from that single page.
-6. TOOL SELECTION & EXECUTION:
-   - Use \`get_site_structure\` whenever you need structural inspection of available documentation versions, supported locales, or navigation trees.
-   - Use \`search_documentation\` to search documentation content for specific technical terms, API parameters, error messages, or release notes. Keyword search is always active; pass clean, focused search terms for highest accuracy.
-   - Use \`read_documentation_page\` when you need full section context or deep code examples.
-7. CLEAN WRITING & LIST FORMATTING:
+   - If no dedicated setting exists for the query, clearly state so, explain the closest supported architectural pattern, and guide the user to relevant pages.
+6. CLEAN WRITING & LIST FORMATTING:
    - Write cleanly and directly without artificial gaps, repeated quotes, or messy text breaks.
    - For lists, use standard numbered lists (1., 2., 3.) or bullet points (-). Do not leave blank lines between list items unless separating distinct multi-paragraph steps.
-8. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced pages.`;
+7. HYPERLINKS & CITATIONS: Always include clickable Markdown hyperlinks \`[Page Title](path)\` in your response for referenced pages.`;
       const basePrompt = cfg.systemPrompt || defaultBasePrompt;
       return `${basePrompt}
 
@@ -2648,6 +2953,12 @@ ${formattedHits}`;
           });
         } else {
           res = await this.engine.sendMessage(queryWithContext);
+        }
+        if (res?.projectSettings?.fetchExternalUrls !== void 0) {
+          this.fetchExternalUrls = !!res.projectSettings.fetchExternalUrls;
+        }
+        if (typeof this.engine?.isFetchExternalUrlsEnabled === "function") {
+          this.fetchExternalUrls = this.engine.isFetchExternalUrlsEnabled();
         }
         if (res && res.unconfigured) {
           bubble.remove();

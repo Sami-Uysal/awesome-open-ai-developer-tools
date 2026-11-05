@@ -1,0 +1,477 @@
+/**
+ * docmd Playground Plugin Styles
+ * Clean, modern, responsive code runner with dark/light mode support.
+ */
+
+.docmd-playground {
+  --pg-bg: var(--docmd-bg-secondary, var(--summer-surface-2, var(--sidebar-bg, #f8fafc)));
+  --pg-header-bg: var(--docmd-bg-tertiary, var(--summer-surface, var(--sidebar-bg, #f1f5f9)));
+  --pg-border: var(--docmd-border-color, var(--docmd-border, var(--summer-border, var(--border-color, #e2e8f0))));
+  --pg-text: var(--docmd-text-primary, var(--summer-fg, var(--text-color, #0f172a)));
+  --pg-text-muted: var(--docmd-text-muted, var(--summer-fg-muted, var(--text-muted, #64748b)));
+  --pg-editor-bg: var(--summer-surface-sunken, var(--code-bg, #ffffff));
+  --pg-console-bg: #0f172a;
+  --pg-console-text: #f8fafc;
+  --pg-accent: var(--docmd-accent-color, var(--summer-accent, var(--link-color, #3b82f6)));
+  --pg-accent-hover: var(--docmd-accent-hover, var(--summer-accent-hover, var(--link-color-hover, #2563eb)));
+  --pg-radius: 10px;
+
+  border: 1px solid var(--pg-border);
+  border-radius: var(--pg-radius);
+  background: var(--pg-bg);
+  margin: 1.5rem 0;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+html[data-theme="dark"] .docmd-playground,
+:root[data-theme="dark"] .docmd-playground,
+[data-theme="dark"] .docmd-playground,
+body[data-theme="dark"] .docmd-playground {
+  --pg-bg: var(--docmd-bg-secondary, var(--summer-surface-2, var(--sidebar-bg, #0f172a)));
+  --pg-header-bg: var(--docmd-bg-tertiary, var(--summer-surface, var(--sidebar-bg, #1e293b)));
+  --pg-border: var(--docmd-border-color, var(--docmd-border, var(--summer-border, var(--border-color, #334155))));
+  --pg-text: var(--docmd-text-primary, var(--summer-fg, var(--text-color, #f8fafc)));
+  --pg-text-muted: var(--docmd-text-muted, var(--summer-fg-muted, var(--text-muted, #94a3b8)));
+  --pg-editor-bg: var(--summer-surface-sunken, var(--code-bg, #0b1120));
+  --pg-console-bg: #030712;
+  --pg-console-text: #f3f4f6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .docmd-playground-preview,
+:root[data-theme="dark"] .docmd-playground-preview,
+[data-theme="dark"] .docmd-playground-preview,
+body[data-theme="dark"] .docmd-playground-preview {
+  background: var(--pg-editor-bg);
+  color: var(--pg-text);
+}
+
+/* Header Toolbar */
+.docmd-playground-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.85rem;
+  background: var(--pg-header-bg);
+  border-bottom: 1px solid var(--pg-border);
+  gap: 0.75rem;
+}
+
+.docmd-playground-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--pg-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.docmd-playground-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  color: var(--pg-accent, #6366f1);
+  flex-shrink: 0;
+}
+
+.docmd-playground-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.45rem;
+  background: var(--pg-accent);
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.docmd-playground-title {
+  color: var(--pg-text);
+}
+
+.docmd-playground-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.docmd-playground-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--pg-border);
+  background: var(--pg-editor-bg);
+  color: var(--pg-text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.docmd-playground-btn:hover {
+  background: var(--pg-header-bg);
+  border-color: var(--pg-text-muted);
+}
+
+.docmd-playground-run-btn {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #059669;
+}
+
+.docmd-playground-run-btn:hover {
+  background: #059669;
+  color: #ffffff;
+  border-color: #047857;
+}
+
+.docmd-playground-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Body (Single Panel Full-Width by Default) */
+.docmd-playground-body {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  background: var(--pg-editor-bg);
+  position: relative;
+}
+
+/* Editor Pane */
+.docmd-playground-editor-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: var(--pg-editor-bg);
+}
+
+.docmd-playground-editor {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  padding: 0.85rem 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: var(--pg-text);
+  tab-size: 2;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* Output Pane */
+.docmd-playground-output-wrap {
+  display: flex;
+  flex-direction: column;
+  background: var(--pg-console-bg);
+  color: var(--pg-console-text);
+  overflow: hidden;
+}
+
+.docmd-playground-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.docmd-playground-tab {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docmd-playground-tab:hover {
+  color: #f1f5f9;
+}
+
+.docmd-playground-tab.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #38bdf8;
+}
+
+.docmd-playground-tab-panel {
+  display: none;
+  flex: 1;
+  overflow: auto;
+  min-height: 140px;
+}
+
+.docmd-playground-tab-panel.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Console Output */
+.docmd-playground-console {
+  flex: 1;
+  padding: 0.75rem 0.85rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-y: auto;
+  max-height: 380px;
+}
+
+.docmd-pg-log-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  word-break: break-word;
+}
+
+.docmd-pg-log-time {
+  font-size: 0.72rem;
+  color: #64748b;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.docmd-pg-log-content {
+  flex: 1;
+  white-space: pre-wrap;
+}
+
+.docmd-pg-log-info { color: #38bdf8; }
+.docmd-pg-log-warn { color: #facc15; }
+.docmd-pg-log-error { color: #f87171; }
+.docmd-pg-log-return { color: #34d399; font-weight: 600; }
+.docmd-pg-log-empty {
+  color: #64748b;
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+/* Live Preview Frame */
+.docmd-playground-preview {
+  flex: 1;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 1rem;
+  overflow: auto;
+  min-height: 160px;
+}
+
+.docmd-playground-preview iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  min-height: 160px;
+}
+
+/* Warning / Notice Alert Banner */
+.docmd-playground-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  background: #fefce8;
+  border-bottom: 1px solid #fef08a;
+  color: #a16207;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+html[data-theme="dark"] .docmd-playground-alert {
+  background: rgba(234, 179, 8, 0.12);
+  border-bottom: 1px solid rgba(234, 179, 8, 0.3);
+  color: #fde047;
+}
+
+.docmd-playground-alert svg {
+  flex-shrink: 0;
+  color: #eab308;
+}
+
+.docmd-playground-alert code {
+  background: rgba(234, 179, 8, 0.15);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Header View Switcher (Live vs Code) */
+.docmd-playground-view-tabs {
+  display: inline-flex;
+  align-items: center;
+  background: var(--pg-editor-bg);
+  border: 1px solid var(--pg-border);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
+.docmd-playground-view-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--pg-text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docmd-playground-view-tab:hover {
+  color: var(--pg-text);
+}
+
+.docmd-playground-view-tab.active {
+  background: var(--pg-accent, #6366f1);
+  color: #ffffff;
+}
+
+/* Universal View Toggling: Play (Live) vs Code */
+.docmd-playground[data-active-view="live"] .docmd-playground-editor-wrap {
+  display: none !important;
+}
+
+.docmd-playground[data-active-view="live"] .docmd-playground-output-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  min-height: 200px;
+  border: none !important;
+}
+
+.docmd-playground[data-active-view="code"] .docmd-playground-editor-wrap {
+  display: block !important;
+  width: 100% !important;
+  min-height: 200px;
+  border: none !important;
+}
+
+.docmd-playground[data-active-view="code"] .docmd-playground-output-wrap {
+  display: none !important;
+}
+
+/* Explicit Split Layout (Only if layout="split" is explicitly requested) */
+.docmd-playground.docmd-playground-layout-split .docmd-playground-body {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+}
+
+.docmd-playground.docmd-playground-layout-split .docmd-playground-editor-wrap {
+  display: block !important;
+  border-right: 1px solid var(--pg-border) !important;
+}
+
+.docmd-playground.docmd-playground-layout-split .docmd-playground-output-wrap {
+  display: flex !important;
+}
+
+@media (max-width: 768px) {
+  .docmd-playground.docmd-playground-layout-split .docmd-playground-body {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Disabled Code View (data-nocode="true") */
+.docmd-playground[data-nocode="true"] .docmd-playground-body {
+  display: block !important;
+  width: 100% !important;
+}
+
+.docmd-playground[data-nocode="true"] .docmd-playground-editor-wrap {
+  display: none !important;
+}
+
+.docmd-playground[data-nocode="true"] .docmd-playground-output-wrap {
+  display: flex !important;
+  width: 100% !important;
+  border: none !important;
+}
+
+.docmd-playground-view-single .docmd-playground-view-tab {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Execution Error / Warning Notice */
+.docmd-pg-error-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.85rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  color: #991b1b;
+  font-size: 0.8rem;
+}
+
+html[data-theme="dark"] .docmd-pg-error-notice {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.docmd-pg-error-notice svg {
+  flex-shrink: 0;
+  color: #ef4444;
+  margin-top: 2px;
+}
+
+.docmd-pg-error-title {
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+}
+
+.docmd-pg-error-msg {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  word-break: break-word;
+}
+
+/* Read-Only State */
+.docmd-playground[data-readonly="true"] .docmd-playground-reset-btn {
+  display: none !important;
+}
+
+.docmd-playground[data-readonly="true"] .docmd-playground-editor {
+  cursor: default;
+  background: var(--pg-header-bg);
+  opacity: 0.95;
+}

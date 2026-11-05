@@ -3,10 +3,10 @@ type: concept
 title: "Local LLM Inference"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/03-local-llm-inference/"
 path: /categories/03-local-llm-inference/
-updated: 2026-11-03
+updated: 2026-11-05
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-03T13:26:09.258Z"
+  generated_at: "2026-11-05T19:09:20.639Z"
 ---
 # Local LLM Inference
 
