@@ -731,6 +731,14 @@ Team wiki whose pages are Markdown files in a Git repository, with a built-in MC
 - **Replaces:** Confluence and Notion as the place where an agent finds team conventions, runbooks and decisions
 - **Edge:** The MCP server ships inside the app (Streamable HTTP, OAuth 2.1 or a personal access token) and acts with the signed-in user's rights. Agent edits land in Git history under that user's name, so they can be reviewed and reverted like any commit.
 
+### [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory)
+`Python` · `MIT` · MCP server + CLI · 🟡 active
+
+Persistent memory for MCP clients over any folder of markdown notes, Obsidian vaults included, stored in one local SQLite file.
+
+- **Replaces:** Hosted agent-memory services, when the memory should stay in your own notes
+- **Edge:** Vector search finds the entry points, then the `[[wikilinks]]` already in the notes act as the graph, so no graph database or ETL pass is needed. In the project's 202-note bench vault, a note the vector pass misses in its top 12 comes in second through one graph hop.
+
 ---
 
 ## Local Inference Engines
