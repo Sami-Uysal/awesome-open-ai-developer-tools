@@ -230,6 +230,15 @@ Agentic software factory that manages parallel Git worktrees with programmatic v
 - **Backends:** Anthropic, OpenAI, local models
 - **Edge:** Automates parallel Git worktree isolation with built-in programmatic verification gates and interactive human-in-the-loop review loops before merging.
 
+### [md²](https://github.com/jan-bogaerts/md2)
+`TypeScript + JavaScript` · `AGPL-3.0` · Desktop app · 🟡 active
+
+Local desktop workspace that organizes Codex and Claude Code work around Markdown feature cards and isolated Git worktrees.
+
+- **Replaces:** Conductor, manual task-board and terminal/worktree orchestration
+- **Backends:** Codex CLI and Claude Code CLI, with multiple accounts and agent switching
+- **Edge:** Keeps feature definitions as local, versionable Markdown while connecting each card to its agent conversations, worktree, commits, diagrams, and merge workflow. Built-in statistics provide insight into agent usage, performance, and cost. Turn code into editable diagrams and diagram changes back into code.
+
 ### [YYLO](https://github.com/yylo-dev/yylo)
 `Python + TypeScript` · `MIT` · CLI · 🟡 active
 
