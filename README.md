@@ -1148,6 +1148,13 @@ Evaluate web agents on 153 everyday tasks across 144 live websites, with the fin
 
 - **Edge:** Captures session replay, screenshots, HTTP traffic, browser actions, and agent messages in one reproducible run, making failures diagnosable beyond a final pass/fail score.
 
+### [WebsiteBench](https://github.com/TIGER-AI-Lab/WebsiteBench)
+`Python` · `Apache-2.0` (code) · Harbor/Docker benchmark · 🟠 experimental
+
+Evaluate coding agents reconstructing full-stack websites through browser exploration.
+
+- **Edge:** Uses native Harbor task directories, an explicit candidate compile/runtime contract and a separate no-network verifier; complete task artifacts follow the linked HF access process.
+
 ### [DeepEval](https://github.com/confident-ai/deepeval)
 `Python` · `Apache-2.0` · 🟢 stable
 
