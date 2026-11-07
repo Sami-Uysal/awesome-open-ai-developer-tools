@@ -757,6 +757,14 @@ Persistent memory for MCP clients over any folder of markdown notes, Obsidian va
 - **Replaces:** Hosted agent-memory services, when the memory should stay in your own notes
 - **Edge:** Vector search finds the entry points, then the `[[wikilinks]]` already in the notes act as the graph, so no graph database or ETL pass is needed. In the project's 202-note bench vault, a note the vector pass misses in its top 12 comes in second through one graph hop.
 
+### [BrewPage MCP](https://github.com/kochetkov-ma/brewpage-openapi)
+`TypeScript` · `MIT` · MCP server (stdio + remote) · 🟡 active
+
+MCP server that lets an agent publish HTML pages, Markdown, multi-file static sites, files, JSON documents and key-value entries and get back a shareable HTTPS link. Source-available note: the server is MIT, the hosting service it talks to (brewpage.app) is proprietary and free.
+
+- **Replaces:** Pasting agent output into a Gist, pastebin or a manual Netlify Drop upload when a human needs to open it in a browser
+- **Edge:** 20 tools cover publish, update, read and delete per resource type with an owner token, so an agent can hand over a rendered report as a link without an account or API key. The same tools are served as a remote Streamable HTTP endpoint at `https://brewpage.app/mcp`. **Known limits:** publications expire (default 15 days, up to 30, 90 with a free profile) and size caps apply (5 MB per page or file, 20 MB per site).
+
 ---
 
 ## Local Inference Engines
