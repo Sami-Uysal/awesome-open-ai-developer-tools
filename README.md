@@ -426,7 +426,7 @@ Open-source desktop AI agent for business automation — lead generation, knowle
 
 Self-hosted team of AI bots in one binary that share chats, hand work to each other with an @mention, and run routines on a schedule.
 
-- **Replaces:** Hosted agent teams such as Grok Bot, Claude Duet and Dots
+- **Replaces:** Hosted agent teams such as Grok Bot, Claude Duet and OpenAI dots
 - **Backends:** Claude, Codex and Grok CLI logins; Anthropic, OpenAI and xAI keys; any OpenAI- or Anthropic-compatible server, including local models
 - **Edge:** Spaces keep separate bots, accounts, routines and approval rules for work and home, and when one account runs out of usage the turn moves to the next one. Risky steps such as `git push` or network calls show an approval card with the exact command. One Rust binary with SQLite and the web app embedded, no telemetry.
 
