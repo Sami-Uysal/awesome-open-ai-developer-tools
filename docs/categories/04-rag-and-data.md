@@ -109,4 +109,11 @@ Preprocessing library for ingesting unstructured documents into ML pipelines.
 
 - **Edge:** Broadest format coverage. The workhorse behind many production ingestion pipelines.
 
+### [LLMSlim](https://github.com/Thanatos9404/llmslim)
+`Python` · `MIT` · library + CLI · 🟡 active
+
+Fits retrieved documents, chat history and tool output into a token budget before the model call, with drop-in compressors for LangChain, LlamaIndex and Haystack.
+
+- **Edge:** The default mode is extractive and runs no model: it keeps sentences from your input, chosen by query relevance (BM25), so the same input always gives the same context and nothing is paraphrased. Retrieved text is treated as untrusted, so imperative wording inside a document is never force-kept.
+
 ---

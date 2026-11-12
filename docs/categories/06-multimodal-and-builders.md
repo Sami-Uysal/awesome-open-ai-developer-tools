@@ -19,6 +19,14 @@ Whisper plus word-level timestamps and speaker diarization.
 
 - **Edge:** If you need to know *who* said *what, when* — subtitles, meeting notes — this is the one.
 
+### [Yap MCP](https://github.com/founden-bot/yap-mcp)
+`JavaScript` · `MIT` · MCP server + CLI · 🟠 experimental
+
+Local MCP server and CLI that transcribes audio and video files on your own computer with NVIDIA Parakeet TDT v3 through sherpa-onnx, so a coding agent can read a recording without a speech API.
+
+- **Replaces:** cloud speech-to-text APIs (AssemblyAI, Google Speech-to-Text) for agent transcription tasks
+- **Edge:** Runs from `npx` on the CPU with no API key, account or upload, and one multilingual model covers 25 European languages with automatic language detection. **Known weakness:** the first run downloads a model of about 670 MB, and its `search_dictations` tool only returns data when the closed-source Yap desktop app is installed.
+
 ### [Kokoro](https://github.com/hexgrad/kokoro) / [Piper](https://github.com/OHF-Voice/piper1-gpl)
 `Apache-2.0` / `GPL-3.0` · 🟢 stable
 
@@ -50,6 +58,16 @@ Node-based interface for diffusion models — image, video, and audio generation
 
 - **Replaces:** Midjourney, DALL·E
 - **Edge:** The graph *is* the program — every step is inspectable and reproducible, and workflows are shareable as JSON. Supports essentially every open image/video model within days of release.
+
+### [Breatic](https://github.com/orime-org/breatic)
+`TypeScript` · `Elastic-2.0` (source-available, not OSI) · Web application / internal deployment · 🟡 active
+
+Collaborative creation workspace with shared documents, AI media canvases, and project-aware agent proposals reviewed by people.
+
+- **Replaces:** Separate brief documents and media-reference boards within a creative project; no full proprietary-suite replacement is claimed.
+- **Backends:** Configured AI model providers; Cloudflare R2 storage is required by the documented setup.
+- **Edge:** Document and canvas Spaces share project context, with Yjs/Hocuspocus collaborative state and explicit review before agent-proposed document changes are applied. This is an application implementation to inspect and deploy internally, not a model, coding agent, or promise to solve every concurrent-edit edge case.
+
 
 ### [Surya](https://github.com/datalab-to/surya)
 `Python` · `GPL-3.0` (commercial exceptions) · 🟡 active
@@ -92,7 +110,8 @@ Visual framework for building multi-agent and RAG applications.
 |---|---|
 | GitHub Copilot | [Continue](https://github.com/continuedev/continue), [Tabby](https://github.com/TabbyML/tabby), [aider](https://github.com/Aider-AI/aider) |
 | Cursor / Windsurf | [Cline](https://github.com/cline/cline), [OpenCode](https://github.com/sst/opencode), [Continue](https://github.com/continuedev/continue), [BitFun](https://github.com/GCWing/BitFun), [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent) |
-| Devin | [OpenHands](https://github.com/All-Hands-AI/OpenHands), [Goose](https://github.com/block/goose), [SWE-agent](https://github.com/SWE-agent/SWE-agent) |
+| Devin | [OpenHands](https://github.com/All-Hands-AI/OpenHands), [Goose](https://github.com/block/goose), [SWE-agent](https://github.com/SWE-agent/SWE-agent), [LoopTroop](https://github.com/looptroop-ai/LoopTroop), [5dive](https://github.com/5dive-ai/5dive) |
+| CodeRabbit / Copilot code review | [CodeOtter](https://github.com/dharmeshgurnani/CodeOtter) |
 | Claude Design / Figma Make | [Open Design](https://github.com/nexu-io/open-design) |
 | ChatGPT desktop / Copilot assistant | [OpenClaw](https://github.com/openclaw/openclaw), [Hermes Agent](https://github.com/NousResearch/hermes-agent) |
 | Bolt.new / v0 / Lovable | [bolt.diy](https://github.com/stackblitz-labs/bolt.diy), [OpenUI](https://github.com/wandb/openui), [Dyad](https://github.com/dyad-sh/dyad) |
@@ -108,7 +127,7 @@ Visual framework for building multi-agent and RAG applications.
 | Zapier / Make | [n8n](https://github.com/n8n-io/n8n) |
 | Vapi / Retell | [LiveKit Agents](https://github.com/livekit/agents), [Pipecat](https://github.com/pipecat-ai/pipecat) |
 | Cohere Embed / Rerank | [FlagEmbedding / BGE](https://github.com/FlagOpen/FlagEmbedding) |
-| Browserbase / Stagehand | [browser-use](https://github.com/browser-use/browser-use), [Skyvern](https://github.com/Skyvern-AI/skyvern) |
+| Browserbase / Stagehand | [browser-use](https://github.com/browser-use/browser-use), [Jet Browser](https://github.com/masakaai/jet-browser), [Skyvern](https://github.com/Skyvern-AI/skyvern) |
 | OpenAI GPTs platform | [Dify](https://github.com/langgenius/dify), [Flowise](https://github.com/FlowiseAI/Flowise) |
 
 ---

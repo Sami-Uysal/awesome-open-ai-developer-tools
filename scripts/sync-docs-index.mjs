@@ -21,6 +21,7 @@ const CATEGORY_MAP = {
     "Autonomous & Persistent Agents",
     "Agent Sandboxes & Browser Control",
     "Agent Frameworks & Orchestration",
+    "Agent Skills & Package Management",
     "Model Context Protocol (MCP)",
   ],
   "docs/categories/03-local-llm-inference.md": [

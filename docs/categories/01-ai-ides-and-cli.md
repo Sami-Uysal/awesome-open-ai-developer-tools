@@ -51,6 +51,15 @@ Agents that do what a developer does — modify code, run commands, browse the w
 - **Backends:** Anything LiteLLM supports
 - **Edge:** Real sandboxed execution (Docker) rather than a chat that pretends to run things. Headless and CLI modes make it scriptable in CI.
 
+### [PatchPilot](https://github.com/harshitethic/PatchPilot)
+`Python` · `MIT` · Local web UI · 🟠 experimental
+
+Local-first coding agent that plans changes, applies guarded edits, runs approved tests in disposable Docker containers, and produces reviewable Git diffs.
+
+- **Replaces:** Hosted coding-agent experiments for basic local edit-and-review workflows; not a feature-for-feature replacement for mature agents
+- **Backends:** Local Ollama, OpenAI-compatible endpoints, OpenRouter
+- **Edge:** Test execution fails closed without an approved offline Docker image instead of running project scripts on the host. It also bounds Git output, checks staged changes for recognizable secrets, and documents the remaining host-side isolation risks.
+
 ### [SWE-agent](https://github.com/SWE-agent/SWE-agent)
 `Python` · `MIT` · CLI · 🟡 active
 
@@ -67,6 +76,15 @@ Extensible autonomous agent from Block, now governed by the Linux Foundation. In
 - **Replaces:** Devin, Cursor agent mode
 - **Backends:** Any provider, plus first-class MCP extension support
 - **Edge:** More autonomous than aider — plans and iterates with less hand-holding. Vendor-neutral governance under the Linux Foundation means no rug-pull risk, which matters for tooling you standardize a team on.
+
+### [molt](https://github.com/solvyxtech/molt)
+`TypeScript` · `Apache-2.0` · CLI + desktop · 🟡 active
+
+Coding agent that won't say done on a false claim — verification on disk, receipts for accepts and refusals.
+
+- **Replaces:** Cursor agent mode, Claude Code for teams that need a done-bar outside the model
+- **Backends:** OpenAI-compatible endpoints (Ollama, vLLM, etc.) or Anthropic
+- **Edge:** Acceptance lives in `.molt/done.yml` against real files; accepts and refusals both write hash-chained receipts (`molt verify`). Install from the [GitHub releases](https://github.com/solvyxtech/molt/releases/latest) or build from source.
 
 ### [BitFun](https://github.com/GCWing/BitFun)
 `Rust + TypeScript` · `MIT` · Desktop + CLI · 🟡 active
@@ -86,6 +104,15 @@ Local-first desktop AI workforce where a Commander plans work and coordinates bu
 - **Backends:** Claude, OpenAI, Gemini, DeepSeek, Kimi, GLM, Qwen, MiniMax, Doubao, and compatible local model endpoints
 - **Edge:** Orkas runs the orchestration layer on the user's machine: conversations, files, agent configuration, and model keys stay local, while the Commander can dispatch Claude Code, Codex, OpenCode, OpenClaw, and Hermes as local subprocesses alongside built-in agents.
 
+### [MulmoTerminal](https://github.com/receptron/mulmoterminal)
+`TypeScript` · `MIT` · Browser / CLI · 🟢 active
+
+Browser grid of live Claude Code and Codex sessions, one real PTY per cell, started with a single `npx` command. Each cell is colour-coded working / needs-you / done, so a session blocked on a permission prompt is distinguishable from one still thinking without opening it.
+
+- **Replaces:** tmux panes plus a notifier script, hand-rolled session dashboards
+- **Backends:** the `claude` and `codex` CLIs you already installed and pay for; Grok and Antigravity also supported
+- **Edge:** session state comes from the agent CLI's own hooks (`PreToolUse` / `Stop` / `Notification`), not from parsing scrollback, so "working" and "waiting on you" are different states rather than both being "output stopped". tmux backs the sessions, so they survive a server restart or a reboot; each cell can hold its own git worktree with commit, push and PR from the grid.
+
 ### [ordewell](https://github.com/ordewell/ordewell)
 `Rust` · `Apache-2.0` · CLI / TUI · 🟡 active
 
@@ -94,6 +121,15 @@ Plan-first CLI/TUI orchestrator that converts a single goal into an ordered, edi
 - **Replaces:** Manual task decomposition and multi-agent CLI scripting
 - **Backends:** Claude Code, Codex, OpenCode
 - **Edge:** Features a read-only planner that generates explicit step-by-step agent plans before execution, with per-task runner, model, and mode assignment.
+
+### [LoopTroop](https://github.com/looptroop-ai/LoopTroop)
+`TypeScript` · `MIT` · Desktop + CLI · 🟡 active
+
+Local orchestrator that turns complex coding tickets into verified pull requests using multi-model planning councils and isolated git worktrees.
+
+- **Replaces:** Devin, Cursor agent mode, cloud-hosted agent orchestrators
+- **Backends:** Anthropic, OpenAI, Google Gemini, DeepSeek, OpenRouter, and local models via OpenCode
+- **Edge:** LoopTroop runs an LLM council where distinct models draft and vote on task plans before implementation starts. Each task executes inside an isolated git worktree with bounded retry loops, so failed runs roll back without touching the primary checkout. Human approval gates pause execution before irreversible terminal commands or branch updates run.
 
 ### [Atomic Agent](https://github.com/AtomicBot-ai/atomic-agent)
 `TypeScript` · `MIT` · CLI + TUI · 🟠 experimental
@@ -127,8 +163,98 @@ Describe a project in natural language; it writes and iterates on the whole code
 
 - **Edge:** Best for greenfield scaffolding rather than surgical edits on an existing repo.
 
----
+### [Orbi](https://github.com/orbi-build/orbi)
+`Python` · `AGPL-3.0` · Self-hosted runner + GitHub · 🟢 stable
 
+Works from GitHub issues: label one `ai-ready` and it implements the change in an isolated worktree, opens a PR, and a separate review session checks the diff against the issue's acceptance criteria before anything merges.
+
+- **Replaces:** Devin, GitHub Copilot coding agent
+- **Backends:** Any OpenAI-compatible model, or a Codex subscription
+- **Edge:** Review is a gate, not a suggestion: only the exact head the reviewer approved is merged, and Orbi then cuts the tagged release. Ops tickets (deploys, investigations) post their real commands and output on the issue.
+
+### [Ivy Tendril](https://github.com/Ivy-Interactive/Ivy-Tendril)
+`TypeScript` · `MIT` · Desktop + Web · 🟡 active
+
+Agentic software factory that manages parallel Git worktrees with programmatic verifications and interactive review loops.
+
+- **Replaces:** Manual git worktree management, multi-agent branch orchestration
+- **Backends:** Anthropic, OpenAI, local models
+- **Edge:** Automates parallel Git worktree isolation with built-in programmatic verification gates and interactive human-in-the-loop review loops before merging.
+
+### [md²](https://github.com/jan-bogaerts/md2)
+`TypeScript + JavaScript` · `AGPL-3.0` · Desktop app · 🟡 active
+
+Local desktop workspace that organizes Codex and Claude Code work around Markdown feature cards and isolated Git worktrees.
+
+- **Replaces:** Conductor, manual task-board and terminal/worktree orchestration
+- **Backends:** Codex CLI and Claude Code CLI, with multiple accounts and agent switching
+- **Edge:** Keeps feature definitions as local, versionable Markdown while connecting each card to its agent conversations, worktree, commits, diagrams, and merge workflow. Built-in statistics provide insight into agent usage, performance, and cost. Turn code into editable diagrams and diagram changes back into code.
+
+### [YYLO](https://github.com/yylo-dev/yylo)
+`Python + TypeScript` · `MIT` · CLI · 🟡 active
+
+Command-line orchestrator for coding agents, repeatable workflows, and receipt-backed repository changes.
+
+- **Replaces:** Manual multi-agent workflow scripting, cloud-hosted agent orchestration
+- **Backends:** Drives Pi and Codex subagents through per-subagent aliases
+- **Edge:** `task start` freezes the protected target SHA and creates a dedicated branch/worktree per task; a merge queue then owns risk-based review — low risk merges with no semantic reviewer,
+
+### [CodeOtter](https://github.com/dharmeshgurnani/CodeOtter)
+`JavaScript + TypeScript` · `AGPL-3.0` · Self-hosted server + CLI · 🟡 active
+
+Self-hosted AI pull request reviewer for GitHub, Forgejo and Gitea that scores each PR, enforces merge gates as status checks and posts committable inline fixes.
+
+- **Replaces:** CodeRabbit, GitHub Copilot code review
+- **Backends:** Local GGUF models via a managed llama.cpp runtime, Anthropic, OpenAI, OpenRouter, MiniMax
+- **Edge:** Scores and pass/fail gates can come from a separate typed-answer model rather than parsed prose, so merge gates don't depend on LLM formatting. Runs fully offline, reads the repo's `AGENTS.md`/`CLAUDE.md`, and works with self-hosted Forgejo and Gitea, not only GitHub.
+
+### [workkit](https://github.com/ITW-Creative-Works/workkit)
+`JavaScript + Shell` · `FSL-1.1-MIT` (source-available, not OSI) · Claude Code plugin + CLI · 🟡 active
+
+Claude Code plugin that runs GitHub Issues as the work pipeline: each issue moves through labeled stages from spec to build, QA and ship.
+
+- **Replaces:** Ad-hoc chat-driven coding sessions and hand-kept task lists
+- **Backends:** Claude Code (Anthropic)
+- **Edge:** The chat acts as a manager that dispatches worker subagents for code and tests plus a verifier that reviews both without seeing how they were made. Hooks block a code commit until the full test suite has passed on exactly what is being committed, and finished work waits uncommitted for the human to try it.
+
+### [Sqwakie](https://github.com/alexcarney460-hue/walkie)
+`TypeScript` · `FSL-1.1-ALv2` (source-available, not OSI; converts to `Apache-2.0`) · Background daemon + CLI + MCP + web dashboard · 🟠 experimental
+
+Puts a small team's people and their Claude Code and Codex agents on one team: agents message and ask each other peer to peer, and one dashboard shows what every agent across everyone's machines is doing.
+
+- **Replaces:** Relaying questions between teammates' agents through Slack, email or copy-paste
+- **Backends:** Claude Code, Codex
+- **Edge:** Agents call `post`, `get`, `reply`, `subscribe` and `ask` from the CLI or as MCP tools, so one agent's question reaches a teammate's agent directly. Daemons connect peer to peer (QUIC with NAT hole-punching, built on iroh) and replicate a signed, append-only team log; when there is no direct path, a relay forwards encrypted traffic it can't read. Project kanban cards can be started, reviewed and finished by agents.
+
+### [Volt](https://github.com/LeulAria/volt)
+`TypeScript` · `MIT` · Desktop IDE (VS Code core) · 🟠 experimental
+
+Open-source agentic workspace on the VS Code core that puts agent chats, code, Git, a browser and a terminal in one window.
+
+- **Replaces:** Cursor
+- **Backends:** Claude Code and Codex agent CLIs over the Agent Client Protocol (ACP), plus local models through Ollama and tools through MCP
+- **Edge:** Agent edits land as hunk-level diffs you keep or revert, with Git checkpoints and worktrees so parallel agents don't collide. Because it runs on the real VS Code core, existing extensions, themes, keybindings and debuggers keep working.
+
+
+### [Sno Station](https://github.com/sno-ai/sno-station)
+`TypeScript` · `Apache-2.0` · CLI + skills added to the agents you already run (no daemon) · 🟡 active
+
+Turns Codex, Claude Code, Cursor, Hermes Agent and OpenClaw into one squad on your own computer: they share one memory, hand work to each other, and review each other's work when you ask.
+
+- **Replaces:** Pasting context between two agent sessions when one hits its usage limit; asking an agent to review its own work
+- **Backends:** Codex, Claude Code, Cursor, Hermes Agent, OpenClaw
+- **Edge:** When one agent hits a rate limit mid-task, another agent picks the task up from the same memory, so nothing is pasted. A review request always goes to a different agent than the author, so the reviewer has no habit of agreeing with it. A nightly pass consolidates memory across all sessions and proposes edits to the agents' own skills, which you approve or reject in the morning.
+
+### [DevIntern](https://github.com/getdevintern/devintern)
+`TypeScript` · `FSL-1.1-ALv2 (source-available)` · CLI daemon (self-hosted worker) · 🟢 stable
+
+One self-hosted worker that routes tracker tickets across many repositories and turns them into pull requests with the coding agent you already have.
+
+- **Replaces:** Devin, GitHub Copilot coding agent, Factory
+- **Backends:** Claude Code, Codex, Cursor, OpenCode
+- **Edge:** Routing rules in one `workspace.toml` send Jira, Linear or GitHub Issues tickets to the right repo, each run in a disposable git worktree. An optional auto-review step has the agent critique and fix its own diff before the PR opens. The same daemon runs cron-scheduled prompts and Sentry-to-PR fixes, and turns review comments, failing CI and merge conflicts into follow-up commits without force-pushing.
+
+---
 ## Prompt-to-App Builders
 
 Prompt in, deployed full-stack app out.
