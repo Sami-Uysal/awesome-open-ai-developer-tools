@@ -6,7 +6,7 @@ path: /categories/03-local-llm-inference/
 updated: 2026-11-12
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-12T10:54:25.061Z"
+  generated_at: "2026-11-12T10:58:58.988Z"
 ---
 # Local LLM Inference
 
@@ -163,6 +163,14 @@ All-in-one desktop and Docker app: chat with your documents, with agents and mul
 
 - **Edge:** Batteries-included RAG — embedder, vector DB, and UI ship together. Fastest path from "I have PDFs" to "I can ask them questions."
 
+### [Artifact Relay](https://github.com/eloktev/artifact-relay)
+`Python + HTML` · `MIT` · `Server + Hermes plugin` · 🟢 stable
+
+Self-hosted delivery surface for publishing long Markdown and standalone HTML results from AI agents to private, mobile-friendly pages.
+
+- **Replaces:** private pastebins and chat-bound artifact viewers
+- **Edge:** Publisher and viewer credentials are separate trust boundaries. Markdown is sanitized, standalone HTML runs in a sandboxed iframe, and optional share links can be scoped and revoked without exposing the publishing credential.
+
 ### [ThoughtDAG](https://github.com/chenxiachan/thoughtdag)
 `TypeScript` · `MIT` · Web · 🟠 experimental
 
@@ -179,5 +187,14 @@ Local-first workspace combining notes, tasks, and AI chat in your browser on you
 
 - **Replaces:** Notion AI, Obsidian + Copilot plugin
 - **Edge:** Plain markdown files on disk — no accounts, no cloud, no database. The AI reads and edits your actual workspace files. Supports Ollama for fully local inference.
+
+### [Aleph](https://github.com/josuecuguy1307/Aleph)
+`TypeScript` · `Apache-2.0` · `macOS / Apple silicon desktop` · 🟡 active
+
+An AI workspace for bringing model providers, tools, and files together across focused workspaces and reusable agents.
+
+- **Replaces:** ChatGPT Desktop or Claude Desktop for users who want to configure their own agents, tools, and workflows.
+- **Backends:** User-configured model API providers and installed, authenticated CLI providers such as Claude Code and Codex; availability depends on setup.
+- **Edge:** The Workshop lets users compose agents, equip them with tools, and arrange reusable workflows visually, making the harness inspectable and changeable.
 
 ---

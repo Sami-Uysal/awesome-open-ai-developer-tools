@@ -6,7 +6,7 @@ path: /categories/04-rag-and-data/
 updated: 2026-11-12
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-12T10:54:25.062Z"
+  generated_at: "2026-11-12T10:58:58.989Z"
 ---
 # RAG and Data
 
@@ -118,5 +118,12 @@ Parse PDF, DOCX, PPTX, HTML, and images into structured, LLM-ready formats.
 Preprocessing library for ingesting unstructured documents into ML pipelines.
 
 - **Edge:** Broadest format coverage. The workhorse behind many production ingestion pipelines.
+
+### [LLMSlim](https://github.com/Thanatos9404/llmslim)
+`Python` · `MIT` · library + CLI · 🟡 active
+
+Fits retrieved documents, chat history and tool output into a token budget before the model call, with drop-in compressors for LangChain, LlamaIndex and Haystack.
+
+- **Edge:** The default mode is extractive and runs no model: it keeps sentences from your input, chosen by query relevance (BM25), so the same input always gives the same context and nothing is paraphrased. Retrieved text is treated as untrusted, so imperative wording inside a document is never force-kept.
 
 ---

@@ -6,7 +6,7 @@ path: /categories/05-training-evals-and-ops/
 updated: 2026-11-12
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-12T10:54:25.062Z"
+  generated_at: "2026-11-12T10:58:58.989Z"
 ---
 # Training, Evals, and Ops
 
@@ -56,6 +56,13 @@ Train transformer models with reinforcement learning — SFT, DPO, GRPO, reward 
 
 - **Edge:** The standard path from a base model to an aligned, instruction-following one.
 
+### [Fuuga](https://bitbucket.org/thorium/fuuga)
+`F#` · `Unlicense` · `Library + CLI` · 🟡 active
+
+Builds, pre-trains, fine-tunes and serves LLMs in F#/.NET on TorchSharp, with no Python.
+
+- **Edge:** One typed .NET codebase covers the whole pipeline (BPE tokenizer, ingestion, pre-training, LoRA/QLoRA/DPO/GRPO, donor-weight import from Hugging Face safetensors and GGUF, RAG, GGUF export for llama.cpp/Ollama) on CPU or CUDA, so a .NET shop can train and run models offline without a Python stack.
+
 ---
 
 ## Evals, Testing & Guardrails
@@ -66,6 +73,15 @@ Train transformer models with reinforcement learning — SFT, DPO, GRPO, reward 
 Test and evaluate prompts, agents, and RAG systems — plus LLM red teaming and vulnerability scanning.
 
 - **Edge:** Declarative test cases in YAML that run in CI. Side-by-side model comparison plus adversarial red-teaming in one tool. Local-first — your prompts never leave your machine.
+
+### [Cage](https://github.com/vitalik1921/cage)
+`TypeScript` · `MIT` · CLI + agent hooks · 🟡 active
+
+Deterministic contract harness that links Markdown specs to TypeScript implementations, invariant-linked tests, and review freshness.
+
+- **Replaces:** Manual spec-to-code and test-traceability checklists
+- **Backends:** Claude Code, Codex
+- **Edge:** Parses `*.cage.mdx` specs into TypeScript contract checks, tracks `@invariant`/`@covers` links, and fingerprints spec, code, test, and import material to detect stale reviews. It does not run tests or prove semantic correctness.
 
 ### [agent-qa](https://github.com/vostride/agent-qa)
 `TypeScript` · `FSL-1.1-ALv2` (fair-code; converts to `Apache-2.0`) · CLI, dashboard, MCP · 🟠 experimental
@@ -81,6 +97,13 @@ The self-improving QA agent for software teams, with natural-language web and mo
 Evaluate web agents on 153 everyday tasks across 144 live websites, with the final submission request intercepted to keep runs side-effect-free.
 
 - **Edge:** Captures session replay, screenshots, HTTP traffic, browser actions, and agent messages in one reproducible run, making failures diagnosable beyond a final pass/fail score.
+
+### [WebsiteBench](https://github.com/TIGER-AI-Lab/WebsiteBench)
+`Python` · `Apache-2.0` (code) · Harbor/Docker benchmark · 🟠 experimental
+
+Evaluate coding agents reconstructing full-stack websites through browser exploration.
+
+- **Edge:** Uses native Harbor task directories, an explicit candidate compile/runtime contract and a separate no-network verifier; complete task artifacts follow the linked HF access process.
 
 ### [DeepEval](https://github.com/confident-ai/deepeval)
 `Python` · `Apache-2.0` · 🟢 stable
@@ -116,6 +139,24 @@ Programmable rails for conversational systems, defined in the Colang modeling la
 LLM vulnerability scanner — probes for prompt injection, jailbreaks, data leakage, and toxicity.
 
 - **Edge:** `nmap` for language models. Run it before you ship, not after the incident.
+
+### [YYLO Benchmark](https://github.com/yylo-dev/yylo-benchmark)
+`TypeScript` · `MIT` · CLI · 🟡 active
+
+Thin trusted-host experiment runner for historical Ledger tasks, supplied coding prompts, and workflows — compare models, harnesses and configurations, then evaluate retained outputs with different checks or judges later.
+
+- **Replaces:** Ad-hoc multi-model coding-agent experiment scripts
+- **Backends:** Runs selected coding-agent harnesses locally; tests require no paid provider calls
+- **Edge:** Reviewed cases fan out to independent attempts whose retained outputs are re-evaluated later with new checks or judges — comparison rows stay separate from judge opinions, and the runner never chooses a winner.
+
+### [Ponder](https://github.com/Quinnod345/ponder)
+`JavaScript` · `MIT` · CLI + Agent skill · 🟡 active
+
+Zero-dependency cognitive verification CLI and agent skill that enforces an 8-stage deliberation protocol and a mathematical convergence gate before an AI agent finishes a review or code change.
+
+- **Replaces:** Ad-hoc single-pass LLM self-review prompts and manual review checklists
+- **Backends:** Claude Code, Cursor, Codex, OpenClaw, and any terminal-capable coding agent
+- **Edge:** Tracks explicit work units, predictions, adversarial lens evaluations (`skeptic`, `builder`, `dreamer`, `empath`), and per-pass deltas in `.ponder/sessions/`, requiring 100% unit coverage and bounded novelty and churn before `ponder verify` exits 0. It verifies coverage and convergence of the agent's deliberation state rather than executing application test suites.
 
 ---
 
@@ -163,5 +204,12 @@ Observability platform for LLM apps — one-line proxy integration, caching, and
 Dependency-free browser calculator for estimating AI model API costs from request volume, input and output tokens, cached input, and fixed per-request charges.
 
 - **Edge:** Runs locally without API keys, accounts, cookies, analytics, or server-side processing. The tested formula separates cached from uncached input and keeps provider-specific pricing assumptions visible so estimates can be reviewed before a real bill is incurred.
+
+### [OrcaReplay](https://github.com/Continuum-AI-Corp/OrcaReplay)
+`TypeScript` · `Apache-2.0` · 🟢 stable
+
+Records a coding agent's exchange with its model provider and replays the run offline with no model called.
+
+- **Edge:** The other tools here tell you what happened; this one runs it again. Replay serves the recorded turns with no provider contacted and nothing spent, and `--from N --model M` replays a prefix then continues on a different model, so the model is the only variable. Captures at the HTTP boundary rather than through instrumentation — aider, OpenHands and goose from the sections above are covered, along with Claude Code and the Vercel AI SDK. The trace format is specified separately under CC BY 4.0, so a recording outlives the CLI.
 
 ---
