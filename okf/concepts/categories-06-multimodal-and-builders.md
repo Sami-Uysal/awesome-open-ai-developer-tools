@@ -6,7 +6,7 @@ path: /categories/06-multimodal-and-builders/
 updated: 2026-11-12
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-12T10:51:24.351Z"
+  generated_at: "2026-11-12T10:53:49.639Z"
 ---
 # Multimodal and Builders
 
