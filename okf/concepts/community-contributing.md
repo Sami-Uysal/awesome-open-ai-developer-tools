@@ -6,7 +6,7 @@ path: /community/contributing/
 updated: 2026-11-12
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-12T10:53:49.640Z"
+  generated_at: "2026-11-12T10:54:25.063Z"
 ---
 # Contributing
 
