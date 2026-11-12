@@ -651,6 +651,15 @@ Git-native context engineering and spec-driven development for AI coding agents.
 - **Backends:** Claude Code, Codex, Cursor and GitHub Copilot
 - **Edge:** The CLI keeps specs, architecture decisions, rules, plans, and project knowledge in `.archcore/`, versioned with your code, and serves the relevant context to coding agents through MCP and integrations.
 
+### [looot-skills](https://github.com/loootai/looot-skills)
+`Shell` · `MIT` · Agent skills · 🟡 active
+
+Agent skills (SKILL.md) that teach coding agents to run looot data jobs such as work email lookup, company enrichment, Google SERP and web page to markdown. The skills are MIT; the looot service they call is proprietary and prepaid, with no free tier.
+
+- **Replaces:** Per-vendor API integrations and a separate key for each data provider
+- **Backends:** Claude Code, Codex, Cursor and other MCP clients
+- **Edge:** One API key and one prepaid balance cover 300+ data providers. The agent sees the price before each run, and a failed call costs $0.
+
 ---
 
 ## Model Context Protocol (MCP)
