@@ -3,10 +3,10 @@ type: concept
 title: "Training, Evals, and Ops"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/05-training-evals-and-ops/"
 path: /categories/05-training-evals-and-ops/
-updated: 2026-11-05
+updated: 2026-11-12
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-05T19:16:32.297Z"
+  generated_at: "2026-11-12T10:51:02.799Z"
 ---
 # Training, Evals, and Ops
 
