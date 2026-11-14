@@ -6,7 +6,7 @@ path: /categories/05-training-evals-and-ops/
 updated: 2026-11-14
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-14T10:21:54.749Z"
+  generated_at: "2026-11-14T10:22:09.187Z"
 ---
 # Training, Evals, and Ops
 

@@ -6,7 +6,7 @@ path: /
 updated: 2026-11-14
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-14T10:21:54.751Z"
+  generated_at: "2026-11-14T10:22:09.189Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -677,6 +677,15 @@ Agent skills (SKILL.md) that teach coding agents to run looot data jobs such as 
 - **Replaces:** Per-vendor API integrations and a separate key for each data provider
 - **Backends:** Claude Code, Codex, Cursor and other MCP clients
 - **Edge:** One API key and one prepaid balance cover 300+ data providers. The agent sees the price before each run, and a failed call costs $0.
+
+### [Muster](https://github.com/oliveralerubio/muster)
+`Rust` · `Apache-2.0` · CLI + web UI + stdio MCP server · 🟡 active
+
+Local-first configuration, Agent Skills, MCP server, and encrypted secrets manager for AI coding agents backed by a single Git repository.
+
+- **Replaces:** Ad-hoc dotfiles symlinks, manual per-agent MCP/skill setup, and cloud secret managers for agent setups
+- **Backends:** Claude Code, Codex, OpenCode, Antigravity CLI, and Pi (plus experimental Hermes Agent)
+- **Edge:** Per-machine `age` encryption keys in the same Git repo with no external server or daemon, `skills.lock` SHA-256 content-hash verification on sync, read-only/proposal-only `muster mcp` stdio server with allowlist-gated secret reveal, and `--format json` envelopes across CLI commands.
 
 ---
 
