@@ -800,6 +800,14 @@ MCP server that lets an agent publish HTML pages, Markdown, multi-file static si
 - **Replaces:** Pasting agent output into a Gist, pastebin or a manual Netlify Drop upload when a human needs to open it in a browser
 - **Edge:** 20 tools cover publish, update, read and delete per resource type with an owner token, so an agent can hand over a rendered report as a link without an account or API key. The same tools are served as a remote Streamable HTTP endpoint at `https://brewpage.app/mcp`. **Known limits:** publications expire (default 15 days, up to 30, 90 with a free profile) and size caps apply (5 MB per page or file, 20 MB per site).
 
+### [YouTube MCP](https://github.com/tubeagentkit/youtube-mcp)
+`JavaScript` · `MIT` · MCP server (stdio + remote) · 🟡 active
+
+MCP server that gives an agent YouTube transcripts, video and channel search, and channel and playlist listings. Source-available note: the server is MIT, the transcript service it calls (getyoutubetranscript.com) is proprietary and paid, with a free account tier of 100 credits.
+
+- **Replaces:** Wiring the YouTube Data API (OAuth, daily quota, and no caption download for videos you don't own) plus a separate transcript scraper
+- **Edge:** 13 tools in one server (transcripts with optional per-line timestamps and caption language choice, caption language lookup, search, channel videos, playlists and posts, playlist videos), so an agent can go from a topic to a set of transcripts without a Google Cloud project. The same tools are served remotely at `https://getyoutubetranscript.com/api/mcp` with OAuth 2.1 sign-in or an API key. **Known limits:** reads existing captions only, so videos without captions return nothing, and every call uses credits.
+
 ---
 
 ## Local Inference Engines
