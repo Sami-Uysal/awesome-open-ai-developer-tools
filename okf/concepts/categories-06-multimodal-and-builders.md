@@ -3,10 +3,10 @@ type: concept
 title: "Multimodal and Builders"
 source: "https://sami-uysal.github.io/awesome-open-ai-developer-tools/categories/06-multimodal-and-builders/"
 path: /categories/06-multimodal-and-builders/
-updated: 2026-11-12
+updated: 2026-11-14
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-12T10:58:58.990Z"
+  generated_at: "2026-11-14T10:21:54.750Z"
 ---
 # Multimodal and Builders
 
