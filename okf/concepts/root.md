@@ -6,7 +6,7 @@ path: /
 updated: 2026-11-20
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-20T18:35:00.507Z"
+  generated_at: "2026-11-20T18:39:08.119Z"
 ---
 # Awesome Open AI Developer Tools
 
@@ -793,6 +793,15 @@ Team wiki whose pages are Markdown files in a Git repository, with a built-in MC
 
 - **Replaces:** Confluence and Notion as the place where an agent finds team conventions, runbooks and decisions
 - **Edge:** The MCP server ships inside the app (Streamable HTTP, OAuth 2.1 or a personal access token) and acts with the signed-in user's rights. Agent edits land in Git history under that user's name, so they can be reviewed and reverted like any commit.
+
+### [ClickHouse Loom](https://github.com/ClickHouse/loom)
+`Python + TypeScript` · `Apache-2.0` · Self-hosted MCP server · 🟢 stable
+
+Self-hosted shared memory, document search with citations, and code intelligence for AI agents.
+
+- **Replaces:** Separate client-specific memory stores and repeated manual code-context collection
+- **Edge:** Exposes definition, caller, and impact queries beside repository-tagged memories and document citations. Memories can link to indexed symbols; namespace grants scope authenticated team access.
+- **Known limits:** Code coverage depends on language and index tier. Binary-document extraction uses a separate service; LLM-backed memory extraction needs a configured model.
 
 ### [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory)
 `Python` · `MIT` · MCP server + CLI · 🟡 active
