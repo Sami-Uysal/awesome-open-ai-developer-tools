@@ -1308,6 +1308,13 @@ Records a coding agent's exchange with its model provider and replays the run of
 
 - **Edge:** The other tools here tell you what happened; this one runs it again. Replay serves the recorded turns with no provider contacted and nothing spent, and `--from N --model M` replays a prefix then continues on a different model, so the model is the only variable. Captures at the HTTP boundary rather than through instrumentation — aider, OpenHands and goose from the sections above are covered, along with Claude Code and the Vercel AI SDK. The trace format is specified separately under CC BY 4.0, so a recording outlives the CLI.
 
+### [Caprock](https://github.com/dspv/caprock)
+`Go + TypeScript` · `Apache-2.0` · Desktop app + CLI · 🟡 active
+
+Local dashboard for the coding agents you run (Claude Code, Codex, Gemini CLI, OpenCode and more): each session live, what it cost, its pull requests and CI, and which one is waiting on you or stuck.
+
+- **Edge:** Reads the agents' own session files on your machine instead of proxying their API traffic, so it needs no base-URL change, account or telemetry and also covers subscription plans. Keeps a per-repository record of the decisions agents made, which the next agent can query through a read-only MCP server (`caprock mcp`), and flags a session repeating the same tool call.
+
 ---
 
 
@@ -2944,6 +2951,13 @@ Dependency-free browser calculator for estimating AI model API costs from reques
 Records a coding agent's exchange with its model provider and replays the run offline with no model called.
 
 - **Edge:** The other tools here tell you what happened; this one runs it again. Replay serves the recorded turns with no provider contacted and nothing spent, and `--from N --model M` replays a prefix then continues on a different model, so the model is the only variable. Captures at the HTTP boundary rather than through instrumentation — aider, OpenHands and goose from the sections above are covered, along with Claude Code and the Vercel AI SDK. The trace format is specified separately under CC BY 4.0, so a recording outlives the CLI.
+
+### [Caprock](https://github.com/dspv/caprock)
+`Go + TypeScript` · `Apache-2.0` · Desktop app + CLI · 🟡 active
+
+Local dashboard for the coding agents you run (Claude Code, Codex, Gemini CLI, OpenCode and more): each session live, what it cost, its pull requests and CI, and which one is waiting on you or stuck.
+
+- **Edge:** Reads the agents' own session files on your machine instead of proxying their API traffic, so it needs no base-URL change, account or telemetry and also covers subscription plans. Keeps a per-repository record of the decisions agents made, which the next agent can query through a read-only MCP server (`caprock mcp`), and flags a session repeating the same tool call.
 
 ---
 
