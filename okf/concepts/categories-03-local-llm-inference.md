@@ -6,7 +6,7 @@ path: /categories/03-local-llm-inference/
 updated: 2026-11-20
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-20T19:08:38.007Z"
+  generated_at: "2026-11-20T19:08:51.786Z"
 ---
 # Local LLM Inference
 
@@ -128,6 +128,15 @@ OpenAI-compatible AI gateway for routing requests across multiple model provider
 
 - **Replaces:** provider-specific AI API integrations and proxy scripts
 - **Edge:** Go-native gateway with one OpenAI-compatible endpoint, automatic failover and load balancing, plus governance and telemetry controls for production traffic.
+
+### [Yabanin Core](https://github.com/yabaninai/yabanin-core)
+`Go` · `Apache-2.0` · `Self-hosted gateway + dashboard + CLI` · 🟠 experimental
+
+Self-hosted AI gateway with OpenAI- and Anthropic-compatible APIs, model routing, access controls, and usage tracking; currently a Developer Preview.
+
+- **Replaces:** provider-specific proxy scripts and separate access/usage administration for shared model endpoints
+- **Backends:** OpenAI-compatible providers and native Anthropic endpoints, plus a mock provider in the quickstart
+- **Edge:** Keeps organization-scoped access, request logs, usage tracking, and an offline spend-audit CLI in the Apache-2.0 Core repository. The Docker Compose quickstart includes a mock provider for evaluating the stack without a paid model account; PostgreSQL and Redis are deployment dependencies.
 
 ---
 
