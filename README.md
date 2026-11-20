@@ -677,6 +677,15 @@ Local-first configuration, Agent Skills, MCP server, and encrypted secrets manag
 - **Backends:** Claude Code, Codex, OpenCode, Antigravity CLI, and Pi (plus experimental Hermes Agent)
 - **Edge:** Per-machine `age` encryption keys in the same Git repo with no external server or daemon, `skills.lock` SHA-256 content-hash verification on sync, read-only/proposal-only `muster mcp` stdio server with allowlist-gated secret reveal, and `--format json` envelopes across CLI commands.
 
+### [research-skills](https://github.com/questionpunk/research-skills)
+`Python` · `MIT` · Agent skills · 🟠 experimental
+
+Agent skills (SKILL.md) for designing surveys and analyzing responses from local files: questionnaire bias checks, sample size, Van Westendorp, Gabor-Granger, MaxDiff, conjoint, NPS, CSAT, Likert, crosstabs, weighting and open-ended coding, 22 in all.
+
+- **Replaces:** Spreadsheet formulas and one-off online calculators for sample size, NPS intervals and Van Westendorp price points
+- **Backends:** Claude Code, Claude.ai, Codex, Cursor, GitHub Copilot and other agents that read SKILL.md
+- **Edge:** Skills that compute something ship a standard-library Python script (3.9+, no network) with test fixtures checked against published worked examples and R, and each skill cites the source of every formula. Works with no account; an optional last step fields the study through QuestionPunk's proprietary hosted MCP server.
+
 ---
 
 ## Model Context Protocol (MCP)
