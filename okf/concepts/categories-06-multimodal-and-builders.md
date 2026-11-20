@@ -6,7 +6,7 @@ path: /categories/06-multimodal-and-builders/
 updated: 2026-11-20
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-20T18:34:24.186Z"
+  generated_at: "2026-11-20T18:35:00.505Z"
 ---
 # Multimodal and Builders
 
@@ -70,7 +70,7 @@ Node-based interface for diffusion models — image, video, and audio generation
 - **Edge:** The graph *is* the program — every step is inspectable and reproducible, and workflows are shareable as JSON. Supports essentially every open image/video model within days of release.
 
 ### [Breatic](https://github.com/orime-org/breatic)
-`TypeScript` · `Elastic-2.0` (source-available, not OSI) · Web application / internal deployment · 🟡 active
+`TypeScript` · `AGPL-3.0-only` · Web application / self-hostable · 🟡 active
 
 Collaborative creation workspace with shared documents, AI media canvases, and project-aware agent proposals reviewed by people.
 
