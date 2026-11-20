@@ -465,7 +465,7 @@ Persistent memory for MCP clients over any folder of markdown notes, Obsidian va
 MCP server that lets an agent publish HTML pages, Markdown, multi-file static sites, files, JSON documents and key-value entries and get back a shareable HTTPS link. Source-available note: the server is MIT, the hosting service it talks to (brewpage.app) is proprietary and free.
 
 - **Replaces:** Pasting agent output into a Gist, pastebin or a manual Netlify Drop upload when a human needs to open it in a browser
-- **Edge:** 20 tools cover publish, update, read and delete per resource type with an owner token, so an agent can hand over a rendered report as a link without an account or API key. The same tools are served as a remote Streamable HTTP endpoint at `https://brewpage.app/mcp`. **Known limits:** publications expire (default 15 days, up to 30, 90 with a free profile) and size caps apply (5 MB per page or file, 20 MB per site).
+- **Edge:** 13 discoverable tools cover publishing and managing different resource types through a shared interface. Agents can share a rendered report and manage it with its owner token, or use optional OAuth to connect a BrewPage profile. Connect at `https://brewpage.app/mcp` over Streamable HTTP or install locally with `npx -y brewpage-mcp`. **Known limits:** publications expire.
 
 ### [YouTube MCP](https://github.com/tubeagentkit/youtube-mcp)
 `JavaScript` · `MIT` · MCP server (stdio + remote) · 🟡 active
