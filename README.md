@@ -1277,6 +1277,15 @@ Zero-dependency cognitive verification CLI and agent skill that enforces an 8-st
 - **Backends:** Claude Code, Cursor, Codex, OpenClaw, and any terminal-capable coding agent
 - **Edge:** Tracks explicit work units, predictions, adversarial lens evaluations (`skeptic`, `builder`, `dreamer`, `empath`), and per-pass deltas in `.ponder/sessions/`, requiring 100% unit coverage and bounded novelty and churn before `ponder verify` exits 0. It verifies coverage and convergence of the agent's deliberation state rather than executing application test suites.
 
+### [EvalShift](https://github.com/evalshift/evalshift-cli)
+`Python` · `Apache-2.0` · CLI + GitHub Action · 🟢 stable
+
+Regression-test an LLM app or agent before switching models: replay the same cases on the current and the candidate model and see what changed.
+
+- **Replaces:** Ad-hoc side-by-side model comparison scripts and spreadsheets
+- **Backends:** Any model LiteLLM supports, including self-hosted endpoints (vLLM, Ollama)
+- **Edge:** Built around paired comparisons: per-case tool-call and output diffs, paired tests with confidence intervals and multiple-comparison correction, and a policy verdict that can gate a PR. A capture SDK records real production runs to use as the test set.
+
 ---
 
 ## Observability & LLMOps
