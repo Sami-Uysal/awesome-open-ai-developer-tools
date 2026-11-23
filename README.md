@@ -55,6 +55,12 @@ No affiliate links. No sponsored slots. OSI-licensed only — source-available t
 
 Agents that read, write, and refactor code in your repo.
 
+### [fitv-mcp](https://github.com/hanshs474/fitv-mcp)
+
+- **What it does**: Open-source MCP server and hosted endpoint (`https://freeimagetovideo.ai/api/mcp`) connecting AI coding agents to [Free Image to Video](https://freeimagetovideo.ai/) for image-to-video and text-to-video generation with synchronized sound and no watermark.
+- **Replaces**: Closed video-generation SaaS UIs with no agent protocol support.
+- **License**: MIT
+
 ### [aider](https://github.com/Aider-AI/aider)
 `Python` · `Apache-2.0` · CLI · 🟡 active
 
