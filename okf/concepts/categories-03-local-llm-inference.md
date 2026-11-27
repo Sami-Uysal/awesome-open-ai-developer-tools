@@ -6,7 +6,7 @@ path: /categories/03-local-llm-inference/
 updated: 2026-11-27
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-27T19:19:51.129Z"
+  generated_at: "2026-11-27T19:20:00.418Z"
 ---
 # Local LLM Inference
 
@@ -137,6 +137,14 @@ Self-hosted AI gateway with OpenAI- and Anthropic-compatible APIs, model routing
 - **Replaces:** provider-specific proxy scripts and separate access/usage administration for shared model endpoints
 - **Backends:** OpenAI-compatible providers and native Anthropic endpoints, plus a mock provider in the quickstart
 - **Edge:** Keeps organization-scoped access, request logs, usage tracking, and an offline spend-audit CLI in the Apache-2.0 Core repository. The Docker Compose quickstart includes a mock provider for evaluating the stack without a paid model account; PostgreSQL and Redis are deployment dependencies.
+
+### [Open Agent API](https://github.com/jiangxingfan1-coder/Open-Agent-API)
+`TypeScript` · `Apache-2.0` · `Self-hosted gateway` · 🟡 active
+
+Self-hosted gateway that lets existing SDK clients invoke configured coding agents through an OpenAI-compatible HTTP endpoint.
+
+- **Replaces:** Separate CLI integrations for each coding agent an application calls.
+- **Edge:** The requested ID selects an agent rather than a raw model. Callers can be allowed to start runs without being allowed to approve pending actions. The quickstart includes a deterministic sample that makes no model calls.
 
 ---
 
