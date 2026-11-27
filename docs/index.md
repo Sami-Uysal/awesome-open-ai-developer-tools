@@ -793,6 +793,15 @@ Self-hosted shared memory, document search with citations, and code intelligence
 - **Edge:** Exposes definition, caller, and impact queries beside repository-tagged memories and document citations. Memories can link to indexed symbols; namespace grants scope authenticated team access.
 - **Known limits:** Code coverage depends on language and index tier. Binary-document extraction uses a separate service; LLM-backed memory extraction needs a configured model.
 
+### [OmniForge Launch Audit](https://github.com/zColdWater/mcp-launch-audit)
+`JavaScript` · `MIT` · MCP server + CLI · 🟢 stable
+
+Pre-deploy web security, client-bundle secret leak, Supabase RLS, SPF/DKIM/DMARC email DNS, `llms.txt`, and 78-TLD RDAP auditor for AI coding agents.
+
+- **Replaces:** Running separate manual SSL/header checkers, DNS lookup tools, and WHOIS queries before shipping a web app
+- **Edge:** Zero-dependency local `stdio` server (`npx -y github:zColdWater/mcp-launch-audit`) plus a zero-auth remote Streamable HTTP endpoint (`https://omnipulse-x402.appwrite.network/mcp`, official MCP Registry `io.github.zColdWater/mcp-launch-audit`) returning structured pass/fail evidence.
+- **Known limits:** Passive external HTTP/DNS/RDAP inspection only; authenticated in-app routes and server-side source code outside shipped client bundles are not scanned.
+
 ### [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory)
 `Python` · `MIT` · MCP server + CLI · 🟡 active
 
@@ -816,6 +825,15 @@ MCP server that gives an agent YouTube transcripts, video and channel search, an
 
 - **Replaces:** Wiring the YouTube Data API (OAuth, daily quota, and no caption download for videos you don't own) plus a separate transcript scraper
 - **Edge:** 13 tools in one server (transcripts with optional per-line timestamps and caption language choice, caption language lookup, search, channel videos, playlists and posts, playlist videos), so an agent can go from a topic to a set of transcripts without a Google Cloud project. The same tools are served remotely at `https://getyoutubetranscript.com/api/mcp` with OAuth 2.1 sign-in or an API key. **Known limits:** reads existing captions only, so videos without captions return nothing, and every call uses credits.
+
+### [AlphaSift](https://github.com/ZhuLinsen/alphasift)
+`Python` · `Apache-2.0` · CLI + local MCP server · 🟡 active
+
+Read-only equity screening CLI and local stdio MCP server across 7 markets (CN, HK, US, JP, KR, TW, IN) with purged walk-forward pattern replay and daily T+N evaluation.
+
+- **Replaces:** Ad-hoc market scraping scripts and unverified pattern-scanning prompts without walk-forward leakage controls
+- **Edge:** Zero-dependency stdio MCP (`alphasift mcp`) exposes 14 read-only tools and 4 resources backed by auditable YAML strategies, market-regime/overhead gates, and a public daily T+N benchmark.
+- **Known limits:** Research and screening engine only — does not execute live trades, model dividends or suspensions in T+N checks, or run full-universe coverage outside A-shares (non-CN markets rely on Yahoo Finance screener queries).
 
 ---
 
@@ -944,6 +962,14 @@ Self-hosted AI gateway with OpenAI- and Anthropic-compatible APIs, model routing
 - **Replaces:** provider-specific proxy scripts and separate access/usage administration for shared model endpoints
 - **Backends:** OpenAI-compatible providers and native Anthropic endpoints, plus a mock provider in the quickstart
 - **Edge:** Keeps organization-scoped access, request logs, usage tracking, and an offline spend-audit CLI in the Apache-2.0 Core repository. The Docker Compose quickstart includes a mock provider for evaluating the stack without a paid model account; PostgreSQL and Redis are deployment dependencies.
+
+### [Open Agent API](https://github.com/jiangxingfan1-coder/Open-Agent-API)
+`TypeScript` · `Apache-2.0` · `Self-hosted gateway` · 🟡 active
+
+Self-hosted gateway that lets existing SDK clients invoke configured coding agents through an OpenAI-compatible HTTP endpoint.
+
+- **Replaces:** Separate CLI integrations for each coding agent an application calls.
+- **Edge:** The requested ID selects an agent rather than a raw model. Callers can be allowed to start runs without being allowed to approve pending actions. The quickstart includes a deterministic sample that makes no model calls.
 
 ---
 
@@ -1276,6 +1302,15 @@ Zero-dependency cognitive verification CLI and agent skill that enforces an 8-st
 - **Replaces:** Ad-hoc single-pass LLM self-review prompts and manual review checklists
 - **Backends:** Claude Code, Cursor, Codex, OpenClaw, and any terminal-capable coding agent
 - **Edge:** Tracks explicit work units, predictions, adversarial lens evaluations (`skeptic`, `builder`, `dreamer`, `empath`), and per-pass deltas in `.ponder/sessions/`, requiring 100% unit coverage and bounded novelty and churn before `ponder verify` exits 0. It verifies coverage and convergence of the agent's deliberation state rather than executing application test suites.
+
+### [EvalShift](https://github.com/evalshift/evalshift-cli)
+`Python` · `Apache-2.0` · CLI + GitHub Action · 🟢 stable
+
+Regression-test an LLM app or agent before switching models: replay the same cases on the current and the candidate model and see what changed.
+
+- **Replaces:** Ad-hoc side-by-side model comparison scripts and spreadsheets
+- **Backends:** Any model LiteLLM supports, including self-hosted endpoints (vLLM, Ollama)
+- **Edge:** Built around paired comparisons: per-case tool-call and output diffs, paired tests with confidence intervals and multiple-comparison correction, and a policy verdict that can gate a PR. A capture SDK records real production runs to use as the test set.
 
 ---
 

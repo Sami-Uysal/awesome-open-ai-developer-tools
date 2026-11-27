@@ -451,6 +451,15 @@ Self-hosted shared memory, document search with citations, and code intelligence
 - **Edge:** Exposes definition, caller, and impact queries beside repository-tagged memories and document citations. Memories can link to indexed symbols; namespace grants scope authenticated team access.
 - **Known limits:** Code coverage depends on language and index tier. Binary-document extraction uses a separate service; LLM-backed memory extraction needs a configured model.
 
+### [OmniForge Launch Audit](https://github.com/zColdWater/mcp-launch-audit)
+`JavaScript` · `MIT` · MCP server + CLI · 🟢 stable
+
+Pre-deploy web security, client-bundle secret leak, Supabase RLS, SPF/DKIM/DMARC email DNS, `llms.txt`, and 78-TLD RDAP auditor for AI coding agents.
+
+- **Replaces:** Running separate manual SSL/header checkers, DNS lookup tools, and WHOIS queries before shipping a web app
+- **Edge:** Zero-dependency local `stdio` server (`npx -y github:zColdWater/mcp-launch-audit`) plus a zero-auth remote Streamable HTTP endpoint (`https://omnipulse-x402.appwrite.network/mcp`, official MCP Registry `io.github.zColdWater/mcp-launch-audit`) returning structured pass/fail evidence.
+- **Known limits:** Passive external HTTP/DNS/RDAP inspection only; authenticated in-app routes and server-side source code outside shipped client bundles are not scanned.
+
 ### [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory)
 `Python` · `MIT` · MCP server + CLI · 🟡 active
 
@@ -474,5 +483,14 @@ MCP server that gives an agent YouTube transcripts, video and channel search, an
 
 - **Replaces:** Wiring the YouTube Data API (OAuth, daily quota, and no caption download for videos you don't own) plus a separate transcript scraper
 - **Edge:** 13 tools in one server (transcripts with optional per-line timestamps and caption language choice, caption language lookup, search, channel videos, playlists and posts, playlist videos), so an agent can go from a topic to a set of transcripts without a Google Cloud project. The same tools are served remotely at `https://getyoutubetranscript.com/api/mcp` with OAuth 2.1 sign-in or an API key. **Known limits:** reads existing captions only, so videos without captions return nothing, and every call uses credits.
+
+### [AlphaSift](https://github.com/ZhuLinsen/alphasift)
+`Python` · `Apache-2.0` · CLI + local MCP server · 🟡 active
+
+Read-only equity screening CLI and local stdio MCP server across 7 markets (CN, HK, US, JP, KR, TW, IN) with purged walk-forward pattern replay and daily T+N evaluation.
+
+- **Replaces:** Ad-hoc market scraping scripts and unverified pattern-scanning prompts without walk-forward leakage controls
+- **Edge:** Zero-dependency stdio MCP (`alphasift mcp`) exposes 14 read-only tools and 4 resources backed by auditable YAML strategies, market-regime/overhead gates, and a public daily T+N benchmark.
+- **Known limits:** Research and screening engine only — does not execute live trades, model dividends or suspensions in T+N checks, or run full-universe coverage outside A-shares (non-CN markets rely on Yahoo Finance screener queries).
 
 ---
