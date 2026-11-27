@@ -826,6 +826,15 @@ MCP server that gives an agent YouTube transcripts, video and channel search, an
 - **Replaces:** Wiring the YouTube Data API (OAuth, daily quota, and no caption download for videos you don't own) plus a separate transcript scraper
 - **Edge:** 13 tools in one server (transcripts with optional per-line timestamps and caption language choice, caption language lookup, search, channel videos, playlists and posts, playlist videos), so an agent can go from a topic to a set of transcripts without a Google Cloud project. The same tools are served remotely at `https://getyoutubetranscript.com/api/mcp` with OAuth 2.1 sign-in or an API key. **Known limits:** reads existing captions only, so videos without captions return nothing, and every call uses credits.
 
+### [AlphaSift](https://github.com/ZhuLinsen/alphasift)
+`Python` · `Apache-2.0` · CLI + local MCP server · 🟡 active
+
+Read-only equity screening CLI and local stdio MCP server across 7 markets (CN, HK, US, JP, KR, TW, IN) with purged walk-forward pattern replay and daily T+N evaluation.
+
+- **Replaces:** Ad-hoc market scraping scripts and unverified pattern-scanning prompts without walk-forward leakage controls
+- **Edge:** Zero-dependency stdio MCP (`alphasift mcp`) exposes 14 read-only tools and 4 resources backed by auditable YAML strategies, market-regime/overhead gates, and a public daily T+N benchmark.
+- **Known limits:** Research and screening engine only — does not execute live trades, model dividends or suspensions in T+N checks, or run full-universe coverage outside A-shares (non-CN markets rely on Yahoo Finance screener queries).
+
 ### [CutVoke](https://github.com/frankShan001/CutVoke)
 `Python` · `MIT` · Desktop app + local MCP server · 🟡 active
 
@@ -833,6 +842,7 @@ Local-first desktop video editor (Windows, macOS, Linux) with a built-in MCP ser
 
 - **Replaces:** CapCut-style editing for agent workflows, and prompt-to-MP4 generators whose output can't be edited afterwards
 - **Edge:** Claude Code, Codex, Cursor or any MCP client can cut silences, add captions and effects and make a 9:16 version on a declarative timeline project, then a human opens that same timeline to fix cuts or captions by hand before FFmpeg export. **Known limits:** v0.3.x preview; macOS packages are ad-hoc signed, not notarized.
+
 
 ---
 
