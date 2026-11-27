@@ -1336,6 +1336,15 @@ Regression-test an LLM app or agent before switching models: replay the same cas
 - **Backends:** Any model LiteLLM supports, including self-hosted endpoints (vLLM, Ollama)
 - **Edge:** Built around paired comparisons: per-case tool-call and output diffs, paired tests with confidence intervals and multiple-comparison correction, and a policy verdict that can gate a PR. A capture SDK records real production runs to use as the test set.
 
+### [LEEVAR Battery](https://github.com/forevercrab321-svg/leevar-battery)
+`TypeScript` · `MIT` · CLI (Deno) · 🟠 experimental
+
+Runs 18 tests of AI agent behavior across 6 dimensions on your own machine, graded by a judge model you choose.
+
+- **Replaces:** Ad-hoc manual review of agent transcripts and one-off judge prompts
+- **Backends:** OpenAI, Anthropic, Gemini, DeepSeek, OpenRouter, Ollama (local, no key), or any OpenAI-compatible endpoint, as the judge
+- **Edge:** A test the sample has no evidence for is reported `NOT TESTED` and left out of the grade instead of being guessed, and no grade is issued when fewer than 13 of 18 tests found evidence. Each failed test comes with why it likely happens, which layer to change, and how to check the fix. An offline `check-code` pattern check for five fault shapes in Python and TypeScript needs no model or network, and it misses many real cases.
+
 ---
 
 ## Observability & LLMOps
