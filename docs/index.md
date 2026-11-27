@@ -945,6 +945,14 @@ Self-hosted AI gateway with OpenAI- and Anthropic-compatible APIs, model routing
 - **Backends:** OpenAI-compatible providers and native Anthropic endpoints, plus a mock provider in the quickstart
 - **Edge:** Keeps organization-scoped access, request logs, usage tracking, and an offline spend-audit CLI in the Apache-2.0 Core repository. The Docker Compose quickstart includes a mock provider for evaluating the stack without a paid model account; PostgreSQL and Redis are deployment dependencies.
 
+### [Open Agent API](https://github.com/jiangxingfan1-coder/Open-Agent-API)
+`TypeScript` · `Apache-2.0` · `Self-hosted gateway` · 🟡 active
+
+Self-hosted gateway that lets existing SDK clients invoke configured coding agents through an OpenAI-compatible HTTP endpoint.
+
+- **Replaces:** Separate CLI integrations for each coding agent an application calls.
+- **Edge:** The requested ID selects an agent rather than a raw model. Callers can be allowed to start runs without being allowed to approve pending actions. The quickstart includes a deterministic sample that makes no model calls.
+
 ---
 
 ## Chat UIs & Frontends
