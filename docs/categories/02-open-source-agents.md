@@ -451,6 +451,15 @@ Self-hosted shared memory, document search with citations, and code intelligence
 - **Edge:** Exposes definition, caller, and impact queries beside repository-tagged memories and document citations. Memories can link to indexed symbols; namespace grants scope authenticated team access.
 - **Known limits:** Code coverage depends on language and index tier. Binary-document extraction uses a separate service; LLM-backed memory extraction needs a configured model.
 
+### [OmniForge Launch Audit](https://github.com/zColdWater/mcp-launch-audit)
+`JavaScript` · `MIT` · MCP server + CLI · 🟢 stable
+
+Pre-deploy web security, client-bundle secret leak, Supabase RLS, SPF/DKIM/DMARC email DNS, `llms.txt`, and 78-TLD RDAP auditor for AI coding agents.
+
+- **Replaces:** Running separate manual SSL/header checkers, DNS lookup tools, and WHOIS queries before shipping a web app
+- **Edge:** Zero-dependency local `stdio` server (`npx -y github:zColdWater/mcp-launch-audit`) plus a zero-auth remote Streamable HTTP endpoint (`https://omnipulse-x402.appwrite.network/mcp`, official MCP Registry `io.github.zColdWater/mcp-launch-audit`) returning structured pass/fail evidence.
+- **Known limits:** Passive external HTTP/DNS/RDAP inspection only; authenticated in-app routes and server-side source code outside shipped client bundles are not scanned.
+
 ### [sqlite-graph-memory](https://github.com/tonydzi/sqlite-graph-memory)
 `Python` · `MIT` · MCP server + CLI · 🟡 active
 
