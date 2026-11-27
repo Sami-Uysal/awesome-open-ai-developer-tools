@@ -1397,6 +1397,13 @@ Local dashboard for the coding agents you run (Claude Code, Codex, Gemini CLI, O
 
 - **Edge:** Reads the agents' own session files on your machine instead of proxying their API traffic, so it needs no base-URL change, account or telemetry and also covers subscription plans. Keeps a per-repository record of the decisions agents made, which the next agent can query through a read-only MCP server (`caprock mcp`), and flags a session repeating the same tool call.
 
+### [TokenDefrag](https://github.com/yuseferi/token-defrag)
+`Go` · `MIT` · CLI · 🟠 experimental
+
+Estimates how much Claude Code and OpenCode could save by sending less conversation history.
+
+- **Edge:** Replays local session history offline and prices cached reads and writes separately. Shadow mode estimates savings on live traffic without modifying model requests or reducing the actual bill.
+
 ---
 
 ## Speech, Vision & Multimodal
