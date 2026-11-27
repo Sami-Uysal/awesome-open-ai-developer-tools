@@ -697,6 +697,13 @@ Reference implementations — filesystem, git, fetch, memory, and dozens of comm
 
 - **Edge:** The fastest way to learn the protocol is to read a 200-line server that already works.
 
+### [Transmitly MCP](https://github.com/Transmitly-io/mcp)
+`JavaScript` · `MIT` · Local MCP · 🟡 active
+
+Official MCP server for Transmitly, a transactional email API and SMTP relay. Reads inboxes, messages, domains, campaigns, automations and usage, and can reply to inbox threads with a send-scope key.
+
+- **Edge:** Unlike send-only email MCPs, it exposes inbox and delivery state as tools, so an agent can inspect a message before replying. Local stdio via `npx -y @transmitly/mcp` with `TRANSMITLY_API_KEY`; official MCP Registry id `io.transmitly/mcp`.
+
 ### [Kilobat CLI](https://github.com/seifip/kilobat-cli)
 `Swift` · `GPL-3.0-only` · macOS CLI / TUI / MCP · 🟠 experimental
 
