@@ -826,6 +826,14 @@ MCP server that gives an agent YouTube transcripts, video and channel search, an
 - **Replaces:** Wiring the YouTube Data API (OAuth, daily quota, and no caption download for videos you don't own) plus a separate transcript scraper
 - **Edge:** 13 tools in one server (transcripts with optional per-line timestamps and caption language choice, caption language lookup, search, channel videos, playlists and posts, playlist videos), so an agent can go from a topic to a set of transcripts without a Google Cloud project. The same tools are served remotely at `https://getyoutubetranscript.com/api/mcp` with OAuth 2.1 sign-in or an API key. **Known limits:** reads existing captions only, so videos without captions return nothing, and every call uses credits.
 
+### [CutVoke](https://github.com/frankShan001/CutVoke)
+`Python` · `MIT` · Desktop app + local MCP server · 🟡 active
+
+Local-first desktop video editor (Windows, macOS, Linux) with a built-in MCP server, so an agent and a human edit the same non-destructive multi-track timeline. Desktop packages bundle FFmpeg (GPLv3).
+
+- **Replaces:** CapCut-style editing for agent workflows, and prompt-to-MP4 generators whose output can't be edited afterwards
+- **Edge:** Claude Code, Codex, Cursor or any MCP client can cut silences, add captions and effects and make a 9:16 version on a declarative timeline project, then a human opens that same timeline to fix cuts or captions by hand before FFmpeg export. **Known limits:** v0.3.x preview; macOS packages are ad-hoc signed, not notarized.
+
 ---
 
 ## Local Inference Engines
