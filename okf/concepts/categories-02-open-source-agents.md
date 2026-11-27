@@ -6,7 +6,7 @@ path: /categories/02-open-source-agents/
 updated: 2026-11-27
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-11-27T19:20:05.840Z"
+  generated_at: "2026-11-27T19:20:17.136Z"
 ---
 # Open-Source Agents
 
