@@ -432,6 +432,13 @@ Hosted memory reached over MCP: one key gives Claude Code, Cursor, VS Code and C
 
 - **Edge:** Recall ranking moves with outcomes, not similarity alone. A memory that helped is promoted, one that misled is demoted, so ranking is a function of consequences.
 
+### [cloud-alter-ego](https://github.com/SebastiaanBoon/cloud-alter-ego)
+`Python` · `MIT` · Git template + hooks for Claude Code and Codex · 🟠 experimental
+
+A private Git repo that serves as shared memory for Claude Code and Codex. Hooks load your working rules at session start, journal every question and answer per client or project, and push to Git.
+
+- **Edge:** The memory is plain files in a repo you own, so it follows you across machines and accounts. For ChatGPT, Claude, Gemini and any AI chat with MCP there is a separate hosted connector, [Alter Ego](https://cloudalterego.cafeboon.com), which can read the same repo.
+
 ### [Khoj](https://github.com/khoj-ai/khoj)
 `Python` · `AGPL-3.0` · 🟢 stable
 
